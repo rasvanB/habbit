@@ -6,7 +6,10 @@ type OptionProps = {
 };
 const Option: FC<OptionProps> = ({ linkTo, text }) => {
   return (
-    <Link to={`${linkTo}`} className="mr-10 flex items-center">
+    <Link
+      to={linkTo}
+      className="mr-10 bold flex font-semibold text-lg items-center"
+    >
       <span className="">{`${text}`}</span>
     </Link>
   );
