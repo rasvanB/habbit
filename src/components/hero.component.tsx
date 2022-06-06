@@ -19,8 +19,7 @@ const Hero = () => {
           </span>
           <span className="mt-5 text-center font-semibold text-zinc-600">
             With Habbit, you can concentrate on what really counts.
-            <br /> By managing your habits, you can become the best version of
-            yourself.
+            <br /> Manage your habits to become the best version of yourself.
           </span>
           <Button buttonStyle="hero" text="Get Started"></Button>
         </div>
