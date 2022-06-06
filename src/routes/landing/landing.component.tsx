@@ -2,10 +2,9 @@ import Header from "../../components/header.component";
 import Hero from "../../components/hero.component";
 const LandingPage = () => {
   return (
-    <div className="h-[7000px] ">
+    <div className="">
       <Header />
       <Hero />
-      <h1>Landing Page</h1>
     </div>
   );
 };
