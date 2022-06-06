@@ -1,0 +1,14 @@
+import { Link } from "react-router-dom";
+import { FC } from "react";
+type OptionProps = {
+  linkTo: string;
+  text: string;
+};
+const Option: FC<OptionProps> = ({ linkTo, text }) => {
+  return (
+    <Link to={`${linkTo}`} className="mr-10 flex items-center">
+      <span className="">{`${text}`}</span>
+    </Link>
+  );
+};
+export default Option;
