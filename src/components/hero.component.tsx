@@ -9,8 +9,8 @@ const Hero = () => {
       }}
     >
       <div className="flex flex-col items-center h-full">
-        <div className="flex flex-col text-zinc-800 text-m sm:text-xl font-bold items-center">
-          <span className="text-4xl md:text-6xl text-center mt-48">
+        <div className="flex flex-col text-zinc-800 text-sm sm:text-xl font-bold items-center">
+          <span className="text-4xl sm:text-5xl md:text-6xl text-center mt-48">
             Build good{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-700 to-sky-500">
               Habits
