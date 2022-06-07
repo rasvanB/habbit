@@ -10,7 +10,7 @@ const Option: FC<OptionProps> = ({ linkTo, text }) => {
       to={linkTo}
       className="mr-10 bold flex font-semibold text-lg items-center"
     >
-      <span className="">{`${text}`}</span>
+      <span className="hidden sm:block">{`${text}`}</span>
     </Link>
   );
 };
