@@ -1,7 +1,16 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+      },
+      backgroundImage: {
+        "dark-bg": "url('./assets/bg-dark.png')",
+        "light-bg": "url('./assets/bg.png')",
+      },
+    },
   },
+  darkMode: "class",
   plugins: [],
 };

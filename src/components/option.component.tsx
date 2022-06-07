@@ -8,9 +8,9 @@ const Option: FC<OptionProps> = ({ linkTo, text }) => {
   return (
     <Link
       to={linkTo}
-      className="mr-10 bold flex font-semibold text-lg items-center"
+      className="text-zinc-700 dark:text-zinc-200 mr-10 bold flex font-normal text-lg items-center hover:text-zinc-500"
     >
-      <span className="hidden sm:block">{`${text}`}</span>
+      <span className="font-poppins hidden sm:block">{`${text}`}</span>
     </Link>
   );
 };
