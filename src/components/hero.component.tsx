@@ -2,7 +2,7 @@ import Button from "./button.component";
 
 const Hero = () => {
   return (
-    <div className="h-screen bg-cover bg-light-bg-svg dark:bg-dark-bg-mid bg-no-repeat bg-center bg-opacity-70 sm:dark:bg-dark-bg-svg sm:bg-light-bg-mid">
+    <div className="h-screen bg-cover bg-light-bg-mid dark:bg-dark-bg-mid bg-no-repeat bg-center bg-opacity-70 sm:dark:bg-dark-bg-svg sm:bg-light-bg-svg">
       <div className="flex flex-col items-center h-full">
         <div className="flex flex-col text-zinc-800 text-xs mobile:text-m sm:text-lg md:text-xl font-bold items-center">
           <span className="text-3xl px-2 mobile:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-poppins dark:text-gray-200 text-center mt-48 sm:px-5">
