@@ -6,10 +6,10 @@ const NavLinks = () => {
   return (
     <div
       className={`
-        flex flex-col w-full sm:w-auto bg-white dark:bg-zinc-800 items-end sm:items-center sm:flex pr-3 sm:pr-0 top-12 sm:flex-row content-center ml-auto absolute right-0 sm:static bg-opacity-70`}
+        flex bg-white dark:bg-zinc-800 items-end items-center flex-row ml-auto bg-opacity-70`}
     >
       <Option linkTo="/contact" text="Contact" />
-      <Link className="sm:mr-6" to="/auth">
+      <Link className="mr-6" to="/auth">
         <Button buttonStyle="navbar-login" text="Log in"></Button>
       </Link>
       <Link to="/auth">

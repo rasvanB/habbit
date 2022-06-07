@@ -6,8 +6,6 @@ module.exports = {
         poppins: ["Poppins", "sans-serif"],
       },
       backgroundImage: {
-        "dark-bg": "url('./assets/bg-dark.png')",
-        "light-bg": "url('./assets/bg.png')",
         "dark-bg-svg": "url('./assets/bg-dark.svg')",
         "light-bg-svg": "url('./assets/bg.svg')",
         "dark-bg-mid": "url('./assets/bg-dark-mid.svg')",

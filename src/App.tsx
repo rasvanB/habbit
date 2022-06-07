@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { ThemeContext } from "./context/theme.context";
 import NotFound from "./routes/not-found/not-found.component";
 const App = () => {
-  const { darkMode, setDarkMode } = useContext(ThemeContext);
+  const { darkMode } = useContext(ThemeContext);
   return (
     <div className={darkMode ? "dark" : "light"}>
       <Routes>
