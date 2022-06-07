@@ -10,14 +10,12 @@ const Header = () => {
       </Link>
       <div className="flex content-center ml-auto">
         <Option linkTo="/contact" text="contact" />
-        <div className="flex items-center">
-          <Link className="mr-6" to="/auth">
-            <Button buttonStyle="navbar-login" text="Log in"></Button>
-          </Link>
-          <Link to="/auth">
-            <Button buttonStyle="navbar-signup" text="Sign up"></Button>
-          </Link>
-        </div>
+        <Link className="mr-6" to="/auth">
+          <Button buttonStyle="navbar-login" text="Log in"></Button>
+        </Link>
+        <Link to="/auth">
+          <Button buttonStyle="navbar-signup" text="Sign up"></Button>
+        </Link>
       </div>
     </div>
   );
