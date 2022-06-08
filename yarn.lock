@@ -1512,6 +1512,11 @@
     "schema-utils" "^3.0.0"
     "source-map" "^0.7.3"
 
+"@reacticons/ionicons@^6.0.3":
+  "integrity" "sha512-T4RU6DQMor0zJjw2TrH3HpFTD/dKsdOBNXo+pd52IypEpnO1IQT/lEswtn+9NcB+EzdCChClxHLQODFKRq+V3Q=="
+  "resolved" "https://registry.npmjs.org/@reacticons/ionicons/-/ionicons-6.0.3.tgz"
+  "version" "6.0.3"
+
 "@rollup/plugin-babel@^5.2.0":
   "integrity" "sha512-WFfdLWU/xVWKeRQnKmIAQULUI7Il0gZnBIH/ZFO069wYIfPu+8zrfp/KMW0atmELoRDq8FbiP3VCss9MhCut7Q=="
   "resolved" "https://registry.npmjs.org/@rollup/plugin-babel/-/plugin-babel-5.3.1.tgz"
