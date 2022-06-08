@@ -16,7 +16,7 @@ const NavLinks = ({ open }: { open: boolean }) => {
       <Link className="sm:mr-6 pt-4 sm:pt-0" to="/auth">
         <Button buttonStyle="navbar-login" text="Log in"></Button>
       </Link>
-      <Link to="/auth" className="pt-5 pb-6">
+      <Link to="/auth" className="pt-5 pb-6 sm:pt-0 sm:pb-0">
         <Button buttonStyle="navbar-signup" text="Sign up"></Button>
       </Link>
     </div>
