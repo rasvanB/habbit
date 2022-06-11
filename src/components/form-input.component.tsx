@@ -6,7 +6,7 @@ type FormInputProps = {
 
 const FormInput: FC<FormInputProps> = ({ label, ...otherProps }) => {
   return (
-    <div className="form-input flex flex-col font-poppins">
+    <div className="form-input flex flex-col font-poppins mobile:min-w-[300px]">
       <label
         htmlFor="name"
         className="font-semibold text-zinc-700 dark:text-gray-100 pb-1 pt-4"
