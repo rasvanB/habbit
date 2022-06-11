@@ -17,7 +17,7 @@ const SignInForm = () => {
   };
 
   return (
-    <div>
+    <div className="bg-slate-100 p-10 rounded-2xl">
       <h1 className="text-center font-poppins font-bold text-zinc-800 text-4xl">
         Sign in
       </h1>
