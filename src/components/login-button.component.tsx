@@ -7,7 +7,7 @@ const LoginButton = ({ type }: { type: IconTypes }) => {
   };
   return (
     <div
-      className="select-none cursor-pointer outline outline-1 rounded-md p-1 outline-zinc-200 dark:outline-zinc-700 shadow-md shadow-zinc-700"
+      className="select-none cursor-pointer outline outline-1 rounded-md p-1 outline-zinc-200 dark:outline-zinc-700 shadow-md dark:shadow-zinc-700"
       onClick={handleOnClick}
     >
       <Icon type={type} />

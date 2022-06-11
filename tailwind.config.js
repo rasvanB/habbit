@@ -11,6 +11,10 @@ module.exports = {
         "dark-bg-mid": "url('./assets/bg-dark-mid.svg')",
         "light-bg-mid": "url('./assets/bg-mid.svg')",
         "mesh-bg": "url('./assets/mesh-bg.webp')",
+        "google-icon": "url('./assets/google.png')",
+        "facebook-icon": "url('./assets/facebook.png')",
+        "apple-icon": "url('./assets/apple.png')",
+        "apple-light-icon": "url('./assets/apple-light.png')",
       },
     },
     screens: {

@@ -1,9 +1,4 @@
-import FacebookIcon from "../assets/facebook.png";
-import GoogleIcon from "../assets/google.png";
-import AppleIcon from "../assets/apple.png";
-import AppleIconLight from "../assets/apple-light.png";
-import { ThemeContext } from "../context/theme.context";
-import { FC, useContext } from "react";
+import { FC } from "react";
 
 export type IconTypes = "facebook" | "google" | "apple";
 type IconProps = {
@@ -11,21 +6,26 @@ type IconProps = {
 };
 
 const Icon: FC<IconProps> = ({ type }) => {
-  const { darkMode } = useContext(ThemeContext);
+  let bgIcon: string = "";
+
+  switch (type) {
+    case "facebook":
+      bgIcon = "bg-facebook-icon";
+      break;
+    case "google":
+      bgIcon = "bg-google-icon";
+      break;
+    case "apple":
+      bgIcon = "bg-apple-icon dark:bg-apple-light-icon";
+      break;
+    default:
+      break;
+  }
+
   return (
-    <div className="icon">
-      {type === "facebook" ? (
-        <img src={FacebookIcon} alt="facebook" className="h-12" />
-      ) : type === "google" ? (
-        <img src={GoogleIcon} alt="google" className="h-12" />
-      ) : type === "apple" ? (
-        darkMode ? (
-          <img src={AppleIcon} alt="apple" className="h-12" />
-        ) : (
-          <img src={AppleIconLight} alt="apple" className="h-12" />
-        )
-      ) : null}
-    </div>
+    <div
+      className={`icon h-12 ${bgIcon} bg-cover bg-center bg-no-repeat w-12`}
+    ></div>
   );
 };
 
