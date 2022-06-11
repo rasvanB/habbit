@@ -1,6 +1,7 @@
 import { FC } from "react";
+type buttonStyles = "navbar-login" | "navbar-signup" | "hero";
 type ButtonProps = {
-  buttonStyle: string;
+  buttonStyle: buttonStyles;
   text: string;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 const Button: FC<ButtonProps> = ({ buttonStyle, text }) => {
