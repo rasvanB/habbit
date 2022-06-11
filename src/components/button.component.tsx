@@ -1,5 +1,5 @@
 import { FC } from "react";
-type buttonStyles = "navbar-login" | "navbar-signup" | "hero";
+type buttonStyles = "navbar-login" | "navbar-signup" | "hero" | "submit";
 type ButtonProps = {
   buttonStyle: buttonStyles;
   text: string;
@@ -11,6 +11,8 @@ const Button: FC<ButtonProps> = ({ buttonStyle, text }) => {
     "text-blue-400 font-semibold py-2 px-4 rounded hover:text-blue-600 outline outline-2 whitespace-nowrap";
   const heroButtonStyle =
     "bg-blue-400 hover:bg-blue-600 text-white font-normal py-2 px-5 rounded-xl mt-5 whitespace-nowrap";
+  const submitButton =
+    "bg-blue-400 hover:bg-blue-600 w-full text-white font-bold py-2 px-4 rounded whitespace-nowrap mt-5";
   return (
     <div>
       <button
@@ -21,6 +23,8 @@ const Button: FC<ButtonProps> = ({ buttonStyle, text }) => {
             ? `${loginButtonStyle}`
             : buttonStyle === "hero"
             ? `${heroButtonStyle}`
+            : buttonStyle === "submit"
+            ? `${submitButton}`
             : ""
         }
       >

@@ -1,5 +1,7 @@
 import { useState } from "react";
-
+import FormInput from "./form-input.component";
+import Divider from "./divider.component";
+import Button from "./button.component";
 const defaultFormState = {
   email: "",
   password: "",
@@ -15,7 +17,29 @@ const SignInForm = () => {
 
   return (
     <div>
-      <h1>Sign in</h1>
+      <h1 className="text-center font-poppins font-bold text-zinc-800 text-4xl">
+        Sign in
+      </h1>
+      <Divider text="or Sign In with Email" />
+      <form onSubmit={() => {}}>
+        <FormInput
+          name="email"
+          label="Email"
+          value={email}
+          type="email"
+          onChange={handleChange}
+          placeholder="mail@website.com"
+        />
+        <FormInput
+          name="password"
+          value={password}
+          label="Password"
+          onChange={handleChange}
+          placeholder="password"
+          type="password"
+        />
+      </form>
+      <Button buttonStyle="submit" text="Sign In"></Button>
     </div>
   );
 };
