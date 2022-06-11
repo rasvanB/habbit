@@ -3,11 +3,11 @@ import { IconTypes } from "./icon.component";
 
 const LoginButton = ({ type }: { type: IconTypes }) => {
   const handleOnClick = () => {
-    console.log("Login Button Clicked");
+    console.log(`${type} button clicked`);
   };
   return (
     <div
-      className="cursor-pointer outline outline-1 rounded-md p-1 outline-zinc-200 shadow-md"
+      className="select-none cursor-pointer outline outline-1 rounded-md p-1 outline-zinc-200 dark:outline-zinc-700 shadow-md shadow-zinc-700"
       onClick={handleOnClick}
     >
       <Icon type={type} />

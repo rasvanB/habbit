@@ -17,8 +17,8 @@ const SignInForm = () => {
   };
 
   return (
-    <div className="bg-slate-100 p-10 rounded-2xl">
-      <h1 className="text-center font-poppins font-bold text-zinc-800 text-4xl">
+    <div className="dark:bg-zinc-800 bg-slate-100 p-10 rounded-2xl">
+      <h1 className="dark:text-gray-100 text-center font-poppins font-bold text-zinc-800 text-4xl">
         Sign in
       </h1>
       <LoginButtonsContainer />

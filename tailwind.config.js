@@ -10,7 +10,7 @@ module.exports = {
         "light-bg-svg": "url('./assets/bg.svg')",
         "dark-bg-mid": "url('./assets/bg-dark-mid.svg')",
         "light-bg-mid": "url('./assets/bg-mid.svg')",
-        "mesh-bg": "url('./assets/mesh-bg.png')",
+        "mesh-bg": "url('./assets/mesh-bg.webp')",
       },
     },
     screens: {
