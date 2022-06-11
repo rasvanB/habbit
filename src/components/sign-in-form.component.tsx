@@ -2,7 +2,7 @@ import { useState } from "react";
 import FormInput from "./form-input.component";
 import Divider from "./divider.component";
 import Button from "./button.component";
-import LoginButtonsContainer from "./login-buttons-container.component";
+import LoginButton from "./login-button.component";
 const defaultFormState = {
   email: "",
   password: "",
@@ -21,7 +21,11 @@ const SignInForm = () => {
       <h1 className="dark:text-gray-100 text-center font-poppins font-bold text-zinc-800 text-4xl">
         Sign in
       </h1>
-      <LoginButtonsContainer />
+      <div className="flex justify-around my-5">
+        <LoginButton type="google" />
+        <LoginButton type="apple" />
+        <LoginButton type="facebook" />
+      </div>
       <Divider text="or Sign In with Email" />
       <form onSubmit={() => {}}>
         <FormInput
