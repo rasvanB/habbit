@@ -23,9 +23,9 @@ const SignInForm = () => {
       <h1 className="dark:text-gray-100 text-center font-poppins font-bold text-zinc-800 text-4xl">
         Sign in
       </h1>
-      <div className="flex justify-around my-5">
+      <div className="flex justify-center my-5">
         <LoginButton type="google" />
-        <LoginButton type="apple" />
+        <LoginButton type="twitter" />
         <LoginButton type="facebook" />
       </div>
       <Divider text="or Sign In with Email" />

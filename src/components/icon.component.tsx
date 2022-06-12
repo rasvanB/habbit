@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-export type IconTypes = "facebook" | "google" | "apple";
+export type IconTypes = "facebook" | "google" | "twitter";
 type IconProps = {
   type: IconTypes;
 };
@@ -15,8 +15,8 @@ const Icon: FC<IconProps> = ({ type }) => {
     case "google":
       bgIcon = "bg-google-icon";
       break;
-    case "apple":
-      bgIcon = "bg-apple-icon dark:bg-apple-light-icon";
+    case "twitter":
+      bgIcon = "bg-twitter-icon";
       break;
     default:
       break;
@@ -24,7 +24,7 @@ const Icon: FC<IconProps> = ({ type }) => {
 
   return (
     <div
-      className={`icon h-12 ${bgIcon} bg-cover bg-center bg-no-repeat w-12`}
+      className={`icon h-9 ${bgIcon} bg-cover bg-center bg-no-repeat w-9`}
     ></div>
   );
 };
