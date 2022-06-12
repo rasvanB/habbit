@@ -11,6 +11,7 @@ module.exports = {
         "dark-bg-mid": "url('./assets/bg-dark-mid.svg')",
         "light-bg-mid": "url('./assets/bg-mid.svg')",
         "mesh-bg": "url('./assets/mesh-bg.webp')",
+        "mesh-bg-dark": "url('./assets/mesh-bg-dark.webp')",
         "google-icon": "url('./assets/google.png')",
         "facebook-icon": "url('./assets/facebook.png')",
         "twitter-icon": "url('./assets/twitter.png')",
