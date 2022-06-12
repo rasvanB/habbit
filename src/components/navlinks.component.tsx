@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import Option from "./option.component";
 import Button from "./button.component";
 const NavLinks = ({ open }: { open: boolean }) => {
-  console.log(open);
   return (
     <div
       className={`

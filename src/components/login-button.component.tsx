@@ -40,11 +40,13 @@ const LoginButton: FC<LoginButtonProps> = ({ type }) => {
         const { user: user2 } = await signInWithFacebook();
         setUserInfo(user2, userInfo);
         createUserDocumentFromAuth(userInfo);
+        console.log(userInfo);
         break;
       case "twitter":
         const { user: user3 } = await signInWithTwitter();
         setUserInfo(user3, userInfo);
         createUserDocumentFromAuth(userInfo);
+        console.log(userInfo);
         break;
       default:
         break;
