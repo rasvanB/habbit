@@ -1,6 +1,6 @@
 import Button from "./button.component";
 import FormInput from "./form-input.component";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ErrorMessage from "./error-message.component";
 import { createAuthUserWithEmailAndPassword } from "../utils/firebase/firebase.utils";
@@ -11,6 +11,7 @@ const defaultFormState = {
   confirmPassword: "",
 };
 const SignUpForm = () => {
+  const navigate = useNavigate();
   const [formState, setFormState] = useState(defaultFormState);
   const [errorMessage, setErrorMessage] = useState("");
   const { email, password, username, confirmPassword } = formState;
@@ -49,7 +50,10 @@ const SignUpForm = () => {
           break;
       }
     });
-    resetFormFields();
+    if (!errorMessage) {
+      resetFormFields();
+      navigate("/auth/sign-in");
+    }
   };
 
   return (

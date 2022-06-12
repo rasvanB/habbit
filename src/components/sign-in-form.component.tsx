@@ -6,6 +6,7 @@ import LoginButton from "./login-button.component";
 import { signInUserWithEmailAndPassword } from "../utils/firebase/firebase.utils";
 import ErrorMessage from "./error-message.component";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const defaultFormState = {
   email: "",
@@ -13,6 +14,7 @@ const defaultFormState = {
 };
 
 const SignInForm = () => {
+  const navigate = useNavigate();
   const [formState, setFormState] = useState(defaultFormState);
   const { email, password } = formState;
   const [errorMessage, setErrorMessage] = useState("");
@@ -48,8 +50,10 @@ const SignInForm = () => {
           setErrorMessage("Something went wrong");
           break;
       }
+    } else {
+      resetFormFields();
+      navigate("/app");
     }
-    resetFormFields();
   };
 
   return (
