@@ -10,17 +10,18 @@ import { UserContext } from "./context/user.context";
 import Dashboard from "./routes/dashboard/dashboard.component";
 const App = () => {
   const { darkMode } = useContext(ThemeContext);
-  const { setCurrentUser } = useContext(UserContext);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
   useEffect(() => {
     const unsubscribe = onAuthStateChangeListener(setCurrentUser);
     return unsubscribe;
   }, [setCurrentUser]);
+  console.log(currentUser);
   return (
     <div className={darkMode ? "dark" : "light"}>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="*" element={<NotFound />} />
-        <Route path="/auth" element={<AuthPage />} />
+        <Route path="/auth/:auth" element={<AuthPage />} />
         <Route path="/app" element={<Dashboard />} />
       </Routes>
     </div>

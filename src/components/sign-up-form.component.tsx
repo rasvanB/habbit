@@ -1,21 +1,19 @@
-import { useState } from "react";
-import FormInput from "./form-input.component";
-import Divider from "./divider.component";
 import Button from "./button.component";
-import LoginButton from "./login-button.component";
-import { signInUserWithEmailAndPassword } from "../utils/firebase/firebase.utils";
-import ErrorMessage from "./error-message.component";
+import FormInput from "./form-input.component";
 import { Link } from "react-router-dom";
-
+import { useState } from "react";
+import ErrorMessage from "./error-message.component";
+import { createAuthUserWithEmailAndPassword } from "../utils/firebase/firebase.utils";
 const defaultFormState = {
   email: "",
   password: "",
+  username: "",
+  confirmPassword: "",
 };
-
-const SignInForm = () => {
+const SignUpForm = () => {
   const [formState, setFormState] = useState(defaultFormState);
-  const { email, password } = formState;
   const [errorMessage, setErrorMessage] = useState("");
+  const { email, password, username, confirmPassword } = formState;
 
   const resetFormFields = () => {
     setFormState(defaultFormState);
@@ -29,42 +27,46 @@ const SignInForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let error: string | undefined = "";
-    await signInUserWithEmailAndPassword(email, password).then((result) => {
-      error = result;
-    });
-    if (error) {
-      switch (error) {
-        case "auth/user-not-found":
-          setErrorMessage("User not found");
-          break;
-        case "auth/wrong-password":
-          setErrorMessage("Wrong password");
+    if (password !== confirmPassword) {
+      setErrorMessage("Passwords do not match");
+      return;
+    }
+    await createAuthUserWithEmailAndPassword(email, password, {
+      displayName: username,
+    }).catch((error) => {
+      switch (error.code) {
+        case "auth/email-already-in-use":
+          setErrorMessage("Email already in use");
           break;
         case "auth/invalid-email":
           setErrorMessage("Invalid email");
+          break;
+        case "auth/weak-password":
+          setErrorMessage("Weak password");
           break;
         default:
           setErrorMessage("Something went wrong");
           break;
       }
-    }
+    });
     resetFormFields();
   };
 
   return (
     <div className="dark:bg-zinc-800 bg-slate-100 py-10 px-5 mobile:px-10 sm:rounded-2xl w-full mobile:w-auto mobile:rounded-lg">
-      <h1 className="dark:text-gray-100 text-center font-poppins font-bold text-zinc-800 text-4xl mb-7">
-        Sign in
+      <h1 className="dark:text-gray-100 text-center font-poppins font-bold text-zinc-800 text-4xl mb-5">
+        Sign up
       </h1>
       {errorMessage && <ErrorMessage message={errorMessage} />}
-      <div className="flex justify-center my-5">
-        <LoginButton type="google" />
-        <LoginButton type="twitter" />
-        <LoginButton type="facebook" />
-      </div>
-      <Divider text="or Sign In with Email" />
       <form onSubmit={handleSubmit}>
+        <FormInput
+          label="Display name"
+          name="username"
+          type="text"
+          onChange={handleChange}
+          value={username}
+          placeholder="display name"
+        />
         <FormInput
           name="email"
           label="Email"
@@ -75,23 +77,31 @@ const SignInForm = () => {
         />
         <FormInput
           name="password"
-          value={password}
           label="Password"
+          value={password}
           onChange={handleChange}
           placeholder="password"
+          type="password"
+        />
+        <FormInput
+          name="confirmPassword"
+          label="Confirm password"
+          value={confirmPassword}
+          onChange={handleChange}
+          placeholder="confirm password"
           type="password"
         />
         <Button buttonStyle="submit" type="submit" text="Sign In"></Button>
       </form>
       <div className="font-poppins mt-3 text-zinc-800 dark:text-gray-200 text-sm sm:text-md">
-        Don't have an account?{" "}
-        <Link to="/auth/sign-up">
+        Already have an account?{" "}
+        <Link to="/auth/sign-in">
           <span className="pl-1 hover:from-indigo-500 hover:to-blue-400 cursor-pointer text-transparent font-extrabold text-md bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">
-            Sign Up
+            Sign In
           </span>
         </Link>
       </div>
     </div>
   );
 };
-export default SignInForm;
+export default SignUpForm;

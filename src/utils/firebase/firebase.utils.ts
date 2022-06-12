@@ -1,10 +1,12 @@
 import { initializeApp } from "firebase/app";
 import {
+  createUserWithEmailAndPassword,
   FacebookAuthProvider,
   getAuth,
   GoogleAuthProvider,
   NextOrObserver,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
   TwitterAuthProvider,
@@ -79,8 +81,25 @@ export const createUserDocumentFromAuth = async (
   }
 };
 
-export const createUserDocument = (data: UserCredential) => {
+export const createUserDocument = (
+  data: UserCredential,
+  additionalInformation: AdditionalUserInfo = {}
+) => {
   const { user } = data;
+  if (additionalInformation != null) {
+    if (user.email) {
+      createUserDocumentFromAuth(
+        {
+          uid: user.uid,
+          email: user.email,
+          displayName: additionalInformation.displayName || "",
+          photoURL: "",
+        },
+        additionalInformation
+      );
+    }
+  }
+
   if (
     !user ||
     !user.uid ||
@@ -96,7 +115,7 @@ export const createUserDocument = (data: UserCredential) => {
     displayName: user.displayName,
     photoURL: user.photoURL,
   };
-  createUserDocumentFromAuth(userInfo);
+  createUserDocumentFromAuth(userInfo, additionalInformation);
 };
 
 export const signInWithProvider = async (provider: authMethods) => {
@@ -129,4 +148,31 @@ export const signInWithProvider = async (provider: authMethods) => {
     const { user } = userCredential;
     return user;
   }
+};
+
+export const createAuthUserWithEmailAndPassword = async (
+  email: string,
+  password: string,
+  additionalInformation: AdditionalUserInfo = {}
+) => {
+  if (!email || !password) return;
+  await createUserWithEmailAndPassword(auth, email, password)
+    .then((data) => {
+      createUserDocument(data, additionalInformation);
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
+export const signInUserWithEmailAndPassword = async (
+  email: string,
+  password: string
+): Promise<string | undefined> => {
+  if (!email || !password) return;
+  let error: string = "";
+  await signInWithEmailAndPassword(auth, email, password).catch((err) => {
+    error = err.code;
+  });
+  return error;
 };
