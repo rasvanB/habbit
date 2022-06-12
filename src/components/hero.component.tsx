@@ -20,7 +20,7 @@ const Hero = () => {
             With Habbit, you can concentrate on what really counts. Manage your
             habits to become the best version of yourself.
           </span>
-          <Link to={`/${currentUser ? "app" : "auth"}`}>
+          <Link to={`/${currentUser ? "app" : "auth/sign-in"}`}>
             <Button buttonStyle="hero" text="Get Started"></Button>
           </Link>
         </div>

@@ -17,12 +17,12 @@ const NavLinks = ({ open }: { open: boolean }) => {
       <Option linkTo="/contact" text="Contact" />
       <Link
         className="sm:mr-6 pt-4 sm:pt-0"
-        to={`/${currentUser ? "app" : "auth"}`}
+        to={`/${currentUser ? "app" : "auth/sign-in"}`}
       >
         <Button buttonStyle="navbar-login" text="Log in"></Button>
       </Link>
       <Link
-        to={`/${currentUser ? "app" : "auth"}`}
+        to={`/${currentUser ? "app" : "auth/sign-up"}`}
         className="pt-5 pb-6 sm:pt-0 sm:pb-0"
       >
         <Button buttonStyle="navbar-signup" text="Sign up"></Button>
