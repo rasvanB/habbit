@@ -20,7 +20,7 @@ const SignInForm = () => {
 
   return (
     <div className="dark:bg-zinc-800 bg-slate-100 py-10 px-5 mobile:px-10 sm:rounded-2xl w-full mobile:w-auto mobile:rounded-lg">
-      <h1 className="dark:text-gray-100 text-center font-poppins font-bold text-zinc-800 text-4xl">
+      <h1 className="dark:text-gray-100 text-center font-poppins font-bold text-zinc-800 text-4xl mb-7">
         Sign in
       </h1>
       <div className="flex justify-center my-5">
@@ -50,7 +50,7 @@ const SignInForm = () => {
       <Button buttonStyle="submit" text="Sign In"></Button>
       <div className="font-poppins mt-3 text-zinc-800 dark:text-gray-200 text-sm sm:text-md">
         Don't have an account?{" "}
-        <span className="cursor-pointer text-transparent font-extrabold text-md bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">
+        <span className="pl-1 hover:from-indigo-500 hover:to-blue-400 cursor-pointer text-transparent font-extrabold text-md bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">
           Sign Up
         </span>
       </div>
