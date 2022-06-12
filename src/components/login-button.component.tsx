@@ -5,25 +5,46 @@ import {
   signInWithGoogle,
   signInWithFacebook,
   signInWithTwitter,
+  UserInfo,
+  createUserDocumentFromAuth,
 } from "../utils/firebase/firebase.utils";
-
+import { User } from "firebase/auth";
 type LoginButtonProps = {
   type: IconTypes;
 };
+
+const setUserInfo = (user: User, userInfo: UserInfo) => {
+  if (user && user.email && user.displayName && user.photoURL && user.uid) {
+    userInfo.displayName = user.displayName;
+    userInfo.email = user.email;
+    userInfo.photoURL = user.photoURL;
+    userInfo.uid = user.uid;
+  }
+};
+
 const LoginButton: FC<LoginButtonProps> = ({ type }) => {
+  const userInfo: UserInfo = {
+    email: "",
+    displayName: "",
+    photoURL: "",
+    uid: "",
+  };
   const handleOnClick = async () => {
     switch (type) {
       case "google":
         const { user } = await signInWithGoogle();
-        console.log(user);
+        setUserInfo(user, userInfo);
+        createUserDocumentFromAuth(userInfo);
         break;
       case "facebook":
         const { user: user2 } = await signInWithFacebook();
-        console.log(user2);
+        setUserInfo(user2, userInfo);
+        createUserDocumentFromAuth(userInfo);
         break;
       case "twitter":
         const { user: user3 } = await signInWithTwitter();
-        console.log(user3);
+        setUserInfo(user3, userInfo);
+        createUserDocumentFromAuth(userInfo);
         break;
       default:
         break;

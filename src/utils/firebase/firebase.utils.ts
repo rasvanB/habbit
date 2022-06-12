@@ -3,9 +3,20 @@ import {
   FacebookAuthProvider,
   getAuth,
   GoogleAuthProvider,
+  NextOrObserver,
+  onAuthStateChanged,
   signInWithPopup,
+  signOut,
   TwitterAuthProvider,
+  User,
 } from "firebase/auth";
+import {
+  doc,
+  getDoc,
+  getFirestore,
+  QueryDocumentSnapshot,
+  setDoc,
+} from "firebase/firestore";
 // import { getAnalytics } from "firebase/analytics";
 const firebaseConfig = {
   apiKey: "AIzaSyCU_8Lk_XYfErTC1-mI8htZ-yfp0P-b74A",
@@ -19,7 +30,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-console.log(app);
 const auth = getAuth();
 // const analytics = getAnalytics(app);
 const googleProvider = new GoogleAuthProvider();
@@ -28,3 +38,42 @@ const twitterProvider = new TwitterAuthProvider();
 export const signInWithGoogle = () => signInWithPopup(auth, googleProvider);
 export const signInWithFacebook = () => signInWithPopup(auth, facebookProvider);
 export const signInWithTwitter = () => signInWithPopup(auth, twitterProvider);
+
+export const signOutUser = async () => signOut(auth);
+export const onAuthStateChangeListener = (callback: NextOrObserver<User>) =>
+  onAuthStateChanged(auth, callback);
+
+type AdditionalUserInfo = {
+  displayName?: string;
+};
+
+export type UserInfo = {
+  uid: string;
+  email: string;
+  displayName: string;
+  photoURL: string;
+};
+
+const db = getFirestore();
+
+export const createUserDocumentFromAuth = async (
+  userAuth: UserInfo,
+  additionalInformation: AdditionalUserInfo = {}
+): Promise<void | QueryDocumentSnapshot> => {
+  const userDocRef = doc(db, "users", userAuth.uid);
+  const userSnapshot = await getDoc(userDocRef);
+  if (!userSnapshot.exists()) {
+    const createdAt = new Date();
+
+    try {
+      await setDoc(userDocRef, {
+        ...userAuth,
+        createdAt,
+        ...additionalInformation,
+      });
+    } catch (error) {
+      console.log("error creating the user", error);
+    }
+  }
+  return userSnapshot as QueryDocumentSnapshot<UserInfo>;
+};
