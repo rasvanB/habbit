@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FormInput from "./form-input.component";
 import Divider from "./divider.component";
 import Button from "./button.component";
@@ -31,28 +31,32 @@ const SignInForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let error: string | undefined = "";
-    await signInUserWithEmailAndPassword(email, password).then((result) => {
-      error = result;
-    });
-    if (error) {
-      switch (error) {
-        case "auth/user-not-found":
-          setErrorMessage("User not found");
-          break;
-        case "auth/wrong-password":
-          setErrorMessage("Wrong password");
-          break;
-        case "auth/invalid-email":
-          setErrorMessage("Invalid email");
-          break;
-        default:
-          setErrorMessage("Something went wrong");
-          break;
-      }
+    if (!email || !password) {
+      setErrorMessage("Please fill out all fields");
     } else {
-      resetFormFields();
-      navigate("/app");
+      let error: string | undefined = "";
+      await signInUserWithEmailAndPassword(email, password).then((result) => {
+        error = result;
+      });
+      if (error) {
+        switch (error) {
+          case "auth/user-not-found":
+            setErrorMessage("User not found");
+            break;
+          case "auth/wrong-password":
+            setErrorMessage("Wrong password");
+            break;
+          case "auth/invalid-email":
+            setErrorMessage("Invalid email");
+            break;
+          default:
+            setErrorMessage("Something went wrong");
+            break;
+        }
+      } else {
+        resetFormFields();
+        navigate("/app");
+      }
     }
   };
 
