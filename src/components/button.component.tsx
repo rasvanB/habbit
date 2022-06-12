@@ -10,7 +10,7 @@ const Button: FC<ButtonProps> = ({ buttonStyle, text }) => {
   const loginButtonStyle =
     "text-blue-400 font-semibold py-2 px-4 rounded hover:text-blue-600 outline outline-2 whitespace-nowrap";
   const heroButtonStyle =
-    "bg-blue-400 hover:bg-blue-600 text-white font-normal py-2 px-5 rounded-xl mt-5 whitespace-nowrap";
+    "bg-blue-500 hover:bg-blue-600 text-white font-normal py-2 px-5 rounded-xl mt-5 whitespace-nowrap";
   const submitButton =
     "bg-blue-500 hover:bg-blue-600 w-full text-white font-semibold py-2 px-4 rounded whitespace-nowrap mt-5";
   return (

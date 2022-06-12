@@ -1,6 +1,10 @@
 import Button from "./button.component";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../context/user.context";
 
 const Hero = () => {
+  const { currentUser } = useContext(UserContext);
   return (
     <div className="h-screen bg-cover bg-light-bg-mid dark:bg-dark-bg-mid bg-no-repeat bg-center bg-opacity-70 sm:dark:bg-dark-bg-svg sm:bg-light-bg-svg">
       <div className="flex flex-col items-center h-full">
@@ -16,7 +20,9 @@ const Hero = () => {
             With Habbit, you can concentrate on what really counts. Manage your
             habits to become the best version of yourself.
           </span>
-          <Button buttonStyle="hero" text="Get Started"></Button>
+          <Link to={`/${currentUser ? "app" : "auth"}`}>
+            <Button buttonStyle="hero" text="Get Started"></Button>
+          </Link>
         </div>
       </div>
     </div>

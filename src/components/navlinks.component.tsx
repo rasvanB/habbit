@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import Option from "./option.component";
 import Button from "./button.component";
+import { useContext } from "react";
+import { UserContext } from "../context/user.context";
 const NavLinks = ({ open }: { open: boolean }) => {
+  const { currentUser } = useContext(UserContext);
   return (
     <div
       className={`
@@ -12,10 +15,16 @@ const NavLinks = ({ open }: { open: boolean }) => {
         } sm:opacity-100 pr-5 sm:pr-0 sm:border-t-0`}
     >
       <Option linkTo="/contact" text="Contact" />
-      <Link className="sm:mr-6 pt-4 sm:pt-0" to="/auth">
+      <Link
+        className="sm:mr-6 pt-4 sm:pt-0"
+        to={`/${currentUser ? "app" : "auth"}`}
+      >
         <Button buttonStyle="navbar-login" text="Log in"></Button>
       </Link>
-      <Link to="/auth" className="pt-5 pb-6 sm:pt-0 sm:pb-0">
+      <Link
+        to={`/${currentUser ? "app" : "auth"}`}
+        className="pt-5 pb-6 sm:pt-0 sm:pb-0"
+      >
         <Button buttonStyle="navbar-signup" text="Sign up"></Button>
       </Link>
     </div>

@@ -39,6 +39,7 @@ export const signInWithFacebook = () => signInWithPopup(auth, facebookProvider);
 export const signInWithTwitter = () => signInWithPopup(auth, twitterProvider);
 
 export const signOutUser = async () => signOut(auth);
+
 export const onAuthStateChangeListener = (callback: NextOrObserver<User>) =>
   onAuthStateChanged(auth, callback);
 
@@ -80,8 +81,6 @@ export const createUserDocumentFromAuth = async (
 
 export const createUserDocument = (data: UserCredential) => {
   const { user } = data;
-  console.log(user);
-
   if (
     !user ||
     !user.uid ||
@@ -97,24 +96,37 @@ export const createUserDocument = (data: UserCredential) => {
     displayName: user.displayName,
     photoURL: user.photoURL,
   };
-  console.log(userInfo);
   createUserDocumentFromAuth(userInfo);
 };
 
 export const signInWithProvider = async (provider: authMethods) => {
+  let userCredential: UserCredential | null = null;
   try {
     switch (provider) {
       case "google":
-        await signInWithGoogle().then((data) => createUserDocument(data));
+        await signInWithGoogle().then((data) => {
+          createUserDocument(data);
+          userCredential = data;
+        });
         break;
       case "facebook":
-        await signInWithFacebook().then((data) => createUserDocument(data));
+        await signInWithFacebook().then((data) => {
+          createUserDocument(data);
+          userCredential = data;
+        });
         break;
       case "twitter":
-        await signInWithTwitter().then((data) => createUserDocument(data));
+        await signInWithTwitter().then((data) => {
+          createUserDocument(data);
+          userCredential = data;
+        });
         break;
     }
   } catch (error) {
     return error as FirebaseError;
+  }
+  if (userCredential) {
+    const { user } = userCredential;
+    return user;
   }
 };
