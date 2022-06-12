@@ -9,14 +9,10 @@ import {
   signOut,
   TwitterAuthProvider,
   User,
+  UserCredential,
 } from "firebase/auth";
-import {
-  doc,
-  getDoc,
-  getFirestore,
-  QueryDocumentSnapshot,
-  setDoc,
-} from "firebase/firestore";
+import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
+import { FirebaseError } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 const firebaseConfig = {
   apiKey: "AIzaSyCU_8Lk_XYfErTC1-mI8htZ-yfp0P-b74A",
@@ -35,6 +31,9 @@ const auth = getAuth();
 const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
 const twitterProvider = new TwitterAuthProvider();
+facebookProvider.addScope("email");
+twitterProvider.addScope("email");
+googleProvider.addScope("email");
 export const signInWithGoogle = () => signInWithPopup(auth, googleProvider);
 export const signInWithFacebook = () => signInWithPopup(auth, facebookProvider);
 export const signInWithTwitter = () => signInWithPopup(auth, twitterProvider);
@@ -46,6 +45,8 @@ export const onAuthStateChangeListener = (callback: NextOrObserver<User>) =>
 type AdditionalUserInfo = {
   displayName?: string;
 };
+
+type authMethods = "google" | "facebook" | "twitter";
 
 export type UserInfo = {
   uid: string;
@@ -59,7 +60,7 @@ const db = getFirestore();
 export const createUserDocumentFromAuth = async (
   userAuth: UserInfo,
   additionalInformation: AdditionalUserInfo = {}
-): Promise<void | QueryDocumentSnapshot> => {
+) => {
   const userDocRef = doc(db, "users", userAuth.uid);
   const userSnapshot = await getDoc(userDocRef);
   if (!userSnapshot.exists()) {
@@ -75,5 +76,45 @@ export const createUserDocumentFromAuth = async (
       console.log("error creating the user", error);
     }
   }
-  return userSnapshot as QueryDocumentSnapshot<UserInfo>;
+};
+
+export const createUserDocument = (data: UserCredential) => {
+  const { user } = data;
+  console.log(user);
+
+  if (
+    !user ||
+    !user.uid ||
+    !user.displayName ||
+    !user.providerData[0].email ||
+    !user.photoURL
+  )
+    return;
+
+  let userInfo: UserInfo = {
+    uid: user.uid,
+    email: user.providerData[0].email,
+    displayName: user.displayName,
+    photoURL: user.photoURL,
+  };
+  console.log(userInfo);
+  createUserDocumentFromAuth(userInfo);
+};
+
+export const signInWithProvider = async (provider: authMethods) => {
+  try {
+    switch (provider) {
+      case "google":
+        await signInWithGoogle().then((data) => createUserDocument(data));
+        break;
+      case "facebook":
+        await signInWithFacebook().then((data) => createUserDocument(data));
+        break;
+      case "twitter":
+        await signInWithTwitter().then((data) => createUserDocument(data));
+        break;
+    }
+  } catch (error) {
+    return error as FirebaseError;
+  }
 };

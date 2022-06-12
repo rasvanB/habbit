@@ -1,55 +1,19 @@
 import { FC } from "react";
 import Icon from "./icon.component";
 import { IconTypes } from "./icon.component";
-import {
-  signInWithGoogle,
-  signInWithFacebook,
-  signInWithTwitter,
-  UserInfo,
-  createUserDocumentFromAuth,
-} from "../utils/firebase/firebase.utils";
-import { User } from "firebase/auth";
+import { signInWithProvider } from "../utils/firebase/firebase.utils";
+
 type LoginButtonProps = {
   type: IconTypes;
 };
 
-const setUserInfo = (user: User, userInfo: UserInfo) => {
-  if (user && user.email && user.displayName && user.photoURL && user.uid) {
-    userInfo.displayName = user.displayName;
-    userInfo.email = user.email;
-    userInfo.photoURL = user.photoURL;
-    userInfo.uid = user.uid;
-  }
-};
-
 const LoginButton: FC<LoginButtonProps> = ({ type }) => {
-  const userInfo: UserInfo = {
-    email: "",
-    displayName: "",
-    photoURL: "",
-    uid: "",
-  };
   const handleOnClick = async () => {
-    switch (type) {
-      case "google":
-        const { user } = await signInWithGoogle();
-        setUserInfo(user, userInfo);
-        createUserDocumentFromAuth(userInfo);
-        break;
-      case "facebook":
-        const { user: user2 } = await signInWithFacebook();
-        setUserInfo(user2, userInfo);
-        createUserDocumentFromAuth(userInfo);
-        console.log(userInfo);
-        break;
-      case "twitter":
-        const { user: user3 } = await signInWithTwitter();
-        setUserInfo(user3, userInfo);
-        createUserDocumentFromAuth(userInfo);
-        console.log(userInfo);
-        break;
-      default:
-        break;
+    const error = await signInWithProvider(type);
+    if (error) {
+      console.log(error.code);
+    } else {
+      console.log("success");
     }
   };
 

@@ -3,6 +3,7 @@ import FormInput from "./form-input.component";
 import Divider from "./divider.component";
 import Button from "./button.component";
 import LoginButton from "./login-button.component";
+import ErrorMessage from "./error-message.component";
 
 const defaultFormState = {
   email: "",
@@ -23,6 +24,7 @@ const SignInForm = () => {
       <h1 className="dark:text-gray-100 text-center font-poppins font-bold text-zinc-800 text-4xl mb-7">
         Sign in
       </h1>
+      <ErrorMessage message="Account with that email already exists" />
       <div className="flex justify-center my-5">
         <LoginButton type="google" />
         <LoginButton type="twitter" />
