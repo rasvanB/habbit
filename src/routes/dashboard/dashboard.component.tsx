@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
   const navigate = useNavigate();
   const { currentUser, loading } = useContext(UserContext);
+
   useEffect(() => {
     if (!loading) {
       if (!currentUser) {
@@ -16,7 +17,10 @@ const Dashboard = () => {
 
   return (
     <div>
-      <Nav username={currentUser ? currentUser.displayName : "Guest"} />
+      <Nav
+        username={currentUser ? currentUser.displayName : "Guest"}
+        photourl={currentUser ? currentUser.photoURL : ""}
+      />
     </div>
   );
 };
