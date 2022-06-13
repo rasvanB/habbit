@@ -10,12 +10,16 @@ import { UserContext } from "./context/user.context";
 import Dashboard from "./routes/dashboard/dashboard.component";
 const App = () => {
   const { darkMode } = useContext(ThemeContext);
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { setCurrentUser, setLoading } = useContext(UserContext);
   useEffect(() => {
-    const unsubscribe = onAuthStateChangeListener(setCurrentUser);
+    const unsubscribe = onAuthStateChangeListener((user) => {
+      if (user) {
+        setLoading(false);
+        setCurrentUser(user);
+      }
+    });
     return unsubscribe;
-  }, [setCurrentUser]);
-  console.log(currentUser);
+  }, [setCurrentUser, setLoading]);
   return (
     <div className={darkMode ? "dark" : "light"}>
       <Routes>

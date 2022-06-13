@@ -11,7 +11,6 @@ const defaultFormState = {
   confirmPassword: "",
 };
 
-// #TODO: VALIDATE EVERYTHING ON SIGN UP
 const SignUpForm = () => {
   const navigate = useNavigate();
   const [formState, setFormState] = useState(defaultFormState);
