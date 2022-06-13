@@ -1,7 +1,19 @@
+import Nav from "../../components/nav.component";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../../context/user.context";
+import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
+  const navigate = useNavigate();
+  const { currentUser } = useContext(UserContext);
+  useEffect(() => {
+    if (!currentUser) {
+      navigate("/auth/sign-in");
+    }
+  }, [currentUser, navigate]);
+
   return (
     <div>
-      <h1>Dashboard</h1>
+      <Nav username={`${currentUser ? currentUser.displayName : ""}`} />
     </div>
   );
 };

@@ -10,6 +10,8 @@ const defaultFormState = {
   username: "",
   confirmPassword: "",
 };
+
+// #TODO: VALIDATE EVERYTHING ON SIGN UP
 const SignUpForm = () => {
   const navigate = useNavigate();
   const [formState, setFormState] = useState(defaultFormState);
@@ -28,8 +30,22 @@ const SignUpForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    let regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+
     if (password !== confirmPassword) {
       setErrorMessage("Passwords do not match");
+      return;
+    }
+    if (email.length < 6 || !regexEmail.test(email)) {
+      setErrorMessage("Invalid email");
+      return;
+    }
+    if (password.length < 6) {
+      setErrorMessage("Password must be at least 6 characters");
+      return;
+    }
+    if (username.length <= 3) {
+      setErrorMessage("Username must be at least 4 characters");
       return;
     }
     await createAuthUserWithEmailAndPassword(email, password, {

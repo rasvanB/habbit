@@ -14,7 +14,7 @@ const Header = () => {
       </Link>
       <div
         onClick={() => setOpen(!open)}
-        className="w-full h-14 dark:bg-zinc-800 bg-slate-100 z-0 flex flex-row items-center justify-end select-none absolute sm:hidden right-0 dark:text-white text-zinc-700 cursor-pointer"
+        className="w-full h-14 dark:bg-zinc-800 bg-slate-100 sm:bg-opacity-70 z-0 flex flex-row items-center justify-end select-none absolute sm:hidden right-0 dark:text-white text-zinc-700 cursor-pointer"
       >
         <IonIcon
           className="pr-3"
