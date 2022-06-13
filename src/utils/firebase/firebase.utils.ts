@@ -81,7 +81,7 @@ export const createUserDocumentFromAuth = async (
   }
 };
 
-export const createUserDocument = (
+export const createUserDocument = async (
   data: UserCredential,
   additionalInformation: AdditionalUserInfo = {}
 ) => {
@@ -115,7 +115,7 @@ export const createUserDocument = (
     displayName: user.displayName,
     photoURL: user.photoURL,
   };
-  createUserDocumentFromAuth(userInfo, additionalInformation);
+  await createUserDocumentFromAuth(userInfo, additionalInformation);
 };
 
 export const getUserDocData = async (uid: string) => {
@@ -164,13 +164,16 @@ export const createAuthUserWithEmailAndPassword = async (
   additionalInformation: AdditionalUserInfo = {}
 ) => {
   if (!email || !password) return;
-  await createUserWithEmailAndPassword(auth, email, password)
-    .then((data) => {
-      createUserDocument(data, additionalInformation);
-    })
-    .catch((error) => {
-      throw error;
-    });
+  try {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    await createUserDocument(userCredential, additionalInformation);
+  } catch (error) {
+    return error as FirebaseError;
+  }
 };
 
 export const signInUserWithEmailAndPassword = async (
