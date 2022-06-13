@@ -92,8 +92,9 @@ export const createUserDocument = (
         {
           uid: user.uid,
           email: user.email,
-          displayName: additionalInformation.displayName || "",
-          photoURL: "",
+          displayName: additionalInformation.displayName || "Guest",
+          photoURL:
+            "https://freepikpsd.com/file/2019/10/default-profile-picture-png-1-Transparent-Images.png",
         },
         additionalInformation
       );
@@ -116,6 +117,14 @@ export const createUserDocument = (
     photoURL: user.photoURL,
   };
   createUserDocumentFromAuth(userInfo, additionalInformation);
+};
+
+export const getUserDocData = async (uid: string) => {
+  const userDocRef = doc(db, "users", uid);
+  const userSnapshot = await getDoc(userDocRef);
+  if (userSnapshot.exists()) {
+    return userSnapshot.data();
+  }
 };
 
 export const signInWithProvider = async (provider: authMethods) => {

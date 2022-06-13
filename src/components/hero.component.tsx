@@ -5,6 +5,7 @@ import { UserContext } from "../context/user.context";
 
 const Hero = () => {
   const { currentUser } = useContext(UserContext);
+  console.log(currentUser);
   return (
     <div className="h-screen bg-cover bg-light-bg-mid dark:bg-dark-bg-mid bg-no-repeat bg-center bg-opacity-70 sm:dark:bg-dark-bg-svg sm:bg-light-bg-svg">
       <div className="flex flex-col items-center h-full">

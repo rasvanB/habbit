@@ -8,14 +8,15 @@ const Dashboard = () => {
   useEffect(() => {
     if (!loading) {
       if (!currentUser) {
-        navigate("/auth/signin");
+        navigate("/auth/sign-in");
+      } else {
       }
     }
   }, [currentUser, navigate, loading]);
 
   return (
     <div>
-      <Nav username={`${currentUser ? currentUser.displayName : ""}`} />
+      <Nav username={currentUser ? currentUser.displayName : "Guest"} />
     </div>
   );
 };

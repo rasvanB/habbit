@@ -5,7 +5,10 @@ import { useContext, useEffect } from "react";
 import { ThemeContext } from "./context/theme.context";
 import NotFound from "./routes/not-found/not-found.component";
 import AuthPage from "./routes/auth/auth.component";
-import { onAuthStateChangeListener } from "./utils/firebase/firebase.utils";
+import {
+  getUserDocData,
+  onAuthStateChangeListener,
+} from "./utils/firebase/firebase.utils";
 import { UserContext } from "./context/user.context";
 import Dashboard from "./routes/dashboard/dashboard.component";
 const App = () => {
@@ -13,9 +16,22 @@ const App = () => {
   const { setCurrentUser, setLoading } = useContext(UserContext);
   useEffect(() => {
     const unsubscribe = onAuthStateChangeListener((user) => {
+      console.log("auth state changed", user);
       if (user) {
-        setLoading(false);
-        setCurrentUser(user);
+        getUserDocData(user.uid).then((userDoc) => {
+          if (userDoc) {
+            setCurrentUser({
+              email: userDoc.email,
+              displayName: userDoc.displayName,
+              photoURL: userDoc.photoURL,
+              uid: userDoc.uid,
+            });
+            setLoading(false);
+          }
+        });
+      } else {
+        setCurrentUser(null);
+        setLoading(true);
       }
     });
     return unsubscribe;

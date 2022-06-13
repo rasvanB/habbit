@@ -1,5 +1,4 @@
 import { createContext, ReactNode, useState } from "react";
-import { User } from "firebase/auth";
 
 export type UserData = {
   displayName: string;
@@ -9,18 +8,15 @@ export type UserData = {
 };
 
 export type UserContextType = {
-  currentUser: User | null;
-  userData?: UserData;
+  currentUser: UserData | null;
   loading: boolean;
   setLoading: (loading: boolean) => void;
-  setCurrentUser: (currentUser: User | null) => void;
-  setUserData: (userData: UserData) => void;
+  setCurrentUser: (currentUser: UserData | null) => void;
 };
 
 const defaultContext: UserContextType = {
   currentUser: null,
   setCurrentUser: () => {},
-  setUserData: () => {},
   loading: true,
   setLoading: () => {},
 };
@@ -28,16 +24,13 @@ const defaultContext: UserContextType = {
 export const UserContext = createContext<UserContextType>(defaultContext);
 
 const UserProvider = ({ children }: { children: ReactNode }) => {
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
-  const [userData, setUserData] = useState<UserData>();
+  const [currentUser, setCurrentUser] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
   return (
     <UserContext.Provider
       value={{
         currentUser,
         setCurrentUser,
-        setUserData,
-        userData,
         loading,
         setLoading,
       }}

@@ -29,6 +29,10 @@ const SignUpForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!email || !password || !username || !confirmPassword) {
+      setErrorMessage("Please fill out all fields");
+      return;
+    }
     let regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
     if (password !== confirmPassword) {
