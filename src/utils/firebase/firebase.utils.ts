@@ -93,8 +93,7 @@ export const createUserDocument = (
           uid: user.uid,
           email: user.email,
           displayName: additionalInformation.displayName || "Guest",
-          photoURL:
-            "https://freepikpsd.com/file/2019/10/default-profile-picture-png-1-Transparent-Images.png",
+          photoURL: "https://i.ibb.co/dBr1HsM/default-profile-300x284.png",
         },
         additionalInformation
       );

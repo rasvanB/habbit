@@ -1,6 +1,6 @@
 import Button from "./button.component";
 import FormInput from "./form-input.component";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import ErrorMessage from "./error-message.component";
 import { createAuthUserWithEmailAndPassword } from "../utils/firebase/firebase.utils";
@@ -11,8 +11,9 @@ const defaultFormState = {
   confirmPassword: "",
 };
 
+// TODO - CHECK IF EMAIL IS ALREADY IN USE
+
 const SignUpForm = () => {
-  const navigate = useNavigate();
   const [formState, setFormState] = useState(defaultFormState);
   const [errorMessage, setErrorMessage] = useState("");
   const { email, password, username, confirmPassword } = formState;
@@ -53,26 +54,28 @@ const SignUpForm = () => {
     }
     await createAuthUserWithEmailAndPassword(email, password, {
       displayName: username,
-    }).catch((error) => {
-      switch (error.code) {
-        case "auth/email-already-in-use":
-          setErrorMessage("Email already in use");
-          break;
-        case "auth/invalid-email":
-          setErrorMessage("Invalid email");
-          break;
-        case "auth/weak-password":
-          setErrorMessage("Weak password");
-          break;
-        default:
-          setErrorMessage("Something went wrong");
-          break;
-      }
-    });
-    if (!errorMessage) {
-      resetFormFields();
-      navigate("/auth/sign-in");
-    }
+    })
+      .catch((error) => {
+        switch (error.code) {
+          case "auth/email-already-in-use":
+            setErrorMessage("Email already in use");
+            break;
+          case "auth/invalid-email":
+            setErrorMessage("Invalid email");
+            break;
+          case "auth/weak-password":
+            setErrorMessage("Weak password");
+            break;
+          default:
+            setErrorMessage("Something went wrong");
+            break;
+        }
+      })
+      .finally(() => {
+        if (!errorMessage) {
+          resetFormFields();
+        }
+      });
   };
 
   return (
@@ -114,7 +117,7 @@ const SignUpForm = () => {
           placeholder="confirm password"
           type="password"
         />
-        <Button buttonStyle="submit" type="submit" text="Sign In"></Button>
+        <Button buttonStyle="submit" type="submit" text="Sign Up"></Button>
       </form>
       <div className="font-poppins mt-3 text-zinc-800 dark:text-gray-200 text-sm sm:text-md">
         Already have an account?{" "}

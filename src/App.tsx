@@ -11,30 +11,35 @@ import {
 } from "./utils/firebase/firebase.utils";
 import { UserContext } from "./context/user.context";
 import Dashboard from "./routes/dashboard/dashboard.component";
+
 const App = () => {
   const { darkMode } = useContext(ThemeContext);
-  const { setCurrentUser, setLoading } = useContext(UserContext);
+  const { setCurrentUser, setLoading, loading, currentUser } =
+    useContext(UserContext);
+  const getUser = async (uid: string) => {
+    const user = await getUserDocData(uid);
+    if (user) {
+      setCurrentUser({
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+        uid: user.uid,
+        email: user.email,
+      });
+      setLoading(false);
+    }
+  };
   useEffect(() => {
     const unsubscribe = onAuthStateChangeListener((user) => {
-      console.log("auth state changed", user);
       if (user) {
-        getUserDocData(user.uid).then((userDoc) => {
-          if (userDoc) {
-            setCurrentUser({
-              email: userDoc.email,
-              displayName: userDoc.displayName,
-              photoURL: userDoc.photoURL,
-              uid: userDoc.uid,
-            });
-            setLoading(false);
-          }
-        });
+        getUser(user.uid);
       } else {
-        setCurrentUser(null);
-        setLoading(true);
+        setLoading(false);
       }
+      console.log("auth state changed", currentUser, loading);
     });
+
     return unsubscribe;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setCurrentUser, setLoading]);
   return (
     <div className={darkMode ? "dark" : "light"}>
