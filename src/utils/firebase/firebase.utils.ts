@@ -13,6 +13,7 @@ import {
   User,
   UserCredential,
   sendEmailVerification,
+  fetchSignInMethodsForEmail,
 } from "firebase/auth";
 import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
 import { FirebaseError } from "firebase/app";
@@ -165,16 +166,24 @@ export const createAuthUserWithEmailAndPassword = async (
   additionalInformation: AdditionalUserInfo = {}
 ) => {
   if (!email || !password) return;
-  try {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
+  const signInMethods = await fetchSignInMethodsForEmail(auth, email);
+  if (!signInMethods.length) {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      await sendEmailVerification(userCredential.user);
+      await createUserDocument(userCredential, additionalInformation);
+    } catch (error) {
+      return error as FirebaseError;
+    }
+  } else {
+    throw new FirebaseError(
+      "auth/email-already-in-use",
+      "Email already in use"
     );
-    await sendEmailVerification(userCredential.user);
-    await createUserDocument(userCredential, additionalInformation);
-  } catch (error) {
-    return error as FirebaseError;
   }
 };
 

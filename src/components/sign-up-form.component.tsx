@@ -31,7 +31,7 @@ const SignUpForm = () => {
     const { name, value } = e.target;
     setFormState({ ...formState, [name]: value });
   };
-  // TODO: change this error handling to be the same as sign in form
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const error = validateSignUp(email, password, confirmPassword, username);
@@ -39,30 +39,34 @@ const SignUpForm = () => {
       setErrorMessage(error);
       return;
     }
+    let errorMsg: string | null = "";
     await createAuthUserWithEmailAndPassword(email, password, {
       displayName: username,
     })
       .catch((error) => {
         switch (error.code) {
           case "auth/email-already-in-use":
-            setErrorMessage("Email already in use");
+            console.log("Email already in use");
+            errorMsg = "Email already in use";
             break;
           case "auth/invalid-email":
-            setErrorMessage("Invalid email");
+            errorMsg = "Invalid email";
             break;
           case "auth/weak-password":
-            setErrorMessage("Weak password");
+            errorMsg = "Weak password";
             break;
           default:
-            setErrorMessage("Something went wrong");
+            errorMsg = "Something went wrong";
             break;
         }
       })
       .finally(() => {
-        if (!errorMessage) {
+        if (!errorMsg) {
           setMessage("Email verification sent, check your inbox");
           resetFormFields();
           signOutUser();
+        } else {
+          setErrorMessage(errorMsg);
         }
       });
   };

@@ -30,6 +30,12 @@ export const validateSignUp = (
   if (password.length < 6) {
     return "Password must be at least 6 characters";
   }
+  if (password.length > 30) {
+    return "Password must be less than 30 characters";
+  }
+  if (username.length > 16) {
+    return "Username must be less than 16 characters";
+  }
   if (username.length <= 3) {
     return "Username must be at least 4 characters";
   }
