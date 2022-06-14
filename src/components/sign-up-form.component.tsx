@@ -1,8 +1,9 @@
 import Button from "./button.component";
 import FormInput from "./form-input.component";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
-import ErrorMessage from "./error-message.component";
+import Message from "./message.component";
+import { validateSignUp } from "../utils/auth/auth.utils";
 import {
   createAuthUserWithEmailAndPassword,
   signOutUser,
@@ -14,10 +15,7 @@ const defaultFormState = {
   confirmPassword: "",
 };
 
-// TODO - CHECK IF EMAIL IS ALREADY IN USE
-
 const SignUpForm = () => {
-  const navigate = useNavigate();
   const [formState, setFormState] = useState(defaultFormState);
   const [errorMessage, setErrorMessage] = useState("");
   const { email, password, username, confirmPassword } = formState;
@@ -34,26 +32,9 @@ const SignUpForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!email || !password || !username || !confirmPassword) {
-      setErrorMessage("Please fill out all fields");
-      return;
-    }
-    let regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-
-    if (password !== confirmPassword) {
-      setErrorMessage("Passwords do not match");
-      return;
-    }
-    if (email.length < 6 || !regexEmail.test(email)) {
-      setErrorMessage("Invalid email");
-      return;
-    }
-    if (password.length < 6) {
-      setErrorMessage("Password must be at least 6 characters");
-      return;
-    }
-    if (username.length <= 3) {
-      setErrorMessage("Username must be at least 4 characters");
+    const error = validateSignUp(email, password, confirmPassword, username);
+    if (error) {
+      setErrorMessage(error);
       return;
     }
     await createAuthUserWithEmailAndPassword(email, password, {
@@ -79,7 +60,6 @@ const SignUpForm = () => {
         if (!errorMessage) {
           resetFormFields();
           signOutUser();
-          navigate("/auth/sign-in");
         }
       });
   };
@@ -89,7 +69,7 @@ const SignUpForm = () => {
       <h1 className="dark:text-gray-100 text-center font-poppins font-bold text-zinc-800 text-4xl mb-5">
         Sign up
       </h1>
-      {errorMessage && <ErrorMessage message={errorMessage} />}
+      {errorMessage && <Message message={errorMessage} isError />}
       <form onSubmit={handleSubmit}>
         <FormInput
           label="Display name"

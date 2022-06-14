@@ -12,6 +12,7 @@ import {
   TwitterAuthProvider,
   User,
   UserCredential,
+  sendEmailVerification,
 } from "firebase/auth";
 import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
 import { FirebaseError } from "firebase/app";
@@ -170,6 +171,7 @@ export const createAuthUserWithEmailAndPassword = async (
       email,
       password
     );
+    sendEmailVerification(userCredential.user);
     await createUserDocument(userCredential, additionalInformation);
   } catch (error) {
     return error as FirebaseError;
@@ -182,8 +184,10 @@ export const signInUserWithEmailAndPassword = async (
 ): Promise<string | undefined> => {
   if (!email || !password) return;
   let error: string = "";
-  await signInWithEmailAndPassword(auth, email, password).catch((err) => {
-    error = err.code;
-  });
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch (err) {
+    error = (err as FirebaseError).code;
+  }
   return error;
 };

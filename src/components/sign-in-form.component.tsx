@@ -4,9 +4,10 @@ import Divider from "./divider.component";
 import Button from "./button.component";
 import LoginButton from "./login-button.component";
 import { signInUserWithEmailAndPassword } from "../utils/firebase/firebase.utils";
-import ErrorMessage from "./error-message.component";
+import Message from "./message.component";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { validateSignIn } from "../utils/auth/auth.utils";
 
 const defaultFormState = {
   email: "",
@@ -31,11 +32,12 @@ const SignInForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!email || !password) {
-      setErrorMessage("Please fill out all fields");
+    let error: string | undefined = "";
+    error = validateSignIn(email, password);
+    if (error) {
+      setErrorMessage(error);
       return;
     }
-    let error: string | undefined = "";
     await signInUserWithEmailAndPassword(email, password).then((result) => {
       error = result;
     });
@@ -65,7 +67,7 @@ const SignInForm = () => {
       <h1 className="dark:text-gray-100 text-center font-poppins font-bold text-zinc-800 text-4xl mb-7">
         Sign in
       </h1>
-      {errorMessage && <ErrorMessage message={errorMessage} />}
+      {errorMessage && <Message message={errorMessage} isError />}
       <div className="flex justify-center my-5">
         <LoginButton type="google" />
         <LoginButton type="twitter" />

@@ -9,7 +9,6 @@ const AuthPage = () => {
   const { auth } = useParams();
   const navigate = useNavigate();
   useEffect(() => {
-    console.log(currentUser, loading);
     if (auth !== "signin" && auth !== "sign-up") {
       navigate("/auth/sign-in");
     }

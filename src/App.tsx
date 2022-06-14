@@ -14,8 +14,7 @@ import Dashboard from "./routes/dashboard/dashboard.component";
 
 const App = () => {
   const { darkMode } = useContext(ThemeContext);
-  const { setCurrentUser, setLoading, loading, currentUser } =
-    useContext(UserContext);
+  const { setCurrentUser, setLoading } = useContext(UserContext);
   const getUser = async (uid: string) => {
     const user = await getUserDocData(uid);
     if (user) {
@@ -34,8 +33,8 @@ const App = () => {
         getUser(user.uid);
       } else {
         setLoading(false);
+        setCurrentUser(null);
       }
-      console.log("auth state changed", currentUser, loading);
     });
 
     return unsubscribe;

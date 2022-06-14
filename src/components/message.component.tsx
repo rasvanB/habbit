@@ -1,5 +1,11 @@
 import IonIcon from "@reacticons/ionicons";
-const ErrorMessage = ({ message }: { message: string }) => {
+const Message = ({
+  message,
+  isError,
+}: {
+  message: string;
+  isError: boolean;
+}) => {
   return (
     <div className="p-2 pr-4 flex items-center w-full bg-red-400 bg-opacity-70 rounded-md">
       <IonIcon
@@ -11,4 +17,4 @@ const ErrorMessage = ({ message }: { message: string }) => {
     </div>
   );
 };
-export default ErrorMessage;
+export default Message;
