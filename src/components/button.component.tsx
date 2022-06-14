@@ -19,7 +19,7 @@ const Button: FC<ButtonProps> = ({ buttonStyle, text }) => {
   const submitButton =
     "bg-blue-500 hover:bg-blue-600 w-full text-white font-semibold py-2 px-4 rounded whitespace-nowrap mt-5";
   const addHabitButton =
-    "bg-blue-500 hover:bg-blue-600 w-full text-white font-semibold py-2 px-4 rounded whitespace-nowrap mt-5";
+    "bg-blue-500 hover:bg-blue-600 min-w-[150px] text-white font-semibold py-2 px-4 rounded whitespace-nowrap mt-5";
   return (
     <div>
       <button
