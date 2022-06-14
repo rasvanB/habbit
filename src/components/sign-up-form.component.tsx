@@ -18,6 +18,7 @@ const defaultFormState = {
 const SignUpForm = () => {
   const [formState, setFormState] = useState(defaultFormState);
   const [errorMessage, setErrorMessage] = useState("");
+  const [message, setMessage] = useState("");
   const { email, password, username, confirmPassword } = formState;
 
   const resetFormFields = () => {
@@ -26,6 +27,7 @@ const SignUpForm = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setErrorMessage("");
+    setMessage("");
     const { name, value } = e.target;
     setFormState({ ...formState, [name]: value });
   };
@@ -58,6 +60,7 @@ const SignUpForm = () => {
       })
       .finally(() => {
         if (!errorMessage) {
+          setMessage("Email verification sent, check your inbox");
           resetFormFields();
           signOutUser();
         }
@@ -70,6 +73,7 @@ const SignUpForm = () => {
         Sign up
       </h1>
       {errorMessage && <Message message={errorMessage} isError />}
+      {message && <Message message={message} isError={false} />}
       <form onSubmit={handleSubmit}>
         <FormInput
           label="Display name"
