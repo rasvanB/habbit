@@ -25,6 +25,7 @@ const App = () => {
         email: user.email,
       });
     }
+    setLoading(false);
   };
   useEffect(() => {
     const unsubscribe = onAuthStateChangeListener((user) => {
@@ -36,10 +37,9 @@ const App = () => {
           return;
         }
         getUser(user.uid);
-        setLoading(false);
       } else {
-        setLoading(false);
         setCurrentUser(null);
+        setLoading(true);
       }
     });
 

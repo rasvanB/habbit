@@ -1,5 +1,6 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 import { signOutUser } from "../utils/firebase/firebase.utils";
+import { UserContext } from "../context/user.context";
 
 type NavProps = {
   username: string;
@@ -7,10 +8,15 @@ type NavProps = {
 };
 
 const Nav: FC<NavProps> = ({ username, photourl }) => {
+  const { setLoading } = useContext(UserContext);
+  const handleSignOut = async () => {
+    await signOutUser();
+    setLoading(false);
+  };
   return (
     <div className="bg-slate-100 flex items-center">
       <div
-        onClick={() => signOutUser()}
+        onClick={handleSignOut}
         style={{
           backgroundImage: `url(${photourl})`,
           backgroundSize: "cover",
