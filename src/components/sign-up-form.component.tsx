@@ -46,7 +46,6 @@ const SignUpForm = () => {
       .catch((error) => {
         switch (error.code) {
           case "auth/email-already-in-use":
-            console.log("Email already in use");
             errorMsg = "Email already in use";
             break;
           case "auth/invalid-email":

@@ -160,6 +160,7 @@ export const signInWithProvider = async (provider: authMethods) => {
   }
 };
 
+// TODO: maybe delete users from firestore if they are not verified
 export const createAuthUserWithEmailAndPassword = async (
   email: string,
   password: string,
