@@ -9,6 +9,7 @@ const Dashboard = () => {
   const { currentUser, loading } = useContext(UserContext);
 
   useEffect(() => {
+    console.log(currentUser, loading);
     if (!loading) {
       if (!currentUser) {
         navigate("/auth/sign-in");

@@ -39,7 +39,7 @@ const App = () => {
         getUser(user.uid);
       } else {
         setCurrentUser(null);
-        setLoading(true);
+        setLoading(false);
       }
     });
 
