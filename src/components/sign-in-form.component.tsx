@@ -38,28 +38,36 @@ const SignInForm = () => {
       setErrorMessage(error);
       return;
     }
-    await signInUserWithEmailAndPassword(email, password).then((result) => {
-      error = result;
-    });
-    if (error) {
-      switch (error) {
-        case "auth/user-not-found":
-          setErrorMessage("User not found");
-          break;
-        case "auth/wrong-password":
-          setErrorMessage("Wrong password");
-          break;
-        case "auth/invalid-email":
-          setErrorMessage("Invalid email");
-          break;
-        default:
-          setErrorMessage("Something went wrong");
-          break;
-      }
-    } else {
-      resetFormFields();
-      navigate("/app");
-    }
+    await signInUserWithEmailAndPassword(email, password)
+      .then((err) => {
+        error = err;
+        if (error) {
+          switch (error) {
+            case "auth/user-not-found":
+              error = "User not found";
+              break;
+            case "auth/wrong-password":
+              error = "Wrong password";
+              break;
+            case "auth/invalid-email":
+              error = "Invalid email";
+              break;
+            case "auth/email-not-verified":
+              error = "Email not verified";
+              break;
+            default:
+              error = "Something went wrong";
+              break;
+          }
+        }
+      })
+      .finally(() => {
+        setErrorMessage(error ? error : "");
+        if (!error) {
+          resetFormFields();
+          navigate("/app");
+        }
+      });
   };
 
   return (

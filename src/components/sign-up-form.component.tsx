@@ -31,7 +31,7 @@ const SignUpForm = () => {
     const { name, value } = e.target;
     setFormState({ ...formState, [name]: value });
   };
-
+  // TODO: change this error handling to be the same as sign in form
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const error = validateSignUp(email, password, confirmPassword, username);

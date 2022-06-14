@@ -29,6 +29,8 @@ const App = () => {
   };
   useEffect(() => {
     const unsubscribe = onAuthStateChangeListener((user) => {
+      console.log("user", user);
+
       if (user) {
         getUser(user.uid);
       } else {

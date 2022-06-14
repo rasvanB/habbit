@@ -18,7 +18,7 @@ const AuthPage = () => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [auth, navigate, currentUser, loading]);
+  }, [auth]);
 
   return (
     <div className="h-screen w-screen dark:bg-mesh-bg-dark bg-mesh-bg bg-cover bg-no-repeat bg-center flex items-center justify-center">

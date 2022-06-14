@@ -185,9 +185,14 @@ export const signInUserWithEmailAndPassword = async (
   if (!email || !password) return;
   let error: string = "";
   try {
-    await signInWithEmailAndPassword(auth, email, password);
+    await signInWithEmailAndPassword(auth, email, password).then((data) => {
+      if (!data.user.emailVerified) {
+        error = "auth/email-not-verified";
+      }
+    });
   } catch (err) {
     error = (err as FirebaseError).code;
   }
+  if (error) await signOutUser();
   return error;
 };
