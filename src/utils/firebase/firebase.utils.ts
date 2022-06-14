@@ -171,7 +171,7 @@ export const createAuthUserWithEmailAndPassword = async (
       email,
       password
     );
-    sendEmailVerification(userCredential.user);
+    await sendEmailVerification(userCredential.user);
     await createUserDocument(userCredential, additionalInformation);
   } catch (error) {
     return error as FirebaseError;
