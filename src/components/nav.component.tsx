@@ -14,17 +14,19 @@ const Nav: FC<NavProps> = ({ username, photourl }) => {
     setLoading(false);
   };
   return (
-    <div className="bg-slate-100 flex items-center p-3">
-      <div onClick={handleSignOut} className="w-[30px] h-[30px] outline-1">
+    <div className="flex items-center py-3 px-40 bg-red-500">
+      <div
+        onClick={handleSignOut}
+        className="w-[30px] h-[30px] outline-1 cursor-pointer"
+      >
         <LazyLoadImage
           src={photourl}
-          alt={username}
           referrerPolicy="no-referrer"
           className="rounded-md"
         />
       </div>
       <h1 className="ml-3 font-poppins font-medium text-zinc-800">
-        {`Hello, ${username.split(" ")[0]}`}
+        {`${username.split(" ")[0]}`}
       </h1>
     </div>
   );
