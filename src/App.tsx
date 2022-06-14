@@ -24,15 +24,19 @@ const App = () => {
         uid: user.uid,
         email: user.email,
       });
-      setLoading(false);
     }
   };
   useEffect(() => {
     const unsubscribe = onAuthStateChangeListener((user) => {
-      console.log("user", user);
-
       if (user) {
+        if (
+          user.providerData[0].providerId === "password" &&
+          !user.emailVerified
+        ) {
+          return;
+        }
         getUser(user.uid);
+        setLoading(false);
       } else {
         setLoading(false);
         setCurrentUser(null);

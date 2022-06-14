@@ -3,19 +3,15 @@ import Icon from "./icon.component";
 import { IconTypes } from "./icon.component";
 import { signInWithProvider } from "../utils/firebase/firebase.utils";
 import { FirebaseError } from "firebase/app";
-import { useNavigate } from "react-router-dom";
 type LoginButtonProps = {
   type: IconTypes;
 };
 
 const LoginButton: FC<LoginButtonProps> = ({ type }) => {
-  const navigate = useNavigate();
   const handleOnClick = async () => {
     const result = await signInWithProvider(type);
     if (result instanceof FirebaseError) {
       console.log(result.code);
-    } else {
-      navigate("/app");
     }
   };
   return (
