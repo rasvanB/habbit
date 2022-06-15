@@ -1,6 +1,6 @@
 import Button from "./button.component";
-import FormInput from "./form-input.component";
 import { Link } from "react-router-dom";
+import InputBox from "./form-input.component";
 import { useState } from "react";
 import Message from "./message.component";
 import { validateSignUp } from "../utils/auth/auth.utils";
@@ -78,7 +78,7 @@ const SignUpForm = () => {
       {errorMessage && <Message message={errorMessage} isError />}
       {message && <Message message={message} isError={false} />}
       <form onSubmit={handleSubmit}>
-        <FormInput
+        <InputBox
           label="Display name"
           name="username"
           type="text"
@@ -86,7 +86,7 @@ const SignUpForm = () => {
           value={username}
           placeholder="display name"
         />
-        <FormInput
+        <InputBox
           name="email"
           label="Email"
           value={email}
@@ -94,7 +94,7 @@ const SignUpForm = () => {
           onChange={handleChange}
           placeholder="mail@website.com"
         />
-        <FormInput
+        <InputBox
           name="password"
           label="Password"
           value={password}
@@ -102,7 +102,7 @@ const SignUpForm = () => {
           placeholder="password"
           type="password"
         />
-        <FormInput
+        <InputBox
           name="confirmPassword"
           label="Confirm password"
           value={confirmPassword}

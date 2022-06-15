@@ -1,10 +1,10 @@
 import { FC } from "react";
 
-type FormInputProps = {
+type InputProps = {
   label: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
-const FormInput: FC<FormInputProps> = ({ label, ...otherProps }) => {
+const InputBox: FC<InputProps> = ({ label, ...otherProps }) => {
   return (
     <div className="form-input flex flex-col font-poppins mobile:min-w-[300px]">
       <label
@@ -21,4 +21,4 @@ const FormInput: FC<FormInputProps> = ({ label, ...otherProps }) => {
   );
 };
 
-export default FormInput;
+export default InputBox;

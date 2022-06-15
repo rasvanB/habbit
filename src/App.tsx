@@ -14,7 +14,7 @@ import Dashboard from "./routes/dashboard/dashboard.component";
 
 const App = () => {
   const { darkMode } = useContext(ThemeContext);
-  const { setCurrentUser, setLoading } = useContext(UserContext);
+  const { setCurrentUser, setLoading, loading } = useContext(UserContext);
   const getUser = async (uid: string) => {
     const user = await getUserDocData(uid);
     if (user) {
@@ -24,8 +24,8 @@ const App = () => {
         uid: user.uid,
         email: user.email,
       });
-      setLoading(false);
     }
+    setLoading(false);
   };
   useEffect(() => {
     const unsubscribe = onAuthStateChangeListener((user) => {
@@ -39,12 +39,12 @@ const App = () => {
         getUser(user.uid);
       } else {
         setCurrentUser(null);
-        setLoading(true);
+        setLoading(false);
       }
     });
     return unsubscribe;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setCurrentUser, setLoading]);
+  }, [setCurrentUser, setLoading, loading]);
   return (
     <div className={darkMode ? "dark" : "light"}>
       <Routes>

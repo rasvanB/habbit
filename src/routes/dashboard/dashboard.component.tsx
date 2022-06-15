@@ -4,12 +4,12 @@ import AddModal from "../../components/add-modal.component";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../context/user.context";
 import { useNavigate } from "react-router-dom";
+//TODO: merge this to git repo
 const Dashboard = () => {
   const navigate = useNavigate();
   const { currentUser, loading } = useContext(UserContext);
 
   useEffect(() => {
-    console.log(currentUser, loading);
     if (!loading) {
       if (!currentUser) {
         navigate("/auth/sign-in");

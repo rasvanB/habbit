@@ -1,6 +1,6 @@
 import { useState } from "react";
-import FormInput from "./form-input.component";
 import Divider from "./divider.component";
+import InputBox from "./form-input.component";
 import Button from "./button.component";
 import LoginButton from "./login-button.component";
 import { signInUserWithEmailAndPassword } from "../utils/firebase/firebase.utils";
@@ -83,7 +83,7 @@ const SignInForm = () => {
       </div>
       <Divider text="or Sign In with Email" />
       <form onSubmit={handleSubmit}>
-        <FormInput
+        <InputBox
           name="email"
           label="Email"
           value={email}
@@ -91,7 +91,7 @@ const SignInForm = () => {
           onChange={handleChange}
           placeholder="mail@website.com"
         />
-        <FormInput
+        <InputBox
           name="password"
           value={password}
           label="Password"
