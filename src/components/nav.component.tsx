@@ -20,7 +20,7 @@ const Nav: FC<NavProps> = ({ username, photourl }) => {
     <div className="flex items-center py-3 px-40 bg-slate-100 dark:bg-zinc-900 border-b border-slate-300 dark:border-zinc-600">
       <div
         onClick={handleSignOut}
-        className="w-[30px] h-[30px] outline-1 cursor-pointer"
+        className="w-[35px] h-[35px] outline-1 cursor-pointer"
       >
         <LazyLoadImage
           src={photourl}
