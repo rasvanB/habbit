@@ -84,6 +84,7 @@ const SignInForm = () => {
       <Divider text="or Sign In with Email" />
       <form onSubmit={handleSubmit}>
         <InputBox
+          isFormInput
           name="email"
           label="Email"
           value={email}
@@ -92,6 +93,7 @@ const SignInForm = () => {
           placeholder="mail@website.com"
         />
         <InputBox
+          isFormInput
           name="password"
           value={password}
           label="Password"
@@ -99,7 +101,9 @@ const SignInForm = () => {
           placeholder="password"
           type="password"
         />
-        <Button buttonStyle="submit" type="submit" text="Sign In"></Button>
+        <Button buttonStyle="submit" type="submit">
+          Sign In
+        </Button>
       </form>
       <div className="font-poppins mt-3 text-zinc-800 dark:text-gray-200 text-sm sm:text-md">
         Don't have an account?{" "}

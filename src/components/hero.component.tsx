@@ -22,7 +22,7 @@ const Hero = () => {
             habits to become the best version of yourself.
           </span>
           <Link to={`/${currentUser ? "app" : "auth/sign-in"}`}>
-            <Button buttonStyle="hero" text="Get Started"></Button>
+            <Button buttonStyle="hero">Get Started</Button>
           </Link>
         </div>
       </div>

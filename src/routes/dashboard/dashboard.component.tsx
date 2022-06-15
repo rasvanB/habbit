@@ -4,7 +4,6 @@ import AddModal from "../../components/add-modal.component";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../context/user.context";
 import { useNavigate } from "react-router-dom";
-//TODO: merge this to git repo
 const Dashboard = () => {
   const navigate = useNavigate();
   const { currentUser, loading } = useContext(UserContext);
@@ -28,9 +27,9 @@ const Dashboard = () => {
         }
       />
       <div className="mx-40 h-full border-x border-slate-300 dark:border-zinc-600">
-        <Button buttonStyle="add-habit" text="Add Habit" />
+        <Button buttonStyle="add-habit">Add Habit</Button>
       </div>
-      <AddModal isHidden />
+      <AddModal />
     </div>
   );
 };

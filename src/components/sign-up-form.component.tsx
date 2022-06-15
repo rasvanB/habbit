@@ -79,6 +79,7 @@ const SignUpForm = () => {
       {message && <Message message={message} isError={false} />}
       <form onSubmit={handleSubmit}>
         <InputBox
+          isFormInput
           label="Display name"
           name="username"
           type="text"
@@ -87,6 +88,7 @@ const SignUpForm = () => {
           placeholder="display name"
         />
         <InputBox
+          isFormInput
           name="email"
           label="Email"
           value={email}
@@ -95,6 +97,7 @@ const SignUpForm = () => {
           placeholder="mail@website.com"
         />
         <InputBox
+          isFormInput
           name="password"
           label="Password"
           value={password}
@@ -103,6 +106,7 @@ const SignUpForm = () => {
           type="password"
         />
         <InputBox
+          isFormInput
           name="confirmPassword"
           label="Confirm password"
           value={confirmPassword}
@@ -110,7 +114,9 @@ const SignUpForm = () => {
           placeholder="confirm password"
           type="password"
         />
-        <Button buttonStyle="submit" type="submit" text="Sign Up"></Button>
+        <Button buttonStyle="submit" type="submit">
+          Sign Up
+        </Button>
       </form>
       <div className="font-poppins mt-3 text-zinc-800 dark:text-gray-200 text-sm sm:text-md">
         Already have an account?{" "}
