@@ -1,12 +1,17 @@
 import Nav from "../../components/nav.component";
 import Button from "../../components/button.component";
 import AddModal from "../../components/add-modal.component";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/user.context";
 import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
   const navigate = useNavigate();
   const { currentUser, loading } = useContext(UserContext);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setModalOpen(!modalOpen);
+  };
 
   useEffect(() => {
     if (!loading) {
@@ -27,9 +32,11 @@ const Dashboard = () => {
         }
       />
       <div className="mx-40 h-full border-x border-slate-300 dark:border-zinc-600">
-        <Button buttonStyle="add-habit">Add Habit</Button>
+        <Button onClick={toggleModal} buttonStyle="add-habit">
+          Add Habit
+        </Button>
       </div>
-      <AddModal />
+      <AddModal isHidden={!modalOpen} close={toggleModal} />
     </div>
   );
 };

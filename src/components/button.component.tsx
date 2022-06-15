@@ -4,7 +4,8 @@ type buttonStyles =
   | "navbar-signup"
   | "hero"
   | "submit"
-  | "add-habit";
+  | "add-habit"
+  | "select-icon";
 type ButtonProps = {
   buttonStyle: buttonStyles;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
@@ -19,11 +20,13 @@ const submitButton =
   "bg-blue-500 hover:bg-blue-600 w-full text-white font-semibold py-2 px-4 rounded whitespace-nowrap mt-5";
 const addHabitButton =
   "bg-blue-500 hover:bg-blue-600 min-w-[150px] text-white font-semibold py-2 px-4 rounded whitespace-nowrap mt-5";
-
-const Button: FC<ButtonProps> = ({ buttonStyle, children }) => {
+const selectIcon =
+  "bg-zinc-600 outline outline-1 hover:outline-2 outline-zinc-500 text-white font-semibold p-1 rounded whitespace-nowrap ml-5 flex items-center justify-center";
+const Button: FC<ButtonProps> = ({ buttonStyle, children, ...otherProps }) => {
   return (
     <div>
       <button
+        {...otherProps}
         className={
           buttonStyle === "navbar-signup"
             ? `${signupButtonStyle}`
@@ -35,6 +38,8 @@ const Button: FC<ButtonProps> = ({ buttonStyle, children }) => {
             ? `${submitButton}`
             : buttonStyle === "add-habit"
             ? `${addHabitButton}`
+            : buttonStyle === "select-icon"
+            ? `${selectIcon}`
             : ""
         }
       >
