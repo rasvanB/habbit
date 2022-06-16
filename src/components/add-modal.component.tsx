@@ -4,16 +4,25 @@ import IonIcon from "@reacticons/ionicons";
 import IconMenu from "./icon-menu.component";
 import { Icon } from "@iconify/react";
 import { FC, useState } from "react";
+
 type ModalProps = {
   isHidden: boolean;
   closeModal: () => void;
 };
+
+const defaultHabitState = {
+  habitName: "",
+  habitDescription: "",
+  iconName: "",
+  iconColor: "",
+};
+
 const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
   const [isIconsHidden, setIsIconsHidden] = useState(true);
-  const [selectedIcon, setSelectedIcon] = useState("");
-  console.log(selectedIcon);
+  const [habitState, setHabitState] = useState(defaultHabitState);
+
   const selectIcon = (iconName: string) => {
-    setSelectedIcon(iconName);
+    setHabitState({ ...habitState, iconName });
     setIsIconsHidden(true);
   };
 
@@ -23,8 +32,14 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
 
   const handleClose = () => {
     setIsIconsHidden(true);
-    setSelectedIcon("");
+    setHabitState(defaultHabitState);
     closeModal();
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const { value } = e.target;
+    setHabitState({ ...habitState, habitName: value });
   };
   return (
     <div
@@ -42,6 +57,8 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
         <div className="flex justify-end items-end">
           <InputBox
             label="NAME"
+            onChange={handleChange}
+            value={habitState.habitName}
             placeholder="Enter the name of your habit"
           ></InputBox>
           <div className="relative">
@@ -53,7 +70,9 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
             >
               <div className="w-[25px] h-[25px] flex justify-center items-center">
                 <Icon
-                  icon={`${selectedIcon ? selectedIcon : "bi:question-lg"}`}
+                  icon={`${
+                    habitState.iconName ? habitState.iconName : "bi:question-lg"
+                  }`}
                   className="text-2xl text-blue-400"
                 />
               </div>
