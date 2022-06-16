@@ -29,13 +29,12 @@ const Dashboard = () => {
             : "https://i.ibb.co/dBr1HsM/default-profile-300x284.png"
         }
       />
-      {/* TODO: turn this into component */}
       <div className="mx-40 h-full border-x border-slate-300 dark:border-zinc-600">
         <Button onClick={toggleModal} buttonStyle="add-habit">
           Add Habit
         </Button>
       </div>
-      <AddModal isHidden={!modalOpen} close={toggleModal} />
+      <AddModal isHidden={!modalOpen} closeModal={toggleModal} />
     </div>
   );
 };

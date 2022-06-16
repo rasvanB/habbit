@@ -15,7 +15,7 @@ const InputBox: FC<InputProps> = ({ label, isFormInput, ...otherProps }) => {
     <div className="form-input flex flex-col font-poppins mobile:min-w-[300px]">
       <label
         htmlFor="name"
-        className="text-zinc-700 dark:text-gray-100 pb-1 pt-4"
+        className="text-zinc-700 dark:text-gray-200 pb-1 pt-4"
       >
         {`${label}`}
       </label>

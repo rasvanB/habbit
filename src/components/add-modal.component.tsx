@@ -1,37 +1,42 @@
 import InputBox from "./form-input.component";
 import Button from "./button.component";
 import IonIcon from "@reacticons/ionicons";
-import iconNames from "../utils/icons.utils";
+import IconMenu from "./icon-menu.component";
 import { Icon } from "@iconify/react";
 import { FC, useState } from "react";
 type ModalState = {
   isHidden: boolean;
-  close: () => void;
+  closeModal: () => void;
 };
-const AddModal: FC<ModalState> = ({ isHidden, close }) => {
+const AddModal: FC<ModalState> = ({ isHidden, closeModal }) => {
   const [isIconsHidden, setIsIconsHidden] = useState(true);
   const handleIconsToggle = () => {
     setIsIconsHidden(!isIconsHidden);
+  };
+  const handleClose = () => {
+    setIsIconsHidden(true);
+    closeModal();
   };
   return (
     <div
       className={`${
         isHidden ? "hidden" : "flex"
-      } fixed h-screen w-screen justify-center items-center bg-black bg-opacity-60 dark:[color-scheme:dark]`}
+      } fixed h-screen w-screen justify-center items-center bg-black bg-opacity-60 dark:[color-scheme:dark] font-poppins`}
     >
       <div className="relative bg-slate-100 dark:bg-zinc-700 flex flex-col px-10 py-5 rounded-md">
         <IonIcon
           name="close-outline"
-          className="text-2xl absolute top-2 right-3 dark:text-white cursor-pointer"
-          onClick={close}
+          className="text-2xl absolute top-2 right-3 dark:text-gray-200 cursor-pointer"
+          onClick={handleClose}
         />
-        <div className="dark:text-white text-xl">Add a new Habit</div>
+        <div className="dark:text-gray-200 text-xl">Add a new Habit</div>
         <div className="flex justify-end items-end">
           <InputBox
-            label="Name"
+            label="NAME"
             placeholder="Enter the name of your habit"
           ></InputBox>
           <div className="relative">
+            <h1 className="dark:text-gray-200 ml-[19px] mb-1 text-sm">ICON</h1>
             <Button
               buttonStyle="select-icon"
               className="bottom-0"
@@ -39,24 +44,7 @@ const AddModal: FC<ModalState> = ({ isHidden, close }) => {
             >
               <Icon icon="bi:question-lg" className="text-xl m-1" />
             </Button>
-            <div
-              className={`${
-                isIconsHidden ? "hidden" : "block"
-              } rounded-md outline outline-1 outline-zinc-400 dark:outline-zinc-500 absolute right-14 -top-4 dark:bg-zinc-700 bg-slate-100 p-3`}
-            >
-              <h2 className="p-1 font-poppins text-sm dark:text-gray-300 mb-2">
-                ICON
-              </h2>
-              <div className="gap-2 flex flex-row flex-wrap min-w-[240px] max-h-[215px] overflow-y-scroll p-1">
-                {iconNames.map((icon) => (
-                  <Icon
-                    key={icon}
-                    icon={icon}
-                    className="text-blue-400 w-[35px] h-[35px] cursor-pointer p-[6px] outline outline-1 outline-zinc-300 dark:outline-zinc-600 rounded-sm hover:bg-slate-200 hover:dark:bg-zinc-600 "
-                  />
-                ))}
-              </div>
-            </div>
+            <IconMenu isIconsHidden={isIconsHidden} />
           </div>
         </div>
       </div>
