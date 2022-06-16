@@ -46,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "@iconify/react": "^3.2.2",
     "@types/react-burger-menu": "^2.8.3",
     "@types/react-lazy-load-image-component": "^1.5.2",
     "autoprefixer": "^10.4.7",

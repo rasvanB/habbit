@@ -1,6 +1,8 @@
 import InputBox from "./form-input.component";
 import Button from "./button.component";
 import IonIcon from "@reacticons/ionicons";
+import iconNames from "../utils/icons.utils";
+import { Icon } from "@iconify/react";
 import { FC } from "react";
 type ModalState = {
   isHidden: boolean;
@@ -25,9 +27,22 @@ const AddModal: FC<ModalState> = ({ isHidden, close }) => {
             label="Name"
             placeholder="Enter the name of your habit"
           ></InputBox>
-          <Button buttonStyle="select-icon" className="bottom-0">
-            Add
-          </Button>
+          <div className="relative">
+            <Button buttonStyle="select-icon" className="bottom-0">
+              <Icon icon="bi:x" className="" />
+            </Button>
+            <div className="absolute top-9 bg-zinc-700">
+              <div className="gap-2 flex flex-row flex-wrap min-w-[145px] p-3">
+                {iconNames.map((icon) => (
+                  <Icon
+                    key={icon}
+                    icon={icon}
+                    className="text-white w-[35px] h-[35px] cursor-pointer p-1 outline outline-1 outline-zinc-500"
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

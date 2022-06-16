@@ -5,7 +5,7 @@ type IconProps = {
   type: IconTypes;
 };
 
-const Icon: FC<IconProps> = ({ type }) => {
+const ProviderIcon: FC<IconProps> = ({ type }) => {
   let bgIcon: string = "";
 
   switch (type) {
@@ -29,4 +29,4 @@ const Icon: FC<IconProps> = ({ type }) => {
   );
 };
 
-export default Icon;
+export default ProviderIcon;
