@@ -47,7 +47,7 @@ const AddModal: FC<ModalState> = ({ isHidden, close }) => {
               <h2 className="p-1 font-poppins text-sm dark:text-gray-300 mb-2">
                 ICON
               </h2>
-              <div className="gap-2 flex flex-row flex-wrap min-w-[235px] max-h-[215px] scrollbar scrollbar-track-zinc-800 scrollbar-thumb-zinc-600 p-1 pr-5 ">
+              <div className="gap-2 flex flex-row flex-wrap min-w-[240px] max-h-[215px] scrollbar scrollbar-track-zinc-800 scrollbar-thumb-zinc-600 p-1 pr-5 ">
                 {iconNames.map((icon) => (
                   <Icon
                     key={icon}
