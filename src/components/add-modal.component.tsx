@@ -17,7 +17,7 @@ const AddModal: FC<ModalState> = ({ isHidden, close }) => {
     <div
       className={`${
         isHidden ? "hidden" : "flex"
-      } fixed h-screen w-screen justify-center items-center bg-black bg-opacity-60`}
+      } fixed h-screen w-screen justify-center items-center bg-black bg-opacity-60 dark:[color-scheme:dark]`}
     >
       <div className="relative bg-slate-100 dark:bg-zinc-700 flex flex-col px-10 py-5 rounded-md">
         <IonIcon
