@@ -25,7 +25,7 @@ const Nav: FC<NavProps> = ({ username, photourl }) => {
         <LazyLoadImage
           src={photourl}
           referrerPolicy="no-referrer"
-          className="rounded-md outline outline-2 dark:outline-gray-700 outline-zinc-700"
+          className="rounded-md outline outline-2 dark:outline-gray-700 outline-zinc-500"
         />
       </div>
       <h1 className="ml-3 font-poppins font-medium text-zinc-800 dark:text-gray-100">
