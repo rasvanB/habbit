@@ -37,17 +37,17 @@ const AddModal: FC<ModalState> = ({ isHidden, close }) => {
               className="bottom-0"
               onClick={handleIconsToggle}
             >
-              <Icon icon="bi:question-lg" />
+              <Icon icon="bi:question-lg" className="text-xl m-1" />
             </Button>
             <div
               className={`${
                 isIconsHidden ? "hidden" : "block"
-              } rounded-md outline outline-1 outline-zinc-400 dark:outline-zinc-500 absolute right-11 -top-4 dark:bg-zinc-700 bg-slate-100 p-3`}
+              } rounded-md outline outline-1 outline-zinc-400 dark:outline-zinc-500 absolute right-14 -top-4 dark:bg-zinc-700 bg-slate-100 p-3`}
             >
               <h2 className="p-1 font-poppins text-sm dark:text-gray-300 mb-2">
                 ICON
               </h2>
-              <div className="gap-2 flex flex-row flex-wrap min-w-[235px] max-h-[215px] scrollbar scrollbar-thumb-zinc-600 p-1 pr-5 ">
+              <div className="gap-2 flex flex-row flex-wrap min-w-[235px] max-h-[215px] scrollbar scrollbar-track-zinc-800 scrollbar-thumb-zinc-600 p-1 pr-5 ">
                 {iconNames.map((icon) => (
                   <Icon
                     key={icon}

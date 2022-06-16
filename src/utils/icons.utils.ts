@@ -22,6 +22,9 @@ const iconNames: string[] = [
   "material-symbols:no-drinks-sharp",
   "fluent:food-apple-20-filled",
   "carbon:health-cross",
+  "carbon:health-cross",
+  "fa-solid:bath",
+  "material-symbols:wifi-off-rounded",
   "fa-solid:bath",
   "material-symbols:wifi-off-rounded",
 ];
