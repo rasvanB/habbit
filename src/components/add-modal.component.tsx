@@ -51,10 +51,12 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
               className="bottom-0"
               onClick={handleIconsToggle}
             >
-              <Icon
-                icon={`${selectedIcon ? selectedIcon : "bi:question-lg"}`}
-                className="text-2xl m-[2px] text-blue-400"
-              />
+              <div className="w-[25px] h-[25px] flex justify-center items-center">
+                <Icon
+                  icon={`${selectedIcon ? selectedIcon : "bi:question-lg"}`}
+                  className="text-2xl text-blue-400"
+                />
+              </div>
             </Button>
             <IconMenu isIconsHidden={isIconsHidden} selectIcon={selectIcon} />
           </div>

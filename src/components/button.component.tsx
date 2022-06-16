@@ -21,7 +21,7 @@ const submitButton =
 const addHabitButton =
   "bg-blue-500 hover:bg-blue-600 min-w-[150px] text-white font-semibold py-2 px-4 rounded whitespace-nowrap mt-5";
 const selectIcon =
-  "dark:bg-zinc-600 bg-white outline outline-1 hover:outline-2 outline-zinc-500 dark:text-white text-zinc-800 font-semibold p-1 rounded whitespace-nowrap ml-5 flex items-center justify-center";
+  "dark:bg-zinc-600 bg-white outline outline-1 hover:outline-2 outline-zinc-500 dark:text-white text-zinc-800 font-semibold p-[5px] rounded whitespace-nowrap ml-5 flex items-center justify-center";
 const Button: FC<ButtonProps> = ({ buttonStyle, children, ...otherProps }) => {
   return (
     <div>
