@@ -1,6 +1,6 @@
 import Button from "./button.component";
 import { Link } from "react-router-dom";
-import InputBox from "./form-input.component";
+import InputBox from "./input-box.component";
 import { useState } from "react";
 import Message from "./message.component";
 import { validateSignUp } from "../utils/auth/auth.utils";

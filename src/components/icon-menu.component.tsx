@@ -10,9 +10,9 @@ const IconMenu: FC<IconMenuProps> = ({ isIconsHidden, selectIcon }) => {
     <div
       className={`${
         isIconsHidden ? "hidden" : ""
-      } rounded-md outline outline-1 outline-zinc-400 dark:outline-zinc-500 absolute right-14 -top-4 dark:bg-zinc-700 bg-slate-100 p-3`}
+      } rounded-md outline outline-1 outline-zinc-400 dark:outline-zinc-500 absolute right-12 -top-5 dark:bg-zinc-700 bg-slate-100 p-3`}
     >
-      <h2 className="p-1 font-poppins text-sm dark:text-gray-300 mb-2">ICON</h2>
+      {/* <h2 className="p-1 font-poppins text-sm dark:text-gray-300 mb-2">ICON</h2> */}
       <div className="gap-2 flex flex-row flex-wrap min-w-[240px] max-h-[215px] overflow-y-scroll p-1">
         {iconNames.map((iconName) => (
           <Icon

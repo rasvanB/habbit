@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Divider from "./divider.component";
-import InputBox from "./form-input.component";
+import InputBox from "./input-box.component";
 import Button from "./button.component";
 import LoginButton from "./login-button.component";
 import { signInUserWithEmailAndPassword } from "../utils/firebase/firebase.utils";

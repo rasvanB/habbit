@@ -1,4 +1,4 @@
-import InputBox from "./form-input.component";
+import InputBox from "./input-box.component";
 import Button from "./button.component";
 import IonIcon from "@reacticons/ionicons";
 import IconMenu from "./icon-menu.component";
