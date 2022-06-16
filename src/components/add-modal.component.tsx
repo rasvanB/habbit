@@ -14,13 +14,12 @@ const defaultHabitState = {
   habitName: "",
   habitDescription: "",
   iconName: "",
-  iconColor: "",
+  iconColor: "red",
 };
 
 const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
   const [isIconsHidden, setIsIconsHidden] = useState(true);
   const [habitState, setHabitState] = useState(defaultHabitState);
-
   const selectIcon = (iconName: string) => {
     setHabitState({ ...habitState, iconName });
     setIsIconsHidden(true);
@@ -40,6 +39,10 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
     e.preventDefault();
     const { value } = e.target;
     setHabitState({ ...habitState, habitName: value });
+  };
+
+  const changeColor = (color: string) => {
+    setHabitState({ ...habitState, iconColor: color });
   };
   return (
     <div
@@ -73,11 +76,16 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
                   icon={`${
                     habitState.iconName ? habitState.iconName : "bi:question-lg"
                   }`}
-                  className="text-2xl text-blue-400"
+                  className={`text-2xl text-blue-400`}
                 />
               </div>
             </Button>
-            <IconMenu isIconsHidden={isIconsHidden} selectIcon={selectIcon} />
+            <IconMenu
+              isIconsHidden={isIconsHidden}
+              selectIcon={selectIcon}
+              iconColor={habitState.iconColor}
+              changeColor={changeColor}
+            />
           </div>
         </div>
       </div>

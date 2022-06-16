@@ -1,4 +1,4 @@
-const iconNames: string[] = [
+export const iconNames: string[] = [
   "ic:round-directions-run",
   "mdi:meditation",
   "fluent:hat-graduation-12-filled",
@@ -26,4 +26,13 @@ const iconNames: string[] = [
   "material-symbols:wifi-off-rounded",
 ];
 
-export default iconNames;
+export const iconColors: string[] = [
+  "red",
+  "green",
+  "blue",
+  "yellow",
+  "orange",
+  "purple",
+  "pink",
+  "brown",
+];
