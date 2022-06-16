@@ -4,17 +4,26 @@ import IonIcon from "@reacticons/ionicons";
 import IconMenu from "./icon-menu.component";
 import { Icon } from "@iconify/react";
 import { FC, useState } from "react";
-type ModalState = {
+type ModalProps = {
   isHidden: boolean;
   closeModal: () => void;
 };
-const AddModal: FC<ModalState> = ({ isHidden, closeModal }) => {
+const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
   const [isIconsHidden, setIsIconsHidden] = useState(true);
+  const [selectedIcon, setSelectedIcon] = useState("");
+  console.log(selectedIcon);
+  const selectIcon = (iconName: string) => {
+    setSelectedIcon(iconName);
+    setIsIconsHidden(true);
+  };
+
   const handleIconsToggle = () => {
     setIsIconsHidden(!isIconsHidden);
   };
+
   const handleClose = () => {
     setIsIconsHidden(true);
+    setSelectedIcon("");
     closeModal();
   };
   return (
@@ -42,9 +51,12 @@ const AddModal: FC<ModalState> = ({ isHidden, closeModal }) => {
               className="bottom-0"
               onClick={handleIconsToggle}
             >
-              <Icon icon="bi:question-lg" className="text-xl m-1" />
+              <Icon
+                icon={`${selectedIcon ? selectedIcon : "bi:question-lg"}`}
+                className="text-2xl m-[2px] text-blue-400"
+              />
             </Button>
-            <IconMenu isIconsHidden={isIconsHidden} />
+            <IconMenu isIconsHidden={isIconsHidden} selectIcon={selectIcon} />
           </div>
         </div>
       </div>

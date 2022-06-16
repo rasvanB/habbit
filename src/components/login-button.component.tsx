@@ -1,8 +1,8 @@
 import { FC, useContext } from "react";
 import { UserContext } from "../context/user.context";
 
-import ProviderIcon from "./icon.component";
-import { IconTypes } from "./icon.component";
+import ProviderIcon from "./provider-icon.component";
+import { IconTypes } from "./provider-icon.component";
 import { signInWithProvider } from "../utils/firebase/firebase.utils";
 import { FirebaseError } from "firebase/app";
 import { useNavigate } from "react-router-dom";
