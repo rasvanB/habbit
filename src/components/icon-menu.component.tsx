@@ -1,7 +1,8 @@
 import { iconNames } from "../utils/icons.utils";
 import { Icon } from "@iconify/react";
-import { FC, useEffect } from "react";
+import { FC, useState } from "react";
 import Button from "./button.component";
+import ColorsMenu from "./colors-menu.component";
 type IconMenuProps = {
   isIconsHidden: boolean;
   iconColor: string;
@@ -14,9 +15,10 @@ const IconMenu: FC<IconMenuProps> = ({
   iconColor,
   changeColor,
 }) => {
-  useEffect(() => {
-    console.log(iconColor);
-  }, [iconColor]);
+  const [isColorMenuOpen, setIsColorMenuOpen] = useState(false);
+  const handleColorMenuToggle = () => {
+    setIsColorMenuOpen(!isColorMenuOpen);
+  };
   return (
     <div
       className={`${
@@ -27,16 +29,26 @@ const IconMenu: FC<IconMenuProps> = ({
         <Button buttonStyle="select-color">
           <Icon
             icon="akar-icons:circle-fill"
-            className={`text-2xl text-blue-400`}
+            className={`text-2xl`}
+            onClick={handleColorMenuToggle}
+            style={{ color: iconColor }}
           />
         </Button>
       </h2>
+      <ColorsMenu
+        closeColorMenu={handleColorMenuToggle}
+        isColorsMenuOpen={isColorMenuOpen}
+        changeColor={changeColor}
+      ></ColorsMenu>
       <div className="gap-2 flex flex-row flex-wrap min-w-[240px] max-h-[215px] overflow-y-scroll p-1">
         {iconNames.map((iconName) => (
           <Icon
             key={iconName}
             icon={iconName}
-            className={`text-blue-400 w-[35px] h-[35px] cursor-pointer p-[6px] outline outline-1 outline-zinc-300 dark:outline-zinc-600 rounded-sm hover:bg-slate-200 hover:dark:bg-zinc-600 `}
+            className={`w-[35px] h-[35px] cursor-pointer p-[6px] outline outline-1 outline-zinc-300 dark:outline-zinc-600 rounded-sm hover:bg-slate-200 hover:dark:bg-zinc-600 `}
+            style={{
+              color: iconColor,
+            }}
             onClick={() => selectIcon(iconName)}
           />
         ))}

@@ -27,12 +27,12 @@ export const iconNames: string[] = [
 ];
 
 export const iconColors: string[] = [
-  "red",
-  "green",
-  "blue",
-  "yellow",
-  "orange",
-  "purple",
-  "pink",
-  "brown",
+  "#f25555",
+  "#55f27a",
+  "#5594f2",
+  "#f2ed55",
+  "#f2a655",
+  "#ae55f2",
+  "#f27ecf",
+  "#8a542b",
 ];

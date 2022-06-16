@@ -14,7 +14,7 @@ const defaultHabitState = {
   habitName: "",
   habitDescription: "",
   iconName: "",
-  iconColor: "red",
+  iconColor: "#5594f2",
 };
 
 const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
@@ -76,7 +76,10 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
                   icon={`${
                     habitState.iconName ? habitState.iconName : "bi:question-lg"
                   }`}
-                  className={`text-2xl text-blue-400`}
+                  className={`text-2xl`}
+                  style={{
+                    color: habitState.iconColor,
+                  }}
                 />
               </div>
             </Button>
