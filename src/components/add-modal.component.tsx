@@ -3,12 +3,16 @@ import Button from "./button.component";
 import IonIcon from "@reacticons/ionicons";
 import iconNames from "../utils/icons.utils";
 import { Icon } from "@iconify/react";
-import { FC } from "react";
+import { FC, useState } from "react";
 type ModalState = {
   isHidden: boolean;
   close: () => void;
 };
 const AddModal: FC<ModalState> = ({ isHidden, close }) => {
+  const [isIconsHidden, setIsIconsHidden] = useState(true);
+  const handleIconsToggle = () => {
+    setIsIconsHidden(!isIconsHidden);
+  };
   return (
     <div
       className={`${
@@ -28,11 +32,19 @@ const AddModal: FC<ModalState> = ({ isHidden, close }) => {
             placeholder="Enter the name of your habit"
           ></InputBox>
           <div className="relative">
-            <Button buttonStyle="select-icon" className="bottom-0">
-              <Icon icon="bi:question-lg" className="" />
+            <Button
+              buttonStyle="select-icon"
+              className="bottom-0"
+              onClick={handleIconsToggle}
+            >
+              <Icon icon="bi:question-lg" />
             </Button>
-            <div className="rounded-md outline outline-1 outline-zinc-400 dark:outline-zinc-500 absolute right-11 -top-4 dark:bg-zinc-700 bg-slate-100 p-3">
-              <h2 className="font-poppins text-sm dark:text-gray-300 mb-2">
+            <div
+              className={`${
+                isIconsHidden ? "hidden" : "block"
+              } rounded-md outline outline-1 outline-zinc-400 dark:outline-zinc-500 absolute right-11 -top-4 dark:bg-zinc-700 bg-slate-100 p-3`}
+            >
+              <h2 className="p-1 font-poppins text-sm dark:text-gray-300 mb-2">
                 ICON
               </h2>
               <div className="gap-2 flex flex-row flex-wrap min-w-[235px] max-h-[215px] scrollbar scrollbar-thumb-zinc-600 p-1 pr-5 ">
