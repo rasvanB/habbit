@@ -2,7 +2,7 @@ export const iconNames: string[] = [
   "ic:round-directions-run",
   "mdi:meditation",
   "fluent:hat-graduation-12-filled",
-  "fluent:dumbbell-20-filled",
+  "ion:barbell",
   "ic:round-sports-gymnastics",
   "fa-solid:dollar-sign",
   "fe:cutlery",
@@ -24,6 +24,7 @@ export const iconNames: string[] = [
   "carbon:health-cross",
   "fa-solid:bath",
   "material-symbols:wifi-off-rounded",
+  "ic:twotone-sports-basketball",
 ];
 
 export const iconColors: string[] = [
@@ -35,4 +36,5 @@ export const iconColors: string[] = [
   "#ae55f2",
   "#f27ecf",
   "#8a542b",
+  "#FFFFFF",
 ];
