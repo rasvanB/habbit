@@ -45,6 +45,7 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
   const changeColor = (color: string) => {
     setHabitState({ ...habitState, iconColor: color });
   };
+
   return (
     <div
       className={`${
