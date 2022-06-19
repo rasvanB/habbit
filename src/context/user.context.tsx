@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useState } from "react";
+import { HabitType } from "./habit.context";
 
 export type UserData = {
   displayName: string;
@@ -12,6 +13,9 @@ export type UserContextType = {
   loading: boolean;
   setLoading: (loading: boolean) => void;
   setCurrentUser: (currentUser: UserData | null) => void;
+  habits: HabitType[];
+  addHabit: (habit: HabitType) => void;
+  removeHabit: (habit: HabitType) => void;
 };
 
 const defaultContext: UserContextType = {
@@ -19,13 +23,23 @@ const defaultContext: UserContextType = {
   setCurrentUser: () => {},
   loading: true,
   setLoading: () => {},
+  habits: [],
+  addHabit: () => {},
+  removeHabit: () => {},
 };
 
 export const UserContext = createContext<UserContextType>(defaultContext);
 
+// TODO: implement remove habits / add habits
+
 const UserProvider = ({ children }: { children: ReactNode }) => {
   const [currentUser, setCurrentUser] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [habits] = useState<HabitType[]>([]);
+  const addHabit = (habit: HabitType) => {
+    habits.push(habit);
+  };
+  const removeHabit = (habit: HabitType) => {};
   return (
     <UserContext.Provider
       value={{
@@ -33,6 +47,9 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
         setCurrentUser,
         loading,
         setLoading,
+        habits,
+        addHabit,
+        removeHabit,
       }}
     >
       {children}

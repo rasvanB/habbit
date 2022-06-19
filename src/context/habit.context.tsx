@@ -12,9 +12,6 @@ type HabitContextType = {
   setIconsMenuOpen: (openState: boolean) => void;
   isColorsMenuOpen: boolean;
   setColorsMenuOpen: (openState: boolean) => void;
-  habits: HabitType[];
-  addHabit: (habit: HabitType) => void;
-  removeHabit: (habit: HabitType) => void;
 };
 
 export const HabitContext = createContext<HabitContextType | null>(null);
