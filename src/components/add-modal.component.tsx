@@ -34,7 +34,6 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
   const [isIconsHidden, setIsIconsHidden] = useState(true);
   const [habitState, setHabitState] = useState(defaultHabitState);
   const [requirement, setRequirement] = useState(requirementOptions[0].value);
-  console.log(requirement);
 
   const selectIcon = (iconName: string) => {
     setHabitState({ ...habitState, iconName });
