@@ -30,7 +30,7 @@ const defaultHabitState = {
   iconColor: "#5594f2",
   requirement: requirementOptions[0].value,
   unit: "",
-  frequency: 1,
+  goal: 1,
 };
 
 const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
@@ -56,7 +56,17 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const { name, value } = e.target;
-    setHabitState({ ...habitState, [name]: value });
+    if (name === "goal" && value) {
+      if (parseInt(value) < 0) {
+        setHabitState({ ...habitState, [name]: 0 });
+      } else if (parseInt(value) > 100) {
+        setHabitState({ ...habitState, [name]: 100 });
+      } else {
+        setHabitState({ ...habitState, [name]: parseInt(value) });
+      }
+    } else {
+      setHabitState({ ...habitState, [name]: value });
+    }
   };
 
   const changeColor = (color: string) => {
@@ -76,7 +86,7 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
       <div className="relative bg-slate-100 dark:bg-zinc-700 flex flex-col px-2 py-5 pt-10 rounded-md w-full mobile:w-auto mobile:px-10 mobile:max-w-[500px]">
         <IonIcon
           name="close-outline"
-          className="text-2xl absolute top-2 right-3 dark:text-gray-200 cursor-pointer rounded-full outline outline-1 dark:outline-zinc-600 outline-zinc-300 hover:bg-gray-200"
+          className="text-2xl absolute top-2 right-3 dark:text-gray-200 cursor-pointer rounded-full outline outline-1 dark:outline-zinc-600 outline-zinc-300 hover:bg-gray-200 dark:hover:bg-zinc-500"
           onClick={handleClose}
         />
         <div className="flex items-end">
@@ -114,28 +124,35 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
             />
           </div>
         </div>
-        <div className="mt-3 flex gap-3 mobile:gap-5">
+        <div className="dark:text-gray-200 mt-3 mb-1">GOAL</div>
+        <div className="flex gap-3 mobile:gap-5">
           <Dropdown
             options={requirementOptions}
             setRequirement={changeRequirement}
             requirement={habitState.requirement}
           ></Dropdown>
           <InputBox
-            name="frequency"
-            placeholder="frequency"
+            name="goal"
+            placeholder="goal"
             type="number"
+            min={1}
+            max={100}
+            value={habitState.goal}
             onChange={handleChange}
           />
           <InputBox placeholder="unit" name="unit" onChange={handleChange} />
         </div>
         <div className="mt-3">
           <InputBox
-            label="DESCRIPTION"
             placeholder="Habit description (optional)"
             name="description"
             onChange={handleChange}
           />
         </div>
+        <div className="mt-3"></div>
+        <Button buttonStyle="submit">
+          <div className="font-medium">Add Habit</div>
+        </Button>
       </div>
     </div>
   );

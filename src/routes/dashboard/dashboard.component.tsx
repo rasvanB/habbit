@@ -4,6 +4,7 @@ import AddModal from "../../components/add-modal.component";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/user.context";
 import { useNavigate } from "react-router-dom";
+
 const Dashboard = () => {
   const navigate = useNavigate();
   const { currentUser, loading } = useContext(UserContext);

@@ -1,5 +1,6 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  plugins: [],
   theme: {
     extend: {
       fontFamily: {
@@ -25,5 +26,4 @@ module.exports = {
       xl: "1280px",
     },
   },
-  plugins: [],
 };
