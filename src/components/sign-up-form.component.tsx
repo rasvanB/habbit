@@ -71,49 +71,57 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className="dark:bg-zinc-800 bg-slate-100 py-10 px-5 mobile:px-10 sm:rounded-2xl w-full mobile:w-auto mobile:rounded-lg">
+    <div className="dark:bg-zinc-800 bg-slate-100 py-10 px-5 mobile:px-10 sm:rounded-2xl w-full mobile:w-[400px] mobile:rounded-lg">
       <h1 className="dark:text-gray-100 text-center font-poppins font-bold text-zinc-800 text-4xl mb-5">
         Sign up
       </h1>
       {errorMessage && <Message message={errorMessage} isError />}
       {message && <Message message={message} isError={false} />}
       <form onSubmit={handleSubmit}>
-        <InputBox
-          isFormInput
-          label="Display name"
-          name="username"
-          type="text"
-          onChange={handleChange}
-          value={username}
-          placeholder="display name"
-        />
-        <InputBox
-          isFormInput
-          name="email"
-          label="Email"
-          value={email}
-          type="email"
-          onChange={handleChange}
-          placeholder="mail@website.com"
-        />
-        <InputBox
-          isFormInput
-          name="password"
-          label="Password"
-          value={password}
-          onChange={handleChange}
-          placeholder="password"
-          type="password"
-        />
-        <InputBox
-          isFormInput
-          name="confirmPassword"
-          label="Confirm password"
-          value={confirmPassword}
-          onChange={handleChange}
-          placeholder="confirm password"
-          type="password"
-        />
+        <div className="mt-5">
+          <InputBox
+            isFormInput
+            label="Display name"
+            name="username"
+            type="text"
+            onChange={handleChange}
+            value={username}
+            placeholder="display name"
+          />
+        </div>
+        <div className="mt-2">
+          <InputBox
+            isFormInput
+            name="email"
+            label="Email"
+            value={email}
+            type="email"
+            onChange={handleChange}
+            placeholder="mail@website.com"
+          />
+        </div>
+        <div className="mt-2">
+          <InputBox
+            isFormInput
+            name="password"
+            label="Password"
+            value={password}
+            onChange={handleChange}
+            placeholder="password"
+            type="password"
+          />
+        </div>
+        <div className="mt-2">
+          <InputBox
+            isFormInput
+            name="confirmPassword"
+            label="Confirm password"
+            value={confirmPassword}
+            onChange={handleChange}
+            placeholder="confirm password"
+            type="password"
+          />
+        </div>
         <Button buttonStyle="submit" type="submit">
           Sign Up
         </Button>

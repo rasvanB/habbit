@@ -71,7 +71,7 @@ const SignInForm = () => {
   };
 
   return (
-    <div className="dark:bg-zinc-800 bg-slate-100 py-10 px-5 mobile:px-10 sm:rounded-2xl w-full mobile:w-auto mobile:rounded-lg">
+    <div className="dark:bg-zinc-800 bg-slate-100 py-10 px-5 mobile:px-10 sm:rounded-2xl w-full mobile:w-[400px] mobile:rounded-lg">
       <h1 className="dark:text-gray-100 text-center font-poppins font-bold text-zinc-800 text-4xl mb-7">
         Sign in
       </h1>
@@ -83,24 +83,28 @@ const SignInForm = () => {
       </div>
       <Divider text="or Sign In with Email" />
       <form onSubmit={handleSubmit}>
-        <InputBox
-          isFormInput
-          name="email"
-          label="Email"
-          value={email}
-          type="email"
-          onChange={handleChange}
-          placeholder="mail@website.com"
-        />
-        <InputBox
-          isFormInput
-          name="password"
-          value={password}
-          label="Password"
-          onChange={handleChange}
-          placeholder="password"
-          type="password"
-        />
+        <div className="mt-2">
+          <InputBox
+            isFormInput
+            name="email"
+            label="Email"
+            value={email}
+            type="email"
+            onChange={handleChange}
+            placeholder="mail@website.com"
+          />
+        </div>
+        <div className="mt-2">
+          <InputBox
+            isFormInput
+            name="password"
+            value={password}
+            label="Password"
+            onChange={handleChange}
+            placeholder="password"
+            type="password"
+          />
+        </div>
         <Button buttonStyle="submit" type="submit">
           Sign In
         </Button>

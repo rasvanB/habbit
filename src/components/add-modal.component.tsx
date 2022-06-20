@@ -73,13 +73,12 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
         isHidden ? "hidden" : "flex"
       } fixed h-screen w-screen justify-center items-center bg-black bg-opacity-60 dark:[color-scheme:dark] font-poppins`}
     >
-      <div className="relative bg-slate-100 dark:bg-zinc-700 flex flex-col px-2 py-5 rounded-md w-full mobile:w-auto mobile:px-10 mobile:max-w-[500px]">
+      <div className="relative bg-slate-100 dark:bg-zinc-700 flex flex-col px-2 py-5 pt-10 rounded-md w-full mobile:w-auto mobile:px-10 mobile:max-w-[500px]">
         <IonIcon
           name="close-outline"
-          className="text-2xl absolute top-2 right-3 dark:text-gray-200 cursor-pointer"
+          className="text-2xl absolute top-2 right-3 dark:text-gray-200 cursor-pointer rounded-sm outline outline-1 dark:outline-zinc-600"
           onClick={handleClose}
         />
-        <div className="dark:text-gray-200 text-xl">Add a new Habit</div>
         <div className="flex items-end">
           <InputBox
             label="NAME"
@@ -124,6 +123,7 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
           <InputBox
             name="frequency"
             placeholder="frequency"
+            value={habitState.frequency}
             type="number"
             onChange={handleChange}
           />
@@ -131,6 +131,7 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
         </div>
         <div className="mt-3">
           <InputBox
+            label="DESCRIPTION"
             placeholder="Habit description (optional)"
             name="description"
             onChange={handleChange}

@@ -36,7 +36,7 @@ const Dropdown: FC<DropdownProps> = ({
       <div
         className={`${
           isDropdownOpen ? "flex" : "hidden"
-        } flex-col absolute w-full top-10 dark:bg-zinc-600 dark:outline-zinc-500 left-0 outline outline-1`}
+        } flex-col absolute w-full top-10 dark:bg-zinc-600 dark:outline-zinc-500 left-0 outline outline-1 z-10`}
       >
         {options.map(({ value, label }) => {
           return (
