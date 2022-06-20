@@ -4,6 +4,7 @@ import IonIcon from "@reacticons/ionicons";
 import IconMenu from "./icon-menu.component";
 import { Icon } from "@iconify/react";
 import { FC, useState } from "react";
+import Dropdown from "./dropdown.component";
 
 type ModalProps = {
   isHidden: boolean;
@@ -17,9 +18,23 @@ const defaultHabitState = {
   iconColor: "#5594f2",
 };
 
+const requirementOptions = [
+  { value: "At least", label: "At least" },
+  {
+    value: "Exactly",
+    label: "Exactly",
+  },
+  {
+    value: "Less than",
+    label: "Less than",
+  },
+];
+
 const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
   const [isIconsHidden, setIsIconsHidden] = useState(true);
   const [habitState, setHabitState] = useState(defaultHabitState);
+  const [requirement, setRequirement] = useState(requirementOptions[0].value);
+  console.log(requirement);
 
   const selectIcon = (iconName: string) => {
     setHabitState({ ...habitState, iconName });
@@ -92,6 +107,13 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
               changeColor={changeColor}
             />
           </div>
+        </div>
+        <div className="mt-3">
+          <Dropdown
+            options={requirementOptions}
+            setRequirement={setRequirement}
+            requirement={requirement}
+          ></Dropdown>
         </div>
       </div>
     </div>

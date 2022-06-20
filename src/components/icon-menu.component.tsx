@@ -23,7 +23,7 @@ const IconMenu: FC<IconMenuProps> = ({
     <div
       className={`${
         isIconsHidden ? "hidden" : ""
-      } rounded-md outline outline-1 outline-zinc-400 dark:outline-zinc-500 absolute right-12 -top-5 dark:bg-zinc-700 bg-slate-100 p-3`}
+      } rounded-md outline outline-1 outline-zinc-400 dark:outline-zinc-500 absolute right-12 -top-5 dark:bg-zinc-700 bg-slate-100 p-3 z-10`}
     >
       <h2 className="p-1 font-poppins text-sm dark:text-gray-300 mb-2">
         <Button buttonStyle="select-color">
