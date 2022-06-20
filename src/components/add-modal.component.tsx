@@ -11,13 +11,6 @@ type ModalProps = {
   closeModal: () => void;
 };
 
-const defaultHabitState = {
-  habitName: "",
-  habitDescription: "",
-  iconName: "",
-  iconColor: "#5594f2",
-};
-
 const requirementOptions = [
   { value: "At least", label: "At least" },
   {
@@ -30,10 +23,20 @@ const requirementOptions = [
   },
 ];
 
+const defaultHabitState = {
+  name: "",
+  description: "",
+  iconName: "",
+  iconColor: "#5594f2",
+  requirement: requirementOptions[0].value,
+  unit: "",
+  frequency: 1,
+};
+
 const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
   const [isIconsHidden, setIsIconsHidden] = useState(true);
   const [habitState, setHabitState] = useState(defaultHabitState);
-  const [requirement, setRequirement] = useState(requirementOptions[0].value);
+  console.log(habitState);
 
   const selectIcon = (iconName: string) => {
     setHabitState({ ...habitState, iconName });
@@ -52,12 +55,16 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    const { value } = e.target;
-    setHabitState({ ...habitState, habitName: value });
+    const { name, value } = e.target;
+    setHabitState({ ...habitState, [name]: value });
   };
 
   const changeColor = (color: string) => {
     setHabitState({ ...habitState, iconColor: color });
+  };
+
+  const changeRequirement = (requirement: string) => {
+    setHabitState({ ...habitState, requirement: requirement });
   };
 
   return (
@@ -76,8 +83,9 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
         <div className="flex items-end">
           <InputBox
             label="NAME"
+            name="name"
             onChange={handleChange}
-            value={habitState.habitName}
+            value={habitState.name}
             placeholder="Name your habit"
           ></InputBox>
           <div className="ml-auto relative">
@@ -87,7 +95,7 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
               className="bottom-0"
               onClick={handleIconsToggle}
             >
-              <div className="w-[25px] h-[25px] flex justify-center items-center">
+              <div className="mobile:w-[25px] mobile:h-[25px] flex justify-center items-center">
                 <Icon
                   icon={`${
                     habitState.iconName ? habitState.iconName : "bi:question-lg"
@@ -107,14 +115,26 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
             />
           </div>
         </div>
-        <div className="mt-3 flex gap-5">
+        <div className="mt-3 flex gap-3 mobile:gap-5">
           <Dropdown
             options={requirementOptions}
-            setRequirement={setRequirement}
-            requirement={requirement}
+            setRequirement={changeRequirement}
+            requirement={habitState.requirement}
           ></Dropdown>
-          <InputBox placeholder="frequency" type="number" />
-          <InputBox placeholder="unit" />
+          <InputBox
+            name="frequency"
+            placeholder="frequency"
+            type="number"
+            onChange={handleChange}
+          />
+          <InputBox placeholder="unit" name="unit" onChange={handleChange} />
+        </div>
+        <div className="mt-3">
+          <InputBox
+            placeholder="Habit description (optional)"
+            name="description"
+            onChange={handleChange}
+          />
         </div>
       </div>
     </div>

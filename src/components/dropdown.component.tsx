@@ -36,13 +36,13 @@ const Dropdown: FC<DropdownProps> = ({
       <div
         className={`${
           isDropdownOpen ? "flex" : "hidden"
-        } flex-col absolute w-full top-7 dark:bg-zinc-600 dark:outline-zinc-500 left-0 outline outline-1`}
+        } flex-col absolute w-full top-10 dark:bg-zinc-600 dark:outline-zinc-500 left-0 outline outline-1`}
       >
         {options.map(({ value, label }) => {
           return (
             <div
               key={value}
-              className="dark:hover:bg-zinc-500 px-6 py-1"
+              className="dark:hover:bg-zinc-500 px-3 mobile:px-6 py-1"
               onClick={() => {
                 setRequirement(value);
               }}
