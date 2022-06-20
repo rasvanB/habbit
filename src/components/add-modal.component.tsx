@@ -76,7 +76,7 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
       <div className="relative bg-slate-100 dark:bg-zinc-700 flex flex-col px-2 py-5 pt-10 rounded-md w-full mobile:w-auto mobile:px-10 mobile:max-w-[500px]">
         <IonIcon
           name="close-outline"
-          className="text-2xl absolute top-2 right-3 dark:text-gray-200 cursor-pointer rounded-sm outline outline-1 dark:outline-zinc-600"
+          className="text-2xl absolute top-2 right-3 dark:text-gray-200 cursor-pointer rounded-full outline outline-1 dark:outline-zinc-600 outline-zinc-300 hover:bg-gray-200"
           onClick={handleClose}
         />
         <div className="flex items-end">
@@ -123,7 +123,6 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
           <InputBox
             name="frequency"
             placeholder="frequency"
-            value={habitState.frequency}
             type="number"
             onChange={handleChange}
           />
