@@ -25,13 +25,13 @@ const Dropdown: FC<DropdownProps> = ({
 
   return (
     <div
-      className="relative px-6 py-1 text-sm dark:bg-zinc-600 dark:outline-zinc-500 dark:text-gray-200 outline outline-1 rounded-sm flex items-center select-none"
+      className="relative px-3 py-1 text-sm dark:bg-zinc-600 dark:outline-zinc-500 dark:text-gray-200 outline outline-1 rounded-sm flex items-center select-none w-auto mobile:min-w-[120px] whitespace-nowrap"
       onClick={toggleDropdownOpen}
     >
       {`${requirement}`}
       <Icon
         icon={`${isDropdownOpen ? "bxs:up-arrow" : "bxs:down-arrow"}`}
-        className="ml-auto text-xs"
+        className="ml-3 mobile:ml-auto text-xs"
       ></Icon>
       <div
         className={`${

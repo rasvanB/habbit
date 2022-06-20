@@ -66,21 +66,21 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
         isHidden ? "hidden" : "flex"
       } fixed h-screen w-screen justify-center items-center bg-black bg-opacity-60 dark:[color-scheme:dark] font-poppins`}
     >
-      <div className="relative bg-slate-100 dark:bg-zinc-700 flex flex-col px-10 py-5 rounded-md">
+      <div className="relative bg-slate-100 dark:bg-zinc-700 flex flex-col px-2 py-5 rounded-md w-full mobile:w-auto mobile:px-10 mobile:max-w-[500px]">
         <IonIcon
           name="close-outline"
           className="text-2xl absolute top-2 right-3 dark:text-gray-200 cursor-pointer"
           onClick={handleClose}
         />
         <div className="dark:text-gray-200 text-xl">Add a new Habit</div>
-        <div className="flex justify-end items-end">
+        <div className="flex items-end">
           <InputBox
             label="NAME"
             onChange={handleChange}
             value={habitState.habitName}
-            placeholder="Enter the name of your habit"
+            placeholder="Name your habit"
           ></InputBox>
-          <div className="relative">
+          <div className="ml-auto relative">
             <h1 className="dark:text-gray-200 ml-[19px] mb-1 text-sm">ICON</h1>
             <Button
               buttonStyle="select-icon"
@@ -107,12 +107,14 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
             />
           </div>
         </div>
-        <div className="mt-3">
+        <div className="mt-3 flex gap-5">
           <Dropdown
             options={requirementOptions}
             setRequirement={setRequirement}
             requirement={requirement}
           ></Dropdown>
+          <InputBox placeholder="frequency" type="number" />
+          <InputBox placeholder="unit" />
         </div>
       </div>
     </div>
