@@ -1,15 +1,10 @@
 import { FC } from "react";
-
+import { inputClasses } from "../utils/styles/input-styles";
 type InputProps = {
   label?: string;
   isFormInput?: boolean;
   isIncrement?: boolean;
 } & React.InputHTMLAttributes<HTMLInputElement>;
-
-const formInputStyle =
-  "dark:bg-zinc-700 py-2 px-6 rounded-lg outline outline-1 outline-zinc-200 dark:outline-zinc-600 text-sm dark:text-gray-100 focus:outline-2 focus:dark:outline-zinc-500 focus:outline-zinc-400 w-full";
-const modalInputStyle =
-  "dark:bg-zinc-600 py-2 px-3 rounded-sm outline outline-1 outline-zinc-200 dark:outline-zinc-500 mobile:text-sm text-xs dark:text-gray-100 focus:outline-2 focus:dark:outline-zinc-500 focus:outline-zinc-400 w-full";
 
 const InputBox: FC<InputProps> = ({
   label,
@@ -27,7 +22,11 @@ const InputBox: FC<InputProps> = ({
       <div className="relative">
         <input
           {...otherProps}
-          className={`${isFormInput ? formInputStyle : modalInputStyle}`}
+          className={`${
+            isFormInput
+              ? inputClasses.formInputStyle
+              : inputClasses.modalInputStyle
+          }`}
         />
       </div>
     </div>
