@@ -5,7 +5,7 @@ import IconMenu from "./icon-menu.component";
 import { Icon } from "@iconify/react";
 import { FC, useState } from "react";
 import Dropdown from "./dropdown.component";
-
+import { HabitType } from "../context/habit.context";
 type ModalProps = {
   isHidden: boolean;
   closeModal: () => void;
@@ -23,7 +23,7 @@ const requirementOptions = [
   },
 ];
 
-const defaultHabitState = {
+const defaultHabitState: HabitType = {
   name: "",
   description: "",
   iconName: "",

@@ -2,9 +2,12 @@ import { createContext, ReactNode } from "react";
 
 export type HabitType = {
   name: string;
-  color: string;
   iconName: string;
   iconColor: string;
+  requirement: string;
+  description: string;
+  goal: number;
+  unit: string;
 };
 
 type HabitContextType = {
