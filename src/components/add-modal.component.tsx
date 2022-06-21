@@ -162,7 +162,12 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
             value={habitState.goal}
             onChange={handleChange}
           />
-          <InputBox placeholder="unit" name="unit" onChange={handleChange} />
+          <InputBox
+            placeholder="unit"
+            name="unit"
+            onChange={handleChange}
+            value={habitState.unit}
+          />
         </div>
         <div className="mt-3">
           <InputBox
