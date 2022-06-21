@@ -1,6 +1,14 @@
 import { createContext, ReactNode, useState } from "react";
-import { HabitType } from "./habit.context";
 
+export type HabitType = {
+  name: string;
+  iconName: string;
+  iconColor: string;
+  requirement: string;
+  description: string;
+  goal: number;
+  unit: string;
+};
 export type UserData = {
   displayName: string;
   email: string;

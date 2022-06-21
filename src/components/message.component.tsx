@@ -17,9 +17,9 @@ const Message = ({
           isError ? "alert-circle-outline" : "checkmark-circle-outline"
         }`}
         size="large"
-        className="text-zinc-700 dark:text-red-100 pr-2"
+        className="text-red-100 pr-2"
       ></IonIcon>
-      <span className="text-sm font-poppins dark:text-white">{`${message}`}</span>
+      <span className="text-sm font-poppins text-white">{`${message}`}</span>
     </div>
   );
 };
