@@ -17,15 +17,20 @@ const AuthPage = () => {
         navigate("/app");
       }
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth, loading, currentUser]);
 
   return (
-    <div className="h-screen w-screen dark:bg-mesh-bg-dark bg-mesh-bg bg-cover bg-no-repeat bg-center flex items-center justify-center">
-      {auth === "sign-in" ? (
-        <SignInForm />
-      ) : (
-        auth === "sign-up" && <SignUpForm />
+    <div className="bg-zinc-700">
+      {!currentUser && (
+        <div className="h-screen w-screen dark:bg-mesh-bg-dark bg-mesh-bg bg-cover bg-no-repeat bg-center flex items-center justify-center">
+          {auth === "sign-in" ? (
+            <SignInForm />
+          ) : (
+            auth === "sign-up" && <SignUpForm />
+          )}
+        </div>
       )}
     </div>
   );
