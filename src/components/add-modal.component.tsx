@@ -149,7 +149,6 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
             onChange={handleChange}
           />
         </div>
-        <div className="mt-3"></div>
         <Button buttonStyle="submit">
           <div className="font-medium">Add Habit</div>
         </Button>
