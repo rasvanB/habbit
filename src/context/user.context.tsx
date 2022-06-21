@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useState } from "react";
 
-export type HabitType = {
+export type Habit = {
   name: string;
   iconName: string;
   iconColor: string;
@@ -9,6 +9,7 @@ export type HabitType = {
   goal: number;
   unit: string;
 };
+
 export type UserData = {
   displayName: string;
   email: string;
@@ -21,10 +22,10 @@ export type UserContextType = {
   loading: boolean;
   setLoading: (loading: boolean) => void;
   setCurrentUser: (currentUser: UserData | null) => void;
-  habits: HabitType[];
-  addHabit: (habit: HabitType) => void;
-  setHabits: (habits: HabitType[]) => void;
-  removeHabit: (habit: HabitType) => void;
+  habits: Habit[];
+  addHabit: (habit: Habit) => void;
+  setHabits: (habits: Habit[]) => void;
+  removeHabit: (habit: Habit) => void;
 };
 
 const defaultContext: UserContextType = {
@@ -45,11 +46,11 @@ export const UserContext = createContext<UserContextType>(defaultContext);
 const UserProvider = ({ children }: { children: ReactNode }) => {
   const [currentUser, setCurrentUser] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [habits, setHabits] = useState<HabitType[]>([]);
-  const addHabit = (habit: HabitType) => {
+  const [habits, setHabits] = useState<Habit[]>([]);
+  const addHabit = (habit: Habit) => {
     habits.push(habit);
   };
-  const removeHabit = (habit: HabitType) => {};
+  const removeHabit = (habit: Habit) => {};
   return (
     <UserContext.Provider
       value={{

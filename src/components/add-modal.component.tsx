@@ -5,7 +5,7 @@ import IconMenu from "./icon-menu.component";
 import { Icon } from "@iconify/react";
 import { FC, useState, useContext } from "react";
 import Dropdown from "./dropdown.component";
-import { HabitType } from "../context/user.context";
+import { Habit } from "../context/user.context";
 import { UserContext } from "../context/user.context";
 import { validateModal } from "../utils/modal.utils";
 import Message from "./message.component";
@@ -27,7 +27,7 @@ const requirementOptions = [
   },
 ];
 
-const defaultHabitState: HabitType = {
+const defaultHabitState: Habit = {
   name: "",
   description: "",
   iconName: "",
