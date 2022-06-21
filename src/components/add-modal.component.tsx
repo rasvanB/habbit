@@ -7,6 +7,9 @@ import { FC, useState, useContext } from "react";
 import Dropdown from "./dropdown.component";
 import { HabitType } from "../context/habit.context";
 import { UserContext } from "../context/user.context";
+import { validateModal } from "../utils/modal.utils";
+import Message from "./message.component";
+
 type ModalProps = {
   isHidden: boolean;
   closeModal: () => void;
@@ -37,6 +40,7 @@ const defaultHabitState: HabitType = {
 const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
   const [isIconsHidden, setIsIconsHidden] = useState(true);
   const [habitState, setHabitState] = useState(defaultHabitState);
+  const [errorMessage, setErrorMessage] = useState("");
   const { addHabit } = useContext(UserContext);
 
   const selectIcon = (iconName: string) => {
@@ -56,6 +60,7 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
+    setErrorMessage("");
     const { name, value } = e.target;
     if (name === "goal" && value) {
       if (parseInt(value) < 0) {
@@ -78,6 +83,16 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
     setHabitState({ ...habitState, requirement: requirement });
   };
 
+  const handleClick = () => {
+    const error = validateModal(habitState);
+    if (error) {
+      setErrorMessage(error);
+    } else {
+      handleClose();
+      addHabit(habitState);
+    }
+  };
+
   return (
     <div
       className={`${
@@ -90,6 +105,11 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
           className="text-2xl absolute top-2 right-3 dark:text-gray-200 cursor-pointer rounded-full outline outline-1 dark:outline-zinc-600 outline-zinc-300 hover:bg-gray-200 dark:hover:bg-zinc-500"
           onClick={handleClose}
         />
+        {errorMessage && (
+          <div className="mb-5 mt-2">
+            <Message isError message={errorMessage} />
+          </div>
+        )}
         <div className="flex items-end">
           <InputBox
             label="NAME"
@@ -125,7 +145,7 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
             />
           </div>
         </div>
-        <div className="dark:text-gray-200 mt-3 mb-1">GOAL</div>
+        <div className="dark:text-gray-200 mt-1 mb-1">GOAL</div>
         <div className="flex gap-3 mobile:gap-5">
           <Dropdown
             options={requirementOptions}
@@ -150,13 +170,7 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
             onChange={handleChange}
           />
         </div>
-        <Button
-          buttonStyle="submit"
-          onClick={() => {
-            handleClose();
-            addHabit(habitState);
-          }}
-        >
+        <Button buttonStyle="submit" onClick={handleClick}>
           <div className="font-light text-sm">Add Habit</div>
         </Button>
       </div>

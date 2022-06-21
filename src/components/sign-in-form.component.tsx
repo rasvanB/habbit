@@ -7,7 +7,7 @@ import { signInUserWithEmailAndPassword } from "../utils/firebase/firebase.utils
 import Message from "./message.component";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { validateSignIn } from "../utils/auth/auth.utils";
+import { validateSignIn } from "../utils/auth.utils";
 
 const defaultFormState = {
   email: "",

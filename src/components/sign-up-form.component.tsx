@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import InputBox from "./input-box.component";
 import { useState } from "react";
 import Message from "./message.component";
-import { validateSignUp } from "../utils/auth/auth.utils";
+import { validateSignUp } from "../utils/auth.utils";
 import {
   createAuthUserWithEmailAndPassword,
   signOutUser,
