@@ -72,7 +72,7 @@ const SignUpForm = () => {
 
   return (
     <div className="dark:bg-zinc-800 bg-slate-100 py-10 px-5 mobile:px-10 sm:rounded-2xl w-full mobile:w-[400px] mobile:rounded-lg">
-      <h1 className="dark:text-gray-100 text-center font-poppins font-bold text-zinc-800 text-4xl mb-5">
+      <h1 className="dark:text-gray-100 text-center font-poppins font-medium text-zinc-800 text-4xl mb-5">
         Sign up
       </h1>
       {errorMessage && <Message message={errorMessage} isError />}

@@ -54,6 +54,7 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
 
   const handleClose = () => {
     setIsIconsHidden(true);
+    setErrorMessage("");
     setHabitState(defaultHabitState);
     closeModal();
   };
@@ -106,7 +107,7 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
           onClick={handleClose}
         />
         {errorMessage && (
-          <div className="mb-5 mt-2">
+          <div className="my-3">
             <Message isError message={errorMessage} />
           </div>
         )}

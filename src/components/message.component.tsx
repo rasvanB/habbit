@@ -10,7 +10,7 @@ const Message = ({
     <div
       className={`p-2 pr-4 flex items-center w-full ${
         isError ? "bg-red-500" : "bg-green-400"
-      } bg-opacity-70 rounded-md`}
+      } bg-opacity-70 rounded-lg`}
     >
       <IonIcon
         name={`${
