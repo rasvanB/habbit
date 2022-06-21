@@ -15,6 +15,7 @@ export type UserContextType = {
   setCurrentUser: (currentUser: UserData | null) => void;
   habits: HabitType[];
   addHabit: (habit: HabitType) => void;
+  setHabits: (habits: HabitType[]) => void;
   removeHabit: (habit: HabitType) => void;
 };
 
@@ -24,6 +25,7 @@ const defaultContext: UserContextType = {
   loading: true,
   setLoading: () => {},
   habits: [],
+  setHabits: () => {},
   addHabit: () => {},
   removeHabit: () => {},
 };
@@ -35,7 +37,7 @@ export const UserContext = createContext<UserContextType>(defaultContext);
 const UserProvider = ({ children }: { children: ReactNode }) => {
   const [currentUser, setCurrentUser] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [habits] = useState<HabitType[]>([]);
+  const [habits, setHabits] = useState<HabitType[]>([]);
   const addHabit = (habit: HabitType) => {
     habits.push(habit);
   };
@@ -48,6 +50,7 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
         loading,
         setLoading,
         habits,
+        setHabits,
         addHabit,
         removeHabit,
       }}

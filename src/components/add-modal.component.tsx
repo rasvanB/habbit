@@ -3,9 +3,10 @@ import Button from "./button.component";
 import IonIcon from "@reacticons/ionicons";
 import IconMenu from "./icon-menu.component";
 import { Icon } from "@iconify/react";
-import { FC, useState } from "react";
+import { FC, useState, useContext } from "react";
 import Dropdown from "./dropdown.component";
 import { HabitType } from "../context/habit.context";
+import { UserContext } from "../context/user.context";
 type ModalProps = {
   isHidden: boolean;
   closeModal: () => void;
@@ -36,7 +37,7 @@ const defaultHabitState: HabitType = {
 const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
   const [isIconsHidden, setIsIconsHidden] = useState(true);
   const [habitState, setHabitState] = useState(defaultHabitState);
-  console.log(habitState);
+  const { addHabit } = useContext(UserContext);
 
   const selectIcon = (iconName: string) => {
     setHabitState({ ...habitState, iconName });
@@ -149,8 +150,14 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
             onChange={handleChange}
           />
         </div>
-        <Button buttonStyle="submit">
-          <div className="font-medium">Add Habit</div>
+        <Button
+          buttonStyle="submit"
+          onClick={() => {
+            handleClose();
+            addHabit(habitState);
+          }}
+        >
+          <div className="font-light text-sm">Add Habit</div>
         </Button>
       </div>
     </div>

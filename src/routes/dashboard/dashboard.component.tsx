@@ -7,8 +7,9 @@ import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { currentUser, loading } = useContext(UserContext);
+  const { currentUser, loading, habits } = useContext(UserContext);
   const [modalOpen, setModalOpen] = useState(false);
+  console.log(currentUser, habits);
 
   const toggleModal = () => {
     setModalOpen(!modalOpen);
