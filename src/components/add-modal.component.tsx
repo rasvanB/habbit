@@ -16,7 +16,10 @@ type ModalProps = {
 };
 
 const requirementOptions = [
-  { value: "At least", label: "At least" },
+  {
+    value: "At least",
+    label: "At least",
+  },
   {
     value: "Exactly",
     label: "Exactly",
@@ -35,6 +38,7 @@ const defaultHabitState: Habit = {
   requirement: requirementOptions[0].value,
   unit: "",
   goal: 1,
+  startDate: new Date(),
 };
 
 const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
@@ -173,6 +177,7 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
           <InputBox
             placeholder="Habit description (optional)"
             name="description"
+            value={habitState.description}
             onChange={handleChange}
           />
         </div>

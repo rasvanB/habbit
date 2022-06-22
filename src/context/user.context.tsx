@@ -11,6 +11,7 @@ export type Habit = {
   description: string;
   goal: number;
   unit: string;
+  startDate: Date;
 };
 
 export type UserData = {

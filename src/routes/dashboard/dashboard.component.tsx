@@ -4,6 +4,7 @@ import AddModal from "../../components/add-modal.component";
 import { useContext, useEffect, useState } from "react";
 import { UserContext, defaultProfilePicURL } from "../../context/user.context";
 import { useNavigate } from "react-router-dom";
+import HabitCard from "../../components/habit-card.component";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -31,6 +32,9 @@ const Dashboard = () => {
         <Button onClick={toggleModal} buttonStyle="add-habit">
           Add Habit
         </Button>
+        {habits.map((habit) => {
+          return <HabitCard key={habit.name + habit.goal} habit={habit} />;
+        })}
       </div>
       <AddModal isHidden={!modalOpen} closeModal={toggleModal} />
     </div>
