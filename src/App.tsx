@@ -7,17 +7,27 @@ import NotFound from "./routes/not-found/not-found.component";
 import AuthPage from "./routes/auth/auth.component";
 import {
   getUserDocData,
+  getUserHabits,
   onAuthStateChangeListener,
 } from "./utils/firebase/firebase.utils";
-import { UserContext } from "./context/user.context";
+import { Habit, UserContext } from "./context/user.context";
 import Dashboard from "./routes/dashboard/dashboard.component";
 
 const App = () => {
   const { darkMode } = useContext(ThemeContext);
-  const { setCurrentUser, setLoading, loading } = useContext(UserContext);
+  const { setCurrentUser, setLoading, loading, setHabits } =
+    useContext(UserContext);
   const getUser = async (uid: string) => {
     const user = await getUserDocData(uid);
     if (user) {
+      const userHabits = await getUserHabits(user.uid);
+      // cast DocumentData arr to Habit
+      if (userHabits) {
+        const habitsArr: Habit[] = userHabits.map((habit) => {
+          return habit as Habit;
+        });
+        setHabits(habitsArr);
+      }
       setCurrentUser({
         displayName: user.displayName,
         photoURL: user.photoURL,

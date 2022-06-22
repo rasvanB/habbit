@@ -5,12 +5,12 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext, defaultProfilePicURL } from "../../context/user.context";
 import { useNavigate } from "react-router-dom";
 import HabitCard from "../../components/habit-card.component";
+import { getUserHabits } from "../../utils/firebase/firebase.utils";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const { currentUser, loading, habits } = useContext(UserContext);
   const [modalOpen, setModalOpen] = useState(false);
-  console.log(habits);
 
   const toggleModal = () => {
     setModalOpen(!modalOpen);
@@ -19,6 +19,9 @@ const Dashboard = () => {
   useEffect(() => {
     if (!loading && !currentUser) {
       navigate("/auth/sign-in");
+    }
+    if (currentUser) {
+      getUserHabits(currentUser.uid);
     }
   }, [currentUser, navigate, loading]);
 

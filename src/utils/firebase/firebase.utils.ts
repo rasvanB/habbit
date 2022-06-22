@@ -15,7 +15,16 @@ import {
   sendEmailVerification,
   fetchSignInMethodsForEmail,
 } from "firebase/auth";
-import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  DocumentData,
+  getDoc,
+  getDocs,
+  getFirestore,
+  query,
+  setDoc,
+} from "firebase/firestore";
 import { FirebaseError } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 const firebaseConfig = {
@@ -126,6 +135,16 @@ export const getUserDocData = async (uid: string) => {
   if (userSnapshot.exists()) {
     return userSnapshot.data();
   }
+};
+
+export const getUserHabits = async (uid: string) => {
+  const habitsQuery = query(collection(db, `users/${uid}/habits/`));
+  const habitsDocs = await getDocs(habitsQuery);
+  const habitsArr: DocumentData[] = [];
+  habitsDocs.forEach((doc) => {
+    habitsArr.push(doc.data());
+  });
+  return habitsArr;
 };
 
 export const signInWithProvider = async (provider: authMethods) => {
