@@ -2,15 +2,29 @@ import Nav from "../../components/nav.component";
 import Button from "../../components/button.component";
 import AddModal from "../../components/add-modal.component";
 import { useContext, useEffect, useState } from "react";
-import { UserContext, defaultProfilePicURL } from "../../context/user.context";
+import {
+  UserContext,
+  defaultProfilePicURL,
+  Habit,
+} from "../../context/user.context";
 import { useNavigate } from "react-router-dom";
 import HabitCard from "../../components/habit-card.component";
-import { getUserHabits } from "../../utils/firebase/firebase.utils";
+import {
+  deleteHabitFromUser,
+  getUserHabits,
+} from "../../utils/firebase/firebase.utils";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { currentUser, loading, habits } = useContext(UserContext);
+  const { currentUser, loading, habits, removeHabit } = useContext(UserContext);
   const [modalOpen, setModalOpen] = useState(false);
+
+  const handleRemoveHabit = (habit: Habit) => {
+    if (currentUser) {
+      removeHabit(habit);
+      deleteHabitFromUser(currentUser.uid, habit);
+    }
+  };
 
   const toggleModal = () => {
     setModalOpen(!modalOpen);
@@ -40,6 +54,9 @@ const Dashboard = () => {
             <HabitCard
               key={habit.name + Math.floor(Math.random() * 1000)}
               habit={habit}
+              onClick={() => {
+                handleRemoveHabit(habit);
+              }}
             />
           );
         })}

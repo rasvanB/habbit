@@ -54,7 +54,12 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
   const addHabit = (habit: Habit) => {
     habits.push(habit);
   };
-  const removeHabit = (habit: Habit) => {};
+
+  const removeHabit = (habit: Habit) => {
+    const newHabits = habits.filter((h) => h.timeStamp !== habit.timeStamp);
+    setHabits(newHabits);
+  };
+
   return (
     <UserContext.Provider
       value={{

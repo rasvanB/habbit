@@ -17,6 +17,7 @@ import {
 } from "firebase/auth";
 import {
   collection,
+  deleteDoc,
   doc,
   DocumentData,
   getDoc,
@@ -155,6 +156,15 @@ export const addHabitToUser = async (uid: string, habit: Habit) => {
     habit.timeStamp.toString()
   );
   await setDoc(habitDocRef, habit);
+};
+
+export const deleteHabitFromUser = async (uid: string, habit: Habit) => {
+  const habitDocRef = doc(
+    db,
+    `users/${uid}/habits`,
+    habit.timeStamp.toString()
+  );
+  await deleteDoc(habitDocRef);
 };
 
 export const signInWithProvider = async (provider: authMethods) => {
