@@ -36,7 +36,12 @@ const Dashboard = () => {
           Add Habit
         </Button>
         {habits.map((habit) => {
-          return <HabitCard key={habit.name + habit.goal} habit={habit} />;
+          return (
+            <HabitCard
+              key={habit.name + Math.floor(Math.random() * 1000)}
+              habit={habit}
+            />
+          );
         })}
       </div>
       <AddModal isHidden={!modalOpen} closeModal={toggleModal} />

@@ -26,6 +26,7 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { FirebaseError } from "firebase/app";
+import { Habit, defaultProfilePicURL } from "../../context/user.context";
 // import { getAnalytics } from "firebase/analytics";
 const firebaseConfig = {
   apiKey: "AIzaSyCU_8Lk_XYfErTC1-mI8htZ-yfp0P-b74A",
@@ -104,7 +105,7 @@ export const createUserDocument = async (
           uid: user.uid,
           email: user.email,
           displayName: additionalInformation.displayName || "Guest",
-          photoURL: "https://i.ibb.co/dBr1HsM/default-profile-300x284.png",
+          photoURL: defaultProfilePicURL,
         },
         additionalInformation
       );
@@ -138,13 +139,22 @@ export const getUserDocData = async (uid: string) => {
 };
 
 export const getUserHabits = async (uid: string) => {
-  const habitsQuery = query(collection(db, `users/${uid}/habits/`));
+  const habitsQuery = query(collection(db, `users/${uid}/habits`));
   const habitsDocs = await getDocs(habitsQuery);
   const habitsArr: DocumentData[] = [];
   habitsDocs.forEach((doc) => {
     habitsArr.push(doc.data());
   });
   return habitsArr;
+};
+
+export const addHabitToUser = async (uid: string, habit: Habit) => {
+  const habitDocRef = doc(
+    db,
+    `users/${uid}/habits`,
+    habit.timeStamp.toString()
+  );
+  await setDoc(habitDocRef, habit);
 };
 
 export const signInWithProvider = async (provider: authMethods) => {

@@ -9,6 +9,7 @@ import { Habit } from "../context/user.context";
 import { UserContext } from "../context/user.context";
 import { validateModal } from "../utils/modal.utils";
 import Message from "./message.component";
+import { addHabitToUser } from "../utils/firebase/firebase.utils";
 
 type ModalProps = {
   isHidden: boolean;
@@ -45,7 +46,7 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
   const [isIconsHidden, setIsIconsHidden] = useState(true);
   const [habitState, setHabitState] = useState(defaultHabitState);
   const [errorMessage, setErrorMessage] = useState("");
-  const { addHabit } = useContext(UserContext);
+  const { addHabit, currentUser } = useContext(UserContext);
 
   const selectIcon = (iconName: string) => {
     setHabitState({ ...habitState, iconName });
@@ -69,14 +70,18 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
     const { name, value } = e.target;
     if (name === "goal" && value) {
       if (parseInt(value) < 0) {
-        setHabitState({ ...habitState, [name]: 0 });
+        setHabitState({ ...habitState, [name]: 0, timeStamp: Date.now() });
       } else if (parseInt(value) > 100) {
-        setHabitState({ ...habitState, [name]: 100 });
+        setHabitState({ ...habitState, [name]: 100, timeStamp: Date.now() });
       } else {
-        setHabitState({ ...habitState, [name]: parseInt(value) });
+        setHabitState({
+          ...habitState,
+          [name]: parseInt(value),
+          timeStamp: Date.now(),
+        });
       }
     } else {
-      setHabitState({ ...habitState, [name]: value });
+      setHabitState({ ...habitState, [name]: value, timeStamp: Date.now() });
     }
   };
 
@@ -93,9 +98,9 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
     if (error) {
       setErrorMessage(error);
     } else {
-      setHabitState({ ...habitState, timeStamp: Date.now() });
-      handleClose();
       addHabit(habitState);
+      if (currentUser) addHabitToUser(currentUser.uid, habitState);
+      handleClose();
     }
   };
 
