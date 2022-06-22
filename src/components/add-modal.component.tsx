@@ -46,7 +46,7 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
   const [isIconsHidden, setIsIconsHidden] = useState(true);
   const [habitState, setHabitState] = useState(defaultHabitState);
   const [errorMessage, setErrorMessage] = useState("");
-  const { addHabit, currentUser } = useContext(UserContext);
+  const { addHabit, currentUser, habits } = useContext(UserContext);
 
   const selectIcon = (iconName: string) => {
     setHabitState({ ...habitState, iconName });
@@ -98,9 +98,13 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
     if (error) {
       setErrorMessage(error);
     } else {
-      addHabit(habitState);
-      if (currentUser) addHabitToUser(currentUser.uid, habitState);
-      handleClose();
+      if (habits.length < 10) {
+        addHabit(habitState);
+        if (currentUser) addHabitToUser(currentUser.uid, habitState);
+        handleClose();
+      } else {
+        setErrorMessage("You have reached the limit of concurrent habits");
+      }
     }
   };
 
