@@ -9,10 +9,10 @@ type CardProps = {
 const HabitCard: FC<CardProps> = ({ habit, ...otherProps }) => {
   return (
     <div
-      className="dark:text-gray-200 flex items-center mt-2 ml-1"
+      className="dark:text-gray-200 flex items-center mt-2 ml-1 outline outline-2 rounded-sm dark:outline-zinc-500"
       {...otherProps}
     >
-      <div className="p-1 outline outline-1 rounded-sm dark:outline-zinc-500 w-[35px] h-[35px] flex justify-center items-center">
+      <div className="p-1 rounded-sm w-[35px] h-[35px] flex justify-center items-center">
         <Icon
           icon={habit.iconName}
           style={{ color: habit.iconColor }}

@@ -25,7 +25,7 @@ const Dropdown: FC<DropdownProps> = ({
 
   return (
     <div
-      className="relative px-3 py-1 text-sm outline-zinc-200 dark:bg-zinc-600 dark:outline-zinc-500 dark:text-gray-200 outline outline-1 rounded-sm flex items-center select-none w-auto mobile:min-w-[120px] whitespace-nowrap"
+      className="bg-white relative px-3 py-1 text-sm outline-zinc-200 dark:bg-zinc-600 dark:outline-zinc-500 dark:text-gray-200 outline outline-1 rounded-sm flex items-center select-none w-auto mobile:min-w-[120px] whitespace-nowrap"
       onClick={toggleDropdownOpen}
     >
       {`${requirement}`}
