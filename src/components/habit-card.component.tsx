@@ -10,7 +10,7 @@ type CardProps = {
 const HabitCard: FC<CardProps> = ({ habit, ...otherProps }) => {
   return (
     <div
-      className="dark:text-gray-200 flex items-center mt-2 ml-1 outline outline-2 rounded-sm dark:outline-zinc-500 p-1"
+      className="dark:text-gray-200 flex items-center mt-2 ml-1 py-2 px-3 outline outline-1 rounded-sm dark:outline-zinc-600 w-fit"
       {...otherProps}
     >
       <div
@@ -25,9 +25,16 @@ const HabitCard: FC<CardProps> = ({ habit, ...otherProps }) => {
           className="text-2xl"
         />
       </div>
-      <div>{`${habit.name} ${habit.requirement.toLowerCase()} ${habit.goal} ${
-        habit.unit
-      }`}</div>
+      <div className="flex flex-col mx-2">
+        <div className="h-4 font-bold text-sm">
+          {`${habit.name} ${habit.requirement.toLowerCase()} ${habit.goal} ${
+            habit.unit
+          }`.toUpperCase()}
+        </div>
+        <div className="text-xs font-semibold dark:text-zinc-400 h-fit">
+          current: <span>{`0 / ${habit.goal}`}</span>
+        </div>
+      </div>
     </div>
   );
 };

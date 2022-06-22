@@ -13,7 +13,7 @@ const CardContainer = () => {
     }
   };
   return (
-    <div>
+    <div className="flex flex-col mt-5">
       {habits.map((habit) => {
         return (
           <HabitCard
