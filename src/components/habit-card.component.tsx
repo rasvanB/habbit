@@ -10,7 +10,7 @@ type CardProps = {
 const HabitCard: FC<CardProps> = ({ habit, ...otherProps }) => {
   return (
     <div
-      className="dark:text-gray-200 flex items-center mt-2 ml-1 py-2 px-3 outline outline-1 rounded-sm dark:outline-zinc-600 w-fit"
+      className="dark:text-gray-200 flex items-center mt-2 py-2 px-3 outline outline-1 rounded-sm dark:outline-zinc-600 w-fit"
       {...otherProps}
     >
       <div
