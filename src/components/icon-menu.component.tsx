@@ -3,12 +3,14 @@ import { Icon } from "@iconify/react";
 import { FC, useState } from "react";
 import Button from "./button.component";
 import ColorsMenu from "./colors-menu.component";
+
 type IconMenuProps = {
   isIconsHidden: boolean;
   iconColor: string;
   selectIcon(iconName: string): void;
   changeColor(color: string): void;
 };
+
 const IconMenu: FC<IconMenuProps> = ({
   isIconsHidden,
   selectIcon,
