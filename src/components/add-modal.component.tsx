@@ -38,7 +38,7 @@ const defaultHabitState: Habit = {
   requirement: requirementOptions[0].value,
   unit: "",
   goal: 1,
-  startDate: new Date(),
+  timeStamp: 0,
 };
 
 const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
@@ -93,6 +93,7 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
     if (error) {
       setErrorMessage(error);
     } else {
+      setHabitState({ ...habitState, timeStamp: Date.now() });
       handleClose();
       addHabit(habitState);
     }

@@ -11,7 +11,7 @@ export type Habit = {
   description: string;
   goal: number;
   unit: string;
-  startDate: Date;
+  timeStamp: number;
 };
 
 export type UserData = {
@@ -45,7 +45,7 @@ const defaultContext: UserContextType = {
 
 export const UserContext = createContext<UserContextType>(defaultContext);
 
-// TODO: implement remove habits / add habits
+// TODO: implement remove habits
 
 const UserProvider = ({ children }: { children: ReactNode }) => {
   const [currentUser, setCurrentUser] = useState<UserData | null>(null);
