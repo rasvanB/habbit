@@ -10,11 +10,14 @@ type CardProps = {
 const HabitCard: FC<CardProps> = ({ habit, ...otherProps }) => {
   return (
     <div
-      className="dark:text-gray-200 w-[400px] flex items-center mt-2 py-2 px-3 outline outline-1 rounded-sm dark:outline-zinc-600"
+      className="dark:text-gray-200 dark:bg-neutral-800 bg-gray-100 w-[400px] flex items-center pr-3 rounded-md dark:outline-zinc-600"
       {...otherProps}
+      style={{
+        border: `2px solid ${hexToRgba(habit.iconColor, 0.5)}`,
+      }}
     >
       <div
-        className="p-1 min-w-[40px] min-h-[40px] rounded-md flex justify-center items-center"
+        className="p-1 h-14 w-14 rounded-sm flex justify-center items-center"
         style={{
           backgroundColor: hexToRgba(habit.iconColor, 0.3),
         }}
@@ -22,16 +25,16 @@ const HabitCard: FC<CardProps> = ({ habit, ...otherProps }) => {
         <Icon
           icon={habit.iconName}
           style={{ color: habit.iconColor }}
-          className="text-2xl"
+          className="text-3xl"
         />
       </div>
-      <div className="flex flex-col mx-4">
-        <div className="font-bold text-sm">
+      <div className="flex flex-col mx-4 my-2 ">
+        <div className="font-bold text-sm text-zinc-700 dark:text-gray-200">
           {`${habit.name} ${habit.requirement.toLowerCase()} ${habit.goal} ${
             habit.unit
           }`.toUpperCase()}
         </div>
-        <div className="text-xs font-semibold dark:text-zinc-400 h-fit">
+        <div className="text-xs font-semibold dark:text-zinc-400 text-zinc-400 h-fit">
           current: <span>{`0 / ${habit.goal}`}</span>
         </div>
       </div>
