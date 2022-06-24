@@ -11,16 +11,17 @@ type NavProps = {
 
 const Nav: FC<NavProps> = ({ username, photourl }) => {
   const navigate = useNavigate();
-  const { setLoading } = useContext(UserContext);
+  const { setLoading, setHabits } = useContext(UserContext);
 
   const handleSignOut = async () => {
     await signOutUser();
     setLoading(true);
+    setHabits([]);
     navigate("/auth/sign-in");
   };
 
   return (
-    <div className="flex items-center py-3 px-20 bg-slate-100 dark:bg-zinc-900 border-b border-slate-300 dark:border-zinc-600">
+    <div className="flex items-center py-3 px-5 sm:px-20 bg-slate-100 dark:bg-zinc-900 border-b border-slate-300 dark:border-zinc-600">
       <div
         onClick={handleSignOut}
         className="w-[35px] h-[35px] min-w-[35px] min-h-[35px] cursor-pointer"
