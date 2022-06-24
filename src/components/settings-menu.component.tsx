@@ -10,8 +10,8 @@ const SettingsMenu: FC<SettingsMenuProps> = ({ isOpen, signOut }) => {
   return (
     <div
       className={`${
-        isOpen ? "flex" : "hidden"
-      } dark:bg-zinc-700 rounded-md absolute top-14 left-[50px] flex-col font-poppins font-medium text-sm dark:text-gray-200 py-1 gap-1`}
+        isOpen ? "top-14 optacity-100" : "-top-14 opacity-0"
+      } flex dark:bg-zinc-700 rounded-md absolute left-[50px] flex-col font-poppins font-medium text-sm dark:text-gray-200 py-1 gap-1 transition-opacity duration-200 ease-in`}
     >
       <SettingsMenuItem text="settings" iconName="bxs:cog" />
       <SettingsMenuItem
