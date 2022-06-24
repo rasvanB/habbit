@@ -13,7 +13,7 @@ const SettingsMenuItem: FC<MenuItemProps> = ({
 }) => {
   return (
     <div
-      className="flex justify-end items-center hover:dark:bg-zinc-600 px-3 gap-2 cursor-pointer"
+      className="flex justify-end items-center hover:dark:bg-zinc-600 px-3 gap-2 cursor-pointer select-none"
       {...otherProps}
     >
       <h1>{text.toUpperCase()}</h1>
