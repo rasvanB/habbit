@@ -1,11 +1,13 @@
 import { iconColors } from "../utils/icons.utils";
 import { Icon } from "@iconify/react";
 import { FC } from "react";
+
 type ColorMenuProps = {
   isColorsMenuOpen: boolean;
   changeColor: (color: string) => void;
   closeColorMenu: () => void;
 };
+
 const ColorsMenu: FC<ColorMenuProps> = ({
   isColorsMenuOpen,
   changeColor,
