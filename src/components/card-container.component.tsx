@@ -17,7 +17,7 @@ const CardContainer = () => {
       {habits.map((habit) => {
         return (
           <HabitCard
-            key={habit.name + Math.floor(Math.random() * 1000)}
+            key={habit.habitName + Math.floor(Math.random() * 1000)}
             habit={habit}
             onClick={() => {
               handleRemoveHabit(habit);

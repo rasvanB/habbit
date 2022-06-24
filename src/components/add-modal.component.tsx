@@ -31,7 +31,7 @@ const requirementOptions = [
 ];
 
 const defaultHabitState: Habit = {
-  name: "",
+  habitName: "",
   description: "",
   iconName: "",
   iconColor: "#5594f2",
@@ -127,9 +127,9 @@ const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
         <div className="flex items-end">
           <InputBox
             label="NAME"
-            name="name"
+            name="habitName"
             onChange={handleChange}
-            value={habitState.name}
+            value={habitState.habitName}
             placeholder="Name your habit"
           ></InputBox>
           <div className="ml-auto relative">

@@ -30,9 +30,9 @@ const HabitCard: FC<CardProps> = ({ habit, ...otherProps }) => {
       </div>
       <div className="flex flex-col mx-4 my-2 ">
         <div className="font-bold text-sm text-zinc-700 dark:text-gray-200">
-          {`${habit.name} ${habit.requirement.toLowerCase()} ${habit.goal} ${
-            habit.unit
-          }`.toUpperCase()}
+          {`${habit.habitName} ${habit.requirement.toLowerCase()} ${
+            habit.goal
+          } ${habit.unit}`.toUpperCase()}
         </div>
         <div className="text-xs font-semibold dark:text-zinc-400 text-zinc-400 h-fit">
           current: <span>{`0 / ${habit.goal}`}</span>

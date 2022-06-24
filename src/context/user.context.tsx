@@ -4,7 +4,7 @@ export const defaultProfilePicURL =
   "https://i.ibb.co/dBr1HsM/default-profile-300x284.png";
 
 export type Habit = {
-  name: string;
+  habitName: string;
   iconName: string;
   iconColor: string;
   requirement: string;
