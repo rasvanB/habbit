@@ -20,7 +20,7 @@ const ColorsMenu: FC<ColorMenuProps> = ({
       {iconColors.map((color) => (
         <Icon
           key={color}
-          className="text-3xl cursor-pointer outline outline-1 outline-zinc-300 dark:outline-zinc-600  rounded-sm p-1 hover:dark:bg-zinc-600 hover:bg-gray-300"
+          className="text-3xl cursor-pointer outline outline-1 outline-zinc-300 dark:outline-zinc-600  rounded-sm p-1 hover:dark:bg-zinc-600 hover:bg-slate-200"
           icon="akar-icons:circle-fill"
           style={{
             color: color,

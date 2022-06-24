@@ -28,11 +28,10 @@ const IconMenu: FC<IconMenuProps> = ({
       } rounded-md outline outline-1 outline-zinc-400 dark:outline-zinc-500 absolute right-12 -top-5 dark:bg-zinc-700 bg-slate-100 p-3 z-20`}
     >
       <h2 className="p-1 font-poppins text-sm dark:text-gray-300 mb-2">
-        <Button buttonStyle="select-color">
+        <Button buttonStyle="select-color" onClick={handleColorMenuToggle}>
           <Icon
             icon="akar-icons:circle-fill"
             className={`text-2xl`}
-            onClick={handleColorMenuToggle}
             style={{ color: iconColor }}
           />
         </Button>

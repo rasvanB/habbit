@@ -21,5 +21,5 @@ export const buttonClasses = {
   selectIcon:
     "dark:bg-zinc-600 bg-white outline outline-1 focus:outline-2 outline-zinc-200 dark:outline-zinc-500 dark:text-white text-zinc-800 font-semibold p-[5px] ml-5 rounded whitespace-nowrap flex items-center justify-center",
   selectColor:
-    "dark:bg-zinc-600 bg-white outline outline-1 hover:outline-2 outline-zinc-500 font-semibold p-[5px] rounded whitespace-nowrap flex items-center justify-center",
+    "dark:bg-zinc-600 bg-white outline outline-1 hover:outline-2 outline-zinc-400 font-semibold p-[5px] rounded whitespace-nowrap flex items-center justify-center",
 };
