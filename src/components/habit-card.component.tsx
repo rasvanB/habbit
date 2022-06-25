@@ -1,8 +1,7 @@
 import { Icon } from "@iconify/react";
-import React, { FC, useContext, useEffect, useRef, useState } from "react";
-import { Habit, UserContext } from "../context/user.context";
+import React, { FC, useEffect, useRef, useState } from "react";
+import { Habit } from "../context/user.context";
 import hexToRgba from "hex-to-rgba";
-import { deleteHabitFromUser } from "../utils/firebase/firebase.utils";
 import CardMenu from "./card-menu.component";
 
 type CardProps = {
@@ -12,14 +11,6 @@ type CardProps = {
 const HabitCard: FC<CardProps> = ({ habit, ...otherProps }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-  const { removeHabit, currentUser } = useContext(UserContext);
-
-  const handleRemoveHabit = (habit: Habit) => {
-    if (currentUser) {
-      removeHabit(habit);
-      deleteHabitFromUser(currentUser.uid, habit);
-    }
-  };
 
   useEffect(() => {
     const closeMenu = (e: any) => {
@@ -76,14 +67,13 @@ const HabitCard: FC<CardProps> = ({ habit, ...otherProps }) => {
       <div
         ref={menuRef}
         onClick={() => {
-          console.log(isMenuOpen);
           setMenuOpen(true);
         }}
         className="absolute top-2 right-1 cursor-pointer"
       >
         <Icon icon="fluent:more-vertical-28-filled" />
       </div>
-      <CardMenu isOpen={isMenuOpen} removeHabit={handleRemoveHabit} />
+      <CardMenu isOpen={isMenuOpen} habit={habit} />
     </div>
   );
 };
