@@ -5,7 +5,7 @@ import HabitCard from "./habit-card.component";
 const CardContainer = () => {
   const { habits } = useContext(UserContext);
   return (
-    <div className="flex flex-col mt-5 gap-3">
+    <div className="flex flex-col mt-5 gap-3 w-fit">
       {habits.map((habit) => {
         return (
           <HabitCard

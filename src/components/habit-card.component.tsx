@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import { FC, useContext, useState } from "react";
+import React, { FC, useContext, useEffect, useRef, useState } from "react";
 import { Habit, UserContext } from "../context/user.context";
 import hexToRgba from "hex-to-rgba";
 import { deleteHabitFromUser } from "../utils/firebase/firebase.utils";
@@ -11,6 +11,7 @@ type CardProps = {
 
 const HabitCard: FC<CardProps> = ({ habit, ...otherProps }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<SVGSVGElement>(null);
   const { removeHabit, currentUser } = useContext(UserContext);
 
   const handleRemoveHabit = (habit: Habit) => {
@@ -24,9 +25,19 @@ const HabitCard: FC<CardProps> = ({ habit, ...otherProps }) => {
     setMenuOpen(!isMenuOpen);
   };
 
+  useEffect(() => {
+    const closeMenu = (e: any) => {
+      if (menuRef.current !== e.path[0]) {
+        setMenuOpen(false);
+      }
+    };
+    document.body.addEventListener("mousedown", closeMenu);
+    return () => document.body.removeEventListener("mousedown", closeMenu);
+  }, []);
+
   return (
     <div
-      className="relative dark:text-gray-200 dark:bg-neutral-800 bg-slate-100 w-[450px] flex items-center pr-10 rounded-md dark:outline-zinc-600"
+      className="relative dark:text-gray-200 dark:bg-neutral-800  w-[450px] flex items-center pr-10 rounded-md dark:outline-zinc-600"
       {...otherProps}
       style={{
         border: `2px solid ${hexToRgba(habit.iconColor, 0.6)}`,
@@ -70,8 +81,9 @@ const HabitCard: FC<CardProps> = ({ habit, ...otherProps }) => {
         icon="fluent:more-vertical-28-filled"
         className="absolute top-2 right-1 cursor-pointer"
         onClick={toggleMenuOpen}
+        ref={menuRef}
       />
-      <CardMenu isOpen={isMenuOpen} />
+      <CardMenu isOpen={isMenuOpen} removeHabit={handleRemoveHabit} />
     </div>
   );
 };
