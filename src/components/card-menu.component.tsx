@@ -24,7 +24,7 @@ const CardMenu = ({
       {...otherProps}
       className={`${
         isOpen ? "top-0 opacity-100" : "-top-[1000px] opacity-0"
-      } select-none flex flex-col absolute dark:bg-zinc-700 dark:text-gray-200 font-poppins text-sm -right-[120px] rounded-sm transition-opacity py-1 z-10`}
+      } select-none flex flex-col absolute dark:bg-zinc-700 dark:text-gray-200 font-poppins text-sm -right-[120px] rounded-sm transition-opacity py-1 z-10 outline outline-1 dark:outline-zinc-500`}
     >
       <CardMenuItem
         text="delete habit"
@@ -33,8 +33,6 @@ const CardMenu = ({
           handleRemoveHabit(habit);
         }}
       />
-      <CardMenuItem text="test" iconName="tabler:error-404" />
-      <CardMenuItem text="test2" iconName="tabler:error-404" />
     </div>
   );
 };

@@ -14,7 +14,10 @@ const HabitCard: FC<CardProps> = ({ habit, ...otherProps }) => {
 
   useEffect(() => {
     const closeMenu = (e: any) => {
-      if (menuRef.current !== e.composedPath()[1]) {
+      if (
+        menuRef.current !== e.composedPath()[1] &&
+        menuRef.current !== e.composedPath()[2]
+      ) {
         setMenuOpen(false);
       }
     };
