@@ -1,16 +1,32 @@
 import { Icon } from "@iconify/react";
-import { FC } from "react";
-import { Habit } from "../context/user.context";
+import { FC, useContext, useState } from "react";
+import { Habit, UserContext } from "../context/user.context";
 import hexToRgba from "hex-to-rgba";
+import { deleteHabitFromUser } from "../utils/firebase/firebase.utils";
+import CardMenu from "./card-menu.component";
 
 type CardProps = {
   habit: Habit;
 } & React.BaseHTMLAttributes<HTMLDivElement>;
 
 const HabitCard: FC<CardProps> = ({ habit, ...otherProps }) => {
+  const [isMenuOpen, setMenuOpen] = useState(false);
+  const { removeHabit, currentUser } = useContext(UserContext);
+
+  const handleRemoveHabit = (habit: Habit) => {
+    if (currentUser) {
+      removeHabit(habit);
+      deleteHabitFromUser(currentUser.uid, habit);
+    }
+  };
+
+  const toggleMenuOpen = () => {
+    setMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div
-      className="dark:text-gray-200 dark:bg-neutral-800 bg-gray-100 w-[400px] flex items-center pr-3 rounded-md dark:outline-zinc-600"
+      className="relative dark:text-gray-200 dark:bg-neutral-800 bg-slate-100 w-[450px] flex items-center pr-10 rounded-md dark:outline-zinc-600"
       {...otherProps}
       style={{
         border: `2px solid ${hexToRgba(habit.iconColor, 0.6)}`,
@@ -38,12 +54,24 @@ const HabitCard: FC<CardProps> = ({ habit, ...otherProps }) => {
           current: <span>{`0 / ${habit.goal}`}</span>
         </div>
       </div>
-      <div className="ml-auto">
+      <div
+        className="ml-auto rounded-md hover:scale-110 transition-transform bg-black"
+        style={{
+          backgroundColor: hexToRgba(habit.iconColor, 0.2),
+        }}
+      >
         <Icon
-          icon="jam:plus-rectangle-f"
-          className="text-2xl text-blue-400 cursor-pointer hover:text-blue-300"
+          icon="bi:plus"
+          className="text-2xl cursor-pointer"
+          style={{ color: `${habit.iconColor}` }}
         />
       </div>
+      <Icon
+        icon="fluent:more-vertical-28-filled"
+        className="absolute top-2 right-1 cursor-pointer"
+        onClick={toggleMenuOpen}
+      />
+      <CardMenu isOpen={isMenuOpen} />
     </div>
   );
 };
