@@ -16,7 +16,7 @@ const LoginButton: FC<LoginButtonProps> = ({ type }) => {
   const handleOnClick = async () => {
     const result = await signInWithProvider(type);
     if (result instanceof FirebaseError) {
-      console.log(result.code);
+      // console.log(result.code);
     } else {
       setLoading(true);
       navigate("/app");

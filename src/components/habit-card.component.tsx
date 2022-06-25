@@ -11,7 +11,7 @@ type CardProps = {
 
 const HabitCard: FC<CardProps> = ({ habit, ...otherProps }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef<SVGSVGElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
   const { removeHabit, currentUser } = useContext(UserContext);
 
   const handleRemoveHabit = (habit: Habit) => {
@@ -21,23 +21,19 @@ const HabitCard: FC<CardProps> = ({ habit, ...otherProps }) => {
     }
   };
 
-  const toggleMenuOpen = () => {
-    setMenuOpen(!isMenuOpen);
-  };
-
   useEffect(() => {
     const closeMenu = (e: any) => {
-      if (menuRef.current !== e.path[0]) {
+      if (menuRef.current !== e.composedPath()[1]) {
         setMenuOpen(false);
       }
     };
-    document.body.addEventListener("mousedown", closeMenu);
-    return () => document.body.removeEventListener("mousedown", closeMenu);
+    document.body.addEventListener("click", closeMenu);
+    return () => document.body.removeEventListener("click", closeMenu);
   }, []);
 
   return (
     <div
-      className="relative dark:text-gray-200 dark:bg-neutral-800  w-[450px] flex items-center pr-10 rounded-md dark:outline-zinc-600"
+      className="relative dark:text-gray-200 dark:bg-neutral-800  w-[450px] flex items-center pr-10 rounded-md dark:outline-zinc-600 select-none"
       {...otherProps}
       style={{
         border: `2px solid ${hexToRgba(habit.iconColor, 0.6)}`,
@@ -77,12 +73,16 @@ const HabitCard: FC<CardProps> = ({ habit, ...otherProps }) => {
           style={{ color: `${habit.iconColor}` }}
         />
       </div>
-      <Icon
-        icon="fluent:more-vertical-28-filled"
-        className="absolute top-2 right-1 cursor-pointer"
-        onClick={toggleMenuOpen}
+      <div
         ref={menuRef}
-      />
+        onClick={() => {
+          console.log(isMenuOpen);
+          setMenuOpen(true);
+        }}
+        className="absolute top-2 right-1 cursor-pointer"
+      >
+        <Icon icon="fluent:more-vertical-28-filled" />
+      </div>
       <CardMenu isOpen={isMenuOpen} removeHabit={handleRemoveHabit} />
     </div>
   );

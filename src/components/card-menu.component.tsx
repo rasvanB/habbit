@@ -1,5 +1,6 @@
 import React from "react";
 import { Habit } from "../context/user.context";
+import CardMenuItem from "./card-menu-item.component";
 
 const CardMenu = ({
   isOpen,
@@ -13,10 +14,12 @@ const CardMenu = ({
     <div
       {...otherProps}
       className={`${
-        isOpen ? "flex" : "hidden"
-      } flex-col dark:bg-zinc-700 dark:text-gray-200 font-poppins text-sm absolute top-0 -right-24 rounded-sm`}
+        isOpen ? "top-0 opacity-100" : "-top-[1000px] opacity-0"
+      } select-none flex flex-col absolute dark:bg-zinc-700 dark:text-gray-200 font-poppins text-sm -right-24 rounded-sm transition-opacity `}
     >
-      <h1>card menu</h1>
+      <CardMenuItem />
+      <CardMenuItem />
+      <CardMenuItem />
     </div>
   );
 };
