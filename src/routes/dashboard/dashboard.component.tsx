@@ -6,6 +6,7 @@ import { UserContext, defaultProfilePicURL } from "../../context/user.context";
 import { useNavigate } from "react-router-dom";
 import { getUserHabits } from "../../utils/firebase/firebase.utils";
 import CardContainer from "../../components/card-container.component";
+import { Toaster } from "react-hot-toast";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ const Dashboard = () => {
 
   return (
     <div className="flex flex-col h-screen dark:bg-zinc-800 bg-white">
+      <Toaster />
       <Nav
         username={currentUser ? currentUser.displayName : "Guest"}
         photourl={currentUser ? currentUser.photoURL : defaultProfilePicURL}
