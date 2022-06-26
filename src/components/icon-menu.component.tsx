@@ -1,6 +1,6 @@
 import { iconNames } from "../utils/icons.utils";
 import { Icon } from "@iconify/react";
-import { FC, useState } from "react";
+import { useState } from "react";
 import Button from "./button.component";
 import ColorsMenu from "./colors-menu.component";
 

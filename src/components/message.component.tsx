@@ -1,4 +1,5 @@
 import IonIcon from "@reacticons/ionicons";
+
 type MessageProps = {
   message: string;
   isError: boolean;

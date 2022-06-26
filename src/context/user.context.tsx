@@ -45,8 +45,6 @@ const defaultContext: UserContextType = {
 
 export const UserContext = createContext<UserContextType>(defaultContext);
 
-// TODO: implement remove habits
-
 const UserProvider = ({ children }: { children: ReactNode }) => {
   const [currentUser, setCurrentUser] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);

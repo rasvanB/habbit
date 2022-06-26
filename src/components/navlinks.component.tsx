@@ -3,6 +3,7 @@ import Option from "./option.component";
 import Button from "./button.component";
 import { useContext } from "react";
 import { UserContext } from "../context/user.context";
+
 const NavLinks = ({ open }: { open: boolean }) => {
   const { currentUser } = useContext(UserContext);
   return (

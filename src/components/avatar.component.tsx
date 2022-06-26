@@ -1,5 +1,3 @@
-import { FC } from "react";
-
 type AvatarProps = {
   photoUrl: string;
 } & React.BaseHTMLAttributes<HTMLDivElement>;
