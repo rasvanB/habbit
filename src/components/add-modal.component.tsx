@@ -4,7 +4,7 @@ import IconMenu from "./icon-menu.component";
 import Dropdown from "./dropdown.component";
 import Message from "./message.component";
 import { Icon } from "@iconify/react";
-import { FC, useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { UserContext } from "../context/user.context";
 import { Habit } from "../context/user.context";
 import { validateModal } from "../utils/modal.utils";
@@ -41,7 +41,7 @@ const defaultHabitState: Habit = {
   timeStamp: 0,
 };
 
-const AddModal: FC<ModalProps> = ({ isHidden, closeModal }) => {
+const AddModal = ({ isHidden, closeModal }: ModalProps) => {
   const [isIconsHidden, setIsIconsHidden] = useState(true);
   const [habitState, setHabitState] = useState(defaultHabitState);
   const [errorMessage, setErrorMessage] = useState("");
