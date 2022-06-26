@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
-import { signOutUser } from "../utils/firebase/firebase.utils";
-import { UserContext } from "../context/user.context";
+import { signOutUser } from "../../utils/firebase/firebase.utils";
+import { UserContext } from "../../context/user.context";
 import { useNavigate } from "react-router-dom";
 import Avatar from "./avatar.component";
 import SettingsMenu from "./settings-menu.component";

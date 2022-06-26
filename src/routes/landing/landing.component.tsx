@@ -1,5 +1,5 @@
-import Header from "../../components/header.component";
-import Hero from "../../components/hero.component";
+import Header from "../../components/landing/header.component";
+import Hero from "../../components/landing/hero.component";
 const LandingPage = () => {
   return (
     <div className="">

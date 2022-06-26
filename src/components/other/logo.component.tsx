@@ -1,4 +1,4 @@
-import logo from "../assets/logo.svg";
+import logo from "../../assets/logo.svg";
 const Logo = () => {
   return (
     <div className="cursor-pointer flex items-center min-w-[50px] justify-center">

@@ -1,15 +1,15 @@
-import InputBox from "./input-box.component";
-import Button from "./button.component";
-import IconMenu from "./icon-menu.component";
-import Dropdown from "./dropdown.component";
-import Message from "./message.component";
+import InputBox from "../other/input-box.component";
+import Button from "../other/button.component";
+import IconMenu from "../icon-menu/icon-menu.component";
+import Dropdown from "../other/dropdown.component";
+import Message from "../other/message.component";
 import { Icon } from "@iconify/react";
 import { useState, useContext } from "react";
-import { UserContext } from "../context/user.context";
-import { Habit } from "../context/user.context";
-import { validateModal } from "../utils/modal.utils";
-import { addHabitToUser } from "../utils/firebase/firebase.utils";
-import { showToast } from "../utils/toast/habit-toasts";
+import { UserContext } from "../../context/user.context";
+import { Habit } from "../../context/user.context";
+import { validateModal } from "../../utils/modal.utils";
+import { addHabitToUser } from "../../utils/firebase/firebase.utils";
+import { showToast } from "../../utils/toast/habit-toasts";
 
 type ModalProps = {
   isHidden: boolean;

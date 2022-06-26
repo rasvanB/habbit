@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Logo from "./logo.component";
+import Logo from "../other/logo.component";
 import NavLinks from "./navlinks.component";
 import IonIcon from "@reacticons/ionicons";
 import { useState } from "react";

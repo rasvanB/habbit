@@ -1,4 +1,4 @@
-import { iconColors } from "../utils/icons.utils";
+import { iconColors } from "../../utils/icons.utils";
 import { Icon } from "@iconify/react";
 
 type ColorMenuProps = {

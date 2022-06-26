@@ -1,8 +1,8 @@
-import { iconNames } from "../utils/icons.utils";
+import { iconNames } from "../../utils/icons.utils";
 import { Icon } from "@iconify/react";
 import { useState } from "react";
-import Button from "./button.component";
-import ColorsMenu from "./colors-menu.component";
+import Button from "../other/button.component";
+import ColorsMenu from "../colors-menu/colors-menu.component";
 
 type IconMenuProps = {
   isIconsHidden: boolean;

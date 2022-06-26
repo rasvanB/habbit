@@ -1,4 +1,4 @@
-import { buttonStyles, buttonClasses } from "../utils/styles/button-styles";
+import { buttonStyles, buttonClasses } from "../../utils/styles/button-styles";
 
 type ButtonProps = {
   buttonStyle: buttonStyles;

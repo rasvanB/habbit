@@ -1,7 +1,7 @@
-import Button from "./button.component";
+import Button from "../other/button.component";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { UserContext } from "../context/user.context";
+import { UserContext } from "../../context/user.context";
 
 const Hero = () => {
   const { currentUser } = useContext(UserContext);

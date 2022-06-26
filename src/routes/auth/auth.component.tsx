@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import SignInForm from "../../components/sign-in-form.component";
-import SignUpForm from "../../components/sign-up-form.component";
+import SignInForm from "../../components/auth-forms/sign-in-form.component";
+import SignUpForm from "../../components/auth-forms/sign-up-form.component";
 import { UserContext } from "../../context/user.context";
 
 const AuthPage = () => {

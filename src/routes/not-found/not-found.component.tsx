@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../../components/header.component";
+import Header from "../../components/landing/header.component";
 
 const NotFound = () => {
   const navigate = useNavigate();

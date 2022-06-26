@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { UserContext } from "../context/user.context";
-import ProviderIcon from "./provider-icon.component";
-import { IconTypes } from "./provider-icon.component";
-import { signInWithProvider } from "../utils/firebase/firebase.utils";
+import { UserContext } from "../../context/user.context";
+import ProviderIcon from "../other/provider-icon.component";
+import { IconTypes } from "../other/provider-icon.component";
+import { signInWithProvider } from "../../utils/firebase/firebase.utils";
 import { FirebaseError } from "firebase/app";
 import { useNavigate } from "react-router-dom";
 
@@ -16,7 +16,6 @@ const LoginButton = ({ type }: LoginButtonProps) => {
   const handleOnClick = async () => {
     const result = await signInWithProvider(type);
     if (result instanceof FirebaseError) {
-      // console.log(result.code);
     } else {
       setLoading(true);
       navigate("/app");

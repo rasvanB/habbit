@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { Habit, UserContext } from "../context/user.context";
-import { deleteHabitFromUser } from "../utils/firebase/firebase.utils";
-import { showToast } from "../utils/toast/habit-toasts";
+import { Habit, UserContext } from "../../context/user.context";
+import { deleteHabitFromUser } from "../../utils/firebase/firebase.utils";
+import { showToast } from "../../utils/toast/habit-toasts";
 import CardMenuItem from "./card-menu-item.component";
 
 type CardMenuProps = {

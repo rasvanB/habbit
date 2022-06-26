@@ -1,4 +1,4 @@
-import { inputClasses } from "../utils/styles/input-styles";
+import { inputClasses } from "../../utils/styles/input-styles";
 type InputProps = {
   label?: string;
   isFormInput?: boolean;
