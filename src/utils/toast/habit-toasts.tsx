@@ -27,7 +27,7 @@ export const showToast = (type: ToastType, message: string) => {
       <div
         className={`${
           t.visible ? "opacity-100" : "opacity-0"
-        } max-w-xs bg-white border rounded-md shadow-lg dark:bg-gray-800 dark:border-gray-700 transition-all duration-300`}
+        } max-w-xs bg-white border rounded-md shadow-lg dark:bg-zinc-800 dark:border-gray-700 transition-all duration-300`}
       >
         <div className="flex p-2">
           <div className="flex-shrink-0">

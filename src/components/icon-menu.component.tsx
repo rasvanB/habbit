@@ -46,7 +46,7 @@ const IconMenu = ({
           <Icon
             key={iconName}
             icon={iconName}
-            className={`w-[35px] h-[35px] cursor-pointer p-[6px] outline outline-1 outline-zinc-300 dark:outline-zinc-600 rounded-sm hover:bg-slate-200 hover:dark:bg-zinc-600 `}
+            className={`w-[35px] h-[35px] cursor-pointer p-[6px] outline outline-1 outline-zinc-300 dark:outline-zinc-600 rounded-sm hover:bg-slate-100 hover:dark:bg-zinc-600 bg-white dark:bg-zinc-700`}
             style={{
               color: iconColor,
             }}
