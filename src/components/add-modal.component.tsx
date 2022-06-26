@@ -9,6 +9,7 @@ import { UserContext } from "../context/user.context";
 import { Habit } from "../context/user.context";
 import { validateModal } from "../utils/modal.utils";
 import { addHabitToUser } from "../utils/firebase/firebase.utils";
+import { showToast } from "../utils/toast/habit-toasts";
 
 type ModalProps = {
   isHidden: boolean;
@@ -99,7 +100,10 @@ const AddModal = ({ isHidden, closeModal }: ModalProps) => {
     } else {
       if (habits.length < 10) {
         addHabit(habitState);
-        if (currentUser) addHabitToUser(currentUser.uid, habitState);
+        if (currentUser) {
+          addHabitToUser(currentUser.uid, habitState);
+          showToast("success", "Successfully added new Habit.");
+        }
         handleClose();
       } else {
         setErrorMessage("You have reached the limit of concurrent habits");
