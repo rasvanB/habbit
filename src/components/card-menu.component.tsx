@@ -3,14 +3,12 @@ import { Habit, UserContext } from "../context/user.context";
 import { deleteHabitFromUser } from "../utils/firebase/firebase.utils";
 import CardMenuItem from "./card-menu-item.component";
 
-const CardMenu = ({
-  isOpen,
-  habit,
-  ...otherProps
-}: {
+type CardMenuProps = {
   isOpen: boolean;
   habit: Habit;
-} & React.ClassAttributes<HTMLDivElement>) => {
+} & React.ClassAttributes<HTMLDivElement>;
+
+const CardMenu = ({ isOpen, habit, ...otherProps }: CardMenuProps) => {
   const { currentUser, removeHabit } = useContext(UserContext);
 
   const handleRemoveHabit = (habit: Habit) => {

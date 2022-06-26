@@ -4,7 +4,7 @@ type AvatarProps = {
   photoUrl: string;
 } & React.BaseHTMLAttributes<HTMLDivElement>;
 
-const Avatar: FC<AvatarProps> = ({ photoUrl, ...otherProps }) => {
+const Avatar = ({ photoUrl, ...otherProps }: AvatarProps) => {
   return (
     <div className="w-[35px] h-[35px] cursor-pointer" {...otherProps}>
       <img

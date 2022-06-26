@@ -8,6 +8,7 @@ import {
   createAuthUserWithEmailAndPassword,
   signOutUser,
 } from "../utils/firebase/firebase.utils";
+
 const defaultFormState = {
   email: "",
   password: "",

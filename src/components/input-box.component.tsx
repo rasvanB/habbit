@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { inputClasses } from "../utils/styles/input-styles";
 type InputProps = {
   label?: string;
@@ -6,12 +5,12 @@ type InputProps = {
   isIncrement?: boolean;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
-const InputBox: FC<InputProps> = ({
+const InputBox = ({
   label,
   isFormInput,
   isIncrement,
   ...otherProps
-}) => {
+}: InputProps) => {
   return (
     <div className="form-input flex flex-col font-poppins w-full">
       {label && (

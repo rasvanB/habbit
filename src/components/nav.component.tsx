@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { signOutUser } from "../utils/firebase/firebase.utils";
 import { UserContext } from "../context/user.context";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +10,7 @@ type NavProps = {
   photourl: string;
 };
 
-const Nav: FC<NavProps> = ({ username, photourl }) => {
+const Nav = ({ username, photourl }: NavProps) => {
   const navigate = useNavigate();
   const { setLoading, setHabits } = useContext(UserContext);
   const [isSettingsOpen, setSettingsOpen] = useState(false);

@@ -1,11 +1,11 @@
-import { FC } from "react";
 import { buttonStyles, buttonClasses } from "../utils/styles/button-styles";
 
 type ButtonProps = {
   buttonStyle: buttonStyles;
+  children: React.ReactNode;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button: FC<ButtonProps> = ({ buttonStyle, children, ...otherProps }) => {
+const Button = ({ buttonStyle, children, ...otherProps }: ButtonProps) => {
   return (
     <div>
       <button

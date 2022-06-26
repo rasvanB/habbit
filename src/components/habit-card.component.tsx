@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Habit } from "../context/user.context";
 import hexToRgba from "hex-to-rgba";
 import CardMenu from "./card-menu.component";
@@ -8,7 +8,7 @@ type CardProps = {
   habit: Habit;
 } & React.BaseHTMLAttributes<HTMLDivElement>;
 
-const HabitCard: FC<CardProps> = ({ habit, ...otherProps }) => {
+const HabitCard = ({ habit, ...otherProps }: CardProps) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 

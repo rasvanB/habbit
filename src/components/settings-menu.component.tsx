@@ -1,4 +1,3 @@
-import { FC } from "react";
 import SettingsMenuItem from "./settings-menu-item.component";
 
 type SettingsMenuProps = {
@@ -6,7 +5,7 @@ type SettingsMenuProps = {
   signOut: () => void;
 };
 
-const SettingsMenu: FC<SettingsMenuProps> = ({ isOpen, signOut }) => {
+const SettingsMenu = ({ isOpen, signOut }: SettingsMenuProps) => {
   return (
     <div
       className={`${

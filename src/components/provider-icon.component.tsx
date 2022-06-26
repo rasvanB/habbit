@@ -1,11 +1,10 @@
-import { FC } from "react";
-
 export type IconTypes = "facebook" | "google" | "twitter";
+
 type IconProps = {
   type: IconTypes;
 };
 
-const ProviderIcon: FC<IconProps> = ({ type }) => {
+const ProviderIcon = ({ type }: IconProps) => {
   let bgIcon: string = "";
 
   switch (type) {

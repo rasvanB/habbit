@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
-import { FC } from "react";
+
 type OptionProps = {
   linkTo: string;
   text: string;
 };
-const Option: FC<OptionProps> = ({ linkTo, text }) => {
+
+const Option = ({ linkTo, text }: OptionProps) => {
   return (
     <Link
       to={linkTo}

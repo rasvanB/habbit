@@ -1,11 +1,10 @@
 import IonIcon from "@reacticons/ionicons";
-const Message = ({
-  message,
-  isError,
-}: {
+type MessageProps = {
   message: string;
   isError: boolean;
-}) => {
+};
+
+const Message = ({ message, isError }: MessageProps) => {
   return (
     <div
       className={`p-2 pr-4 flex items-center w-full ${

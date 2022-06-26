@@ -11,12 +11,12 @@ type IconMenuProps = {
   changeColor(color: string): void;
 };
 
-const IconMenu: FC<IconMenuProps> = ({
+const IconMenu = ({
   isIconsHidden,
   selectIcon,
   iconColor,
   changeColor,
-}) => {
+}: IconMenuProps) => {
   const [isColorMenuOpen, setIsColorMenuOpen] = useState(false);
   const handleColorMenuToggle = () => {
     setIsColorMenuOpen(!isColorMenuOpen);

@@ -8,11 +8,11 @@ type ColorMenuProps = {
   closeColorMenu: () => void;
 };
 
-const ColorsMenu: FC<ColorMenuProps> = ({
+const ColorsMenu = ({
   isColorsMenuOpen,
   changeColor,
   closeColorMenu,
-}) => {
+}: ColorMenuProps) => {
   return (
     <div
       className={`${

@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import { FC, useState } from "react";
+import { useState } from "react";
 
 type Option = {
   value: string;
@@ -12,11 +12,7 @@ type DropdownProps = {
   requirement: string;
 };
 
-const Dropdown: FC<DropdownProps> = ({
-  options,
-  setRequirement,
-  requirement,
-}) => {
+const Dropdown = ({ options, setRequirement, requirement }: DropdownProps) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdownOpen = () => {

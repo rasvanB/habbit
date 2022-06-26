@@ -1,4 +1,4 @@
-import { FC, useContext } from "react";
+import { useContext } from "react";
 import { UserContext } from "../context/user.context";
 import ProviderIcon from "./provider-icon.component";
 import { IconTypes } from "./provider-icon.component";
@@ -10,7 +10,7 @@ type LoginButtonProps = {
   type: IconTypes;
 };
 
-const LoginButton: FC<LoginButtonProps> = ({ type }) => {
+const LoginButton = ({ type }: LoginButtonProps) => {
   const navigate = useNavigate();
   const { setLoading } = useContext(UserContext);
   const handleOnClick = async () => {
