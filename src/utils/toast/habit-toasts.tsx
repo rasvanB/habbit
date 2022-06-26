@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 
 type ToastType = "error" | "warning" | "success";
 
-export const habitToast = (type: ToastType, message: string) => {
+export const showToast = (type: ToastType, message: string) => {
   let iconName = "";
   let iconColor = "";
 
@@ -23,8 +23,12 @@ export const habitToast = (type: ToastType, message: string) => {
   }
 
   toast.custom(
-    () => (
-      <div className="max-w-xs bg-white border rounded-md shadow-lg dark:bg-gray-800 dark:border-gray-700">
+    (t) => (
+      <div
+        className={`${
+          t.visible ? "opacity-100" : "opacity-0"
+        } max-w-xs bg-white border rounded-md shadow-lg dark:bg-gray-800 dark:border-gray-700 transition-all duration-300`}
+      >
         <div className="flex p-2">
           <div className="flex-shrink-0">
             <Icon icon={iconName} className={`${iconColor} text-xl`} />
