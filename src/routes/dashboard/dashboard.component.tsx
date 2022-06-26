@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { getUserHabits } from "../../utils/firebase/firebase.utils";
 import CardContainer from "../../components/card/card-container.component";
 import { Toaster } from "react-hot-toast";
-import { showToast } from "../../utils/toast/habit-toasts";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -26,7 +25,7 @@ const Dashboard = () => {
       getUserHabits(currentUser.uid);
     }
   }, [currentUser, navigate, loading]);
-  showToast("error", "EROARE EROARE EROARE EROARE ");
+
   return (
     <div className="flex flex-col h-screen dark:bg-zinc-800 bg-white">
       <Toaster />
