@@ -1,20 +1,21 @@
 import Nav from "../../components/dashboard-nav/nav.component";
 import Button from "../../components/other/button.component";
 import AddModal from "../../components/add-modal/add-modal.component";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext, defaultProfilePicURL } from "../../context/user.context";
 import { useNavigate } from "react-router-dom";
 import { getUserHabits } from "../../utils/firebase/firebase.utils";
 import CardContainer from "../../components/card/card-container.component";
 import { Toaster } from "react-hot-toast";
+import { ModalContext } from "../../context/add-modal.context";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const { currentUser, loading } = useContext(UserContext);
-  const [modalOpen, setModalOpen] = useState(false);
+  const { isOpen, setOpen } = useContext(ModalContext);
 
   const toggleModal = () => {
-    setModalOpen(!modalOpen);
+    setOpen(!isOpen);
   };
 
   useEffect(() => {
@@ -39,7 +40,7 @@ const Dashboard = () => {
         </Button>
         <CardContainer />
       </div>
-      <AddModal isHidden={!modalOpen} closeModal={toggleModal} />
+      <AddModal isOpen={isOpen} />
     </div>
   );
 };
