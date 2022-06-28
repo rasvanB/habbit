@@ -13,6 +13,7 @@ import { showToast } from "../../utils/toast/habit-toasts";
 
 type ModalProps = {
   isHidden: boolean;
+  habit?: Habit;
   closeModal: () => void;
 };
 
