@@ -10,6 +10,11 @@ import { Habit } from "../../context/user.context";
 import { validateModal } from "../../utils/modal.utils";
 import { addHabitToUser } from "../../utils/firebase/firebase.utils";
 import { showToast } from "../../utils/toast/habit-toasts";
+import {
+  ModalContext,
+  requirementOptions,
+  defaultHabitState,
+} from "../../context/add-modal.context";
 
 type ModalProps = {
   isHidden: boolean;
@@ -17,40 +22,14 @@ type ModalProps = {
   closeModal: () => void;
 };
 
-const requirementOptions = [
-  {
-    value: "At least",
-    label: "At least",
-  },
-  {
-    value: "Exactly",
-    label: "Exactly",
-  },
-  {
-    value: "Less than",
-    label: "Less than",
-  },
-];
-
-const defaultHabitState: Habit = {
-  habitName: "",
-  description: "",
-  iconName: "",
-  iconColor: "#5594f2",
-  requirement: requirementOptions[0].value,
-  unit: "",
-  goal: 1,
-  timeStamp: 0,
-};
-
 const AddModal = ({ isHidden, closeModal }: ModalProps) => {
   const [isIconsHidden, setIsIconsHidden] = useState(true);
-  const [habitState, setHabitState] = useState(defaultHabitState);
-  const [errorMessage, setErrorMessage] = useState("");
+  const { currentHabit, setCurrentHabit } = useContext(ModalContext);
+  const { errorMessage, setErrorMessage } = useContext(ModalContext);
   const { addHabit, currentUser, habits } = useContext(UserContext);
 
   const selectIcon = (iconName: string) => {
-    setHabitState({ ...habitState, iconName });
+    setCurrentHabit({ ...currentHabit, iconName });
     setIsIconsHidden(true);
   };
 
@@ -61,7 +40,7 @@ const AddModal = ({ isHidden, closeModal }: ModalProps) => {
   const handleClose = () => {
     setIsIconsHidden(true);
     setErrorMessage("");
-    setHabitState(defaultHabitState);
+    setCurrentHabit(defaultHabitState);
     closeModal();
   };
 
@@ -71,38 +50,46 @@ const AddModal = ({ isHidden, closeModal }: ModalProps) => {
     const { name, value } = e.target;
     if (name === "goal" && value) {
       if (parseInt(value) < 0) {
-        setHabitState({ ...habitState, [name]: 0, timeStamp: Date.now() });
+        setCurrentHabit({ ...currentHabit, [name]: 0, timeStamp: Date.now() });
       } else if (parseInt(value) > 100) {
-        setHabitState({ ...habitState, [name]: 100, timeStamp: Date.now() });
+        setCurrentHabit({
+          ...currentHabit,
+          [name]: 100,
+          timeStamp: Date.now(),
+        });
       } else {
-        setHabitState({
-          ...habitState,
+        setCurrentHabit({
+          ...currentHabit,
           [name]: parseInt(value),
           timeStamp: Date.now(),
         });
       }
     } else {
-      setHabitState({ ...habitState, [name]: value, timeStamp: Date.now() });
+      setCurrentHabit({
+        ...currentHabit,
+        [name]: value,
+        timeStamp: Date.now(),
+      });
     }
   };
 
   const changeColor = (color: string) => {
-    setHabitState({ ...habitState, iconColor: color });
+    setCurrentHabit({ ...currentHabit, iconColor: color });
   };
 
   const changeRequirement = (requirement: string) => {
-    setHabitState({ ...habitState, requirement: requirement });
+    setCurrentHabit({ ...currentHabit, requirement: requirement });
   };
 
   const handleClick = () => {
-    const error = validateModal(habitState);
+    const error = validateModal(currentHabit);
     if (error) {
       setErrorMessage(error);
     } else {
       if (habits.length < 10) {
-        addHabit(habitState);
+        addHabit(currentHabit);
         if (currentUser) {
-          addHabitToUser(currentUser.uid, habitState);
+          addHabitToUser(currentUser.uid, currentHabit);
           showToast("success", "Successfully added new Habit.");
         }
         handleClose();
@@ -134,7 +121,7 @@ const AddModal = ({ isHidden, closeModal }: ModalProps) => {
             label="NAME"
             name="habitName"
             onChange={handleChange}
-            value={habitState.habitName}
+            value={currentHabit.habitName}
             placeholder="Name your habit"
           ></InputBox>
           <div className="ml-auto relative">
@@ -147,11 +134,13 @@ const AddModal = ({ isHidden, closeModal }: ModalProps) => {
               <div className="mobile:w-[25px] mobile:h-[25px] flex justify-center items-center">
                 <Icon
                   icon={`${
-                    habitState.iconName ? habitState.iconName : "bi:question-lg"
+                    currentHabit.iconName
+                      ? currentHabit.iconName
+                      : "bi:question-lg"
                   }`}
                   className={`text-2xl`}
                   style={{
-                    color: habitState.iconColor,
+                    color: currentHabit.iconColor,
                   }}
                 />
               </div>
@@ -159,7 +148,7 @@ const AddModal = ({ isHidden, closeModal }: ModalProps) => {
             <IconMenu
               isIconsHidden={isIconsHidden}
               selectIcon={selectIcon}
-              iconColor={habitState.iconColor}
+              iconColor={currentHabit.iconColor}
               changeColor={changeColor}
             />
           </div>
@@ -169,7 +158,7 @@ const AddModal = ({ isHidden, closeModal }: ModalProps) => {
           <Dropdown
             options={requirementOptions}
             setRequirement={changeRequirement}
-            requirement={habitState.requirement}
+            requirement={currentHabit.requirement}
           ></Dropdown>
           <InputBox
             name="goal"
@@ -177,21 +166,21 @@ const AddModal = ({ isHidden, closeModal }: ModalProps) => {
             type="number"
             min={1}
             max={100}
-            value={habitState.goal}
+            value={currentHabit.goal}
             onChange={handleChange}
           />
           <InputBox
             placeholder="unit"
             name="unit"
             onChange={handleChange}
-            value={habitState.unit}
+            value={currentHabit.unit}
           />
         </div>
         <div className="mt-3">
           <InputBox
             placeholder="Habit description (optional)"
             name="description"
-            value={habitState.description}
+            value={currentHabit.description}
             onChange={handleChange}
           />
         </div>

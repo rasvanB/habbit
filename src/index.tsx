@@ -5,6 +5,7 @@ import ThemeProvider from "./context/theme.context";
 import UserProvider from "./context/user.context";
 import "./index.css";
 import App from "./App";
+import ModalProvider from "./context/add-modal.context";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -13,11 +14,13 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ThemeProvider>
-      <UserProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </UserProvider>
+      <ModalProvider>
+        <UserProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </UserProvider>
+      </ModalProvider>
     </ThemeProvider>
   </React.StrictMode>
 );
