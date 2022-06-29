@@ -59,10 +59,7 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
   const editHabit = (habit: Habit, other: Habit) => {
     const newHabits = habits.map((h: Habit) => {
       if (h.timeStamp === habit.timeStamp) {
-        const oldTimestamp = habit.timeStamp;
-        const newHabit = { ...other };
-        newHabit.timeStamp = oldTimestamp;
-        return newHabit;
+        return other;
       }
       return habit;
     });

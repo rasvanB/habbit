@@ -108,7 +108,10 @@ const AddModal = () => {
     const error = validateModal(currentHabit);
     if (error) setErrorMessage(error);
     else {
-      editHabit(habitToEdit, currentHabit);
+      const oldTimestamp = habitToEdit.timeStamp;
+      const newHabit = { ...currentHabit };
+      newHabit.timeStamp = oldTimestamp;
+      editHabit(habitToEdit, newHabit);
       handleClose();
     }
   };
