@@ -12,10 +12,11 @@ import { ModalContext } from "../../context/add-modal.context";
 const Dashboard = () => {
   const navigate = useNavigate();
   const { currentUser, loading } = useContext(UserContext);
-  const { isOpen, setOpen } = useContext(ModalContext);
+  const { isOpen, setOpen, setEditMode } = useContext(ModalContext);
 
   const toggleModal = () => {
     setOpen(!isOpen);
+    setEditMode(false);
   };
 
   useEffect(() => {
@@ -40,7 +41,7 @@ const Dashboard = () => {
         </Button>
         <CardContainer />
       </div>
-      <AddModal isOpen={isOpen} />
+      <AddModal />
     </div>
   );
 };

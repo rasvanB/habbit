@@ -18,12 +18,11 @@ import {
 
 type ModalProps = {
   habit?: Habit;
-  isOpen: boolean;
 };
 
-const AddModal = ({ habit, isOpen }: ModalProps) => {
+const AddModal = ({ habit }: ModalProps) => {
   const [isIconsHidden, setIsIconsHidden] = useState(true);
-  const { setOpen } = useContext(ModalContext);
+  const { isOpen, setOpen } = useContext(ModalContext);
   const { currentHabit, setCurrentHabit } = useContext(ModalContext);
   const { errorMessage, setErrorMessage } = useContext(ModalContext);
   const { addHabit, currentUser, habits } = useContext(UserContext);
@@ -106,7 +105,7 @@ const AddModal = ({ habit, isOpen }: ModalProps) => {
   return (
     <div
       className={`${
-        isOpen ? "hidden" : "flex"
+        isOpen ? "flex" : "hidden"
       } fixed h-screen w-screen justify-center items-center bg-black bg-opacity-40 backdrop-blur-sm dark:[color-scheme:dark] font-poppins`}
     >
       <div className="relative bg-slate-100 dark:bg-zinc-700 flex flex-col px-2 py-5 pt-10 rounded-md w-full mobile:w-auto mobile:px-10 mobile:max-w-[500px]">

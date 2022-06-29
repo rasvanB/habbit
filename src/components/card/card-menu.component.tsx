@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { ModalContext } from "../../context/add-modal.context";
 import { Habit, UserContext } from "../../context/user.context";
 import { deleteHabitFromUser } from "../../utils/firebase/firebase.utils";
 import { showToast } from "../../utils/toast/habit-toasts";
@@ -11,7 +12,7 @@ type CardMenuProps = {
 
 const CardMenu = ({ isOpen, habit, ...otherProps }: CardMenuProps) => {
   const { currentUser, removeHabit } = useContext(UserContext);
-
+  const { setOpen, setCurrentHabit, setEditMode } = useContext(ModalContext);
   const handleRemoveHabit = (habit: Habit) => {
     if (currentUser) {
       removeHabit(habit);
@@ -19,6 +20,13 @@ const CardMenu = ({ isOpen, habit, ...otherProps }: CardMenuProps) => {
       showToast("success", "Habit has been deleted successfully.");
     }
   };
+
+  const handleClick = () => {
+    setOpen(true);
+    setCurrentHabit(habit);
+    setEditMode(true);
+  };
+
   return (
     <div
       {...otherProps}
@@ -33,7 +41,11 @@ const CardMenu = ({ isOpen, habit, ...otherProps }: CardMenuProps) => {
           handleRemoveHabit(habit);
         }}
       />
-      <CardMenuItem text="edit" iconName="akar-icons:edit" />
+      <CardMenuItem
+        text="edit"
+        iconName="akar-icons:edit"
+        onClick={handleClick}
+      />
     </div>
   );
 };
