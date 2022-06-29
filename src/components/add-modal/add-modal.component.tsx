@@ -6,12 +6,8 @@ import Message from "../other/message.component";
 import { Icon } from "@iconify/react";
 import { useState, useContext } from "react";
 import { UserContext } from "../../context/user.context";
-import { Habit } from "../../context/user.context";
 import { validateModal } from "../../utils/modal.utils";
-import {
-  addHabitToUser,
-  deleteHabitFromUser,
-} from "../../utils/firebase/firebase.utils";
+import { addHabitToUser } from "../../utils/firebase/firebase.utils";
 import { showToast } from "../../utils/toast/habit-toasts";
 import {
   ModalContext,
@@ -19,11 +15,7 @@ import {
   defaultHabitState,
 } from "../../context/add-modal.context";
 
-type ModalProps = {
-  habit?: Habit;
-};
-
-const AddModal = ({ habit }: ModalProps) => {
+const AddModal = () => {
   const [isIconsHidden, setIsIconsHidden] = useState(true);
   const {
     isOpen,
@@ -36,8 +28,7 @@ const AddModal = ({ habit }: ModalProps) => {
     habitToEdit,
   } = useContext(ModalContext);
 
-  const { addHabit, currentUser, habits, removeHabit } =
-    useContext(UserContext);
+  const { addHabit, currentUser, habits, editHabit } = useContext(UserContext);
 
   const closeModal = () => {
     setOpen(!isOpen);
@@ -57,13 +48,6 @@ const AddModal = ({ habit }: ModalProps) => {
     setErrorMessage("");
     setCurrentHabit(defaultHabitState);
     closeModal();
-  };
-
-  const handleRemoveHabit = (habit: Habit) => {
-    if (currentUser) {
-      removeHabit(habit);
-      deleteHabitFromUser(currentUser.uid, habit);
-    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -124,8 +108,8 @@ const AddModal = ({ habit }: ModalProps) => {
     const error = validateModal(currentHabit);
     if (error) setErrorMessage(error);
     else {
-      handleRemoveHabit(habitToEdit);
-      handleAdd();
+      editHabit(habitToEdit, currentHabit);
+      handleClose();
     }
   };
 

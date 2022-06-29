@@ -29,6 +29,7 @@ export type UserContextType = {
   habits: Habit[];
   addHabit: (habit: Habit) => void;
   setHabits: (habits: Habit[]) => void;
+  editHabit: (habit: Habit, other: Habit) => void;
   removeHabit: (habit: Habit) => void;
 };
 
@@ -39,6 +40,7 @@ const defaultContext: UserContextType = {
   setLoading: () => {},
   habits: [],
   setHabits: () => {},
+  editHabit: () => {},
   addHabit: () => {},
   removeHabit: () => {},
 };
@@ -49,8 +51,22 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
   const [currentUser, setCurrentUser] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
   const [habits, setHabits] = useState<Habit[]>([]);
+
   const addHabit = (habit: Habit) => {
     habits.push(habit);
+  };
+
+  const editHabit = (habit: Habit, other: Habit) => {
+    const newHabits = habits.map((h: Habit) => {
+      if (h.timeStamp === habit.timeStamp) {
+        const oldTimestamp = habit.timeStamp;
+        const newHabit = { ...other };
+        newHabit.timeStamp = oldTimestamp;
+        return newHabit;
+      }
+      return habit;
+    });
+    setHabits(newHabits);
   };
 
   const removeHabit = (habit: Habit) => {
@@ -61,6 +77,7 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
   return (
     <UserContext.Provider
       value={{
+        editHabit,
         currentUser,
         setCurrentUser,
         loading,
