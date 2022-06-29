@@ -113,7 +113,7 @@ const AddModal = () => {
         const newHabit = { ...currentHabit };
         newHabit.timeStamp = oldTimestamp;
         editHabit(habitToEdit, newHabit);
-        addHabitToUser(currentUser?.uid, newHabit);
+        addHabitToUser(currentUser.uid, newHabit);
         showToast("success", "Habit has been edited.");
         handleClose();
       }
@@ -209,7 +209,9 @@ const AddModal = () => {
           buttonStyle="submit"
           onClick={editMode ? handleEdit : handleAdd}
         >
-          <div className="font-light text-sm">Add Habit</div>
+          <div className="font-light text-sm">{`${
+            editMode ? "Edit Habit" : "Add Habit"
+          }`}</div>
         </Button>
       </div>
     </div>
