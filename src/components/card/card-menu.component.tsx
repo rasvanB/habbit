@@ -12,7 +12,9 @@ type CardMenuProps = {
 
 const CardMenu = ({ isOpen, habit, ...otherProps }: CardMenuProps) => {
   const { currentUser, removeHabit } = useContext(UserContext);
-  const { setOpen, setCurrentHabit, setEditMode } = useContext(ModalContext);
+  const { setOpen, setCurrentHabit, setHabitToEdit, setEditMode } =
+    useContext(ModalContext);
+
   const handleRemoveHabit = (habit: Habit) => {
     if (currentUser) {
       removeHabit(habit);
@@ -24,6 +26,7 @@ const CardMenu = ({ isOpen, habit, ...otherProps }: CardMenuProps) => {
   const handleClick = () => {
     setOpen(true);
     setCurrentHabit(habit);
+    setHabitToEdit(habit);
     setEditMode(true);
   };
 
@@ -41,6 +44,7 @@ const CardMenu = ({ isOpen, habit, ...otherProps }: CardMenuProps) => {
           handleRemoveHabit(habit);
         }}
       />
+
       <CardMenuItem
         text="edit"
         iconName="akar-icons:edit"

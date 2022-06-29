@@ -34,17 +34,21 @@ type ModalContextType = {
   setEditMode: (x: boolean) => void;
   currentHabit: Habit;
   setCurrentHabit: (x: Habit) => void;
+  habitToEdit: Habit;
+  setHabitToEdit: (x: Habit) => void;
   errorMessage: string;
   setErrorMessage: (x: string) => void;
 };
 
-const defaultModalContext = {
+const defaultModalContext: ModalContextType = {
   isOpen: false,
   setOpen: () => {},
   editMode: false,
   setEditMode: () => {},
   currentHabit: {} as Habit,
   setCurrentHabit: () => {},
+  habitToEdit: {} as Habit,
+  setHabitToEdit: () => {},
   errorMessage: "",
   setErrorMessage: () => {},
 };
@@ -55,6 +59,7 @@ export const ModalContext =
 const ModalProvider = ({ children }: { children: ReactNode }) => {
   const [isOpen, setOpen] = useState(false);
   const [currentHabit, setCurrentHabit] = useState(defaultHabitState);
+  const [habitToEdit, setHabitToEdit] = useState(defaultHabitState);
   const [errorMessage, setErrorMessage] = useState("");
   const [editMode, setEditMode] = useState(false);
   return (
@@ -66,6 +71,8 @@ const ModalProvider = ({ children }: { children: ReactNode }) => {
         setEditMode,
         currentHabit,
         setCurrentHabit,
+        habitToEdit,
+        setHabitToEdit,
         errorMessage,
         setErrorMessage,
       }}

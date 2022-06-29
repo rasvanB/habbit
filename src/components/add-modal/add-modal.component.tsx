@@ -8,7 +8,10 @@ import { useState, useContext } from "react";
 import { UserContext } from "../../context/user.context";
 import { Habit } from "../../context/user.context";
 import { validateModal } from "../../utils/modal.utils";
-import { addHabitToUser } from "../../utils/firebase/firebase.utils";
+import {
+  addHabitToUser,
+  deleteHabitFromUser,
+} from "../../utils/firebase/firebase.utils";
 import { showToast } from "../../utils/toast/habit-toasts";
 import {
   ModalContext,
@@ -22,10 +25,19 @@ type ModalProps = {
 
 const AddModal = ({ habit }: ModalProps) => {
   const [isIconsHidden, setIsIconsHidden] = useState(true);
-  const { isOpen, setOpen } = useContext(ModalContext);
-  const { currentHabit, setCurrentHabit } = useContext(ModalContext);
-  const { errorMessage, setErrorMessage } = useContext(ModalContext);
-  const { addHabit, currentUser, habits } = useContext(UserContext);
+  const {
+    isOpen,
+    setOpen,
+    currentHabit,
+    setCurrentHabit,
+    editMode,
+    errorMessage,
+    setErrorMessage,
+    habitToEdit,
+  } = useContext(ModalContext);
+
+  const { addHabit, currentUser, habits, removeHabit } =
+    useContext(UserContext);
 
   const closeModal = () => {
     setOpen(!isOpen);
@@ -45,6 +57,13 @@ const AddModal = ({ habit }: ModalProps) => {
     setErrorMessage("");
     setCurrentHabit(defaultHabitState);
     closeModal();
+  };
+
+  const handleRemoveHabit = (habit: Habit) => {
+    if (currentUser) {
+      removeHabit(habit);
+      deleteHabitFromUser(currentUser.uid, habit);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -84,11 +103,10 @@ const AddModal = ({ habit }: ModalProps) => {
     setCurrentHabit({ ...currentHabit, requirement: requirement });
   };
 
-  const handleClick = () => {
+  const handleAdd = () => {
     const error = validateModal(currentHabit);
-    if (error) {
-      setErrorMessage(error);
-    } else {
+    if (error) setErrorMessage(error);
+    else {
       if (habits.length < 10) {
         addHabit(currentHabit);
         if (currentUser) {
@@ -99,6 +117,15 @@ const AddModal = ({ habit }: ModalProps) => {
       } else {
         setErrorMessage("You have reached the limit of concurrent habits");
       }
+    }
+  };
+
+  const handleEdit = () => {
+    const error = validateModal(currentHabit);
+    if (error) setErrorMessage(error);
+    else {
+      handleRemoveHabit(habitToEdit);
+      handleAdd();
     }
   };
 
@@ -187,7 +214,10 @@ const AddModal = ({ habit }: ModalProps) => {
             onChange={handleChange}
           />
         </div>
-        <Button buttonStyle="submit" onClick={handleClick}>
+        <Button
+          buttonStyle="submit"
+          onClick={editMode ? handleEdit : handleAdd}
+        >
           <div className="font-light text-sm">Add Habit</div>
         </Button>
       </div>
