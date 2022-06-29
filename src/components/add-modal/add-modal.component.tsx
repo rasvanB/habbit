@@ -95,7 +95,7 @@ const AddModal = () => {
         addHabit(currentHabit);
         if (currentUser) {
           addHabitToUser(currentUser.uid, currentHabit);
-          showToast("success", "Successfully added new Habit.");
+          showToast("success", "Habit has been added.");
         }
         handleClose();
       } else {
@@ -108,11 +108,15 @@ const AddModal = () => {
     const error = validateModal(currentHabit);
     if (error) setErrorMessage(error);
     else {
-      const oldTimestamp = habitToEdit.timeStamp;
-      const newHabit = { ...currentHabit };
-      newHabit.timeStamp = oldTimestamp;
-      editHabit(habitToEdit, newHabit);
-      handleClose();
+      if (currentUser) {
+        const oldTimestamp = habitToEdit.timeStamp;
+        const newHabit = { ...currentHabit };
+        newHabit.timeStamp = oldTimestamp;
+        editHabit(habitToEdit, newHabit);
+        addHabitToUser(currentUser?.uid, newHabit);
+        showToast("success", "Habit has been edited.");
+        handleClose();
+      }
     }
   };
 
