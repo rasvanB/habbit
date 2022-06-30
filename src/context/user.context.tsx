@@ -29,7 +29,7 @@ export type UserContextType = {
   habits: Habit[];
   addHabit: (habit: Habit) => void;
   setHabits: (habits: Habit[]) => void;
-  editHabit: (habit: Habit, other: Habit) => void;
+  editHabit: (habit: Habit) => void;
   removeHabit: (habit: Habit) => void;
 };
 
@@ -56,9 +56,9 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
     habits.push(habit);
   };
 
-  const editHabit = (habit: Habit, other: Habit) => {
+  const editHabit = (other: Habit) => {
     const newHabits = habits.map((h: Habit) => {
-      if (h.timeStamp === habit.timeStamp) {
+      if (h.timeStamp === other.timeStamp) {
         return other;
       }
       return h;

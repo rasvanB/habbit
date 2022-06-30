@@ -112,7 +112,7 @@ const AddModal = () => {
         const oldTimestamp = habitToEdit.timeStamp;
         const newHabit = { ...currentHabit };
         newHabit.timeStamp = oldTimestamp;
-        editHabit(habitToEdit, newHabit);
+        editHabit(newHabit);
         addHabitToUser(currentUser.uid, newHabit);
         showToast("success", "Habit has been edited.");
         handleClose();
