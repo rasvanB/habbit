@@ -29,22 +29,22 @@ const Dashboard = () => {
   }, [currentUser, navigate, loading]);
 
   return (
-    <div className="flex flex-col h-screen dark:bg-zinc-800 bg-white">
+    <div className="flex flex-col h-screen dark:bg-zinc-800 bg-white overflow-hidden">
       <Toaster />
       <Nav
         username={currentUser ? currentUser.displayName : "Guest"}
         photourl={currentUser ? currentUser.photoURL : defaultProfilePicURL}
       />
-      <div className="mt-5 mx-5 sm:mx-20">
+      <div className="mt-4 sm:mx-4 mx-2 xl:mx-20">
         <Button onClick={toggleModal} buttonStyle="add-habit">
           Add Habit
         </Button>
       </div>
-      <div className="mx-5 sm:mx-20 h-full flex">
-        <div className="w-[50%] h-full">
+      <div className="mx-1 sm:mx-4 xl:mx-20 h-full flex">
+        <div className="w-full lg:w-[50%] h-full">
           <CardContainer />
         </div>
-        <div className="w-[50%] h-full"></div>
+        <div className="lg:w-[50%] h-full hidden lg:visible"></div>
       </div>
       <AddModal />
     </div>

@@ -27,14 +27,14 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
 
   return (
     <div
-      className="relative dark:text-gray-200 dark:bg-neutral-800  w-[450px] flex items-center pr-10 rounded-md dark:outline-zinc-600 select-none"
+      className="relative dark:text-gray-200 dark:bg-neutral-800  flex items-center lg:pr-10 pr-6 rounded-md dark:outline-zinc-600 select-none box-border pl-1 md:pl-2 py-1 md:py-2"
       {...otherProps}
       style={{
         border: `2px solid ${hexToRgba(habit.iconColor, 0.6)}`,
       }}
     >
       <div
-        className="p-1 h-14 w-14 rounded-sm flex justify-center items-center"
+        className="min-w-[2rem] min-h-[2rem] lg:min-w-[3.5rem] lg:min-h-[3.5rem] rounded-md lg:rounded-lg flex items-center justify-center"
         style={{
           backgroundColor: hexToRgba(habit.iconColor, 0.4),
         }}
@@ -42,14 +42,17 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
         <Icon
           icon={habit.iconName}
           style={{ color: habit.iconColor }}
-          className="text-3xl"
+          className="text-xl lg:text-3xl"
         />
       </div>
-      <div className="flex flex-col mx-4 my-2 ">
-        <div className="font-bold text-sm text-zinc-700 dark:text-gray-200">
-          {`${habit.habitName} ${habit.requirement.toLowerCase()} ${
-            habit.goal
-          } ${habit.unit}`.toUpperCase()}
+      <div className="flex flex-col w-full mx-3 lg:mx-4">
+        <div className="font-bold text-xs lg:text-sm text-zinc-700 dark:text-gray-200 flex flex-col">
+          <div className="truncate max-w-[150px] mobile:max-w-[400px]">
+            {`${habit.habitName}`.toUpperCase()}
+          </div>
+          <div className="truncate">
+            {`${habit.requirement} ${habit.goal} ${habit.unit}`.toUpperCase()}
+          </div>
         </div>
         <div className="text-xs font-semibold dark:text-zinc-400 text-zinc-400 h-fit">
           current: <span>{`0 / ${habit.goal}`}</span>
@@ -62,7 +65,7 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
         }}
       >
         <Icon
-          icon="bi:plus"
+          icon={habit.goal === 1 ? "eva:checkmark-outline" : "bi:plus"}
           className="text-2xl cursor-pointer"
           style={{ color: `${habit.iconColor}` }}
         />
