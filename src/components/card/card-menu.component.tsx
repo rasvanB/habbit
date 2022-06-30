@@ -50,7 +50,11 @@ const CardMenu = ({ isOpen, habit, ...otherProps }: CardMenuProps) => {
         iconName="akar-icons:edit"
         onClick={handleClick}
       />
-      <CardMenuItem text="view progress" iconName="bx:calendar" />
+      <CardMenuItem
+        text="view progress"
+        iconName="bx:calendar"
+        className="hidden lg:visible"
+      />
     </div>
   );
 };
