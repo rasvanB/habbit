@@ -61,7 +61,7 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
       if (h.timeStamp === habit.timeStamp) {
         return other;
       }
-      return habit;
+      return h;
     });
     setHabits(newHabits);
   };
