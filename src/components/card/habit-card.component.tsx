@@ -27,14 +27,14 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
 
   return (
     <div
-      className="relative dark:text-gray-200 dark:bg-neutral-800  flex items-center lg:pr-10 pr-6 rounded-md dark:outline-zinc-600 select-none box-border pl-1 md:pl-2 py-1 md:py-2"
+      className="relative dark:text-gray-200 dark:bg-neutral-800  flex items-center lg:pr-10 pr-8 rounded-md dark:outline-zinc-600 select-none box-border pl-1 md:pl-2 py-1 md:py-2 w-full lg:max-w-[600px]"
       {...otherProps}
       style={{
         border: `2px solid ${hexToRgba(habit.iconColor, 0.6)}`,
       }}
     >
       <div
-        className="min-w-[2rem] min-h-[2rem] lg:min-w-[3.5rem] lg:min-h-[3.5rem] rounded-md lg:rounded-lg flex items-center justify-center"
+        className="p-2 md:p-3 h-full w-auto rounded-md lg:rounded-lg flex items-center justify-center"
         style={{
           backgroundColor: hexToRgba(habit.iconColor, 0.4),
         }}
@@ -42,12 +42,12 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
         <Icon
           icon={habit.iconName}
           style={{ color: habit.iconColor }}
-          className="text-xl lg:text-3xl"
+          className=" w-[25px] h-[25px] "
         />
       </div>
       <div className="flex flex-col w-full mx-3 lg:mx-4">
         <div className="font-bold text-xs lg:text-sm text-zinc-700 dark:text-gray-200 flex flex-col">
-          <div className="truncate max-w-[150px] mobile:max-w-[400px]">
+          <div className="truncate max-w-[150px] mobile:max-w-[250px] sm:max-w-[350px]">
             {`${habit.habitName}`.toUpperCase()}
           </div>
           <div className="truncate">
