@@ -43,17 +43,18 @@ const CardMenu = ({ isOpen, habit, ...otherProps }: CardMenuProps) => {
         onClick={() => {
           handleRemoveHabit(habit);
         }}
+        isMobile
       />
-
       <CardMenuItem
         text="edit"
         iconName="akar-icons:edit"
         onClick={handleClick}
+        isMobile
       />
       <CardMenuItem
         text="view progress"
         iconName="bx:calendar"
-        className="hidden lg:visible"
+        isMobile={false}
       />
     </div>
   );

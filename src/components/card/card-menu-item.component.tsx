@@ -4,12 +4,20 @@ import React from "react";
 type MenuItemProps = {
   text: string;
   iconName: string;
+  isMobile: boolean;
 } & React.BaseHTMLAttributes<HTMLDivElement>;
 
-const CardMenuItem = ({ text, iconName, ...otherProps }: MenuItemProps) => {
+const CardMenuItem = ({
+  text,
+  iconName,
+  isMobile,
+  ...otherProps
+}: MenuItemProps) => {
   return (
     <div
-      className="px-2 hover:dark:bg-zinc-600 hover:bg-slate-100 cursor-pointer  "
+      className={`${
+        isMobile ? "block" : "hidden lg:block"
+      } px-2 hover:dark:bg-zinc-600 hover:bg-slate-100 cursor-pointer `}
       {...otherProps}
     >
       <Icon icon={iconName} className="inline align-middle mr-2" />
