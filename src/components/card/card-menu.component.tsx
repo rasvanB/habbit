@@ -34,8 +34,8 @@ const CardMenu = ({ isOpen, habit, ...otherProps }: CardMenuProps) => {
     <div
       {...otherProps}
       className={`${
-        isOpen ? "top-0 opacity-100" : "-right-[1000px] opacity-0"
-      } select-none flex flex-col absolute dark:bg-zinc-700 dark:text-gray-200 font-poppins text-sm right-7 top-3 lg:top-0 lg:-right-[140px] rounded-sm transition-opacity py-1 z-10 outline outline-1 dark:outline-zinc-500 outline-zinc-400 bg-white-100 shadow-md dark:shadow-none`}
+        isOpen ? "top-3 lg:top-0 opacity-100" : "-top-[1000px] opacity-0"
+      } select-none flex flex-col absolute dark:bg-zinc-700 dark:text-gray-200 font-poppins text-sm right-7 lg:-right-[140px] rounded-sm transition-opacity py-1 z-10 outline outline-1 dark:outline-zinc-500 outline-zinc-400 bg-white-100 shadow-md dark:shadow-none`}
     >
       <CardMenuItem
         text="delete"
