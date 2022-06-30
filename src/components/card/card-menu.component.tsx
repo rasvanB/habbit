@@ -35,7 +35,7 @@ const CardMenu = ({ isOpen, habit, ...otherProps }: CardMenuProps) => {
       {...otherProps}
       className={`${
         isOpen ? "top-0 opacity-100" : "-top-[1000px] opacity-0"
-      } select-none flex flex-col absolute dark:bg-zinc-700 dark:text-gray-200 font-poppins text-sm -right-[85px] rounded-sm transition-opacity py-1 z-10 outline outline-1 dark:outline-zinc-500 outline-zinc-400 bg-white-100 shadow-md dark:shadow-none`}
+      } select-none flex flex-col absolute dark:bg-zinc-700 dark:text-gray-200 font-poppins text-sm -right-[140px] rounded-sm transition-opacity py-1 z-10 outline outline-1 dark:outline-zinc-500 outline-zinc-400 bg-white-100 shadow-md dark:shadow-none`}
     >
       <CardMenuItem
         text="delete"
@@ -50,6 +50,7 @@ const CardMenu = ({ isOpen, habit, ...otherProps }: CardMenuProps) => {
         iconName="akar-icons:edit"
         onClick={handleClick}
       />
+      <CardMenuItem text="view progress" iconName="bx:calendar" />
     </div>
   );
 };
