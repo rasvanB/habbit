@@ -27,17 +27,11 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
 
   return (
     <div
-      className="relative dark:text-gray-200 dark:bg-neutral-800  flex items-center lg:pr-10 pr-8 rounded-md dark:outline-zinc-700 select-none pl-2 py-1 w-full lg:max-w-[600px] outline outline-1"
+      className="relative dark:text-gray-200 dark:bg-neutral-800  flex items-center lg:pr-10 pr-8 rounded-md dark:outline-zinc-700 select-none pl-2 py-1 w-full lg:max-w-[600px] outline outline-1 outline-gray-200"
       {...otherProps}
-      style={
-        {
-          // border: `1px solid ${hexToRgba(habit.iconColor, 0.6)}`,
-          // boxShadow: `0 10px 20px -15px ${hexToRgba(habit.iconColor, 0.4)}`,
-        }
-      }
     >
       <div
-        className="p-2  md:p-3 h-full w-auto rounded-md lg:rounded-lg flex items-center justify-center my-1"
+        className="p-2 md:p-3 h-full rounded-md flex items-center justify-center my-2 lg:my-1"
         style={{
           backgroundColor: hexToRgba(habit.iconColor, 0.4),
         }}
@@ -49,7 +43,7 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
         />
       </div>
       <div className="flex flex-col w-full mx-3 lg:mx-4">
-        <div className="font-bold text-xs lg:text-sm text-zinc-700 dark:text-gray-200 flex flex-col">
+        <div className="font-bold text-sm text-zinc-700 dark:text-gray-200 flex flex-col">
           <div className="truncate max-w-[150px] mobile:max-w-[250px] sm:max-w-[350px] leading-none">
             {`${habit.habitName}`.toUpperCase()}
           </div>
@@ -64,13 +58,15 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
       <div
         className="ml-auto rounded-md hover:scale-110 transition-transform bg-black"
         style={{
-          backgroundColor: hexToRgba(habit.iconColor, 0.3),
+          backgroundColor: hexToRgba(habit.iconColor, 0.8),
+          border: `1px solid ${hexToRgba(habit.iconColor, 0.4)}`,
         }}
       >
         <Icon
-          icon={habit.goal === 1 ? "eva:checkmark-outline" : "akar-icons:plus"}
-          className="text-2xl cursor-pointer p-1"
-          style={{ color: `${habit.iconColor}` }}
+          icon={habit.goal === 1 ? "eva:checkmark-outline" : "bi:plus"}
+          className={`text-2xl cursor-pointer ${
+            habit.goal === 1 ? "p-1" : ""
+          } text-white`}
         />
       </div>
       <div

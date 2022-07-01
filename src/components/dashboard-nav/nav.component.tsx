@@ -27,7 +27,7 @@ const Nav = ({ username, photourl }: NavProps) => {
   };
 
   return (
-    <div className="relative flex items-center py-3 px-5 lg:px-20 bg-slate-100 dark:bg-zinc-900 border-b border-slate-300 dark:border-zinc-600">
+    <div className="relative flex items-center py-4 px-1 sm:px-4 xl:px-20 bg-slate-100 dark:bg-zinc-900 border-b border-slate-300 dark:border-zinc-600">
       <Avatar photoUrl={photourl} onClick={toggleOpenSettings} />
       <SettingsMenu isOpen={isSettingsOpen} signOut={handleSignOut} />
       <h1 className="ml-3 font-poppins font-medium text-zinc-800 dark:text-gray-100">
