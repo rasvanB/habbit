@@ -27,14 +27,17 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
 
   return (
     <div
-      className="relative dark:text-gray-200 dark:bg-neutral-800  flex items-center lg:pr-10 pr-8 rounded-md dark:outline-zinc-600 select-none pl-2 py-1 w-full lg:max-w-[600px]"
+      className="relative dark:text-gray-200 dark:bg-neutral-800  flex items-center lg:pr-10 pr-8 rounded-md dark:outline-zinc-700 select-none pl-2 py-1 w-full lg:max-w-[600px] outline outline-1"
       {...otherProps}
-      style={{
-        border: `2px solid ${hexToRgba(habit.iconColor, 0.6)}`,
-      }}
+      style={
+        {
+          // border: `1px solid ${hexToRgba(habit.iconColor, 0.6)}`,
+          // boxShadow: `0 10px 20px -15px ${hexToRgba(habit.iconColor, 0.4)}`,
+        }
+      }
     >
       <div
-        className="p-2 md:p-3 h-full w-auto rounded-md lg:rounded-lg flex items-center justify-center"
+        className="p-2  md:p-3 h-full w-auto rounded-md lg:rounded-lg flex items-center justify-center my-1"
         style={{
           backgroundColor: hexToRgba(habit.iconColor, 0.4),
         }}
@@ -42,31 +45,31 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
         <Icon
           icon={habit.iconName}
           style={{ color: habit.iconColor }}
-          className=" w-[25px] h-[25px] "
+          className=" w-[25px] h-[25px]"
         />
       </div>
       <div className="flex flex-col w-full mx-3 lg:mx-4">
         <div className="font-bold text-xs lg:text-sm text-zinc-700 dark:text-gray-200 flex flex-col">
-          <div className="truncate max-w-[150px] mobile:max-w-[250px] sm:max-w-[350px]">
+          <div className="truncate max-w-[150px] mobile:max-w-[250px] sm:max-w-[350px] leading-none">
             {`${habit.habitName}`.toUpperCase()}
           </div>
-          <div className="truncate">
+          <div className="truncate leading-tight">
             {`${habit.requirement} ${habit.goal} ${habit.unit}`.toUpperCase()}
           </div>
         </div>
-        <div className="text-xs font-semibold dark:text-zinc-400 text-zinc-400 h-fit">
+        <div className="text-xs font-semibold dark:text-zinc-400 text-zinc-400 h-fit leading-none">
           current: <span>{`0 / ${habit.goal}`}</span>
         </div>
       </div>
       <div
         className="ml-auto rounded-md hover:scale-110 transition-transform bg-black"
         style={{
-          backgroundColor: hexToRgba(habit.iconColor, 0.2),
+          backgroundColor: hexToRgba(habit.iconColor, 0.3),
         }}
       >
         <Icon
-          icon={habit.goal === 1 ? "eva:checkmark-outline" : "bi:plus"}
-          className="text-2xl cursor-pointer"
+          icon={habit.goal === 1 ? "eva:checkmark-outline" : "akar-icons:plus"}
+          className="text-2xl cursor-pointer p-1"
           style={{ color: `${habit.iconColor}` }}
         />
       </div>
