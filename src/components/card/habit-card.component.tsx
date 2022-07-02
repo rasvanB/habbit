@@ -27,7 +27,7 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
 
   return (
     <div
-      className="relative dark:text-gray-200 dark:bg-neutral-800  flex items-center lg:pr-10 pr-8 rounded-md dark:outline-zinc-700 select-none pl-2 py-1 w-full lg:max-w-[600px] outline outline-1 outline-gray-200"
+      className="relative dark:text-gray-200 dark:bg-neutral-800  flex items-center lg:pr-10 pr-8 rounded-sm dark:outline-zinc-700 select-none pl-2 py-1 w-full lg:max-w-[600px] outline outline-1 outline-gray-200"
       {...otherProps}
     >
       <div
@@ -42,6 +42,7 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
           className=" w-[25px] h-[25px]"
         />
       </div>
+
       <div className="flex flex-col w-full mx-3 lg:mx-4">
         <div className="font-bold text-sm text-zinc-700 dark:text-gray-200 flex flex-col">
           <div className="truncate max-w-[150px] mobile:max-w-[250px] sm:max-w-[350px] leading-none">
@@ -55,18 +56,12 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
           current: <span>{`0 / ${habit.goal}`}</span>
         </div>
       </div>
-      <div
-        className="ml-auto rounded-md hover:scale-110 transition-transform bg-black"
-        style={{
-          backgroundColor: hexToRgba(habit.iconColor, 0.8),
-          border: `1px solid ${hexToRgba(habit.iconColor, 0.4)}`,
-        }}
-      >
+      <div className="ml-auto rounded-md hover:scale-110 transition-transform dark:bg-zinc-700 bg-gray-100 outline outline-1 dark:outline-zinc-600 outline-zinc-300">
         <Icon
           icon={habit.goal === 1 ? "eva:checkmark-outline" : "bi:plus"}
           className={`text-2xl cursor-pointer ${
             habit.goal === 1 ? "p-1" : ""
-          } text-white`}
+          } dark:text-white text-zinc-700`}
         />
       </div>
       <div
