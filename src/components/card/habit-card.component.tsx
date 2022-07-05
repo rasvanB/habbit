@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Habit } from "../../context/user.context";
 import hexToRgba from "hex-to-rgba";
 import CardMenu from "./card-menu.component";
+import ProgressMenu from "./progress-menu.component";
 
 type CardProps = {
   habit: Habit;
@@ -10,6 +11,8 @@ type CardProps = {
 
 const HabitCard = ({ habit, ...otherProps }: CardProps) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isProgressOpen, setProgressOpen] = useState(false);
+
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -62,7 +65,13 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
           className={`text-2xl cursor-pointer ${
             habit.goal === 1 ? "p-1" : ""
           } dark:text-white text-zinc-700`}
+          onClick={() => {
+            if (habit.goal !== 1) {
+              setProgressOpen(true);
+            }
+          }}
         />
+        <ProgressMenu isOpen={isProgressOpen} />
       </div>
       <div
         ref={menuRef}
