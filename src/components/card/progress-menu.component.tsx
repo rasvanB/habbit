@@ -3,7 +3,11 @@ type ProgressMenuProps = {
 };
 const ProgressMenu = ({ isOpen }: ProgressMenuProps) => {
   return (
-    <div className={`${isOpen ? "flex" : "hidden"} absolute bg-red-500`}>
+    <div
+      className={`${
+        isOpen ? "flex" : "hidden"
+      } absolute flex-col bg-neutral-700`}
+    >
       Progress Menu
     </div>
   );
