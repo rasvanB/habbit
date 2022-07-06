@@ -71,8 +71,8 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
             }
           }}
         />
-        <ProgressMenu isOpen={isProgressOpen} />
       </div>
+      <ProgressMenu isOpen={isProgressOpen} />
       <div
         ref={menuRef}
         onClick={() => {
