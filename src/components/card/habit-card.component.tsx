@@ -59,7 +59,7 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
           current: <span>{`0 / ${habit.goal}`}</span>
         </div>
       </div>
-      <div>
+      <div className="relative">
         <div className="ml-auto rounded-md hover:scale-110 transition-transform dark:bg-zinc-700 bg-gray-100 outline outline-1 dark:outline-zinc-600 outline-zinc-300">
           <Icon
             icon={habit.goal === 1 ? "eva:checkmark-outline" : "bi:plus"}

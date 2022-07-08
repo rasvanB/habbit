@@ -6,9 +6,9 @@ const ProgressMenu = ({ isOpen }: ProgressMenuProps) => {
     <div
       className={`${
         isOpen ? "flex" : "hidden"
-      } absolute flex-col bg-neutral-700`}
+      } absolute top-7 right-0 flex-col bg-neutral-800 outline outline-1 dark:outline-zinc-600 rounded-md p-2`}
     >
-      Progress Menu
+      <div>Test</div>
     </div>
   );
 };
