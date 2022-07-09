@@ -1,3 +1,5 @@
+import { Icon } from "@iconify/react";
+
 type ProgressMenuProps = {
   isOpen: boolean;
 };
@@ -11,13 +13,13 @@ const ProgressMenu = ({ isOpen }: ProgressMenuProps) => {
       <div className="whitespace-nowrap text-sm font-semibold dark:text-neutral-400 text-center">
         Enter a value
       </div>
-      <div className="flex">
-        <button className="bg-blue-400 w-[40px] rouded-md text-white text-4xl font-poppins font-thin text-center">
-          -
+      <div className="flex items-center justify-center">
+        <button className="bg-blue-400 w-[30px] flex items-center justify-center rouded-md text-white text-lg h-[30px] font-poppins rounded-l-full">
+          <Icon icon="charm:minus" />
         </button>
-        <input type="text" className="" />
-        <button className="bg-blue-400 w-[40px] text-white text-3xl font-poppins">
-          +
+        <input type="text" className="h-[30px] w-[70px]" />
+        <button className="bg-blue-400 flex items-center justify-center w-[30px] h-[30px] text-white text-2xl font-poppin rounded-r-full">
+          <Icon icon="bi:plus" />
         </button>
       </div>
     </div>
