@@ -12,6 +12,7 @@ export type Habit = {
   goal: number;
   unit: string;
   timeStamp: number;
+  progress: number;
 };
 
 export type UserData = {

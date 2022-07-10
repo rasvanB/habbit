@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react";
+// import { useState } from "react";
 import { Habit } from "../../context/user.context";
 
 type ProgressMenuProps = {
@@ -6,6 +7,7 @@ type ProgressMenuProps = {
   habit: Habit;
 };
 const ProgressMenu = ({ isOpen, habit }: ProgressMenuProps) => {
+  // const [progress, setProgress] = useState();
   return (
     <div
       className={`${
@@ -30,9 +32,9 @@ const ProgressMenu = ({ isOpen, habit }: ProgressMenuProps) => {
       <div className="text-center text-xs mt-1 font-semibold dark:text-neutral-400">
         Goal
       </div>
-      <div className="text-center text-sm font-semibold">{`${1} At least 32`}</div>
-      <div className="flex justify-between border border-b-0 border-x-0 mt-2 border-neutral-600">
-        <button className="text-center text-xs font-poppins w-full p-2 border-r-[1px] border-neutral-600 text-blue-400 hover:text-blue-500">
+      <div className="text-center text-sm font-semibold">{`${habit.requirement} ${habit.goal}`}</div>
+      <div className="flex justify-between border border-b-0 border-x-0 mt-2 border-neutral-700">
+        <button className="text-center text-xs font-poppins w-full p-2 border-r-[1px] border-neutral-700 text-blue-400 hover:text-blue-500">
           CONFIRM
         </button>
         <button className="text-center text-xs font-poppins w-full p-2 dark:text-gray-300">
