@@ -73,7 +73,7 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
             }}
           />
         </div>
-        <ProgressMenu isOpen={isProgressOpen} />
+        <ProgressMenu isOpen={isProgressOpen} habit={habit} />
       </div>
       <div
         ref={menuRef}
