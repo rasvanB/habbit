@@ -25,6 +25,10 @@ const Button = ({ buttonStyle, children, ...otherProps }: ButtonProps) => {
             ? `${buttonClasses.selectIcon}`
             : buttonStyle === "select-color"
             ? `${buttonClasses.selectColor}`
+            : buttonStyle === "increment"
+            ? `${buttonClasses.increment}`
+            : buttonStyle === "decrement"
+            ? `${buttonClasses.decrement}`
             : ""
         }
       >

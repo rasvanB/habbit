@@ -1,13 +1,21 @@
 import { Icon } from "@iconify/react";
-// import { useState } from "react";
+import React, { useState } from "react";
 import { Habit } from "../../context/user.context";
+import Button from "../other/button.component";
 
 type ProgressMenuProps = {
   isOpen: boolean;
   habit: Habit;
 };
 const ProgressMenu = ({ isOpen, habit }: ProgressMenuProps) => {
-  // const [progress, setProgress] = useState();
+  const [progress, setProgress] = useState(habit.progress);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    if (value) setProgress(parseInt(value));
+    else setProgress(0);
+  };
+
   return (
     <div
       className={`${
@@ -18,16 +26,18 @@ const ProgressMenu = ({ isOpen, habit }: ProgressMenuProps) => {
         Enter a value
       </div>
       <div className="flex items-center justify-center px-2">
-        <button className="bg-blue-400 hover:bg-blue-500 w-[30px] flex items-center justify-center rouded-md text-white text-lg h-[30px] font-poppins rounded-l-full">
+        <Button buttonStyle="increment">
           <Icon icon="bx:minus" />
-        </button>
+        </Button>
         <input
           type="text"
           className="h-[30px] w-[70px] dark:bg-white dark:bg-opacity-5 outline outline-0 outline-zinc-200 dark:outline-zinc-600 text-center focus:outline-1"
+          value={progress}
+          onChange={handleChange}
         />
-        <button className="bg-blue-400 hover:bg-blue-500 flex items-center justify-center w-[30px] h-[30px] text-white text-2xl font-poppin rounded-r-full">
+        <Button buttonStyle="decrement">
           <Icon icon="bi:plus" />
-        </button>
+        </Button>
       </div>
       <div className="text-center text-xs mt-1 font-semibold dark:text-neutral-400">
         Goal

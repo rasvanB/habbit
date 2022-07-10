@@ -5,7 +5,9 @@ export type buttonStyles =
   | "submit"
   | "add-habit"
   | "select-icon"
-  | "select-color";
+  | "select-color"
+  | "increment"
+  | "decrement";
 
 export const buttonClasses = {
   signupButtonStyle:
@@ -22,4 +24,8 @@ export const buttonClasses = {
     "dark:bg-zinc-600 bg-white outline outline-1 focus:outline-2 outline-zinc-200 dark:outline-zinc-500 dark:text-white text-zinc-800 font-semibold p-[5px] ml-5 rounded whitespace-nowrap flex items-center justify-center",
   selectColor:
     "dark:bg-zinc-600 bg-white outline outline-1 hover:outline-2 outline-zinc-400 font-semibold p-[5px] rounded whitespace-nowrap flex items-center justify-center",
+  increment:
+    "bg-blue-400 hover:bg-blue-500 w-[30px] flex items-center justify-center rouded-md text-white text-lg h-[30px] font-poppins rounded-l-full",
+  decrement:
+    "bg-blue-400 hover:bg-blue-500 w-[30px] flex items-center justify-center rouded-md text-white text-lg h-[30px] font-poppins rounded-r-full",
 };
