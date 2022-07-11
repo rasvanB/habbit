@@ -43,7 +43,7 @@ const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
     <div
       className={`${
         isOpen ? "flex" : "hidden"
-      } absolute top-8 right-0 flex-col bg-neutral-800 outline outline-1 dark:outline-zinc-600 rounded-md `}
+      } absolute top-8 right-0 z-10 flex-col bg-neutral-800 outline outline-1 dark:outline-zinc-600 rounded-md `}
     >
       <div className="whitespace-nowrap text-sm font-semibold dark:text-neutral-400 text-center mb-1 px-2 pt-2">
         Enter a value
@@ -73,7 +73,10 @@ const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
         >
           CONFIRM
         </button>
-        <button className="text-center text-xs font-poppins w-full p-2 dark:text-gray-300">
+        <button
+          className="text-center text-xs font-poppins w-full p-2 dark:text-gray-300"
+          onClick={close}
+        >
           CANCEL
         </button>
       </div>
