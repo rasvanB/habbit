@@ -56,7 +56,7 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
           </div>
         </div>
         <div className="text-xs font-semibold dark:text-zinc-400 text-zinc-400 h-fit leading-none">
-          current: <span>{`0 / ${habit.goal}`}</span>
+          current: <span>{`${habit.progress} / ${habit.goal}`}</span>
         </div>
       </div>
       <div className="relative">

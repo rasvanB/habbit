@@ -1,6 +1,7 @@
 import { Icon } from "@iconify/react";
-import React, { useState } from "react";
-import { Habit } from "../../context/user.context";
+import React, { useContext, useState } from "react";
+import { Habit, UserContext } from "../../context/user.context";
+import { addHabitToUser } from "../../utils/firebase/firebase.utils";
 import Button from "../other/button.component";
 
 type ProgressMenuProps = {
@@ -9,11 +10,27 @@ type ProgressMenuProps = {
 };
 const ProgressMenu = ({ isOpen, habit }: ProgressMenuProps) => {
   const [progress, setProgress] = useState(habit.progress);
+  const { currentUser, editHabit } = useContext(UserContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    if (value) setProgress(parseInt(value));
+    if (value) setProgress(parseFloat(value));
     else setProgress(0);
+  };
+
+  const handleIncrement = (isIncrement: boolean) => {
+    if (isIncrement) setProgress(progress + 1);
+    else if (progress > 0) setProgress(progress - 1);
+  };
+
+  const handleConfirm = () => {
+    if (currentUser) {
+      const newHabit = { ...habit };
+      newHabit.progress = progress;
+      newHabit.timeStamp = habit.timeStamp;
+      editHabit(newHabit);
+      addHabitToUser(currentUser.uid, newHabit);
+    }
   };
 
   return (
@@ -26,7 +43,7 @@ const ProgressMenu = ({ isOpen, habit }: ProgressMenuProps) => {
         Enter a value
       </div>
       <div className="flex items-center justify-center px-2">
-        <Button buttonStyle="increment">
+        <Button buttonStyle="increment" onClick={() => handleIncrement(false)}>
           <Icon icon="bx:minus" />
         </Button>
         <input
@@ -35,7 +52,7 @@ const ProgressMenu = ({ isOpen, habit }: ProgressMenuProps) => {
           value={progress}
           onChange={handleChange}
         />
-        <Button buttonStyle="decrement">
+        <Button buttonStyle="decrement" onClick={() => handleIncrement(true)}>
           <Icon icon="bi:plus" />
         </Button>
       </div>
@@ -44,7 +61,10 @@ const ProgressMenu = ({ isOpen, habit }: ProgressMenuProps) => {
       </div>
       <div className="text-center text-sm font-semibold">{`${habit.requirement} ${habit.goal}`}</div>
       <div className="flex justify-between border border-b-0 border-x-0 mt-2 border-neutral-700">
-        <button className="text-center text-xs font-poppins w-full p-2 border-r-[1px] border-neutral-700 text-blue-400 hover:text-blue-500">
+        <button
+          className="text-center text-xs font-poppins w-full p-2 border-r-[1px] border-neutral-700 text-blue-400 hover:text-blue-500"
+          onClick={handleConfirm}
+        >
           CONFIRM
         </button>
         <button className="text-center text-xs font-poppins w-full p-2 dark:text-gray-300">
