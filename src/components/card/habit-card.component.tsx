@@ -4,6 +4,7 @@ import { Habit } from "../../context/user.context";
 import hexToRgba from "hex-to-rgba";
 import CardMenu from "./card-menu.component";
 import ProgressMenu from "./progress-menu.component";
+import CompleteMenu from "./complete-menu.component";
 
 type CardProps = {
   habit: Habit;
@@ -12,6 +13,7 @@ type CardProps = {
 const HabitCard = ({ habit, ...otherProps }: CardProps) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isProgressOpen, setProgressOpen] = useState(false);
+  const [isCompleteOpen, setCompleteOpen] = useState(false);
 
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -30,6 +32,10 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
 
   const closeProgressMenu = () => {
     setProgressOpen(false);
+  };
+
+  const closeCompleteMenu = () => {
+    setCompleteOpen(false);
   };
 
   return (
@@ -73,15 +79,25 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
             onClick={() => {
               if (habit.goal !== 1) {
                 setProgressOpen(!isProgressOpen);
+              } else {
+                setCompleteOpen(!isCompleteOpen);
               }
             }}
           />
         </div>
-        <ProgressMenu
-          isOpen={isProgressOpen}
-          habit={habit}
-          close={closeProgressMenu}
-        />
+        {habit.goal === 1 ? (
+          <CompleteMenu
+            isOpen={isCompleteOpen}
+            habit={habit}
+            close={closeCompleteMenu}
+          />
+        ) : (
+          <ProgressMenu
+            isOpen={isProgressOpen}
+            habit={habit}
+            close={closeProgressMenu}
+          />
+        )}
       </div>
       <div
         ref={menuRef}
