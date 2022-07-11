@@ -7,8 +7,9 @@ import Button from "../other/button.component";
 type ProgressMenuProps = {
   isOpen: boolean;
   habit: Habit;
+  close: () => void;
 };
-const ProgressMenu = ({ isOpen, habit }: ProgressMenuProps) => {
+const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
   const [progress, setProgress] = useState(habit.progress);
   const { currentUser, editHabit } = useContext(UserContext);
 
@@ -24,12 +25,17 @@ const ProgressMenu = ({ isOpen, habit }: ProgressMenuProps) => {
   };
 
   const handleConfirm = () => {
-    if (currentUser) {
-      const newHabit = { ...habit };
-      newHabit.progress = progress;
-      newHabit.timeStamp = habit.timeStamp;
-      editHabit(newHabit);
-      addHabitToUser(currentUser.uid, newHabit);
+    if (progress !== habit.progress) {
+      if (currentUser) {
+        const newHabit = { ...habit };
+        newHabit.progress = progress;
+        newHabit.timeStamp = habit.timeStamp;
+        editHabit(newHabit);
+        addHabitToUser(currentUser.uid, newHabit);
+        close();
+      }
+    } else {
+      close();
     }
   };
 
