@@ -9,14 +9,22 @@ type ProgressMenuProps = {
   habit: Habit;
   close: () => void;
 };
+
 const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
   const [progress, setProgress] = useState(habit.progress);
   const { currentUser, editHabit } = useContext(UserContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    if (value) setProgress(parseFloat(value));
-    else setProgress(0);
+    if (value) {
+      if (habit.requirement.toLowerCase() !== "at least")
+        setProgress(parseFloat(value));
+      else {
+        if (parseInt(value) >= habit.goal) {
+          setProgress(habit.goal);
+        }
+      }
+    } else setProgress(0);
   };
 
   const handleIncrement = (isIncrement: boolean) => {

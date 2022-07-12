@@ -25,6 +25,7 @@ export const iconNames: string[] = [
   "fa-solid:bath",
   "material-symbols:wifi-off-rounded",
   "ic:twotone-sports-basketball",
+  "heroicons-solid:music-note",
 ];
 
 export const iconColors: string[] = [
