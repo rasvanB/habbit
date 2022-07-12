@@ -33,13 +33,13 @@ const CompleteMenu = ({ isOpen, habit, close }: MenuProps) => {
       </div>
       <div className="flex justify-between border border-b-0 border-x-0 border-neutral-700">
         <button
-          className="text-center text-xs font-poppins w-full p-2 border-r-[1px] border-neutral-700 text-blue-400 hover:text-blue-500"
+          className="text-center text-xs font-poppins w-full px-2 py-1 border-r-[1px] border-neutral-700 text-blue-400 hover:text-blue-500"
           onClick={handleConfirm}
         >
           CONFIRM
         </button>
         <button
-          className="text-center text-xs font-poppins w-full p-2 dark:text-gray-300"
+          className="text-center text-xs font-poppins w-full px-2 py-1 dark:text-gray-300"
           onClick={close}
         >
           CANCEL
