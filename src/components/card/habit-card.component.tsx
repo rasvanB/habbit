@@ -1,10 +1,11 @@
 import { Icon } from "@iconify/react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Habit } from "../../context/user.context";
 import hexToRgba from "hex-to-rgba";
 import CardMenu from "./card-menu.component";
 import ProgressMenu, { getDateAsString } from "./progress-menu.component";
 import CompleteMenu from "./complete-menu.component";
+import { PanelContext } from "../../context/progress-panel.context";
 
 type CardProps = {
   habit: Habit;
@@ -30,6 +31,7 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isProgressOpen, setProgressOpen] = useState(false);
   const [isCompleteOpen, setCompleteOpen] = useState(false);
+  const { setOpen, setSelectedHabit } = useContext(PanelContext);
 
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -54,11 +56,17 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
     setCompleteOpen(false);
   };
 
+  const handleClick = () => {
+    setSelectedHabit(habit);
+    // setOpen(true);
+  };
+
   return (
     <div
       className="relative dark:text-gray-200 dark:bg-neutral-800 dark:hover:bg-[rgb(45,45,45)] 
       hover:bg-[rgb(245,245,245)] flex items-center lg:pr-10 pr-8 rounded-sm dark:outline-zinc-700 select-none pl-2 py-1 w-full lg:max-w-[600px] outline outline-1 outline-gray-200"
       {...otherProps}
+      onClick={handleClick}
     >
       <div
         className="p-2 md:p-3 h-full rounded-md flex items-center justify-center my-2 lg:my-1"
