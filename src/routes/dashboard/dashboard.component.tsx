@@ -37,7 +37,7 @@ const Dashboard = () => {
         photourl={currentUser ? currentUser.photoURL : defaultProfilePicURL}
       />
       <div className="ml-1 sm:ml-4 xl:ml-20 h-full flex">
-        <div className="w-full lg:w-[50%] h-full">
+        <div className="w-full lg:w-[45%] h-full lg:pr-3">
           <Button onClick={toggleModal} buttonStyle="add-habit">
             Add Habit
           </Button>

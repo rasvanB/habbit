@@ -15,7 +15,7 @@ const CardContainer = () => {
   });
   return (
     <div>
-      <div className="flex flex-col mt-3 gap-3 w-full">
+      <div className="flex flex-col mt-3 gap-3 w-full border-t pt-2 dark:border-zinc-600">
         <div className="font-medium text-md dark:text-gray-300">{`Active: ${incompleteHabits.length}`}</div>
         {incompleteHabits.map((habit) => {
           return (
@@ -26,7 +26,7 @@ const CardContainer = () => {
           );
         })}
       </div>
-      <div className="flex flex-col mt-2 gap-3 w-full">
+      <div className="flex flex-col mt-2 gap-3 w-full border-t pt-2 dark:border-zinc-600">
         <div className="font-medium text-md dark:text-gray-300">
           {`Completed: ${completedHabits.length}`}
         </div>
