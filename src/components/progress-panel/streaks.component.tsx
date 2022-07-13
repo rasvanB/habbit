@@ -33,7 +33,7 @@ const Streaks = () => {
   const highestStreak = calculateHighestStreak(selectedHabit);
 
   return (
-    <div className="dark:bg-zinc-800 w-fit dark:text-gray-200 flex p-2">
+    <div className="dark:bg-zinc-800 w-fit dark:text-gray-200 flex p-4 rounded-lg">
       <div className="border-r border-gray-600 pr-2">
         <div className="flex justify-center items-center">
           <Icon
