@@ -9,16 +9,21 @@ import CompleteMenu from "./complete-menu.component";
 type CardProps = {
   habit: Habit;
 } & React.BaseHTMLAttributes<HTMLDivElement>;
-
-export const getProgressOfToday = (habit: Habit) => {
+export const getDataOfToday = (habit: Habit) => {
   if (habit.activeDays)
     if (
       habit.activeDays.length > 0 &&
       habit.activeDays[habit.activeDays.length - 1].date === getDateAsString()
     ) {
-      return habit.activeDays[habit.activeDays.length - 1].progress;
-    } else return 0;
-  else return 0;
+      return habit.activeDays[habit.activeDays.length - 1];
+    } else return null;
+  else return null;
+};
+
+export const getProgressOfToday = (habit: Habit) => {
+  const today = getDataOfToday(habit);
+  if (today) return today.progress;
+  return 0;
 };
 
 const HabitCard = ({ habit, ...otherProps }: CardProps) => {
