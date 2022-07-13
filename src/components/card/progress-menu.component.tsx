@@ -74,6 +74,12 @@ const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
               progress: progress,
               completed: progress >= habit.goal,
             });
+          } else {
+            newHabit.activeDays.push({
+              date: getDateAsString(),
+              progress: progress,
+              completed: progress >= habit.goal,
+            });
           }
         } else {
           newHabit.activeDays.push({
