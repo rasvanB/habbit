@@ -9,6 +9,7 @@ export type Habit = {
   iconColor: string;
   requirement: string;
   description: string;
+  completedDays: string[];
   goal: number;
   unit: string;
   timeStamp: number;

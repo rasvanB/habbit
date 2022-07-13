@@ -26,6 +26,7 @@ export const defaultHabitState: Habit = {
   goal: 1,
   timeStamp: 0,
   progress: 0,
+  completedDays: [],
 };
 
 type ModalContextType = {
