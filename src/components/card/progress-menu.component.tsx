@@ -17,19 +17,26 @@ const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     if (value) {
-      if (habit.requirement.toLowerCase() !== "at least")
-        setProgress(parseFloat(value));
-      else {
+      if (habit.requirement.toLowerCase() === "at least") {
+        if (parseInt(value) <= 100) setProgress(parseFloat(value));
+      } else {
         if (parseInt(value) >= habit.goal) {
           setProgress(habit.goal);
-        }
+        } else setProgress(parseInt(value));
       }
     } else setProgress(0);
   };
 
   const handleIncrement = (isIncrement: boolean) => {
-    if (isIncrement) setProgress(progress + 1);
-    else if (progress > 0) setProgress(progress - 1);
+    if (isIncrement) {
+      if (habit.requirement.toLowerCase() === "at least") {
+        if (progress < 100) setProgress(progress + 1);
+      } else {
+        if (progress < habit.goal) setProgress(progress + 1);
+      }
+    } else {
+      if (progress > 0) setProgress(progress - 1);
+    }
   };
 
   const handleConfirm = () => {
