@@ -35,13 +35,11 @@ const Dashboard = () => {
         username={currentUser ? currentUser.displayName : "Guest"}
         photourl={currentUser ? currentUser.photoURL : defaultProfilePicURL}
       />
-      <div className="mt-4 sm:mx-4 mx-2 xl:mx-20">
-        <Button onClick={toggleModal} buttonStyle="add-habit">
-          Add Habit
-        </Button>
-      </div>
-      <div className="mx-1 sm:mx-4 xl:mx-20 h-full flex">
+      <div className="ml-1 sm:ml-4 xl:ml-20 h-full flex">
         <div className="w-full lg:w-[50%] h-full">
+          <Button onClick={toggleModal} buttonStyle="add-habit">
+            Add Habit
+          </Button>
           <CardContainer />
         </div>
         <div className="lg:w-[50%] h-full hidden lg:visible"></div>

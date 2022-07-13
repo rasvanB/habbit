@@ -19,7 +19,7 @@ export const buttonClasses = {
   submitButton:
     "bg-blue-500 hover:bg-blue-600 w-full text-white font-semibold py-2 px-4 rounded whitespace-nowrap mt-5",
   addHabitButton:
-    "bg-blue-500 hover:bg-blue-600 min-w-[150px] text-white font-semibold py-2 px-4 rounded whitespace-nowrap",
+    "bg-blue-500 hover:bg-blue-600 min-w-[150px] text-white font-semibold py-2 mt-3 px-4 rounded whitespace-nowrap",
   selectIcon:
     "dark:bg-zinc-600 bg-white outline outline-1 focus:outline-2 outline-zinc-200 dark:outline-zinc-500 dark:text-white text-zinc-800 font-semibold p-[5px] ml-5 rounded whitespace-nowrap flex items-center justify-center",
   selectColor:
