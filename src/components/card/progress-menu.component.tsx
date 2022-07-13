@@ -10,7 +10,7 @@ type ProgressMenuProps = {
   close: () => void;
 };
 
-const getDateAsString = () => {
+export const getDateAsString = () => {
   const d = new Date();
   return `${d.getDate()}.${d.getMonth()}.${d.getFullYear()}`;
 };

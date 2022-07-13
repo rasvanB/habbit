@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Habit, UserContext } from "../../context/user.context";
 import { addHabitToUser } from "../../utils/firebase/firebase.utils";
+import { getDateAsString } from "./progress-menu.component";
 
 type MenuProps = {
   isOpen: boolean;
@@ -16,6 +17,12 @@ const CompleteMenu = ({ isOpen, habit, close }: MenuProps) => {
       const newHabit = { ...habit };
       newHabit.progress = 1;
       newHabit.timeStamp = habit.timeStamp;
+      if (
+        newHabit.completedDays[newHabit.completedDays.length - 1] !==
+        getDateAsString()
+      ) {
+        newHabit.completedDays.push(getDateAsString());
+      }
       editHabit(newHabit);
       addHabitToUser(currentUser.uid, newHabit);
       close();
