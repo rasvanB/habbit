@@ -8,6 +8,7 @@ import { getUserHabits } from "../../utils/firebase/firebase.utils";
 import CardContainer from "../../components/card/card-container.component";
 import { Toaster } from "react-hot-toast";
 import { ModalContext } from "../../context/add-modal.context";
+import ProgressPanel from "../../components/progress-panel/progress-panel.component";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ const Dashboard = () => {
           </Button>
           <CardContainer />
         </div>
-        <div className="lg:w-[50%] h-full hidden lg:visible"></div>
+        <ProgressPanel />
       </div>
       <AddModal />
     </div>
