@@ -33,16 +33,31 @@ const Streaks = () => {
   const highestStreak = calculateHighestStreak(selectedHabit);
 
   return (
-    <div className="dark:bg-zinc-800 w-fit dark:text-gray-200 flex">
-      <div className="">
+    <div className="dark:bg-zinc-800 w-fit dark:text-gray-200 flex p-2">
+      <div className="border-r border-gray-600 pr-2">
         <div className="flex justify-center items-center">
-          <Icon icon="fxemoji:fire" className="text-2xl" />
+          <Icon
+            icon="ant-design:fire-filled"
+            className="text-2xl text-orange-400"
+          />
           <div className="ml-2 font-semibold text-xl">{`${highestStreak} ${
             highestStreak !== 1 ? "DAYS" : "DAY"
           }`}</div>
         </div>
+        <div className=" font-semibold text-xs">LONGEST STREAK</div>
       </div>
-      <div></div>
+      <div className="pl-2">
+        <div className="flex justify-center items-center">
+          <Icon
+            icon="ant-design:fire-filled"
+            className="text-2xl text-blue-300"
+          />
+          <div className="ml-2 font-semibold text-xl">{`${highestStreak} ${
+            highestStreak !== 1 ? "DAYS" : "DAY"
+          }`}</div>
+        </div>
+        <div className="font-semibold text-xs text-center">CURRENT STREAK</div>
+      </div>
     </div>
   );
 };
