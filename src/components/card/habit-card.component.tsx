@@ -78,9 +78,9 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
             } dark:text-white text-zinc-700`}
             onClick={() => {
               if (habit.goal !== 1) {
-                setProgressOpen(!isProgressOpen);
+                setProgressOpen(true);
               } else {
-                setCompleteOpen(!isCompleteOpen);
+                setCompleteOpen(true);
               }
             }}
           />

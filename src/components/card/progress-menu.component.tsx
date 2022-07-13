@@ -10,8 +10,14 @@ type ProgressMenuProps = {
   close: () => void;
 };
 
+const getDateAsString = () => {
+  const d = new Date();
+  return `${d.getDate()}.${d.getMonth()}.${d.getFullYear()}`;
+};
+
 const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
   const [progress, setProgress] = useState(habit.progress);
+  const [completedDay, setCompletedDay] = useState("");
   const { currentUser, editHabit } = useContext(UserContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,15 +26,18 @@ const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
       if (habit.requirement.toLowerCase() === "at least") {
         if (parseInt(value) <= 100) {
           if (parseInt(value) >= habit.goal) {
-            console.log("completed");
-          }
+            setCompletedDay(getDateAsString());
+          } else setCompletedDay("");
           setProgress(parseFloat(value));
         }
       } else {
         if (parseInt(value) >= habit.goal) {
-          console.log("completed");
+          setCompletedDay(getDateAsString());
           setProgress(habit.goal);
-        } else setProgress(parseInt(value));
+        } else {
+          setCompletedDay("");
+          setProgress(parseInt(value));
+        }
       }
     } else setProgress(0);
   };
@@ -37,18 +46,18 @@ const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
     if (isIncrement) {
       if (habit.requirement.toLowerCase() === "at least") {
         if (progress < 100) {
-          console.log(progress, habit.goal);
+          if (progress >= habit.goal - 1) {
+            setCompletedDay(getDateAsString());
+          } else setCompletedDay("");
 
-          if (progress === habit.goal - 1) {
-            console.log("completed");
-          }
           setProgress(progress + 1);
         }
       } else {
         if (progress < habit.goal) {
           if (progress === habit.goal - 1) {
-            console.log("completed");
-          }
+            setCompletedDay(getDateAsString());
+          } else setCompletedDay("");
+
           setProgress(progress + 1);
         }
       }
@@ -57,9 +66,15 @@ const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
     }
   };
 
+  const handleClose = () => {
+    setProgress(habit.progress);
+    close();
+  };
+
   const handleConfirm = () => {
     if (progress !== habit.progress) {
       if (currentUser) {
+        console.log(completedDay);
         const newHabit = { ...habit };
         newHabit.progress = progress;
         newHabit.timeStamp = habit.timeStamp;
@@ -67,9 +82,7 @@ const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
         addHabitToUser(currentUser.uid, newHabit);
         close();
       }
-    } else {
-      close();
-    }
+    } else close();
   };
 
   return (
@@ -108,7 +121,7 @@ const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
         </button>
         <button
           className="text-center text-xs font-poppins w-full p-2 dark:text-gray-300"
-          onClick={close}
+          onClick={handleClose}
         >
           CANCEL
         </button>
