@@ -1,3 +1,4 @@
+import { Icon } from "@iconify/react";
 import { useContext } from "react";
 import { PanelContext } from "../../context/progress-panel.context";
 import { Habit } from "../../context/user.context";
@@ -7,15 +8,20 @@ const calculateHighestStreak = (habit: Habit | null) => {
     if (habit.activeDays) {
       if (habit.activeDays.length > 0) {
         let highestStreak = 1;
-        const prev = parseInt(habit.activeDays[0].date.slice(0, 2));
+        let prev = parseInt(habit.activeDays[0].date.slice(0, 2));
         for (let i = 1; i < habit.activeDays.length; i++) {
           let current = parseInt(habit.activeDays[i].date.slice(0, 2));
           if (current === prev + 1) highestStreak++;
+          else {
+            highestStreak = 1;
+          }
+          prev = current;
         }
         return highestStreak;
-      } else return 1;
+      } else return 0;
     }
   }
+  return 0;
 };
 
 // const calculateCurrentStreak = (habit: Habit | null) => {
@@ -28,7 +34,14 @@ const Streaks = () => {
 
   return (
     <div className="dark:bg-zinc-800 w-fit dark:text-gray-200 flex">
-      <div className="font-semibold text-xl">{highestStreak}</div>
+      <div className="">
+        <div className="flex justify-center items-center">
+          <Icon icon="fxemoji:fire" className="text-2xl" />
+          <div className="ml-2 font-semibold text-xl">{`${highestStreak} ${
+            highestStreak !== 1 ? "DAYS" : "DAY"
+          }`}</div>
+        </div>
+      </div>
       <div></div>
     </div>
   );
