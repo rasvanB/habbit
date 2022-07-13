@@ -18,9 +18,15 @@ const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
     const { value } = e.target;
     if (value) {
       if (habit.requirement.toLowerCase() === "at least") {
-        if (parseInt(value) <= 100) setProgress(parseFloat(value));
+        if (parseInt(value) <= 100) {
+          if (parseInt(value) >= habit.goal) {
+            console.log("completed");
+          }
+          setProgress(parseFloat(value));
+        }
       } else {
         if (parseInt(value) >= habit.goal) {
+          console.log("completed");
           setProgress(habit.goal);
         } else setProgress(parseInt(value));
       }
@@ -30,9 +36,21 @@ const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
   const handleIncrement = (isIncrement: boolean) => {
     if (isIncrement) {
       if (habit.requirement.toLowerCase() === "at least") {
-        if (progress < 100) setProgress(progress + 1);
+        if (progress < 100) {
+          console.log(progress, habit.goal);
+
+          if (progress === habit.goal - 1) {
+            console.log("completed");
+          }
+          setProgress(progress + 1);
+        }
       } else {
-        if (progress < habit.goal) setProgress(progress + 1);
+        if (progress < habit.goal) {
+          if (progress === habit.goal - 1) {
+            console.log("completed");
+          }
+          setProgress(progress + 1);
+        }
       }
     } else {
       if (progress > 0) setProgress(progress - 1);
