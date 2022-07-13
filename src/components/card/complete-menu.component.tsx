@@ -33,14 +33,14 @@ const CompleteMenu = ({ isOpen, habit, close }: MenuProps) => {
     <div
       className={`${
         isOpen ? "flex" : "hidden"
-      } absolute top-8 right-0 flex-col bg-neutral-800 outline outline-1 dark:outline-zinc-600 rounded-md`}
+      } absolute top-8 right-0 flex-col dark:bg-neutral-800 bg-white outline outline-1 dark:outline-zinc-600 outline-zinc-300 rounded-md`}
     >
-      <div className="whitespace-nowrap font-semibold text-sm p-2 px-4">
+      <div className="whitespace-nowrap font-semibold text-sm p-2 px-4 text-neutral-700 dark:text-gray-200">
         Complete this Habit
       </div>
-      <div className="flex justify-between border border-b-0 border-x-0 border-neutral-700">
+      <div className="flex justify-between border border-b-0 border-x-0 dark:border-neutral-700">
         <button
-          className="text-center text-xs font-poppins w-full px-2 py-1 border-r-[1px] border-neutral-700 text-blue-400 hover:text-blue-500"
+          className="text-center text-xs font-poppins w-full px-2 py-1 border-r-[1px] dark:border-neutral-700 text-blue-500 hover:text-blue-600"
           onClick={handleConfirm}
         >
           CONFIRM

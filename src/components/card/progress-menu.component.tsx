@@ -96,9 +96,10 @@ const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
     <div
       className={`${
         isOpen ? "flex" : "hidden"
-      } absolute top-8 right-0 z-10 flex-col bg-neutral-800 outline outline-1 dark:outline-zinc-600 rounded-md `}
+      } absolute top-8 right-0 z-10 flex-col dark:bg-neutral-800 bg-white outline outline-1 dark:outline-zinc-600
+      outline-zinc-300 rounded-md `}
     >
-      <div className="whitespace-nowrap text-sm font-semibold dark:text-neutral-400 text-center mb-1 px-2 pt-2">
+      <div className="whitespace-nowrap text-sm font-semibold dark:text-neutral-400 text-neutral-500 text-center mb-1 px-2 pt-2">
         Enter a value
       </div>
       <div className="flex items-center justify-center px-2">
@@ -107,7 +108,7 @@ const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
         </Button>
         <input
           type="text"
-          className="h-[30px] w-[70px] dark:bg-white dark:bg-opacity-5 outline outline-0 outline-zinc-200 dark:outline-zinc-600 text-center focus:outline-1"
+          className="h-[30px] w-[70px] dark:bg-white bg-black bg-opacity-5 dark:bg-opacity-10 outline outline-0 outline-zinc-200 dark:outline-zinc-600 text-center focus:outline-1 font-semibold "
           value={progress}
           onChange={handleChange}
         />
@@ -115,13 +116,13 @@ const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
           <Icon icon="bi:plus" />
         </Button>
       </div>
-      <div className="text-center text-xs mt-1 font-semibold dark:text-neutral-400">
+      <div className="text-center text-xs mt-1 font-semibold dark:text-neutral-400 text-neutral-500">
         Goal
       </div>
       <div className="text-center text-sm font-semibold">{`${habit.requirement} ${habit.goal}`}</div>
-      <div className="flex justify-between border border-b-0 border-x-0 mt-2 border-neutral-700">
+      <div className="flex justify-between border border-b-0 border-x-0 mt-2 dark:border-neutral-700">
         <button
-          className="text-center text-xs font-poppins w-full p-2 border-r-[1px] border-neutral-700 text-blue-400 hover:text-blue-500"
+          className="text-center text-xs font-poppins w-full p-2 border-r-[1px] dark:border-neutral-700 text-blue-500 hover:text-blue-600"
           onClick={handleConfirm}
         >
           CONFIRM
