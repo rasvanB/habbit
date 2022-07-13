@@ -3,13 +3,18 @@ import { createContext, ReactNode, useState } from "react";
 export const defaultProfilePicURL =
   "https://i.ibb.co/dBr1HsM/default-profile-300x284.png";
 
+type CompletedDay = {
+  date: string;
+  progress: number;
+};
+
 export type Habit = {
   habitName: string;
   iconName: string;
   iconColor: string;
   requirement: string;
   description: string;
-  completedDays: string[];
+  completedDays: CompletedDay[];
   goal: number;
   unit: string;
   timeStamp: number;

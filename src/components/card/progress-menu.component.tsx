@@ -79,10 +79,13 @@ const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
         newHabit.timeStamp = habit.timeStamp;
         if (completedDay) {
           if (
-            newHabit.completedDays[newHabit.completedDays.length - 1] !==
+            newHabit.completedDays[newHabit.completedDays.length - 1].date !==
             completedDay
           ) {
-            newHabit.completedDays.push(completedDay);
+            newHabit.completedDays.push({
+              date: completedDay,
+              progress: progress,
+            });
           }
         }
         editHabit(newHabit);
