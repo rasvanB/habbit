@@ -56,7 +56,8 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
 
   return (
     <div
-      className="relative dark:text-gray-200 dark:bg-neutral-800 dark:hover:bg-[rgb(45,45,45)] flex items-center lg:pr-10 pr-8 rounded-sm dark:outline-zinc-700 select-none pl-2 py-1 w-full lg:max-w-[600px] outline outline-1 outline-gray-200"
+      className="relative dark:text-gray-200 dark:bg-neutral-800 dark:hover:bg-[rgb(45,45,45)] 
+      hover:bg-[rgb(245,245,245)] flex items-center lg:pr-10 pr-8 rounded-sm dark:outline-zinc-700 select-none pl-2 py-1 w-full lg:max-w-[600px] outline outline-1 outline-gray-200"
       {...otherProps}
     >
       <div
@@ -73,7 +74,7 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
       </div>
 
       <div className="flex flex-col w-full mx-3 lg:mx-4">
-        <div className="font-bold text-sm text-zinc-700 dark:text-gray-200 flex flex-col">
+        <div className="font-bold text-sm text-zinc-500 dark:text-gray-200 flex flex-col">
           <div className="truncate max-w-[150px] mobile:max-w-[250px] sm:max-w-[350px] leading-none">
             {`${habit.habitName}`.toUpperCase()}
           </div>
