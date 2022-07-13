@@ -15,18 +15,27 @@ const CompleteMenu = ({ isOpen, habit, close }: MenuProps) => {
   const handleConfirm = () => {
     if (currentUser) {
       const newHabit = { ...habit };
-      newHabit.progress = 1;
       newHabit.timeStamp = habit.timeStamp;
-      if (newHabit.completedDays.length > 0) {
+      if (newHabit.activeDays && newHabit.activeDays.length > 0) {
         if (
-          newHabit.completedDays[newHabit.completedDays.length - 1].date !==
+          newHabit.activeDays[newHabit.activeDays.length - 1].date !==
           getDateAsString()
         ) {
-          newHabit.completedDays.push({ date: getDateAsString(), progress: 1 });
+          newHabit.activeDays.push({
+            date: getDateAsString(),
+            progress: 1,
+            completed: true,
+          });
         }
       } else {
-        newHabit.completedDays.push({ date: getDateAsString(), progress: 1 });
+        newHabit.activeDays = [];
+        newHabit.activeDays.push({
+          date: getDateAsString(),
+          progress: 1,
+          completed: true,
+        });
       }
+
       editHabit(newHabit);
       addHabitToUser(currentUser.uid, newHabit);
       close();

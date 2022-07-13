@@ -10,6 +10,14 @@ type CardProps = {
   habit: Habit;
 } & React.BaseHTMLAttributes<HTMLDivElement>;
 
+export const getProgressOfLastDay = (habit: Habit) => {
+  if (habit.activeDays)
+    if (habit.activeDays.length > 0) {
+      return habit.activeDays[habit.activeDays.length - 1].progress;
+    } else return 0;
+  else return 0;
+};
+
 const HabitCard = ({ habit, ...otherProps }: CardProps) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isProgressOpen, setProgressOpen] = useState(false);
@@ -66,7 +74,8 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
           </div>
         </div>
         <div className="text-xs font-semibold dark:text-zinc-400 text-zinc-400 h-fit leading-none">
-          current: <span>{`${habit.progress} / ${habit.goal}`}</span>
+          current:{" "}
+          <span>{`${getProgressOfLastDay(habit)} / ${habit.goal}`}</span>
         </div>
       </div>
       <div className="relative">

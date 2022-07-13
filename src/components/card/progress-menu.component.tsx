@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { Habit, UserContext } from "../../context/user.context";
 import { addHabitToUser } from "../../utils/firebase/firebase.utils";
 import Button from "../other/button.component";
+import { getProgressOfLastDay } from "./habit-card.component";
 
 type ProgressMenuProps = {
   isOpen: boolean;
@@ -16,8 +17,7 @@ export const getDateAsString = () => {
 };
 
 const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
-  const [progress, setProgress] = useState(habit.progress);
-  const [completedDay, setCompletedDay] = useState("");
+  const [progress, setProgress] = useState(getProgressOfLastDay(habit));
   const { currentUser, editHabit } = useContext(UserContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,17 +25,12 @@ const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
     if (value) {
       if (habit.requirement.toLowerCase() === "at least") {
         if (parseInt(value) <= 100) {
-          if (parseInt(value) >= habit.goal) {
-            setCompletedDay(getDateAsString());
-          } else setCompletedDay("");
           setProgress(parseFloat(value));
         }
       } else {
         if (parseInt(value) >= habit.goal) {
-          setCompletedDay(getDateAsString());
           setProgress(habit.goal);
         } else {
-          setCompletedDay("");
           setProgress(parseInt(value));
         }
       }
@@ -46,18 +41,10 @@ const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
     if (isIncrement) {
       if (habit.requirement.toLowerCase() === "at least") {
         if (progress < 100) {
-          if (progress >= habit.goal - 1) {
-            setCompletedDay(getDateAsString());
-          } else setCompletedDay("");
-
           setProgress(progress + 1);
         }
       } else {
         if (progress < habit.goal) {
-          if (progress === habit.goal - 1) {
-            setCompletedDay(getDateAsString());
-          } else setCompletedDay("");
-
           setProgress(progress + 1);
         }
       }
@@ -67,27 +54,35 @@ const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
   };
 
   const handleClose = () => {
-    setProgress(habit.progress);
+    setProgress(getProgressOfLastDay(habit));
     close();
   };
 
   const handleConfirm = () => {
-    if (progress !== habit.progress) {
+    if (progress !== getProgressOfLastDay(habit)) {
       if (currentUser) {
         const newHabit = { ...habit };
-        newHabit.progress = progress;
         newHabit.timeStamp = habit.timeStamp;
-        if (completedDay) {
+        if (newHabit.activeDays.length > 0) {
           if (
-            newHabit.completedDays[newHabit.completedDays.length - 1].date !==
-            completedDay
+            newHabit.activeDays[newHabit.activeDays.length - 1].date ===
+            getDateAsString()
           ) {
-            newHabit.completedDays.push({
-              date: completedDay,
+            newHabit.activeDays.pop();
+            newHabit.activeDays.push({
+              date: getDateAsString(),
               progress: progress,
+              completed: progress >= habit.goal,
             });
           }
+        } else {
+          newHabit.activeDays.push({
+            date: getDateAsString(),
+            progress: progress,
+            completed: progress >= habit.goal,
+          });
         }
+
         editHabit(newHabit);
         addHabitToUser(currentUser.uid, newHabit);
         close();
