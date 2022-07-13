@@ -14,6 +14,7 @@ import {
   requirementOptions,
   defaultHabitState,
 } from "../../context/add-modal.context";
+import { getDateAsString } from "../card/progress-menu.component";
 
 const AddModal = () => {
   const [isIconsHidden, setIsIconsHidden] = useState(true);
@@ -112,6 +113,27 @@ const AddModal = () => {
         const oldTimestamp = habitToEdit.timeStamp;
         const newHabit = { ...currentHabit };
         newHabit.timeStamp = oldTimestamp;
+
+        if (newHabit.goal !== habitToEdit.goal) {
+          console.log("WTF");
+          console.log(newHabit);
+
+          if (newHabit.activeDays && newHabit.activeDays.length > 0) {
+            if (
+              newHabit.activeDays[newHabit.activeDays.length - 1].date ===
+              getDateAsString()
+            ) {
+              const progress =
+                newHabit.activeDays[newHabit.activeDays.length - 1].progress;
+              newHabit.activeDays.pop();
+              newHabit.activeDays.push({
+                completed: progress >= newHabit.goal,
+                date: getDateAsString(),
+                progress: progress,
+              });
+            }
+          }
+        }
         editHabit(newHabit);
         addHabitToUser(currentUser.uid, newHabit);
         showToast("success", "Habit has been edited.");

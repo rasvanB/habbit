@@ -46,7 +46,7 @@ const CompleteMenu = ({ isOpen, habit, close }: MenuProps) => {
     <div
       className={`${
         isOpen ? "flex" : "hidden"
-      } absolute top-8 right-0 flex-col dark:bg-neutral-800 bg-white outline outline-1 dark:outline-zinc-600 outline-zinc-300 rounded-md`}
+      } absolute top-8 right-0 flex-col dark:bg-neutral-800 bg-white outline outline-1 dark:outline-zinc-600 outline-zinc-300 rounded-md z-10`}
     >
       <div className="whitespace-nowrap font-semibold text-sm p-2 px-4 text-neutral-700 dark:text-gray-200">
         Complete this Habit
