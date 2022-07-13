@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { Habit, UserContext } from "../../context/user.context";
 import { addHabitToUser } from "../../utils/firebase/firebase.utils";
 import Button from "../other/button.component";
-import { getProgressOfLastDay } from "./habit-card.component";
+import { getProgressOfToday } from "./habit-card.component";
 
 type ProgressMenuProps = {
   isOpen: boolean;
@@ -17,7 +17,7 @@ export const getDateAsString = () => {
 };
 
 const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
-  const [progress, setProgress] = useState(getProgressOfLastDay(habit));
+  const [progress, setProgress] = useState(getProgressOfToday(habit));
   const { currentUser, editHabit } = useContext(UserContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,12 +54,12 @@ const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
   };
 
   const handleClose = () => {
-    setProgress(getProgressOfLastDay(habit));
+    setProgress(getProgressOfToday(habit));
     close();
   };
 
   const handleConfirm = () => {
-    if (progress !== getProgressOfLastDay(habit)) {
+    if (progress !== getProgressOfToday(habit)) {
       if (currentUser) {
         const newHabit = { ...habit };
         newHabit.timeStamp = habit.timeStamp;

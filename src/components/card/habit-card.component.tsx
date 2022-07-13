@@ -3,16 +3,19 @@ import React, { useEffect, useRef, useState } from "react";
 import { Habit } from "../../context/user.context";
 import hexToRgba from "hex-to-rgba";
 import CardMenu from "./card-menu.component";
-import ProgressMenu from "./progress-menu.component";
+import ProgressMenu, { getDateAsString } from "./progress-menu.component";
 import CompleteMenu from "./complete-menu.component";
 
 type CardProps = {
   habit: Habit;
 } & React.BaseHTMLAttributes<HTMLDivElement>;
 
-export const getProgressOfLastDay = (habit: Habit) => {
+export const getProgressOfToday = (habit: Habit) => {
   if (habit.activeDays)
-    if (habit.activeDays.length > 0) {
+    if (
+      habit.activeDays.length > 0 &&
+      habit.activeDays[habit.activeDays.length - 1].date === getDateAsString()
+    ) {
       return habit.activeDays[habit.activeDays.length - 1].progress;
     } else return 0;
   else return 0;
@@ -74,8 +77,7 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
           </div>
         </div>
         <div className="text-xs font-semibold dark:text-zinc-400 text-zinc-400 h-fit leading-none">
-          current:{" "}
-          <span>{`${getProgressOfLastDay(habit)} / ${habit.goal}`}</span>
+          current: <span>{`${getProgressOfToday(habit)} / ${habit.goal}`}</span>
         </div>
       </div>
       <div className="relative">
