@@ -74,10 +74,17 @@ const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
   const handleConfirm = () => {
     if (progress !== habit.progress) {
       if (currentUser) {
-        console.log(completedDay);
         const newHabit = { ...habit };
         newHabit.progress = progress;
         newHabit.timeStamp = habit.timeStamp;
+        if (completedDay) {
+          if (
+            newHabit.completedDays[newHabit.completedDays.length - 1] !==
+            completedDay
+          ) {
+            newHabit.completedDays.push(completedDay);
+          }
+        }
         editHabit(newHabit);
         addHabitToUser(currentUser.uid, newHabit);
         close();
