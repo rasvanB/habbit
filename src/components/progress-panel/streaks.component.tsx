@@ -25,14 +25,14 @@ const calculateHighestStreak = (habit: Habit | null) => {
   return 0;
 };
 
-// TODO implement this
-// const calculateCurrentStreak = (habit: Habit | null) => {
-
-// }
+const calculateCurrentStreak = (habit: Habit | null) => {
+  return 0;
+};
 
 const Streaks = () => {
   const { selectedHabit } = useContext(PanelContext);
   const highestStreak = calculateHighestStreak(selectedHabit);
+  const currentStreak = calculateCurrentStreak(selectedHabit);
 
   // TODO: change second highest streak to current streak using built function
   return (
@@ -55,8 +55,8 @@ const Streaks = () => {
             icon="ant-design:fire-filled"
             className="text-2xl text-blue-300"
           />
-          <div className="ml-2 font-semibold text-xl">{`${highestStreak} ${
-            highestStreak !== 1 ? "DAYS" : "DAY"
+          <div className="ml-2 font-semibold text-xl">{`${currentStreak} ${
+            currentStreak !== 1 ? "DAYS" : "DAY"
           }`}</div>
         </div>
         <div className="font-semibold text-xs text-center">CURRENT STREAK</div>
