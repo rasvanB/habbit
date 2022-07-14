@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { PanelContext } from "../../context/progress-panel.context";
 import { Habit } from "../../context/user.context";
 
+// FIXME: THIS SHOULD CHECK IF DAYS ARE COMPLETED OR NOT
 const calculateHighestStreak = (habit: Habit | null) => {
   if (habit) {
     if (habit.activeDays) {
@@ -24,6 +25,7 @@ const calculateHighestStreak = (habit: Habit | null) => {
   return 0;
 };
 
+// TODO implement this
 // const calculateCurrentStreak = (habit: Habit | null) => {
 
 // }
@@ -32,9 +34,10 @@ const Streaks = () => {
   const { selectedHabit } = useContext(PanelContext);
   const highestStreak = calculateHighestStreak(selectedHabit);
 
+  // TODO: change second highest streak to current streak using built function
   return (
-    <div className="dark:bg-zinc-800 w-fit dark:text-gray-200 flex p-4 rounded-lg">
-      <div className="border-r border-gray-600 pr-2">
+    <div className="flex">
+      <div className="border-gray-600  dark:bg-zinc-800 w-fit dark:text-gray-200 p-4 rounded-lg">
         <div className="flex justify-center items-center">
           <Icon
             icon="ant-design:fire-filled"
@@ -46,7 +49,7 @@ const Streaks = () => {
         </div>
         <div className=" font-semibold text-xs">LONGEST STREAK</div>
       </div>
-      <div className="pl-2">
+      <div className="border-gray-600 dark:bg-zinc-800 w-fit dark:text-gray-200 p-4 rounded-lg ml-3">
         <div className="flex justify-center items-center">
           <Icon
             icon="ant-design:fire-filled"
