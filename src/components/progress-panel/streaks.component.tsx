@@ -8,15 +8,29 @@ const calculateHighestStreak = (habit: Habit | null) => {
   if (habit) {
     if (habit.activeDays) {
       if (habit.activeDays.length > 0) {
-        let highestStreak = 1;
-        let prev = parseInt(habit.activeDays[0].date.slice(0, 2));
-        for (let i = 1; i < habit.activeDays.length; i++) {
-          let current = parseInt(habit.activeDays[i].date.slice(0, 2));
-          if (current === prev + 1) highestStreak++;
-          else {
-            highestStreak = 1;
+        let highestStreak = 0;
+        let currentStreak = 0;
+        let prevDate = 0;
+        for (let i = 0; i < habit.activeDays.length; i++) {
+          let current = habit.activeDays[i];
+          let currentDate = parseInt(current.date.slice(0, 2));
+          if (current.completed) {
+            if (prevDate === 0) {
+              currentStreak = 1;
+              prevDate = currentDate;
+            } else {
+              if (currentDate === prevDate + 1) {
+                currentStreak++;
+                prevDate = currentDate;
+              } else {
+                currentStreak = 1;
+                prevDate = currentDate;
+              }
+            }
+          } else {
+            currentStreak = 0;
           }
-          prev = current;
+          if (currentStreak > highestStreak) highestStreak = currentStreak;
         }
         return highestStreak;
       } else return 0;
