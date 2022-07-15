@@ -6,6 +6,7 @@ const CardContainer = () => {
   const { habits } = useContext(UserContext);
   const completedHabits: Habit[] = [];
   const incompleteHabits: Habit[] = [];
+
   habits.forEach((habit) => {
     const today = getDataOfToday(habit);
     if (today) {
@@ -13,6 +14,7 @@ const CardContainer = () => {
       else incompleteHabits.push(habit);
     } else incompleteHabits.push(habit);
   });
+
   return (
     <div>
       <div className="flex flex-col mt-3 gap-3 w-full border-t pt-2 dark:border-zinc-600">
