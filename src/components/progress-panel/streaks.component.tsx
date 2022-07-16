@@ -43,41 +43,7 @@ const calculateHighestStreak = (habit: Habit | null) => {
 const calculateCurrentStreak = (habit: Habit | null) => {
   if (habit) {
     if (habit.activeDays) {
-      const today = getDateAsString();
-      let currentStreak = 0;
-      let prevDate = 0;
-      let todayDate = parseInt(today.slice(0, 2));
-      let lastActiveDay = habit.activeDays[habit.activeDays.length - 1];
-      let lastActiveDate = parseInt(lastActiveDay.date.slice(0, 2));
-
-      if (lastActiveDate === todayDate - 1 || lastActiveDate === todayDate) {
-        if (lastActiveDay.completed) {
-          for (let i = habit.activeDays.length - 1; i > 0; i--) {
-            let currentDay = habit.activeDays[i];
-            let currentDate = parseInt(currentDay.date.slice(0, 2));
-            if (currentDay.completed) {
-              if (prevDate === 0) {
-                currentStreak = 1;
-                prevDate = currentDate;
-              } else {
-                if (currentDate === prevDate - 1) {
-                  currentStreak++;
-                  prevDate = currentDate;
-                } else {
-                  return currentStreak;
-                }
-              }
-            } else {
-              return currentStreak;
-            }
-          }
-          return currentStreak;
-        } else {
-          console.log(currentStreak);
-        }
-      } else {
-        return 0;
-      }
+      return 0;
     } else return 0;
   } else return 0;
 };
