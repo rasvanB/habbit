@@ -2,7 +2,6 @@ import { Icon } from "@iconify/react";
 import { useContext } from "react";
 import { PanelContext } from "../../context/progress-panel.context";
 import { Habit } from "../../context/user.context";
-import { getDateAsString } from "../card/progress-menu.component";
 
 // FIXME: THIS SHOULD CHECK IF DAYS ARE COMPLETED OR NOT
 const calculateHighestStreak = (habit: Habit | null) => {
