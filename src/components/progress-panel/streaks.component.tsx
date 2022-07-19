@@ -40,12 +40,11 @@ const calculateHighestStreak = (habit: Habit | null) => {
 };
 
 const calculateCurrentStreak = (habit: Habit | null) => {
-  // if (habit) {
-  //   if (habit.activeDays) {
-  //     return 0;
-  //   } else return 0;
-  // } else return 0;
-  return 0;
+  if (habit) {
+    if (habit.activeDays) {
+      return 0;
+    } else return 0;
+  } else return 0;
 };
 
 const Streaks = () => {
