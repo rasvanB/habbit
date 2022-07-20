@@ -13,7 +13,9 @@ type ProgressMenuProps = {
 
 export const getDateAsString = () => {
   const d = new Date();
-  return `${d.getDate()}.${d.getMonth()}.${d.getFullYear()}`;
+  return `${d.getFullYear()}-${
+    d.getMonth() < 10 ? "0" + d.getMonth() : d.getMonth()
+  }-${d.getDate() < 10 ? "0" + d.getDate() : d.getDate()}`;
 };
 
 const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
