@@ -1,7 +1,9 @@
 import { Icon } from "@iconify/react";
+import { parse } from "path";
 import { useContext } from "react";
 import { PanelContext } from "../../context/progress-panel.context";
 import { Habit } from "../../context/user.context";
+import { getDateAsString } from "../card/progress-menu.component";
 
 // FIXME: THIS SHOULD CHECK IF DAYS ARE COMPLETED OR NOT
 const calculateHighestStreak = (habit: Habit | null) => {
@@ -42,7 +44,33 @@ const calculateHighestStreak = (habit: Habit | null) => {
 const calculateCurrentStreak = (habit: Habit | null) => {
   if (habit) {
     if (habit.activeDays) {
-      return 0;
+      if (habit.activeDays.length > 0) {
+        let noOfDays = habit.activeDays.length;
+        let lastDay = habit.activeDays[noOfDays - 1];
+        let startingIndex = 0;
+        const todayDate = getDateAsString();
+        if (lastDay.date === todayDate) {
+          if (lastDay.completed) {
+            startingIndex = noOfDays - 1;
+          } else {
+            if (habit.activeDays.length > 1) {
+              if (habit.activeDays[habit.activeDays.length - 2].completed) {
+                startingIndex = noOfDays - 2;
+              }
+            } else return 0;
+          }
+        } else {
+          let lastDayNumber = parseInt(lastDay.date.slice(0, 2));
+          if (lastDayNumber === parseInt(todayDate.slice(0, 2)) - 1) {
+            if (lastDay.completed) startingIndex = noOfDays - 1;
+            else return 0;
+          } else {
+            return 0;
+          }
+        }
+      } else {
+        // has one item
+      }
     } else return 0;
   } else return 0;
 };
