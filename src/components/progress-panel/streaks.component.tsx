@@ -1,32 +1,36 @@
 import { Icon } from "@iconify/react";
-import { parse } from "path";
 import { useContext } from "react";
 import { PanelContext } from "../../context/progress-panel.context";
 import { Habit } from "../../context/user.context";
-import { getDateAsString } from "../card/progress-menu.component";
+
+// CHECK IF TWO DAYS ARE CONSECUTIVE
+const checkConsecutive = (day1: string, day2: string): boolean => {
+  const firstDay = new Date(day1).setUTCHours(0, 0, 0);
+  const secondDay = new Date(day2).setUTCHours(0, 0, 0);
+  return firstDay - secondDay === 86400000;
+};
 
 // FIXME: THIS SHOULD CHECK IF DAYS ARE COMPLETED OR NOT
-const calculateHighestStreak = (habit: Habit | null) => {
+const calculateHighestStreak = (habit: Habit | null): number => {
   if (habit) {
     if (habit.activeDays) {
       if (habit.activeDays.length > 0) {
         let highestStreak = 0;
         let currentStreak = 0;
-        let prevDate = 0;
+        let prevDate = null;
         for (let i = 0; i < habit.activeDays.length; i++) {
           let current = habit.activeDays[i];
-          let currentDate = parseInt(current.date.slice(0, 2));
           if (current.completed) {
-            if (prevDate === 0) {
+            if (prevDate === null) {
               currentStreak = 1;
-              prevDate = currentDate;
+              prevDate = current;
             } else {
-              if (currentDate === prevDate + 1) {
+              if (checkConsecutive(current.date, prevDate.date)) {
                 currentStreak++;
-                prevDate = currentDate;
+                prevDate = current;
               } else {
                 currentStreak = 1;
-                prevDate = currentDate;
+                prevDate = current;
               }
             }
           } else {
@@ -41,38 +45,15 @@ const calculateHighestStreak = (habit: Habit | null) => {
   return 0;
 };
 
-const calculateCurrentStreak = (habit: Habit | null) => {
+const calculateCurrentStreak = (habit: Habit | null): number => {
   if (habit) {
     if (habit.activeDays) {
       if (habit.activeDays.length > 0) {
-        let noOfDays = habit.activeDays.length;
-        let lastDay = habit.activeDays[noOfDays - 1];
-        let startingIndex = 0;
-        const todayDate = getDateAsString();
-        if (lastDay.date === todayDate) {
-          if (lastDay.completed) {
-            startingIndex = noOfDays - 1;
-          } else {
-            if (habit.activeDays.length > 1) {
-              if (habit.activeDays[habit.activeDays.length - 2].completed) {
-                startingIndex = noOfDays - 2;
-              }
-            } else return 0;
-          }
-        } else {
-          let lastDayNumber = parseInt(lastDay.date.slice(0, 2));
-          if (lastDayNumber === parseInt(todayDate.slice(0, 2)) - 1) {
-            if (lastDay.completed) startingIndex = noOfDays - 1;
-            else return 0;
-          } else {
-            return 0;
-          }
-        }
-      } else {
-        // has one item
+        console.log(new Date());
       }
-    } else return 0;
-  } else return 0;
+    }
+  }
+  return 0;
 };
 
 const Streaks = () => {
