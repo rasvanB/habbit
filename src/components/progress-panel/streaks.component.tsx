@@ -2,6 +2,7 @@ import { Icon } from "@iconify/react";
 import { useContext } from "react";
 import { PanelContext } from "../../context/progress-panel.context";
 import { Habit } from "../../context/user.context";
+import { getDateAsString } from "../card/progress-menu.component";
 
 // CHECK IF TWO DAYS ARE CONSECUTIVE
 const checkConsecutive = (day1: string, day2: string): boolean => {
@@ -49,9 +50,56 @@ const calculateCurrentStreak = (habit: Habit | null): number => {
   if (habit) {
     if (habit.activeDays) {
       if (habit.activeDays.length > 0) {
-        console.log(new Date());
+        if (habit.activeDays.length === 1) {
+          let lastDay = habit.activeDays[habit.activeDays.length - 1];
+          if (lastDay.completed) return 1;
+          else return 0;
+        } else {
+          let prevDay = habit.activeDays[habit.activeDays.length - 1];
+          let streak = 0;
+
+          if (
+            checkConsecutive(getDateAsString(), prevDay.date) ||
+            prevDay.date === getDateAsString()
+          ) {
+            if (checkConsecutive(getDateAsString(), prevDay.date)) {
+              if (prevDay.completed) streak = 1;
+              else return streak;
+            }
+            if (prevDay.date === getDateAsString()) {
+              if (prevDay.completed) streak = 1;
+            }
+
+            for (let i = habit.activeDays.length - 2; i >= 0; i--) {
+              let currentDay = habit.activeDays[i];
+              console.log(currentDay);
+
+              if (checkConsecutive(prevDay.date, currentDay.date)) {
+                if (
+                  prevDay.date !==
+                  habit.activeDays[habit.activeDays.length - 1].date
+                ) {
+                  if (currentDay.completed && prevDay.completed) {
+                    streak++;
+                  } else {
+                    return streak;
+                  }
+                } else {
+                  if (currentDay.completed) streak++;
+                  else return streak;
+                }
+              } else {
+                return streak;
+              }
+              prevDay = currentDay;
+            }
+          }
+          return streak;
+        }
       }
+      return 0;
     }
+    return 0;
   }
   return 0;
 };
