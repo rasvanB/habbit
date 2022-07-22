@@ -122,7 +122,7 @@ const Streaks = () => {
   const currentStreak = calculateCurrentStreak(selectedHabit);
   const totalCompletions = calculateTotalCompletions(selectedHabit);
   return (
-    <div className="flex">
+    <div className="flex gap-3">
       <div className="border-gray-600  dark:bg-zinc-800 w-fit dark:text-gray-200 p-4 rounded-lg">
         <div className="flex justify-center items-center">
           <Icon
@@ -135,7 +135,7 @@ const Streaks = () => {
         </div>
         <div className=" font-semibold text-xs">LONGEST STREAK</div>
       </div>
-      <div className="border-gray-600 dark:bg-zinc-800 w-fit dark:text-gray-200 p-4 rounded-lg ml-3">
+      <div className="border-gray-600 dark:bg-zinc-800 w-fit dark:text-gray-200 p-4 rounded-lg">
         <div className="flex justify-center items-center">
           <Icon
             icon="ant-design:fire-filled"
@@ -146,6 +146,16 @@ const Streaks = () => {
           }`}</div>
         </div>
         <div className="font-semibold text-xs text-center">CURRENT STREAK</div>
+      </div>
+      <div className="border-gray-600  dark:bg-zinc-800 w-fit dark:text-gray-200 p-4 rounded-lg">
+        <div className="flex justify-center items-center">
+          <Icon
+            icon="akar-icons:circle-check-fill"
+            className="text-2xl text-green-500"
+          />
+          <div className="ml-2 font-semibold text-xl">{`${totalCompletions} ${selectedHabit?.unit}`}</div>
+        </div>
+        <div className=" font-semibold text-xs">TOTAL PROGRESS</div>
       </div>
     </div>
   );
