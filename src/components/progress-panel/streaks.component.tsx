@@ -133,7 +133,9 @@ const Streaks = () => {
             highestStreak !== 1 ? "DAYS" : "DAY"
           }`}</div>
         </div>
-        <div className=" font-semibold text-xs">LONGEST STREAK</div>
+        <div className=" font-semibold text-xs text-center mt-1">
+          LONGEST STREAK
+        </div>
       </div>
       <div className="border-gray-600 dark:bg-zinc-800 w-fit dark:text-gray-200 p-4 rounded-lg">
         <div className="flex justify-center items-center">
@@ -145,7 +147,9 @@ const Streaks = () => {
             currentStreak !== 1 ? "DAYS" : "DAY"
           }`}</div>
         </div>
-        <div className="font-semibold text-xs text-center">CURRENT STREAK</div>
+        <div className="font-semibold text-xs text-center mt-1">
+          CURRENT STREAK
+        </div>
       </div>
       <div className="border-gray-600  dark:bg-zinc-800 w-fit dark:text-gray-200 p-4 rounded-lg">
         <div className="flex justify-center items-center">
@@ -155,7 +159,9 @@ const Streaks = () => {
           />
           <div className="ml-2 font-semibold text-xl">{`${totalCompletions} ${selectedHabit?.unit}`}</div>
         </div>
-        <div className=" font-semibold text-xs">TOTAL PROGRESS</div>
+        <div className=" font-semibold text-xs text-center mt-1">
+          TOTAL PROGRESS
+        </div>
       </div>
     </div>
   );
