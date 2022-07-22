@@ -11,7 +11,21 @@ const checkConsecutive = (day1: string, day2: string): boolean => {
   return firstDay - secondDay === 86400000;
 };
 
-// FIXME: THIS SHOULD CHECK IF DAYS ARE COMPLETED OR NOT
+const calculateTotalCompletions = (habit: Habit | null): number => {
+  if (habit) {
+    if (habit.activeDays) {
+      let totalCompletions = 0;
+      for (let i = 0; i < habit.activeDays.length; i++) {
+        const currentDay = habit.activeDays[i];
+        totalCompletions += currentDay.progress;
+      }
+      return totalCompletions;
+    }
+    return 0;
+  }
+  return 0;
+};
+
 const calculateHighestStreak = (habit: Habit | null): number => {
   if (habit) {
     if (habit.activeDays) {
@@ -72,8 +86,6 @@ const calculateCurrentStreak = (habit: Habit | null): number => {
 
             for (let i = habit.activeDays.length - 2; i >= 0; i--) {
               let currentDay = habit.activeDays[i];
-              console.log(currentDay);
-
               if (checkConsecutive(prevDay.date, currentDay.date)) {
                 if (
                   prevDay.date !==
@@ -108,8 +120,7 @@ const Streaks = () => {
   const { selectedHabit } = useContext(PanelContext);
   const highestStreak = calculateHighestStreak(selectedHabit);
   const currentStreak = calculateCurrentStreak(selectedHabit);
-
-  // TODO: change second highest streak to current streak using built function
+  const totalCompletions = calculateTotalCompletions(selectedHabit);
   return (
     <div className="flex">
       <div className="border-gray-600  dark:bg-zinc-800 w-fit dark:text-gray-200 p-4 rounded-lg">
