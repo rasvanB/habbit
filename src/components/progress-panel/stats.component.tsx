@@ -116,7 +116,7 @@ const calculateCurrentStreak = (habit: Habit | null): number => {
   return 0;
 };
 
-const Streaks = () => {
+const Stats = () => {
   const { selectedHabit } = useContext(PanelContext);
   const highestStreak = calculateHighestStreak(selectedHabit);
   const currentStreak = calculateCurrentStreak(selectedHabit);
@@ -167,4 +167,4 @@ const Streaks = () => {
   );
 };
 
-export default Streaks;
+export default Stats;

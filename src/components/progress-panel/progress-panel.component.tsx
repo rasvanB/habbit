@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { PanelContext } from "../../context/progress-panel.context";
-import Streaks from "./streaks.component";
+import Stats from "./stats.component";
 
 const ProgressPanel = () => {
   const { isOpen } = useContext(PanelContext);
@@ -10,7 +10,7 @@ const ProgressPanel = () => {
         isOpen ? "lg:visible lg:p-3" : "hidden"
       } dark:bg-zinc-900 bg-neutral-100 border-l dark:border-neutral-700 ml-3`}
     >
-      <Streaks />
+      <Stats />
     </div>
   );
 };
