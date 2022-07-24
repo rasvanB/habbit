@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { PanelContext } from "../../context/progress-panel.context";
+import Calendar from "./calendar/calendar.component";
 import Stats from "./stats.component";
 
 const ProgressPanel = () => {
@@ -11,6 +12,7 @@ const ProgressPanel = () => {
       } dark:bg-zinc-900 bg-neutral-100 border-l dark:border-neutral-700 ml-3`}
     >
       <Stats />
+      <Calendar />
     </div>
   );
 };
