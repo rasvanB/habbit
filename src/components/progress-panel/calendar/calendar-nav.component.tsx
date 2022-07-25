@@ -23,13 +23,30 @@ const getMonthFromNumber = (x: number): string | undefined => {
   }
 };
 
+const nextMonth = (currentMonth: Date): Date => {
+  const newDate = new Date(
+    currentMonth.getFullYear(),
+    currentMonth.getMonth() + 2,
+    0
+  );
+  console.log(currentMonth, newDate);
+
+  return newDate;
+};
+
 const CalendarNavigation = () => {
-  const [currentMonth] = useState(new Date());
+  const [currentMonth, setCurrentMonth] = useState(new Date());
   return (
     <div className="flex justify-between dark:text-gray-200">
       <div>PREV</div>
       <div>{`${getMonthFromNumber(currentMonth.getMonth())}`}</div>
-      <div>NEXT</div>
+      <div
+        onClick={() => {
+          setCurrentMonth(nextMonth(currentMonth));
+        }}
+      >
+        NEXT
+      </div>
     </div>
   );
 };
