@@ -1,5 +1,11 @@
+import CalendarNavigation from "./calendar-nav.component";
+
 const Calendar = () => {
-  return <div>Calendar</div>;
+  return (
+    <div>
+      <CalendarNavigation />
+    </div>
+  );
 };
 
 export default Calendar;
