@@ -1,4 +1,6 @@
-import { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useCallback, useContext } from "react";
+import { PanelContext } from "../../../context/progress-panel.context";
 
 const monthNames: { [key: number]: string } = {
   0: "January",
@@ -18,8 +20,6 @@ const monthNames: { [key: number]: string } = {
 const getMonthFromNumber = (x: number): string | undefined => {
   if (x >= 0 && x < 12) {
     return monthNames[x];
-  } else {
-    // maybe throw error
   }
 };
 
@@ -30,24 +30,26 @@ const prevMonth = (currentMonth: Date): Date =>
   new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 0);
 
 const CalendarNavigation = () => {
-  const [currentMonth, setCurrentMonth] = useState(new Date());
+  const { startingDate, setStartingDate } = useContext(PanelContext);
+
+  const handleNextMonth = useCallback(() => {
+    setStartingDate(nextMonth(startingDate));
+  }, [startingDate]);
+
+  const handlePrevMonth = useCallback(() => {
+    setStartingDate(prevMonth(startingDate));
+  }, [startingDate]);
+
   return (
     <div className="flex justify-between dark:text-gray-200">
-      <div
-        onClick={() => {
-          setCurrentMonth(prevMonth(currentMonth));
-        }}
-      >
-        PREV
+      <div onClick={handlePrevMonth}>PREV</div>
+      <div>
+        <div className="text-center">{`${getMonthFromNumber(
+          startingDate.getMonth()
+        )}`}</div>
+        <div className="text-center">{`${startingDate.getFullYear()}`}</div>
       </div>
-      <div>{`${getMonthFromNumber(currentMonth.getMonth())}`}</div>
-      <div
-        onClick={() => {
-          setCurrentMonth(nextMonth(currentMonth));
-        }}
-      >
-        NEXT
-      </div>
+      <div onClick={handleNextMonth}>NEXT</div>
     </div>
   );
 };

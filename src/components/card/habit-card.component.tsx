@@ -32,7 +32,8 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isProgressOpen, setProgressOpen] = useState(false);
   const [isCompleteOpen, setCompleteOpen] = useState(false);
-  const { setSelectedHabit, setOpen } = useContext(PanelContext);
+  const { setSelectedHabit, setOpen, setStartingDate } =
+    useContext(PanelContext);
 
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -59,6 +60,7 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
 
   const handleClick = () => {
     setSelectedHabit(habit);
+    setStartingDate(new Date());
     setOpen(true);
   };
 
