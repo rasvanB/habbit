@@ -1,7 +1,8 @@
 import { useCallback, useContext } from "react";
 import { PanelContext } from "../../../context/progress-panel.context";
-import { getDatesOfMonth, weekDays } from "../../../utils/calendar.utils";
+import { getDatesOfMonth } from "../../../utils/calendar.utils";
 import CalendarNavigation from "./calendar-nav.component";
+import DayLabels from "./day-labels.component";
 
 const Calendar = () => {
   const { startingDate, selectedHabit } = useContext(PanelContext);
@@ -18,11 +19,7 @@ const Calendar = () => {
   return (
     <div>
       <CalendarNavigation />
-      <div className="grid grid-cols-7 text-white text-center">
-        {weekDays.map((day) => {
-          return <div key={day}>{day.slice(0, 2)}</div>;
-        })}
-      </div>
+      <DayLabels />
       <div className="grid grid-cols-7 text-center">
         {monthDates.map((date) => {
           let isActiveDay = false;
