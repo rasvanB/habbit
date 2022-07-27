@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react";
 import React, { useContext, useState } from "react";
+import { PanelContext } from "../../context/progress-panel.context";
 import { Habit, UserContext } from "../../context/user.context";
 import { addHabitToUser } from "../../utils/firebase/firebase.utils";
 import Button from "../other/button.component";
@@ -21,6 +22,7 @@ export const getDateAsString = () => {
 const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
   const [progress, setProgress] = useState(getProgressOfToday(habit));
   const { currentUser, editHabit } = useContext(UserContext);
+  const { setSelectedHabit } = useContext(PanelContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -93,6 +95,7 @@ const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
 
         editHabit(newHabit);
         addHabitToUser(currentUser.uid, newHabit);
+        setSelectedHabit(newHabit);
         close();
       }
     } else close();

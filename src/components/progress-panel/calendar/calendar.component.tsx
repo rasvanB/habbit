@@ -1,4 +1,4 @@
-import { useCallback, useContext, useMemo } from "react";
+import { useCallback, useContext } from "react";
 import { PanelContext } from "../../../context/progress-panel.context";
 import { getDatesOfMonth, weekDays } from "../../../utils/calendar.utils";
 import CalendarNavigation from "./calendar-nav.component";
@@ -11,11 +11,7 @@ const Calendar = () => {
     return selectedHabit?.activeDays.filter((day) => day.completed);
   }, [selectedHabit]);
 
-  const activeDays = useMemo(
-    () => getActiveDays(),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [selectedHabit]
-  );
+  const activeDays = getActiveDays();
 
   let activeDaysIndex = 0;
 

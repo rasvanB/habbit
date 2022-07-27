@@ -5,6 +5,7 @@ import Stats from "./stats.component";
 
 const ProgressPanel = () => {
   const { isOpen } = useContext(PanelContext);
+
   return (
     <div
       className={`lg:w-[55%] w-[0px] h-full ${
