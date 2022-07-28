@@ -15,7 +15,7 @@ const DatesContainer = () => {
 
   let activeDaysIndex = 0;
   return (
-    <div className="grid grid-cols-7 text-center gap-x-4 gap-y-1">
+    <div className="grid grid-cols-7 text-center gap-x-4 gap-y-3 ">
       {monthDates.map((date) => {
         let isActiveDay = false;
         if (activeDays) {

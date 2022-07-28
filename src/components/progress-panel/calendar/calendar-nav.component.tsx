@@ -21,7 +21,7 @@ const CalendarNavigation = () => {
   return (
     <div className="flex justify-between dark:text-gray-200">
       <div onClick={handlePrevMonth}>PREV</div>
-      <div>
+      <div className="flex gap-1">
         <div className="text-center">{`${getMonthFromNumber(
           startingDate.getMonth()
         )}`}</div>
