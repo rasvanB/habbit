@@ -1,58 +1,13 @@
-import { useCallback, useContext } from "react";
-import { PanelContext } from "../../../context/progress-panel.context";
-import { getDatesOfMonth } from "../../../utils/calendar.utils";
 import CalendarNavigation from "./calendar-nav.component";
+import DatesContainer from "./dates-container.component";
 import DayLabels from "./day-labels.component";
 
 const Calendar = () => {
-  const { startingDate, selectedHabit } = useContext(PanelContext);
-  const monthDates = getDatesOfMonth(startingDate);
-
-  const getActiveDays = useCallback(() => {
-    return selectedHabit?.activeDays.filter((day) => day.completed);
-  }, [selectedHabit]);
-
-  const activeDays = getActiveDays();
-
-  let activeDaysIndex = 0;
-
   return (
-    <div>
+    <div className="dark:bg-zinc-800 w-fit dark:text-gray-200 p-4 rounded-lg mt-3">
       <CalendarNavigation />
       <DayLabels />
-      <div className="grid grid-cols-7 text-center">
-        {monthDates.map((date) => {
-          let isActiveDay = false;
-          if (activeDays) {
-            if (activeDaysIndex < activeDays.length) {
-              const activeDayAsDate = new Date(
-                activeDays[activeDaysIndex].date
-              );
-              activeDayAsDate.setMonth(activeDayAsDate.getMonth() + 1);
-              if (
-                activeDayAsDate.getDate() === date.d.getDate() &&
-                activeDayAsDate.getMonth() === date.d.getMonth() &&
-                activeDayAsDate.getFullYear() === date.d.getFullYear()
-              ) {
-                isActiveDay = true;
-                activeDaysIndex++;
-              }
-            }
-          }
-          return (
-            <div
-              className={`${
-                date.active
-                  ? isActiveDay
-                    ? "text-blue-400"
-                    : "text-white"
-                  : "text-neutral-600"
-              }`}
-              key={date.d.getTime()}
-            >{`${date.d.getDate()}`}</div>
-          );
-        })}
-      </div>
+      <DatesContainer />
     </div>
   );
 };

@@ -14,7 +14,7 @@ const DatesContainer = () => {
 
   let activeDaysIndex = 0;
   return (
-    <div className="grid grid-cols-7 text-center">
+    <div className="grid grid-cols-7 text-center gap-x-4 gap-y-1 mt-2">
       {monthDates.map((date) => {
         let isActiveDay = false;
         if (activeDays) {
@@ -39,7 +39,7 @@ const DatesContainer = () => {
                   ? "text-blue-400"
                   : "text-white"
                 : "text-neutral-600"
-            }`}
+            } text-center`}
             key={date.d.getTime()}
           >{`${date.d.getDate()}`}</div>
         );
