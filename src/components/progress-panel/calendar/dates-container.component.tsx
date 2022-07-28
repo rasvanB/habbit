@@ -1,6 +1,7 @@
 import { useCallback, useContext } from "react";
 import { PanelContext } from "../../../context/progress-panel.context";
 import { getDatesOfMonth } from "../../../utils/calendar.utils";
+import Day from "./day.component";
 
 const DatesContainer = () => {
   const { startingDate, selectedHabit } = useContext(PanelContext);
@@ -14,7 +15,7 @@ const DatesContainer = () => {
 
   let activeDaysIndex = 0;
   return (
-    <div className="grid grid-cols-7 text-center gap-x-4 gap-y-1 mt-2">
+    <div className="grid grid-cols-7 text-center gap-x-4 gap-y-1">
       {monthDates.map((date) => {
         let isActiveDay = false;
         if (activeDays) {
@@ -32,16 +33,7 @@ const DatesContainer = () => {
           }
         }
         return (
-          <div
-            className={`${
-              date.active
-                ? isActiveDay
-                  ? "text-blue-400"
-                  : "text-white"
-                : "text-neutral-600"
-            } text-center`}
-            key={date.d.getTime()}
-          >{`${date.d.getDate()}`}</div>
+          <Day isSurplus={date.active} active={isActiveDay} date={date.d} />
         );
       })}
     </div>
