@@ -11,7 +11,9 @@ const Day = ({ active, isSurplus, date }: DateProps) => {
           ? active
             ? "text-blue-400 outline outline-1 outline-blue-800"
             : "text-white"
-          : "text-neutral-600"
+          : active
+          ? "text-blue-800 outline outline-1 outline-blue-800"
+          : "text-gray-600"
       } text-center rounded-md p-1 px-1.5`}
       key={date.getTime()}
     >{`${date.getDate()}`}</div>
