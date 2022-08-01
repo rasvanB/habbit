@@ -15,7 +15,7 @@ type ProgressMenuProps = {
 export const getDateAsString = () => {
   const d = new Date();
   return `${d.getFullYear()}-${
-    d.getMonth() < 10 ? "0" + d.getMonth() : d.getMonth()
+    d.getMonth() < 10 ? "0" + (d.getMonth() + 1) : d.getMonth() + 1
   }-${d.getDate() < 10 ? "0" + d.getDate() : d.getDate()}`;
 };
 
