@@ -8,10 +8,10 @@ const DatesContainer = () => {
   const monthDates = getDatesOfMonth(selectedDate);
   const getActiveDays = useCallback(() => {
     return selectedHabit?.activeDays.filter((day) => {
-      const monthFromDay = parseInt(day.date.slice(5, 7));
-      return monthFromDay === selectedDate.getMonth() + 1 && day.completed;
+      const dayAsDate = new Date(day.date);
+      return day.completed && dayAsDate >= monthDates[0].d;
     });
-  }, [selectedHabit, selectedDate]);
+  }, [selectedHabit, monthDates]);
   const activeDays = getActiveDays();
   let activeDaysIndex = 0;
   return (
