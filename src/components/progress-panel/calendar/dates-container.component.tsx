@@ -6,13 +6,15 @@ import Day from "./day.component";
 const DatesContainer = () => {
   const { startingDate, selectedHabit } = useContext(PanelContext);
   const monthDates = getDatesOfMonth(startingDate);
-  console.log(monthDates);
-
   const getActiveDays = useCallback(() => {
-    return selectedHabit?.activeDays.filter((day) => day.completed);
-  }, [selectedHabit]);
+    return selectedHabit?.activeDays.filter((day) => {
+      const monthFromDay = parseInt(day.date.slice(5, 7));
+      return monthFromDay > monthDates[0].d.getMonth() + 1 && day.completed;
+    });
+  }, [selectedHabit, monthDates]);
 
   const activeDays = getActiveDays();
+  console.log(activeDays);
 
   let activeDaysIndex = 0;
   return (
@@ -23,7 +25,6 @@ const DatesContainer = () => {
           if (activeDaysIndex < activeDays.length) {
             const activeDayAsDate = new Date(activeDays[activeDaysIndex].date);
             activeDayAsDate.setMonth(activeDayAsDate.getMonth());
-            console.log(activeDayAsDate);
             if (
               activeDayAsDate.getDate() === date.d.getDate() &&
               activeDayAsDate.getMonth() === date.d.getMonth() &&
