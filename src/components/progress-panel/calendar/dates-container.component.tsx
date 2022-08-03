@@ -9,13 +9,10 @@ const DatesContainer = () => {
   const getActiveDays = useCallback(() => {
     return selectedHabit?.activeDays.filter((day) => {
       const monthFromDay = parseInt(day.date.slice(5, 7));
-      return monthFromDay > monthDates[0].d.getMonth() + 1 && day.completed;
+      return monthFromDay === startingDate.getMonth() + 1 && day.completed;
     });
-  }, [selectedHabit, monthDates]);
-
+  }, [selectedHabit, startingDate]);
   const activeDays = getActiveDays();
-  console.log(activeDays);
-
   let activeDaysIndex = 0;
   return (
     <div className="grid grid-cols-7 text-center gap-x-4 gap-y-3 ">
