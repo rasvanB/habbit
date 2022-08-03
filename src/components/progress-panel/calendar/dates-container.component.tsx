@@ -4,14 +4,14 @@ import { getDatesOfMonth } from "../../../utils/calendar.utils";
 import Day from "./day.component";
 
 const DatesContainer = () => {
-  const { startingDate, selectedHabit } = useContext(PanelContext);
-  const monthDates = getDatesOfMonth(startingDate);
+  const { selectedDate, selectedHabit } = useContext(PanelContext);
+  const monthDates = getDatesOfMonth(selectedDate);
   const getActiveDays = useCallback(() => {
     return selectedHabit?.activeDays.filter((day) => {
       const monthFromDay = parseInt(day.date.slice(5, 7));
-      return monthFromDay === startingDate.getMonth() + 1 && day.completed;
+      return monthFromDay === selectedDate.getMonth() + 1 && day.completed;
     });
-  }, [selectedHabit, startingDate]);
+  }, [selectedHabit, selectedDate]);
   const activeDays = getActiveDays();
   let activeDaysIndex = 0;
   return (

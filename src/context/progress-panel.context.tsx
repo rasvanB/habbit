@@ -3,18 +3,18 @@ import { Habit } from "./user.context";
 
 type PanelContextType = {
   selectedHabit: Habit | null;
-  startingDate: Date;
+  selectedDate: Date;
   isOpen: boolean;
-  setStartingDate: (d: Date) => void;
+  setSelectedDate: (d: Date) => void;
   setSelectedHabit: (h: Habit) => void;
   setOpen: (x: boolean) => void;
 };
 
 const defaultPanelContext: PanelContextType = {
   selectedHabit: null,
-  startingDate: new Date(),
+  selectedDate: new Date(),
   isOpen: false,
-  setStartingDate: () => {},
+  setSelectedDate: () => {},
   setSelectedHabit: () => {},
   setOpen: () => {},
 };
@@ -27,7 +27,7 @@ type PanelProps = {
 
 const PanelProvider = ({ children }: PanelProps) => {
   const [selectedHabit, setSelectedHabit] = useState<Habit | null>(null);
-  const [startingDate, setStartingDate] = useState<Date>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [isOpen, setOpen] = useState(false);
 
   return (
@@ -37,8 +37,8 @@ const PanelProvider = ({ children }: PanelProps) => {
         setSelectedHabit,
         isOpen,
         setOpen,
-        startingDate,
-        setStartingDate,
+        selectedDate,
+        setSelectedDate,
       }}
     >
       {children}

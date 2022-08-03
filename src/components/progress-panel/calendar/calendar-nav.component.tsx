@@ -9,18 +9,18 @@ import {
 } from "../../../utils/calendar.utils";
 
 const CalendarNavigation = () => {
-  const { startingDate, setStartingDate } = useContext(PanelContext);
+  const { selectedDate, setSelectedDate } = useContext(PanelContext);
 
   const handleNextMonth = useCallback(() => {
-    setStartingDate(nextMonth(startingDate));
-  }, [startingDate]);
+    setSelectedDate(nextMonth(selectedDate));
+  }, [selectedDate]);
 
   const handlePrevMonth = useCallback(() => {
-    setStartingDate(prevMonth(startingDate));
-  }, [startingDate]);
+    setSelectedDate(prevMonth(selectedDate));
+  }, [selectedDate]);
 
   return (
-    <div className="flex justify-between dark:text-gray-200">
+    <div className="flex justify-between dark:text-gray-200 select-none">
       <div
         onClick={handlePrevMonth}
         className="flex items-center ml-3 bg-[rgb(48,48,48)] p-2 rounded-lg hover:bg-neutral-700"
@@ -29,9 +29,9 @@ const CalendarNavigation = () => {
       </div>
       <div className="flex gap-1">
         <div className="text-center flex items-center">{`${getMonthFromNumber(
-          startingDate.getMonth()
+          selectedDate.getMonth()
         )}`}</div>
-        <div className="text-center flex items-center">{`${startingDate.getFullYear()}`}</div>
+        <div className="text-center flex items-center">{`${selectedDate.getFullYear()}`}</div>
       </div>
       <div
         onClick={handleNextMonth}
