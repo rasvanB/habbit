@@ -9,7 +9,7 @@ const Avatar = ({ photoUrl, ...otherProps }: AvatarProps) => {
         alt="profile"
         src={photoUrl}
         referrerPolicy="no-referrer"
-        className="rounded-md outline outline-2 outline-offset-2 outline-blue-400"
+        className="rounded-md outline outline-2 outline-offset-2 outline-blue-400 w-[35px] h-[35px]"
       />
     </div>
   );
