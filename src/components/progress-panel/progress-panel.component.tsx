@@ -14,8 +14,10 @@ const ProgressPanel = () => {
       } dark:bg-zinc-900 bg-neutral-100 border-l dark:border-neutral-700 ml-3`}
     >
       <Stats />
-      <Calendar />
-      <CompletionRate />
+      <div className="flex">
+        <Calendar />
+        <CompletionRate />
+      </div>
     </div>
   );
 };
