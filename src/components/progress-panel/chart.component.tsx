@@ -48,12 +48,12 @@ const CompletionRate = () => {
           data={[
             {
               id: 0,
-              value: parseFloat(numberOfDays) / numberOfCompletedDays,
+              value: parseFloat(completedRate),
               color: "#5480d9",
             },
             {
               id: 1,
-              value: 100 - parseFloat(numberOfDays) / numberOfCompletedDays,
+              value: 100 - parseFloat(completedRate),
               color: "#363636",
             },
           ]}
