@@ -53,10 +53,10 @@ const CompletionRate = () => {
   ).toFixed(1);
 
   return (
-    <div className="w-[200px] h-[230px] dark:bg-zinc-800 dark:text-gray-200 rounded-lg mt-3 font-poppins p-2 relative ml-2">
+    <div className="w-[200px] h-[230px] dark:bg-zinc-800 bg-white shadow-sm dark:text-gray-200 rounded-lg mt-3 font-poppins p-2 relative ml-2">
       <div className="text-center font-medium mt-2">Completion Rate</div>
       <div className="w-[180px] h-[180px] relative mt-1">
-        <div className="absolute flex justify-center items-center text-xl text-gray-200 font-medium font-poppins text-center top-0 left-0 w-full h-full">
+        <div className="absolute flex justify-center items-center text-xl dark:text-gray-200 text-neutral-700 font-medium font-poppins text-center top-0 left-0 w-full h-full">
           {completedRate}%
         </div>
         <ResponsivePie
@@ -69,7 +69,7 @@ const CompletionRate = () => {
             {
               id: 1,
               value: 100 - parseFloat(completedRate),
-              color: "#363636",
+              color: mode === "dark" ? "#363636" : "#e7e7e7",
             },
           ]}
           innerRadius={0.5}
@@ -78,7 +78,6 @@ const CompletionRate = () => {
           margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
           activeOuterRadiusOffset={5}
           colors={{ datum: "data.color" }}
-          borderWidth={1}
           enableArcLabels={false}
           enableArcLinkLabels={false}
           tooltip={() => <></>}

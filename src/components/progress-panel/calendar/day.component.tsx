@@ -9,11 +9,11 @@ const Day = ({ active, isSurplus, date }: DateProps) => {
       className={`${
         isSurplus
           ? active
-            ? "text-blue-400 outline outline-2 outline-blue-700"
-            : "text-white"
+            ? "dark:text-blue-400 text-blue-600 outline outline-2 dark:outline-blue-700 outline-blue-500"
+            : "dark:text-white text-neutral-800"
           : active
-          ? "text-blue-800 outline outline-2 outline-blue-900"
-          : "text-gray-600"
+          ? "darl:text-blue-800 text-blue-400 outline outline-2 dark:outline-blue-900 outline-blue-400"
+          : "dark:text-gray-600 text-neutral-400"
       } text-center rounded-md p-1 px-1.5`}
       key={date.getTime()}
     >{`${date.getDate()}`}</div>
