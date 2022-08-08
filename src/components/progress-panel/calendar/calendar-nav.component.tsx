@@ -20,10 +20,10 @@ const CalendarNavigation = () => {
   }, [selectedDate]);
 
   return (
-    <div className="flex justify-between dark:text-gray-200 select-none">
+    <div className="flex justify-between dark:text-gray-200 text-neutral-600 select-none">
       <div
         onClick={handlePrevMonth}
-        className="flex items-center ml-3 bg-[rgb(48,48,48)] p-2 rounded-lg hover:bg-neutral-700"
+        className="flex items-center ml-3 dark:bg-[rgb(48,48,48)] bg-neutral-100 shadow-sm p-2 rounded-lg hover:dark:bg-neutral-700 hover:bg-neutral-200 cursor-pointer"
       >
         <Icon icon={"ep:arrow-left-bold"} />
       </div>
@@ -35,7 +35,7 @@ const CalendarNavigation = () => {
       </div>
       <div
         onClick={handleNextMonth}
-        className="flex items-center mr-3 bg-[rgb(48,48,48)] p-2 rounded-lg hover:bg-neutral-700"
+        className="flex items-center mr-3 dark:bg-[rgb(48,48,48)] bg-neutral-100 shadow-sm p-2 rounded-lg hover:dark:bg-neutral-700 hover:bg-neutral-200  cursor-pointer"
       >
         <Icon icon={"ep:arrow-right-bold"} />
       </div>
