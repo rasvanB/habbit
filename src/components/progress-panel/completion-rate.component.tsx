@@ -1,9 +1,24 @@
 import { ResponsivePie } from "@nivo/pie";
-import { useCallback, useContext } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { PanelContext } from "../../context/progress-panel.context";
 
 const CompletionRate = () => {
+  const [mode, setMode] = useState("");
   const { selectedHabit } = useContext(PanelContext);
+
+  useEffect(() => {
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (event) => {
+        const colorScheme = event.matches ? "dark" : "light";
+        setMode(colorScheme);
+      });
+    setMode(
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light"
+    );
+  }, []);
 
   const getNumberOfCompletedDays = useCallback(() => {
     if (selectedHabit) {
