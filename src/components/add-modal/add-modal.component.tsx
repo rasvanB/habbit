@@ -115,9 +115,6 @@ const AddModal = () => {
         newHabit.timeStamp = oldTimestamp;
 
         if (newHabit.goal !== habitToEdit.goal) {
-          console.log("WTF");
-          console.log(newHabit);
-
           if (newHabit.activeDays && newHabit.activeDays.length > 0) {
             if (
               newHabit.activeDays[newHabit.activeDays.length - 1].date ===
