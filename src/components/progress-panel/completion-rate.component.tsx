@@ -52,7 +52,6 @@ const CompletionRate = () => {
     (parseFloat(numberOfDays) / numberOfCompletedDays) *
     100
   ).toFixed(1);
-  console.log(numberOfCompletedDays, numberOfDays);
 
   return (
     <div className="w-[200px] h-[230px] dark:bg-zinc-800 bg-white shadow-sm dark:text-gray-200 rounded-lg mt-3 font-poppins p-2 relative ml-2">
