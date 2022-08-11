@@ -1,14 +1,22 @@
 import { ResponsiveBar } from "@nivo/bar";
+import { useEffect, useState } from "react";
 
 const Graph = () => {
+  const [reload, setReload] = useState(false);
+  useEffect(() => {
+    setInterval(() => {
+      setReload(!reload);
+    }, 700);
+  }, [reload]);
   return (
     <div className="w-[600px] h-[350px] dark:bg-zinc-800 rounded-md pt-10 px-2 mt-3">
       <ResponsiveBar
         data={[
-          { month: "JAN", value: 100 },
-          { month: "FEB", value: 120 },
-          { month: "MAR", value: 200 },
+          { month: "JAN", value: 1 },
+          { month: "FEB", value: 10 },
+          { month: "MAR", value: 20 },
         ]}
+        keys={["value"]}
         indexBy="month"
         margin={{
           top: 10,
@@ -17,8 +25,9 @@ const Graph = () => {
           left: 36,
         }}
         colors={["#3B82F6"]}
-        padding={0.6}
         borderRadius={5}
+        padding={0.3}
+        enableLabel={false}
         theme={{
           axis: {
             ticks: {
