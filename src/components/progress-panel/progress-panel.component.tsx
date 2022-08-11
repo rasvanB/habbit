@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { PanelContext } from "../../context/progress-panel.context";
 import Calendar from "./calendar/calendar.component";
 import CompletionRate from "./completion-rate.component";
+import Graph from "./graph.component";
 import Stats from "./stats.component";
 
 const ProgressPanel = () => {
@@ -18,6 +19,7 @@ const ProgressPanel = () => {
         <Calendar />
         <CompletionRate />
       </div>
+      <Graph />
     </div>
   );
 };

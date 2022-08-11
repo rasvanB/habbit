@@ -65,7 +65,7 @@ const CompletionRate = () => {
             {
               id: 0,
               value: completedRate !== "NaN" ? parseFloat(completedRate) : 0,
-              color: "#5480d9",
+              color: "#3B82F6",
             },
             {
               id: 1,
