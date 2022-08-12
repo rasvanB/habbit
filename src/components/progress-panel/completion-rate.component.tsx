@@ -40,17 +40,22 @@ const CompletionRate = () => {
     if (firstDay) {
       const firstDayAsDate = new Date(firstDay.date);
       const todayDate = new Date();
-      return Math.round(
+      todayDate.setUTCHours(0, 0, 0);
+      const result = Math.round(
         (todayDate.getTime() - firstDayAsDate.getTime()) / (1000 * 3600 * 24)
       );
+      if (result === -1) return 1;
+      else return result;
     } else return 0;
   }, [selectedHabit]);
 
   const numberOfCompletedDays = getNumberOfCompletedDays();
   const numberOfDays = getNumberOfDays();
-  const completedRate = ((100 * numberOfCompletedDays) / numberOfDays).toFixed(
-    1
-  );
+
+  let completedRate = "0";
+  if (numberOfDays) {
+    completedRate = ((100 * numberOfCompletedDays) / numberOfDays).toFixed(1);
+  }
 
   return (
     <div className="w-[240px] h-[312px] dark:bg-zinc-800 bg-white shadow-sm dark:text-gray-200 rounded-lg mt-3 font-poppins p-2 relative ml-2">
