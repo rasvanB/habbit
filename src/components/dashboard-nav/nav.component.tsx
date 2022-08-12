@@ -4,6 +4,7 @@ import { UserContext } from "../../context/user.context";
 import { useNavigate } from "react-router-dom";
 import Avatar from "./avatar.component";
 import SettingsMenu from "./settings-menu.component";
+import { PanelContext } from "../../context/progress-panel.context";
 
 type NavProps = {
   username: string;
@@ -13,12 +14,14 @@ type NavProps = {
 const Nav = ({ username, photourl }: NavProps) => {
   const navigate = useNavigate();
   const { setLoading, setHabits } = useContext(UserContext);
+  const { setSelectedHabit } = useContext(PanelContext);
   const [isSettingsOpen, setSettingsOpen] = useState(false);
 
   const handleSignOut = async () => {
     await signOutUser();
     setLoading(true);
     setHabits([]);
+    setSelectedHabit(null);
     navigate("/auth/sign-in");
   };
 

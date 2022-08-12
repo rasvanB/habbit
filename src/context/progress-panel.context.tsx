@@ -6,7 +6,7 @@ type PanelContextType = {
   selectedDate: Date;
   isOpen: boolean;
   setSelectedDate: (d: Date) => void;
-  setSelectedHabit: (h: Habit) => void;
+  setSelectedHabit: (h: Habit | null) => void;
   setOpen: (x: boolean) => void;
 };
 
