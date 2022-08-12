@@ -53,9 +53,9 @@ const CompletionRate = () => {
   );
 
   return (
-    <div className="w-[200px] h-[230px] dark:bg-zinc-800 bg-white shadow-sm dark:text-gray-200 rounded-lg mt-3 font-poppins p-2 relative ml-2">
+    <div className="w-[240px] h-[312px] dark:bg-zinc-800 bg-white shadow-sm dark:text-gray-200 rounded-lg mt-3 font-poppins p-2 relative ml-2">
       <div className="text-center font-medium mt-2">Completion Rate</div>
-      <div className="w-[180px] h-[180px] relative mt-1">
+      <div className="w-[220px] h-[252px] relative mt-1">
         <div className="absolute flex justify-center items-center text-xl dark:text-gray-200 text-neutral-700 font-medium font-poppins text-center top-0 left-0 w-full h-full">
           {completedRate !== "NaN" ? completedRate : 0}%
         </div>
