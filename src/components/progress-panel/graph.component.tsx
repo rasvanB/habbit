@@ -93,6 +93,12 @@ const Graph = () => {
               strokeWidth: 2,
             },
           },
+          tooltip: {
+            container: {
+              background: mode === "dark" ? "#383838" : "white",
+              color: mode === "dark" ? "white" : "#383838",
+            },
+          },
         }}
       ></ResponsiveBarCanvas>
     </div>
