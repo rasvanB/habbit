@@ -47,11 +47,10 @@ const CompletionRate = () => {
   }, [selectedHabit]);
 
   const numberOfCompletedDays = getNumberOfCompletedDays();
-  const numberOfDays = getNumberOfDays().toFixed(1);
-  const completedRate = (
-    (parseFloat(numberOfDays) / numberOfCompletedDays) *
-    100
-  ).toFixed(1);
+  const numberOfDays = getNumberOfDays();
+  const completedRate = ((100 * numberOfCompletedDays) / numberOfDays).toFixed(
+    1
+  );
 
   return (
     <div className="w-[200px] h-[230px] dark:bg-zinc-800 bg-white shadow-sm dark:text-gray-200 rounded-lg mt-3 font-poppins p-2 relative ml-2">

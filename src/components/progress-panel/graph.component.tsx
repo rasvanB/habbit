@@ -1,14 +1,16 @@
-import { ResponsiveBar } from "@nivo/bar";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { ResponsiveBarCanvas } from "@nivo/bar";
+import { useContext, useEffect, useState } from "react";
 import { PanelContext } from "../../context/progress-panel.context";
 
 const Graph = () => {
   const [reload, setReload] = useState(false);
+
   const { selectedHabit } = useContext(PanelContext);
 
-  const getProgressByMonth = useCallback(() => {
+  const getProgressByMonth = () => {
     if (selectedHabit && selectedHabit.activeDays) {
       let dataAsObj: any = {};
+      let dataAsArr = [];
       if (selectedHabit.activeDays.length > 0) {
         for (let i = 0; i < selectedHabit.activeDays.length; i++) {
           let month = selectedHabit.activeDays[i].date.slice(0, -3);
@@ -22,32 +24,32 @@ const Graph = () => {
             });
           }
         }
-        console.log(dataAsObj);
+        for (const property in dataAsObj) {
+          dataAsArr.push({ month: property, value: dataAsObj[property] });
+        }
       }
+      return dataAsArr;
     }
-    return null;
-  }, [selectedHabit]);
+    return [];
+  };
+
+  const data = getProgressByMonth();
 
   useEffect(() => {
     if (selectedHabit) {
       setTimeout(() => {
         setReload(true);
-        getProgressByMonth();
       }, 1000);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reload, selectedHabit]);
+
   return (
     <div className="w-[600px] h-[380px] dark:bg-zinc-800 rounded-md pt-2 px-2 mt-3 pb-10">
       <div className="text-center font-medium mt-2 font-poppins dark:text-gray-200 mb-2">
         Progress by month
       </div>
-      <ResponsiveBar
-        data={[
-          { month: "JAN", value: 1 },
-          { month: "FEB", value: 10 },
-          { month: "MAR", value: 20 },
-        ]}
+      <ResponsiveBarCanvas
+        data={data}
         keys={["value"]}
         indexBy="month"
         margin={{
@@ -78,7 +80,7 @@ const Graph = () => {
             },
           },
         }}
-      ></ResponsiveBar>
+      ></ResponsiveBarCanvas>
     </div>
   );
 };
