@@ -15,6 +15,7 @@ import {
   defaultHabitState,
 } from "../../context/add-modal.context";
 import { getDateAsString } from "../card/progress-menu.component";
+import { PanelContext } from "../../context/progress-panel.context";
 
 const AddModal = () => {
   const [isIconsHidden, setIsIconsHidden] = useState(true);
@@ -30,6 +31,7 @@ const AddModal = () => {
   } = useContext(ModalContext);
 
   const { addHabit, currentUser, habits, editHabit } = useContext(UserContext);
+  const { selectedHabit, setSelectedHabit } = useContext(PanelContext);
 
   const closeModal = () => {
     setOpen(!isOpen);
@@ -92,7 +94,7 @@ const AddModal = () => {
     const error = validateModal(currentHabit);
     if (error) setErrorMessage(error);
     else {
-      if (habits.length < 10) {
+      if (habits.length < 8) {
         addHabit(currentHabit);
         if (currentUser) {
           addHabitToUser(currentUser.uid, currentHabit);
@@ -133,6 +135,9 @@ const AddModal = () => {
         }
         editHabit(newHabit);
         addHabitToUser(currentUser.uid, newHabit);
+        if (selectedHabit) {
+          setSelectedHabit(newHabit);
+        }
         showToast("success", "Habit has been edited.");
         handleClose();
       }

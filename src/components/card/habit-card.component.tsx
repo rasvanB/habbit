@@ -105,10 +105,12 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
               habit.goal === 1 ? "p-1" : ""
             } dark:text-white text-zinc-700`}
             onClick={() => {
-              if (habit.goal !== 1) {
-                setProgressOpen(true);
-              } else {
-                setCompleteOpen(true);
+              if (!getDataOfToday(habit)?.completed) {
+                if (habit.goal !== 1) {
+                  setProgressOpen(true);
+                } else {
+                  setCompleteOpen(true);
+                }
               }
             }}
           />
