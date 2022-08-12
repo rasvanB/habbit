@@ -38,7 +38,7 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const closeMenu = (e: any) => {
+    const closeMenus = (e: any) => {
       if (
         menuRef.current !== e.composedPath()[1] &&
         menuRef.current !== e.composedPath()[2]
@@ -46,8 +46,8 @@ const HabitCard = ({ habit, ...otherProps }: CardProps) => {
         setMenuOpen(false);
       }
     };
-    document.body.addEventListener("click", closeMenu);
-    return () => document.body.removeEventListener("click", closeMenu);
+    document.body.addEventListener("click", closeMenus);
+    return () => document.body.removeEventListener("click", closeMenus);
   }, []);
 
   const closeProgressMenu = () => {

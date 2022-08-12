@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { ClassAttributes, useContext } from "react";
 import { Habit, UserContext } from "../../context/user.context";
 import { addHabitToUser } from "../../utils/firebase/firebase.utils";
 import { getDateAsString } from "./progress-menu.component";
@@ -7,9 +7,9 @@ type MenuProps = {
   isOpen: boolean;
   habit: Habit;
   close: () => void;
-};
+} & ClassAttributes<HTMLDivElement>;
 
-const CompleteMenu = ({ isOpen, habit, close }: MenuProps) => {
+const CompleteMenu = ({ isOpen, habit, close, ...other }: MenuProps) => {
   const { currentUser, editHabit } = useContext(UserContext);
 
   const handleConfirm = () => {
@@ -47,6 +47,7 @@ const CompleteMenu = ({ isOpen, habit, close }: MenuProps) => {
       className={`${
         isOpen ? "flex" : "hidden"
       } absolute top-8 right-0 flex-col dark:bg-neutral-800 bg-white outline outline-1 dark:outline-zinc-600 outline-zinc-300 rounded-md z-10`}
+      {...other}
     >
       <div className="whitespace-nowrap font-semibold text-sm p-2 px-4 text-neutral-700 dark:text-gray-200">
         Complete this Habit

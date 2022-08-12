@@ -19,7 +19,12 @@ export const getDateAsString = () => {
   }-${d.getDate() < 10 ? "0" + d.getDate() : d.getDate()}`;
 };
 
-const ProgressMenu = ({ isOpen, habit, close }: ProgressMenuProps) => {
+const ProgressMenu = ({
+  isOpen,
+  habit,
+  close,
+  ...other
+}: ProgressMenuProps) => {
   const [progress, setProgress] = useState(getProgressOfToday(habit));
   const { currentUser, editHabit } = useContext(UserContext);
   const { setSelectedHabit } = useContext(PanelContext);
