@@ -40,12 +40,11 @@ const CompletionRate = () => {
     if (firstDay) {
       const firstDayAsDate = new Date(firstDay.date);
       const todayDate = new Date();
-      todayDate.setUTCHours(0, 0, 0);
       const result = Math.round(
         (todayDate.getTime() - firstDayAsDate.getTime()) / (1000 * 3600 * 24)
       );
       if (result === -1) return 1;
-      else return result;
+      else return result + 1;
     } else return 0;
   }, [selectedHabit]);
 
