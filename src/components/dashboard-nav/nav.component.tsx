@@ -14,7 +14,7 @@ type NavProps = {
 const Nav = ({ username, photourl }: NavProps) => {
   const navigate = useNavigate();
   const { setLoading, setHabits } = useContext(UserContext);
-  const { setSelectedHabit } = useContext(PanelContext);
+  const { setSelectedHabit, setOpen } = useContext(PanelContext);
   const [isSettingsOpen, setSettingsOpen] = useState(false);
 
   const handleSignOut = async () => {
@@ -22,6 +22,7 @@ const Nav = ({ username, photourl }: NavProps) => {
     setLoading(true);
     setHabits([]);
     setSelectedHabit(null);
+    setOpen(false);
     navigate("/auth/sign-in");
   };
 

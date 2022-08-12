@@ -44,7 +44,7 @@ const Graph = () => {
   }, [reload, selectedHabit]);
 
   return (
-    <div className="w-[600px] h-[380px] dark:bg-zinc-800 rounded-md pt-2 px-2 mt-3 pb-10">
+    <div className="w-[600px] h-[380px] dark:bg-zinc-800 rounded-md pt-2 px-2 mt-3 pr-5 pb-10">
       <div className="text-center font-medium mt-2 font-poppins dark:text-gray-200 mb-2">
         Progress by month
       </div>
