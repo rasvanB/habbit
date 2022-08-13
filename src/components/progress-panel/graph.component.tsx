@@ -5,7 +5,6 @@ import { PanelContext } from "../../context/progress-panel.context";
 const Graph = () => {
   const [reload, setReload] = useState(false);
   const [mode, setMode] = useState("");
-
   const { selectedHabit } = useContext(PanelContext);
 
   useEffect(() => {
@@ -21,6 +20,7 @@ const Graph = () => {
         : "light"
     );
   }, []);
+
   const getProgressByMonth = () => {
     if (selectedHabit && selectedHabit.activeDays) {
       let dataAsObj: any = {};
