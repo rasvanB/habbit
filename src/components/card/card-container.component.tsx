@@ -16,7 +16,7 @@ const CardContainer = () => {
   });
 
   return (
-    <div>
+    <div className="pr-3 lg:pr-0">
       <div className="flex flex-col mt-3 gap-3 w-full border-t pt-2 dark:border-zinc-600">
         <div className="font-medium text-md dark:text-gray-300">{`Active: ${incompleteHabits.length}`}</div>
         {incompleteHabits.map((habit) => {
