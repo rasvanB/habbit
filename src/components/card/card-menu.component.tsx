@@ -8,9 +8,15 @@ import CardMenuItem from "./card-menu-item.component";
 type CardMenuProps = {
   isOpen: boolean;
   habit: Habit;
+  completed: boolean;
 } & React.ClassAttributes<HTMLDivElement>;
 
-const CardMenu = ({ isOpen, habit, ...otherProps }: CardMenuProps) => {
+const CardMenu = ({
+  isOpen,
+  habit,
+  completed,
+  ...otherProps
+}: CardMenuProps) => {
   const { currentUser, removeHabit } = useContext(UserContext);
   const { setOpen, setCurrentHabit, setHabitToEdit, setEditMode } =
     useContext(ModalContext);
@@ -56,6 +62,15 @@ const CardMenu = ({ isOpen, habit, ...otherProps }: CardMenuProps) => {
         iconName="bx:calendar"
         isMobile={false}
       />
+      {completed ? (
+        <CardMenuItem
+          text="reset progress"
+          iconName="codicon:debug-restart"
+          isMobile
+        ></CardMenuItem>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
