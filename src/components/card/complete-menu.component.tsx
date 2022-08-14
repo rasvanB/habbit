@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { PanelContext } from "../../context/progress-panel.context";
 import { Habit, UserContext } from "../../context/user.context";
 import { addHabitToUser } from "../../utils/firebase/firebase.utils";
 import { getDateAsString } from "./progress-menu.component";
@@ -11,6 +12,7 @@ type MenuProps = {
 
 const CompleteMenu = ({ isOpen, habit, close }: MenuProps) => {
   const { currentUser, editHabit } = useContext(UserContext);
+  const { setSelectedHabit } = useContext(PanelContext);
 
   const handleConfirm = () => {
     if (currentUser) {
@@ -21,6 +23,13 @@ const CompleteMenu = ({ isOpen, habit, close }: MenuProps) => {
           newHabit.activeDays[newHabit.activeDays.length - 1].date !==
           getDateAsString()
         ) {
+          newHabit.activeDays.push({
+            date: getDateAsString(),
+            progress: 1,
+            completed: true,
+          });
+        } else {
+          newHabit.activeDays.pop();
           newHabit.activeDays.push({
             date: getDateAsString(),
             progress: 1,
@@ -37,6 +46,7 @@ const CompleteMenu = ({ isOpen, habit, close }: MenuProps) => {
       }
 
       editHabit(newHabit);
+      setSelectedHabit(newHabit);
       addHabitToUser(currentUser.uid, newHabit);
       close();
     }

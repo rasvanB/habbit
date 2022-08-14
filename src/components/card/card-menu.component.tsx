@@ -1,9 +1,14 @@
 import React, { useContext } from "react";
 import { ModalContext } from "../../context/add-modal.context";
+import { PanelContext } from "../../context/progress-panel.context";
 import { Habit, UserContext } from "../../context/user.context";
-import { deleteHabitFromUser } from "../../utils/firebase/firebase.utils";
+import {
+  addHabitToUser,
+  deleteHabitFromUser,
+} from "../../utils/firebase/firebase.utils";
 import { showToast } from "../../utils/toast/habit-toasts";
 import CardMenuItem from "./card-menu-item.component";
+import { getDateAsString } from "./progress-menu.component";
 
 type CardMenuProps = {
   isOpen: boolean;
@@ -17,7 +22,8 @@ const CardMenu = ({
   completed,
   ...otherProps
 }: CardMenuProps) => {
-  const { currentUser, removeHabit } = useContext(UserContext);
+  const { currentUser, removeHabit, editHabit } = useContext(UserContext);
+  const { setSelectedHabit } = useContext(PanelContext);
   const { setOpen, setCurrentHabit, setHabitToEdit, setEditMode } =
     useContext(ModalContext);
 
@@ -34,6 +40,24 @@ const CardMenu = ({
     setCurrentHabit(habit);
     setHabitToEdit(habit);
     setEditMode(true);
+  };
+
+  const handleReset = () => {
+    if (currentUser) {
+      const newHabit = { ...habit };
+      newHabit.timeStamp = habit.timeStamp;
+      if (newHabit.activeDays && newHabit.activeDays.length > 0) {
+        newHabit.activeDays.pop();
+        newHabit.activeDays.push({
+          completed: false,
+          date: getDateAsString(),
+          progress: 0,
+        });
+        editHabit(newHabit);
+        addHabitToUser(currentUser.uid, newHabit);
+        setSelectedHabit(newHabit);
+      }
+    }
   };
 
   return (
@@ -67,6 +91,7 @@ const CardMenu = ({
           text="reset progress"
           iconName="codicon:debug-restart"
           isMobile
+          onClick={handleReset}
         ></CardMenuItem>
       ) : (
         <></>

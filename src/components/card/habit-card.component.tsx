@@ -139,7 +139,7 @@ const HabitCard = ({ habit, completed, ...otherProps }: CardProps) => {
       >
         <Icon icon="fluent:more-vertical-28-filled" />
       </div>
-      <CardMenu isOpen={isMenuOpen} habit={habit} />
+      <CardMenu isOpen={isMenuOpen} habit={habit} completed={completed} />
     </div>
   );
 };
