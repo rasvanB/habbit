@@ -24,6 +24,7 @@ const CardContainer = () => {
             <HabitCard
               key={habit.habitName + Math.floor(Math.random() * 1000)}
               habit={habit}
+              completed={false}
             />
           );
         })}
@@ -37,6 +38,7 @@ const CardContainer = () => {
             <HabitCard
               key={habit.habitName + Math.floor(Math.random() * 1000)}
               habit={habit}
+              completed
             />
           );
         })}

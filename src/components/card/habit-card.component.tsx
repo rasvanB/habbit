@@ -9,6 +9,7 @@ import { PanelContext } from "../../context/progress-panel.context";
 
 type CardProps = {
   habit: Habit;
+  completed: boolean;
 } & React.BaseHTMLAttributes<HTMLDivElement>;
 
 export const getDataOfToday = (habit: Habit) => {
@@ -28,7 +29,7 @@ export const getProgressOfToday = (habit: Habit) => {
   return 0;
 };
 
-const HabitCard = ({ habit, ...otherProps }: CardProps) => {
+const HabitCard = ({ habit, completed, ...otherProps }: CardProps) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isProgressOpen, setProgressOpen] = useState(false);
   const [isCompleteOpen, setCompleteOpen] = useState(false);
