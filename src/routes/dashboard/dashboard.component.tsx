@@ -15,20 +15,13 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { currentUser, loading } = useContext(UserContext);
   const { isOpen, setOpen, setEditMode } = useContext(ModalContext);
-  const { setDarkMode, darkMode } = useContext(ThemeContext);
+  const { setDarkMode } = useContext(ThemeContext);
   const toggleModal = () => {
     setOpen(!isOpen);
     setEditMode(false);
   };
-  console.log(darkMode);
 
   useEffect(() => {
-    if (!loading && !currentUser) {
-      navigate("/auth/sign-in");
-    }
-    if (currentUser) {
-      getUserHabits(currentUser.uid);
-    }
     window
       .matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", (event) => {
@@ -38,7 +31,16 @@ const Dashboard = () => {
     setDarkMode(
       window.matchMedia("(prefers-color-scheme: dark)").matches ? true : false
     );
-  }, [currentUser, navigate, loading, setDarkMode]);
+  }, [setDarkMode]);
+
+  useEffect(() => {
+    if (!loading && !currentUser) {
+      navigate("/auth/sign-in");
+    }
+    if (currentUser) {
+      getUserHabits(currentUser.uid);
+    }
+  }, [currentUser, navigate, loading]);
 
   return (
     <div className="flex flex-col h-screen dark:bg-zinc-800 bg-white overflow-hidden">
