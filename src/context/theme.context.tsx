@@ -6,14 +6,14 @@ export type ThemeContextType = {
 };
 
 const defaultContext: ThemeContextType = {
-  darkMode: false,
+  darkMode: true,
   setDarkMode: () => {},
 };
 
 export const ThemeContext = createContext<ThemeContextType>(defaultContext);
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   return (
     <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
       {children}

@@ -9,16 +9,18 @@ import CardContainer from "../../components/card/card-container.component";
 import { Toaster } from "react-hot-toast";
 import { ModalContext } from "../../context/add-modal.context";
 import ProgressPanel from "../../components/progress-panel/progress-panel.component";
+import { ThemeContext } from "../../context/theme.context";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const { currentUser, loading } = useContext(UserContext);
   const { isOpen, setOpen, setEditMode } = useContext(ModalContext);
-
+  const { setDarkMode, darkMode } = useContext(ThemeContext);
   const toggleModal = () => {
     setOpen(!isOpen);
     setEditMode(false);
   };
+  console.log(darkMode);
 
   useEffect(() => {
     if (!loading && !currentUser) {
@@ -27,7 +29,16 @@ const Dashboard = () => {
     if (currentUser) {
       getUserHabits(currentUser.uid);
     }
-  }, [currentUser, navigate, loading]);
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (event) => {
+        const colorScheme = event.matches ? true : false;
+        setDarkMode(colorScheme);
+      });
+    setDarkMode(
+      window.matchMedia("(prefers-color-scheme: dark)").matches ? true : false
+    );
+  }, [currentUser, navigate, loading, setDarkMode]);
 
   return (
     <div className="flex flex-col h-screen dark:bg-zinc-800 bg-white overflow-hidden">

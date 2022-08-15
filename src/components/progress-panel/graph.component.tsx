@@ -1,25 +1,12 @@
 import { ResponsiveBarCanvas } from "@nivo/bar";
 import { useContext, useEffect, useState } from "react";
 import { PanelContext } from "../../context/progress-panel.context";
+import { ThemeContext } from "../../context/theme.context";
 
 const Graph = () => {
   const [reload, setReload] = useState(false);
-  const [mode, setMode] = useState("");
   const { selectedHabit } = useContext(PanelContext);
-
-  useEffect(() => {
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", (event) => {
-        const colorScheme = event.matches ? "dark" : "light";
-        setMode(colorScheme);
-      });
-    setMode(
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light"
-    );
-  }, []);
+  const { darkMode } = useContext(ThemeContext);
 
   const getProgressByMonth = () => {
     if (selectedHabit && selectedHabit.activeDays) {
@@ -83,20 +70,20 @@ const Graph = () => {
                 stroke: "#A3A3A3",
               },
               text: {
-                fill: mode === "dark" ? "#A3A3A3" : "#4e4e4e",
+                fill: darkMode ? "#A3A3A3" : "#4e4e4e",
               },
             },
           },
           grid: {
             line: {
-              stroke: mode === "dark" ? "#383838" : "#e0e0e0",
+              stroke: darkMode ? "#383838" : "#e0e0e0",
               strokeWidth: 2,
             },
           },
           tooltip: {
             container: {
-              background: mode === "dark" ? "#383838" : "white",
-              color: mode === "dark" ? "white" : "#383838",
+              background: darkMode ? "#383838" : "white",
+              color: darkMode ? "white" : "#383838",
             },
           },
         }}
