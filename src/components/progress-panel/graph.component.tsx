@@ -8,6 +8,12 @@ const Graph = () => {
   const { selectedHabit } = useContext(PanelContext);
   const { darkMode } = useContext(ThemeContext);
 
+  const defaultData = [
+    {
+      value: 0,
+      month: `${new Date().getFullYear()}-${new Date().getMonth() + 1}`,
+    },
+  ];
   const getProgressByMonth = () => {
     if (selectedHabit && selectedHabit.activeDays) {
       let dataAsObj: any = {};
@@ -34,8 +40,8 @@ const Graph = () => {
     return [];
   };
 
-  const data = getProgressByMonth();
-
+  let data = getProgressByMonth();
+  if (data.length === 0) data = defaultData;
   useEffect(() => {
     if (selectedHabit) {
       setTimeout(() => {
