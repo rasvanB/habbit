@@ -42,6 +42,7 @@ const Graph = () => {
 
   let data = getProgressByMonth();
   if (data.length === 0) data = defaultData;
+
   useEffect(() => {
     if (selectedHabit) {
       setTimeout(() => {
