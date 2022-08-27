@@ -55,7 +55,7 @@ const CardMenu = ({
         });
         editHabit(newHabit);
         addHabitToUser(currentUser.uid, newHabit);
-        showToast("success", "Progress has been reset.");
+        showToast("success", "Progress has been reset!");
         setSelectedHabit(newHabit);
       }
     }
