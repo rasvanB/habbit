@@ -13,7 +13,7 @@ export const monthNames: { [key: number]: string } = {
   11: "December",
 };
 
-const partsOfDay = ["morning", "afternoon", "evening", "night"] as const;
+const partsOfDay = ["morning", "afternoon", "evening"] as const;
 type partsOfDayType = typeof partsOfDay[number];
 
 export const getPartOfDayFromTimeString = (d: Date): partsOfDayType => {
@@ -24,11 +24,7 @@ export const getPartOfDayFromTimeString = (d: Date): partsOfDayType => {
   } else {
     if (hoursPlusMinutes > 1200 && hoursPlusMinutes <= 1700) {
       return partsOfDay[1];
-    } else {
-      if (hoursPlusMinutes > 1700 && hoursPlusMinutes <= 2100) {
-        return partsOfDay[2];
-      } else return partsOfDay[3];
-    }
+    } else return partsOfDay[2];
   }
 };
 
