@@ -1,20 +1,44 @@
+import { Icon } from "@iconify/react";
+import { useContext } from "react";
+import { UserContext } from "../../context/user.context";
+
 type ProfileProps = {
   isOpen: boolean;
   close: () => void;
 };
 
 const Profile = ({ isOpen, close }: ProfileProps) => {
+  const { currentUser } = useContext(UserContext);
   const handleClose = () => {
     close();
   };
+
   return (
     <div
       className={`${
         isOpen ? "flex" : "hidden"
       } fixed top-0 left-0 h-screen w-screen justify-center items-center bg-black bg-opacity-40 backdrop-blur-sm font-poppins z-50`}
-      onClick={handleClose}
     >
-      User
+      <div className="relative bg-slate-100 dark:bg-zinc-700 flex flex-col px-2 py-5 pt-10 rounded-md w-full mobile:w-auto mobile:px-10 mobile:max-w-[500px]">
+        <Icon
+          icon="clarity:close-line"
+          className="p-1 text-2xl absolute top-2 right-3 dark:text-gray-200 cursor-pointer rounded-full outline outline-1 dark:outline-zinc-600 outline-zinc-300 hover:bg-gray-200 dark:hover:bg-zinc-500 bg-white dark:bg-zinc-600"
+          onClick={handleClose}
+        />
+        <div className="text-center">User Profile</div>
+        <div className="w-fit h-fit relative">
+          <img
+            alt="profile"
+            src={currentUser?.photoURL}
+            referrerPolicy="no-referrer"
+            className="rounded-full outline outline-2 dark:outline-zinc-400"
+          />
+          <Icon
+            icon="clarity:edit-solid"
+            className="absolute bottom-[-5px] right-1 bg-blue-600 p-2 text-3xl rounded-full"
+          ></Icon>
+        </div>
+      </div>
     </div>
   );
 };
