@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { PanelContext } from "../../context/progress-panel.context";
 import { Habit, UserContext } from "../../context/user.context";
 import { addHabitToUser } from "../../utils/firebase/firebase.utils";
@@ -12,6 +12,7 @@ type MenuProps = {
 
 const CompleteMenu = ({ isOpen, habit, close }: MenuProps) => {
   const { currentUser, editHabit } = useContext(UserContext);
+  const menuRef = useRef<HTMLDivElement>(null);
   const { setSelectedHabit } = useContext(PanelContext);
 
   const handleConfirm = () => {
@@ -52,8 +53,25 @@ const CompleteMenu = ({ isOpen, habit, close }: MenuProps) => {
     }
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      if (
+        isOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target)
+      ) {
+        close();
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen, menuRef, close]);
+
   return (
     <div
+      ref={menuRef}
       className={`${
         isOpen ? "flex" : "hidden"
       } absolute top-8 right-0 flex-col dark:bg-neutral-800 bg-white outline outline-1 dark:outline-zinc-600 outline-zinc-300 rounded-md z-10`}
