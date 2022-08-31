@@ -16,7 +16,6 @@ const SettingsMenu = ({ isOpen, signOut }: SettingsMenuProps) => {
 
   const closeProfile = () => {
     setProfileOpen(false);
-    console.log("wtf2");
   };
 
   return (
