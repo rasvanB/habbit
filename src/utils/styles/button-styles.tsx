@@ -33,5 +33,5 @@ export const buttonClasses = {
   saveChanges:
     "bg-blue-500 hover:bg-blue-600 min-w-[150px] text-white font-regular py-1 mt-5 w-fit rounded whitespace-nowrap mr-3 outline outline-1 outline-blue-400",
   cancel:
-    "bg-black bg-opacity-10 hover:bg-opacity-20 text-white font-regular py-1 mt-5 px-4 w-fit rounded outline outline-1 outline-neutral-500",
+    "bg-black bg-opacity-10 hover:bg-opacity-20 dark:text-white text-black font-regular py-1 mt-5 px-4 w-fit rounded outline outline-1 dark:outline-neutral-500 outline-neutral-300",
 };

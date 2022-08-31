@@ -61,13 +61,12 @@ const CardMenu = ({
     }
   };
 
-  
   return (
     <div
       {...otherProps}
       className={`${
         isOpen ? "top-3 lg:top-0 opacity-100" : "-top-[1000px] opacity-0"
-      } select-none flex flex-col absolute dark:bg-neutral-800 dark:text-gray-200 font-poppins text-sm right-7 lg:-right-[140px] rounded-sm transition-opacity py-1 z-10 outline outline-1 dark:outline-zinc-500 outline-zinc-400 bg-white-100 shadow-md dark:shadow-none`}
+      } select-none flex flex-col absolute dark:bg-neutral-800 dark:text-gray-200 font-poppins text-sm right-7 lg:-right-[140px] rounded-sm transition-opacity py-1 z-10 outline outline-1 dark:outline-zinc-500 outline-zinc-300 bg-white shadow-md dark:shadow-none`}
     >
       <CardMenuItem
         text="delete"

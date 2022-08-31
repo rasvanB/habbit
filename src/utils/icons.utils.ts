@@ -35,6 +35,7 @@ export const iconNames: string[] = [
   "ic:baseline-computer",
   "clarity:talk-bubbles-solid",
   "tabler:smoking-no",
+  "entypo:code",
 ];
 
 export const iconColors: string[] = [
