@@ -1,6 +1,11 @@
 import { Icon } from "@iconify/react";
+import { getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import React, { useContext, useRef } from "react";
-import { UserContext } from "../../context/user.context";
+import { UserContext, UserData } from "../../context/user.context";
+import {
+  editUser,
+  getImagesStorageRef,
+} from "../../utils/firebase/firebase.utils";
 import { showToast } from "../../utils/toast/habit-toasts";
 
 type ProfileProps = {
@@ -11,7 +16,7 @@ type ProfileProps = {
 const MB = 1048576;
 
 const Profile = ({ isOpen, close }: ProfileProps) => {
-  const { currentUser } = useContext(UserContext);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
   const uploadRef = useRef<HTMLInputElement>(null);
 
   const handleClose = () => {
@@ -24,12 +29,34 @@ const Profile = ({ isOpen, close }: ProfileProps) => {
     }
   };
 
-  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const image = e.target.files[0];
       if (image.size > 2 * MB) {
         showToast("error", "File size too big (max. 2MB)");
       } else {
+        if (currentUser) {
+          const storageRef = getImagesStorageRef(currentUser.uid);
+          const uploadTask = uploadBytesResumable(storageRef, image);
+          uploadTask.on(
+            "state_changed",
+            (snapshot) => {},
+            (error) => {
+              console.error(error);
+            },
+            () => {
+              getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl) => {
+                const newUser: UserData = {
+                  ...currentUser,
+                  photoURL: downloadUrl,
+                };
+                setCurrentUser(newUser);
+                editUser(newUser);
+                showToast("success", "Profile picture has been changed");
+              });
+            }
+          );
+        }
       }
     }
   };
@@ -52,7 +79,7 @@ const Profile = ({ isOpen, close }: ProfileProps) => {
             alt="profile"
             src={currentUser?.photoURL}
             referrerPolicy="no-referrer"
-            className="rounded-full outline outline-2 dark:outline-zinc-400"
+            className="rounded-full outline outline-2 dark:outline-zinc-400 w-[85px] h-[85px] object-cover"
           />
           <input
             type="file"

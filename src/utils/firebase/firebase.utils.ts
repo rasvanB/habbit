@@ -27,7 +27,12 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { FirebaseError } from "firebase/app";
-import { Habit, defaultProfilePicURL } from "../../context/user.context";
+import {
+  Habit,
+  defaultProfilePicURL,
+  UserData,
+} from "../../context/user.context";
+import { getStorage, ref } from "firebase/storage";
 // import { getAnalytics } from "firebase/analytics";
 const firebaseConfig = {
   apiKey: "AIzaSyCU_8Lk_XYfErTC1-mI8htZ-yfp0P-b74A",
@@ -72,6 +77,7 @@ export type UserInfo = {
 };
 
 const db = getFirestore();
+const storage = getStorage();
 
 export const createUserDocumentFromAuth = async (
   userAuth: UserInfo,
@@ -139,9 +145,14 @@ export const getUserDocData = async (uid: string) => {
   }
 };
 
-export const getUserDocRef = async (uid: string) => {
+export const getImagesStorageRef = (imageName: string) => {
+  return ref(storage, imageName);
+};
+
+export const editUser = async (newUser: UserData) => {
+  const { uid } = newUser;
   const userDocRef = doc(db, "users", uid);
-  return userDocRef;
+  await setDoc(userDocRef, newUser);
 };
 
 export const getUserHabits = async (uid: string) => {
