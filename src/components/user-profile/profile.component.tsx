@@ -110,7 +110,7 @@ const Profile = ({ isOpen, close }: ProfileProps) => {
           className="p-1 text-2xl absolute top-2 right-3 dark:text-gray-200 cursor-pointer rounded-full outline outline-1 dark:outline-zinc-600 outline-zinc-300 hover:bg-gray-200 dark:hover:bg-zinc-500 bg-white dark:bg-zinc-600"
           onClick={handleClose}
         />
-        <div className="text-center mb-2">User Profile</div>
+        <div className="text-center mb-4 text-lg ">User Profile</div>
         <div className="w-fit h-fit relative self-center mb-4">
           {isLoading ? (
             <div className="rounded-full flex items-center justify-center outline outline-2 dark:outline-zinc-400 w-[85px] h-[85px] object-cover">
