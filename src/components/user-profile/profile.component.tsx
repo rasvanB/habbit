@@ -91,11 +91,13 @@ const Profile = ({ isOpen, close }: ProfileProps) => {
         setCurrentUser(newUser);
         editUser(newUser);
         showToast("success", "Changes have been saved succesfully");
+        handleClose();
       } else {
         showToast("error", "Invalid name");
       }
     }
   };
+
   return (
     <div
       className={`${
@@ -143,7 +145,9 @@ const Profile = ({ isOpen, close }: ProfileProps) => {
         <InputBox label="Name" value={nameInput} onChange={handleChange} />
         {hasChanged && (
           <div className="flex">
-            <Button buttonStyle="save-changes">Save changes</Button>
+            <Button buttonStyle="save-changes" onClick={handleSaveChanges}>
+              Save changes
+            </Button>
             <Button buttonStyle="cancel" onClick={handleClose}>
               Cancel
             </Button>
