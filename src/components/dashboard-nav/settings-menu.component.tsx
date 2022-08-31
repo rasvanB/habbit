@@ -21,7 +21,7 @@ const SettingsMenu = ({ isOpen, signOut }: SettingsMenuProps) => {
   return (
     <div
       className={`${
-        isOpen ? "top-16 left-3 xl:left-auto optacity-100" : "-top-20 opacity-0"
+        isOpen ? "top-16 left-1 xl:left-auto optacity-100" : "-top-20 opacity-0"
       } flex dark:bg-zinc-700 rounded-md absolute left-[50px] flex-col font-poppins font-medium text-sm dark:text-gray-200 py-2 gap-1 bg-white shadow-md transition-opacity duration-200 ease-in`}
     >
       <SettingsMenuItem

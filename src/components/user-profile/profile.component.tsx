@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
 import { getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { UserContext, UserData } from "../../context/user.context";
 import {
   editUser,
@@ -17,6 +17,7 @@ const MB = 1048576;
 
 const Profile = ({ isOpen, close }: ProfileProps) => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
+  const [isLoading, setLoading] = useState(false);
   const uploadRef = useRef<HTMLInputElement>(null);
 
   const handleClose = () => {
@@ -40,7 +41,9 @@ const Profile = ({ isOpen, close }: ProfileProps) => {
           const uploadTask = uploadBytesResumable(storageRef, image);
           uploadTask.on(
             "state_changed",
-            (snapshot) => {},
+            (snapshot) => {
+              setLoading(true);
+            },
             (error) => {
               console.error(error);
             },
@@ -53,6 +56,7 @@ const Profile = ({ isOpen, close }: ProfileProps) => {
                 setCurrentUser(newUser);
                 editUser(newUser);
                 showToast("success", "Profile picture has been changed");
+                setLoading(false);
               });
             }
           );
@@ -75,12 +79,21 @@ const Profile = ({ isOpen, close }: ProfileProps) => {
         />
         <div className="text-center mb-2">User Profile</div>
         <div className="w-fit h-fit relative">
-          <img
-            alt="profile"
-            src={currentUser?.photoURL}
-            referrerPolicy="no-referrer"
-            className="rounded-full outline outline-2 dark:outline-zinc-400 w-[85px] h-[85px] object-cover"
-          />
+          {isLoading ? (
+            <div className="rounded-full flex items-center justify-center outline outline-2 dark:outline-zinc-400 w-[85px] h-[85px] object-cover">
+              <Icon
+                icon={"line-md:loading-twotone-loop"}
+                className="text-6xl text-blue-500"
+              />
+            </div>
+          ) : (
+            <img
+              alt="profile"
+              src={currentUser?.photoURL}
+              referrerPolicy="no-referrer"
+              className="rounded-full outline outline-2 dark:outline-zinc-400 w-[85px] h-[85px] object-cover"
+            />
+          )}
           <input
             type="file"
             ref={uploadRef}
