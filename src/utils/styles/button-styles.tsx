@@ -1,4 +1,6 @@
 export type buttonStyles =
+  | "cancel"
+  | "save-changes"
   | "navbar-login"
   | "navbar-signup"
   | "hero"
@@ -28,4 +30,8 @@ export const buttonClasses = {
     "bg-blue-400 hover:bg-blue-500 w-[30px] flex items-center justify-center rouded-md text-white text-lg h-[30px] font-poppins rounded-l-full",
   decrement:
     "bg-blue-400 hover:bg-blue-500 w-[30px] flex items-center justify-center rouded-md text-white text-lg h-[30px] font-poppins rounded-r-full",
+  saveChanges:
+    "bg-blue-500 hover:bg-blue-600 min-w-[150px] text-white font-regular py-1 mt-5 w-fit rounded whitespace-nowrap mr-3 outline outline-1 outline-blue-400",
+  cancel:
+    "bg-black bg-opacity-10 hover:bg-opacity-20 text-white font-regular py-1 mt-5 px-4 w-fit rounded outline outline-1 outline-neutral-500",
 };

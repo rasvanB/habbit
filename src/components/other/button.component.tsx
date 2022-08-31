@@ -29,6 +29,10 @@ const Button = ({ buttonStyle, children, ...otherProps }: ButtonProps) => {
             ? `${buttonClasses.increment}`
             : buttonStyle === "decrement"
             ? `${buttonClasses.decrement}`
+            : buttonStyle === "save-changes"
+            ? `${buttonClasses.saveChanges}`
+            : buttonStyle === "cancel"
+            ? `${buttonClasses.cancel}`
             : ""
         }
       >
