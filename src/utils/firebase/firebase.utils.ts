@@ -139,6 +139,11 @@ export const getUserDocData = async (uid: string) => {
   }
 };
 
+export const getUserDocRef = async (uid: string) => {
+  const userDocRef = doc(db, "users", uid);
+  return userDocRef;
+};
+
 export const getUserHabits = async (uid: string) => {
   const habitsQuery = query(collection(db, `users/${uid}/habits`));
   const habitsDocs = await getDocs(habitsQuery);
