@@ -37,7 +37,11 @@ const Nav = ({ username, photourl }: NavProps) => {
   return (
     <div className="relative flex items-center py-4 px-1 sm:px-4 xl:px-20 bg-slate-100 dark:bg-zinc-900 border-b border-slate-300 dark:border-zinc-600">
       <Avatar photoUrl={photourl} onClick={toggleOpenSettings} />
-      <SettingsMenu isOpen={isSettingsOpen} signOut={handleSignOut} />
+      <SettingsMenu
+        isOpen={isSettingsOpen}
+        signOut={handleSignOut}
+        close={toggleOpenSettings}
+      />
       <h1 className="ml-5 font-poppins font-medium text-lg text-zinc-800 dark:text-gray-100">
         {`Good ${partOfDay}, ${firstName}`}
       </h1>
