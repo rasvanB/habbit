@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { PanelContext } from "../../context/progress-panel.context";
 import { Habit, UserContext } from "../../context/user.context";
 import { addHabitToUser } from "../../utils/firebase/firebase.utils";
@@ -27,6 +27,7 @@ const ProgressMenu = ({
 }: ProgressMenuProps) => {
   const [progress, setProgress] = useState(getProgressOfToday(habit));
   const { currentUser, editHabit } = useContext(UserContext);
+  const menuRef = useRef<HTMLDivElement>(null);
   const { setSelectedHabit } = useContext(PanelContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,6 +67,22 @@ const ProgressMenu = ({
     setProgress(getProgressOfToday(habit));
     close();
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      if (
+        isOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target)
+      ) {
+        close();
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen, menuRef, close]);
 
   const handleConfirm = () => {
     if (progress !== getProgressOfToday(habit)) {
@@ -108,6 +125,7 @@ const ProgressMenu = ({
 
   return (
     <div
+      ref={menuRef}
       className={`${
         isOpen ? "flex" : "hidden"
       } absolute top-8 right-0 z-10 flex-col dark:bg-neutral-800 bg-white outline outline-1 dark:outline-zinc-600
