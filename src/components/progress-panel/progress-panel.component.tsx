@@ -11,7 +11,7 @@ const ProgressPanel = () => {
   return (
     <div
       className={`lg:w-auto lg:ml-auto w-[0px] h-full ${
-        isOpen ? "lg:visible lg:p-3 lg:pr-10" : "hidden"
+        isOpen ? "lg:visible lg:p-5" : "hidden"
       } dark:bg-zinc-900 bg-neutral-100 border-l dark:border-neutral-700`}
     >
       <Stats />

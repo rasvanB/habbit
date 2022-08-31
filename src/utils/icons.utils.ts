@@ -26,6 +26,15 @@ export const iconNames: string[] = [
   "material-symbols:wifi-off-rounded",
   "ic:twotone-sports-basketball",
   "heroicons-solid:music-note",
+  "bi:people-fill",
+  "ion:ear-outline",
+  "emojione-monotone:no-mobile-phones",
+  "fluent-emoji-high-contrast:toothbrush",
+  "clarity:sun-solid",
+  "fa:paint-brush",
+  "ic:baseline-computer",
+  "clarity:talk-bubbles-solid",
+  "tabler:smoking-no",
 ];
 
 export const iconColors: string[] = [
