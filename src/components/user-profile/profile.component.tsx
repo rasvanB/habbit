@@ -1,12 +1,13 @@
 import { Icon } from "@iconify/react";
 import { getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { UserContext, UserData } from "../../context/user.context";
 import {
   editUser,
   getImagesStorageRef,
 } from "../../utils/firebase/firebase.utils";
 import { showToast } from "../../utils/toast/habit-toasts";
+import InputBox from "../other/input-box.component";
 
 type ProfileProps = {
   isOpen: boolean;
@@ -18,6 +19,7 @@ const MB = 1048576;
 const Profile = ({ isOpen, close }: ProfileProps) => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const [isLoading, setLoading] = useState(false);
+  const [nameInput, setNameInput] = useState(currentUser?.displayName);
   const uploadRef = useRef<HTMLInputElement>(null);
 
   const handleClose = () => {
@@ -29,6 +31,10 @@ const Profile = ({ isOpen, close }: ProfileProps) => {
       uploadRef.current.click();
     }
   };
+
+  useEffect(() => {
+    setNameInput(currentUser?.displayName);
+  }, [currentUser]);
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -65,6 +71,11 @@ const Profile = ({ isOpen, close }: ProfileProps) => {
     }
   };
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setNameInput(value);
+  };
+
   return (
     <div
       className={`${
@@ -78,7 +89,7 @@ const Profile = ({ isOpen, close }: ProfileProps) => {
           onClick={handleClose}
         />
         <div className="text-center mb-2">User Profile</div>
-        <div className="w-fit h-fit relative">
+        <div className="w-fit h-fit relative self-center">
           {isLoading ? (
             <div className="rounded-full flex items-center justify-center outline outline-2 dark:outline-zinc-400 w-[85px] h-[85px] object-cover">
               <Icon
@@ -109,6 +120,7 @@ const Profile = ({ isOpen, close }: ProfileProps) => {
             onClick={handleUploadClick}
           ></Icon>
         </div>
+        <InputBox label="Name" value={nameInput} onChange={handleChange} />
       </div>
     </div>
   );
