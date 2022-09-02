@@ -14,6 +14,7 @@ const Graph = () => {
       month: `${new Date().getFullYear()}-${new Date().getMonth() + 1}`,
     },
   ];
+
   const getProgressByMonth = () => {
     if (selectedHabit && selectedHabit.activeDays) {
       let dataAsObj: any = {};
