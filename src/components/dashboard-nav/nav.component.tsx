@@ -35,7 +35,7 @@ const Nav = ({ username, photourl }: NavProps) => {
   const firstName: string = username.split(" ")[0];
 
   return (
-    <div className="relative flex items-center py-4 px-1 sm:px-4 xl:px-20 bg-slate-100 dark:bg-zinc-900 border-b border-slate-300 dark:border-zinc-600">
+    <div className="relative flex items-center py-4 px-2 sm:px-4 xl:px-20 bg-slate-100 dark:bg-zinc-900 border-b border-slate-300 dark:border-zinc-600">
       <Avatar photoUrl={photourl} onClick={toggleOpenSettings} />
       <SettingsMenu
         isOpen={isSettingsOpen}
