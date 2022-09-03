@@ -10,6 +10,7 @@ import { Toaster } from "react-hot-toast";
 import { ModalContext } from "../../context/add-modal.context";
 import ProgressPanel from "../../components/progress-panel/progress-panel.component";
 import { ThemeContext } from "../../context/theme.context";
+import { Icon } from "@iconify/react";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -52,7 +53,10 @@ const Dashboard = () => {
       <div className="ml-1 sm:ml-4 xl:ml-20 h-full flex">
         <div className="w-full max-w-[1200px] h-full lg:pr-3 xl:mr-10">
           <Button onClick={toggleModal} buttonStyle="add-habit">
-            Add Habit
+            <div className="flex justify-center items-center">
+              <Icon icon={"entypo:plus"} className="text-2xl mr-1" />
+              <span className="mr-2">Add Habit</span>
+            </div>
           </Button>
           <CardContainer />
         </div>
