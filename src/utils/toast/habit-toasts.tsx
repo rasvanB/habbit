@@ -41,7 +41,7 @@ export const showToast = (type: ToastType, message: string) => {
         </div>
       </div>
     ),
-    { duration: 2000 }
+    { duration: 2500 }
   );
 };
 export {};

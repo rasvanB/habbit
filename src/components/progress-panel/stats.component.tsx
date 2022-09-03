@@ -157,7 +157,10 @@ const Stats = () => {
             icon="akar-icons:circle-check-fill"
             className="text-2xl text-green-500"
           />
-          <div className="ml-2 font-semibold text-xl">{`${totalCompletions} ${selectedHabit?.unit}`}</div>
+          <div className="ml-2 font-semibold text-xl">{`${totalCompletions} ${selectedHabit?.unit.slice(
+            0,
+            7
+          )}...`}</div>
         </div>
         <div className=" font-semibold text-xs text-center mt-1">
           TOTAL PROGRESS
