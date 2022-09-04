@@ -42,7 +42,6 @@ export const iconColors: string[] = [
   "#f25555",
   "#5cd12a",
   "#5594f2",
-  "#ffff00",
   "#f2a655",
   "#ae55f2",
   "#f27ecf",
