@@ -118,6 +118,14 @@ const calculateCurrentStreak = (habit: Habit | null): number => {
 
 const Stats = () => {
   const { selectedHabit } = useContext(PanelContext);
+  let unit = "";
+
+  if (selectedHabit) {
+    if (selectedHabit.unit.length > 7)
+      unit = selectedHabit.unit.slice(0, 7) + "...";
+    else unit = selectedHabit.unit;
+  }
+
   const highestStreak = calculateHighestStreak(selectedHabit);
   const currentStreak = calculateCurrentStreak(selectedHabit);
   const totalCompletions = calculateTotalCompletions(selectedHabit);
@@ -157,10 +165,7 @@ const Stats = () => {
             icon="akar-icons:circle-check-fill"
             className="text-2xl text-green-500"
           />
-          <div className="ml-2 font-semibold text-xl">{`${totalCompletions} ${selectedHabit?.unit.slice(
-            0,
-            7
-          )}...`}</div>
+          <div className="ml-2 font-semibold text-xl">{`${totalCompletions} ${unit}`}</div>
         </div>
         <div className=" font-semibold text-xs text-center mt-1">
           TOTAL PROGRESS
