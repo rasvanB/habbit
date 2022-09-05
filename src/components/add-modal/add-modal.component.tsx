@@ -16,6 +16,7 @@ import {
 } from "../../context/add-modal.context";
 import { getDateAsString } from "../card/progress-menu.component";
 import { PanelContext } from "../../context/progress-panel.context";
+import Modal from "../other/modal.component";
 
 const AddModal = () => {
   const [isIconsHidden, setIsIconsHidden] = useState(true);
@@ -145,100 +146,86 @@ const AddModal = () => {
   };
 
   return (
-    <div
-      className={`${
-        isOpen ? "flex" : "hidden"
-      } fixed h-screen w-screen justify-center items-center bg-black bg-opacity-40 backdrop-blur-sm dark:[color-scheme:dark] font-poppins`}
-    >
-      <div className="relative bg-slate-100 dark:bg-zinc-700 flex flex-col px-2 py-5 pt-10 rounded-md w-full mobile:w-auto mobile:px-10 mobile:max-w-[500px]">
-        <Icon
-          icon="clarity:close-line"
-          className="p-1 text-2xl absolute top-3 right-3 dark:text-gray-200 cursor-pointer rounded-full outline outline-1 dark:outline-zinc-600 outline-zinc-300 hover:bg-gray-200 dark:hover:bg-zinc-500 bg-white dark:bg-zinc-600"
-          onClick={handleClose}
-        />
-        {errorMessage && (
-          <div className="my-3">
-            <Message isError message={errorMessage} />
-          </div>
-        )}
-        <div className="flex items-end">
-          <InputBox
-            label="NAME"
-            name="habitName"
-            onChange={handleChange}
-            value={currentHabit.habitName}
-            placeholder="Name your habit"
-          ></InputBox>
-          <div className="ml-auto relative">
-            <h1 className="dark:text-gray-200 ml-[19px] mb-1 text-sm">ICON</h1>
-            <Button
-              buttonStyle="select-icon"
-              className="bottom-0"
-              onClick={handleIconsToggle}
-            >
-              <div className="mobile:w-[25px] mobile:h-[25px] flex justify-center items-center">
-                <Icon
-                  icon={`${
-                    currentHabit.iconName
-                      ? currentHabit.iconName
-                      : "bi:question-lg"
-                  }`}
-                  className={`text-2xl`}
-                  style={{
-                    color: currentHabit.iconColor,
-                  }}
-                />
-              </div>
-            </Button>
-            <IconMenu
-              isIconsHidden={isIconsHidden}
-              selectIcon={selectIcon}
-              iconColor={currentHabit.iconColor}
-              changeColor={changeColor}
-            />
-          </div>
+    <Modal isOpen={isOpen} close={handleClose}>
+      {errorMessage && (
+        <div className="my-3">
+          <Message isError message={errorMessage} />
         </div>
-        <div className="dark:text-gray-200 mt-1 mb-1">GOAL</div>
-        <div className="flex gap-3 mobile:gap-5">
-          <Dropdown
-            options={requirementOptions}
-            setRequirement={changeRequirement}
-            requirement={currentHabit.requirement}
-          ></Dropdown>
-          <InputBox
-            name="goal"
-            placeholder="goal"
-            type="number"
-            min={1}
-            max={100}
-            value={currentHabit.goal}
-            onChange={handleChange}
-          />
-          <InputBox
-            placeholder="unit"
-            name="unit"
-            onChange={handleChange}
-            value={currentHabit.unit}
+      )}
+      <div className="flex items-end">
+        <InputBox
+          label="NAME"
+          name="habitName"
+          onChange={handleChange}
+          value={currentHabit.habitName}
+          placeholder="Name your habit"
+        ></InputBox>
+        <div className="ml-auto relative">
+          <h1 className="dark:text-gray-200 ml-[19px] mb-1 text-sm">ICON</h1>
+          <Button
+            buttonStyle="select-icon"
+            className="bottom-0"
+            onClick={handleIconsToggle}
+          >
+            <div className="mobile:w-[25px] mobile:h-[25px] flex justify-center items-center">
+              <Icon
+                icon={`${
+                  currentHabit.iconName
+                    ? currentHabit.iconName
+                    : "bi:question-lg"
+                }`}
+                className={`text-2xl`}
+                style={{
+                  color: currentHabit.iconColor,
+                }}
+              />
+            </div>
+          </Button>
+          <IconMenu
+            isIconsHidden={isIconsHidden}
+            selectIcon={selectIcon}
+            iconColor={currentHabit.iconColor}
+            changeColor={changeColor}
           />
         </div>
-        <div className="mt-3">
-          <InputBox
-            placeholder="Habit description (optional)"
-            name="description"
-            value={currentHabit.description}
-            onChange={handleChange}
-          />
-        </div>
-        <Button
-          buttonStyle="submit"
-          onClick={editMode ? handleEdit : handleAdd}
-        >
-          <div className="font-light text-sm">{`${
-            editMode ? "Edit Habit" : "Add Habit"
-          }`}</div>
-        </Button>
       </div>
-    </div>
+      <div className="dark:text-gray-200 mt-1 mb-1">GOAL</div>
+      <div className="flex gap-3 mobile:gap-5">
+        <Dropdown
+          options={requirementOptions}
+          setRequirement={changeRequirement}
+          requirement={currentHabit.requirement}
+        ></Dropdown>
+        <InputBox
+          name="goal"
+          placeholder="goal"
+          type="number"
+          min={1}
+          max={100}
+          value={currentHabit.goal}
+          onChange={handleChange}
+        />
+        <InputBox
+          placeholder="unit"
+          name="unit"
+          onChange={handleChange}
+          value={currentHabit.unit}
+        />
+      </div>
+      <div className="mt-3">
+        <InputBox
+          placeholder="Habit description (optional)"
+          name="description"
+          value={currentHabit.description}
+          onChange={handleChange}
+        />
+      </div>
+      <Button buttonStyle="submit" onClick={editMode ? handleEdit : handleAdd}>
+        <div className="font-light text-sm">{`${
+          editMode ? "Edit Habit" : "Add Habit"
+        }`}</div>
+      </Button>
+    </Modal>
   );
 };
 export default AddModal;

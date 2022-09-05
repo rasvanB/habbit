@@ -9,6 +9,7 @@ import {
 import { showToast } from "../../utils/toast/habit-toasts";
 import Button from "../other/button.component";
 import InputBox from "../other/input-box.component";
+import Modal from "../other/modal.component";
 
 type ProfileProps = {
   isOpen: boolean;
@@ -99,64 +100,53 @@ const Profile = ({ isOpen, close }: ProfileProps) => {
   };
 
   return (
-    <div
-      className={`${
-        isOpen ? "flex" : "hidden"
-      } fixed top-0 left-0 h-screen w-screen justify-center items-center bg-black bg-opacity-40 backdrop-blur-sm font-poppins z-50`}
-    >
-      <div className="relative bg-slate-100 dark:bg-zinc-700 flex flex-col px-2 py-5 rounded-md w-full mobile:w-auto mobile:px-10 mobile:max-w-[500px]">
-        <Icon
-          icon="clarity:close-line"
-          className="p-1 text-2xl absolute top-2 right-3 dark:text-gray-200 cursor-pointer rounded-full outline outline-1 dark:outline-zinc-600 outline-zinc-300 hover:bg-gray-200 dark:hover:bg-zinc-500 bg-white dark:bg-zinc-600"
-          onClick={handleClose}
-        />
-        <div className="text-center mb-2 text-lg dark:text-white text-neutral-500">
-          User Profile
-        </div>
-        <div className="w-fit h-fit relative self-center mb-2">
-          {isLoading ? (
-            <div className="rounded-full flex items-center justify-center outline outline-2 dark:outline-zinc-400 w-[85px] h-[85px] object-cover">
-              <Icon
-                icon={"line-md:loading-twotone-loop"}
-                className="text-6xl text-blue-500"
-              />
-            </div>
-          ) : (
-            <img
-              alt="profile"
-              src={currentUser?.photoURL}
-              referrerPolicy="no-referrer"
-              className="rounded-full outline outline-2 dark:outline-zinc-400 outline-zinc-300 w-[85px] h-[85px] object-cover"
-            />
-          )}
-          <input
-            type="file"
-            ref={uploadRef}
-            hidden
-            accept="image/jpeg,image/png"
-            onChange={(e) => {
-              handleUpload(e);
-            }}
-          />
-          <Icon
-            icon="clarity:edit-solid"
-            className="absolute bottom-[-5px] right-1 dark:bg-blue-600 bg-blue-400 p-2 text-3xl rounded-full text-white cursor-pointer hover:bg-blue-500"
-            onClick={handleUploadClick}
-          ></Icon>
-        </div>
-        <InputBox label="Name" value={nameInput} onChange={handleChange} />
-        {hasChanged && (
-          <div className="flex">
-            <Button buttonStyle="save-changes" onClick={handleSaveChanges}>
-              Save changes
-            </Button>
-            <Button buttonStyle="cancel" onClick={handleClose}>
-              Cancel
-            </Button>
-          </div>
-        )}
+    <Modal isOpen={isOpen} close={handleClose}>
+      <div className="text-center mb-2 text-lg dark:text-white text-neutral-500">
+        User Profile
       </div>
-    </div>
+      <div className="w-fit h-fit relative self-center mb-2">
+        {isLoading ? (
+          <div className="rounded-full flex items-center justify-center outline outline-2 dark:outline-zinc-400 w-[85px] h-[85px] object-cover">
+            <Icon
+              icon={"line-md:loading-twotone-loop"}
+              className="text-6xl text-blue-500"
+            />
+          </div>
+        ) : (
+          <img
+            alt="profile"
+            src={currentUser?.photoURL}
+            referrerPolicy="no-referrer"
+            className="rounded-full outline outline-2 dark:outline-zinc-400 outline-zinc-300 w-[85px] h-[85px] object-cover"
+          />
+        )}
+        <input
+          type="file"
+          ref={uploadRef}
+          hidden
+          accept="image/jpeg,image/png"
+          onChange={(e) => {
+            handleUpload(e);
+          }}
+        />
+        <Icon
+          icon="clarity:edit-solid"
+          className="absolute bottom-[-5px] right-1 dark:bg-blue-600 bg-blue-400 p-2 text-3xl rounded-full text-white cursor-pointer hover:bg-blue-500"
+          onClick={handleUploadClick}
+        ></Icon>
+      </div>
+      <InputBox label="Name" value={nameInput} onChange={handleChange} />
+      {hasChanged && (
+        <div className="flex">
+          <Button buttonStyle="save-changes" onClick={handleSaveChanges}>
+            Save changes
+          </Button>
+          <Button buttonStyle="cancel" onClick={handleClose}>
+            Cancel
+          </Button>
+        </div>
+      )}
+    </Modal>
   );
 };
 
