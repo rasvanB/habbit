@@ -2,46 +2,21 @@ import { ResponsiveBarCanvas } from "@nivo/bar";
 import { useContext, useEffect, useState } from "react";
 import { PanelContext } from "../../context/progress-panel.context";
 import { ThemeContext } from "../../context/theme.context";
+import { getProgressByMonth } from "../../utils/stats.utils";
+
+const defaultData = [
+  {
+    value: 0,
+    month: `${new Date().getFullYear()}-${new Date().getMonth() + 1}`,
+  },
+];
 
 const Graph = () => {
   const [reload, setReload] = useState(false);
   const { selectedHabit } = useContext(PanelContext);
   const { darkMode } = useContext(ThemeContext);
 
-  const defaultData = [
-    {
-      value: 0,
-      month: `${new Date().getFullYear()}-${new Date().getMonth() + 1}`,
-    },
-  ];
-
-  const getProgressByMonth = () => {
-    if (selectedHabit && selectedHabit.activeDays) {
-      let dataAsObj: any = {};
-      let dataAsArr = [];
-      if (selectedHabit.activeDays.length > 0) {
-        for (let i = 0; i < selectedHabit.activeDays.length; i++) {
-          let month = selectedHabit.activeDays[i].date.slice(0, -3);
-          if (!dataAsObj.hasOwnProperty(month)) {
-            Object.assign(dataAsObj, {
-              [month]: selectedHabit.activeDays[i].progress,
-            });
-          } else {
-            Object.assign(dataAsObj, {
-              [month]: dataAsObj[month] + selectedHabit.activeDays[i].progress,
-            });
-          }
-        }
-        for (const property in dataAsObj) {
-          dataAsArr.push({ month: property, value: dataAsObj[property] });
-        }
-      }
-      return dataAsArr;
-    }
-    return [];
-  };
-
-  let data = getProgressByMonth();
+  let data = getProgressByMonth(selectedHabit);
   if (data.length === 0) data = defaultData;
 
   useEffect(() => {
