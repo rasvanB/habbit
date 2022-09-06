@@ -22,7 +22,7 @@ const Stats = () => {
   const totalCompletions = calculateTotalCompletions(selectedHabit);
   return (
     <div className="flex justify-between gap-3">
-      <div className="border-gray-600 dark:bg-zinc-800 bg-white shadow-sm w-full dark:text-gray-200 p-4 rounded-lg">
+      <div className="border-gray-600 dark:bg-zinc-800 bg-white shadow-sm dark:text-gray-200 p-4 rounded-lg min-w-[192px] ">
         <div className="flex justify-center items-center">
           <Icon
             icon="ant-design:fire-filled"
@@ -36,7 +36,7 @@ const Stats = () => {
           LONGEST STREAK
         </div>
       </div>
-      <div className="border-gray-600 dark:bg-zinc-800 bg-white shadow-sm w-full dark:text-gray-200 p-4 rounded-lg">
+      <div className="border-gray-600 dark:bg-zinc-800 bg-white shadow-sm dark:text-gray-200 p-4 rounded-lg min-w-[192px]">
         <div className="flex justify-center items-center">
           <Icon
             icon="ant-design:fire-filled"
@@ -50,7 +50,7 @@ const Stats = () => {
           CURRENT STREAK
         </div>
       </div>
-      <div className="border-gray-600  dark:bg-zinc-800 bg-white shadow-sm w-full dark:text-gray-200 p-4 rounded-lg">
+      <div className="border-gray-600  dark:bg-zinc-800 bg-white shadow-sm dark:text-gray-200 p-4 rounded-lg min-w-[192px] ">
         <div className="flex justify-center items-center">
           <Icon
             icon="akar-icons:circle-check-fill"

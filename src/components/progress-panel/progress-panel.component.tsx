@@ -11,8 +11,10 @@ const ProgressPanel = () => {
   return (
     <div
       className={`lg:w-auto lg:ml-auto w-[0px] h-full ${
-        isOpen ? "lg:visible lg:p-5 translate-x-5 lg:translate-x-0" : "hidden"
-      } dark:bg-zinc-900 bg-neutral-100 border-l dark:border-neutral-700`}
+        isOpen
+          ? "lg:visible lg:p-5 lg:pr-7 translate-x-5 lg:translate-x-0"
+          : "hidden"
+      } dark:bg-zinc-900 bg-neutral-100 border-l dark:border-neutral-700 lg:min-w-[650px] overflow-y-auto overflow-x-clip`}
     >
       <Stats />
       <div className="flex gap-1">

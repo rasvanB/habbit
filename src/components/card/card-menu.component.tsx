@@ -66,7 +66,7 @@ const CardMenu = ({
       {...otherProps}
       className={`${
         isOpen ? "top-3 lg:top-0 opacity-100" : "-top-[1000px] opacity-0"
-      } select-none flex flex-col absolute dark:bg-neutral-800 dark:text-gray-200 font-poppins text-sm right-7 ${
+      } select-none flex flex-col justify-center absolute dark:bg-neutral-800 dark:text-gray-200 font-poppins text-sm right-7 ${
         completed ? "lg:-right-[157px]" : "lg:-right-[140px]"
       } rounded-sm transition-opacity py-1 z-10 outline outline-1 dark:outline-zinc-500 outline-zinc-300 bg-white shadow-md dark:shadow-none`}
     >
@@ -86,6 +86,11 @@ const CardMenu = ({
       />
       <CardMenuItem
         text="view progress"
+        iconName="bi:bar-chart-line-fill"
+        isMobile={false}
+      />
+      <CardMenuItem
+        text="log progress"
         iconName="bx:calendar"
         isMobile={false}
       />
