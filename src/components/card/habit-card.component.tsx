@@ -3,31 +3,15 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Habit } from "../../context/user.context";
 import hexToRgba from "hex-to-rgba";
 import CardMenu from "./card-menu.component";
-import ProgressMenu, { getDateAsString } from "./progress-menu.component";
+import ProgressMenu from "./progress-menu.component";
 import CompleteMenu from "./complete-menu.component";
 import { PanelContext } from "../../context/progress-panel.context";
+import { getDataOfToday, getProgressOfToday } from "../../utils/stats.utils";
 
 type CardProps = {
   habit: Habit;
   completed: boolean;
 } & React.BaseHTMLAttributes<HTMLDivElement>;
-
-export const getDataOfToday = (habit: Habit) => {
-  if (habit.activeDays)
-    if (
-      habit.activeDays.length > 0 &&
-      habit.activeDays[habit.activeDays.length - 1].date === getDateAsString()
-    ) {
-      return habit.activeDays[habit.activeDays.length - 1];
-    } else return null;
-  else return null;
-};
-
-export const getProgressOfToday = (habit: Habit) => {
-  const today = getDataOfToday(habit);
-  if (today) return today.progress;
-  return 0;
-};
 
 const HabitCard = ({ habit, completed, ...otherProps }: CardProps) => {
   const [isMenuOpen, setMenuOpen] = useState(false);

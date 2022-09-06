@@ -138,3 +138,20 @@ export const getProgressByMonth = (selectedHabit: Habit | null): {}[] => {
   }
   return [];
 };
+
+export const getDataOfToday = (habit: Habit) => {
+  if (habit.activeDays)
+    if (
+      habit.activeDays.length > 0 &&
+      habit.activeDays[habit.activeDays.length - 1].date === getDateAsString()
+    ) {
+      return habit.activeDays[habit.activeDays.length - 1];
+    } else return null;
+  else return null;
+};
+
+export const getProgressOfToday = (habit: Habit) => {
+  const today = getDataOfToday(habit);
+  if (today) return today.progress;
+  return 0;
+};

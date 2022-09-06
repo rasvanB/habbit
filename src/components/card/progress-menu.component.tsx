@@ -3,8 +3,8 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { PanelContext } from "../../context/progress-panel.context";
 import { Habit, UserContext } from "../../context/user.context";
 import { addHabitToUser } from "../../utils/firebase/firebase.utils";
+import { getProgressOfToday } from "../../utils/stats.utils";
 import Button from "../other/button.component";
-import { getProgressOfToday } from "./habit-card.component";
 
 type ProgressMenuProps = {
   isOpen: boolean;
