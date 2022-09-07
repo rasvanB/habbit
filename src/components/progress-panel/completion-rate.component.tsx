@@ -25,10 +25,11 @@ const CompletionRate = () => {
       }
     }
     if (firstDay) {
-      const firstDayAsDate = new Date(firstDay.date);
-      const todayDate = new Date();
+      const firstDayAsDate = new Date(firstDay.date).setUTCHours(0, 0, 0);
+      const todayDate = new Date().setUTCHours(0, 0, 0);
+
       const result = Math.round(
-        (todayDate.getTime() - firstDayAsDate.getTime()) / (1000 * 3600 * 24)
+        (todayDate - firstDayAsDate) / (1000 * 3600 * 24)
       );
       if (result === -1) return 1;
       else return result + 1;
