@@ -8,11 +8,11 @@ type ProgressCalendarProps = {
 
 const ProgressCalendar = ({ habit }: ProgressCalendarProps) => {
   return (
-    <>
+    <div className="bg-[#39393e] p-3 rounded-md">
       <ProgressCalendarNav />
       <DayLabels />
       <ProgressCalendarDates habit={habit} />
-    </>
+    </div>
   );
 };
 

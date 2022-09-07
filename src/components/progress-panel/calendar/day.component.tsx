@@ -2,6 +2,8 @@ type DateProps = {
   active: boolean;
   isSurplus: boolean;
   date: Date;
+  activeCompletedStyle?: string;
+  inactiveCompletedStyle?: string;
 };
 const Day = ({ active, isSurplus, date }: DateProps) => {
   return (
