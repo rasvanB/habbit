@@ -8,7 +8,7 @@ type ProgressCalendarProps = {
 
 const ProgressCalendar = ({ habit }: ProgressCalendarProps) => {
   return (
-    <div className="bg-[#39393e] p-3 rounded-md">
+    <div className="dark:bg-[#39393e] bg-white p-3 rounded-md">
       <ProgressCalendarNav />
       <DayLabels />
       <ProgressCalendarDates habit={habit} />

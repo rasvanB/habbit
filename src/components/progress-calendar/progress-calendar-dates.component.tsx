@@ -45,6 +45,10 @@ const ProgressCalendarDates = ({ habit }: ProgressCalendarDatesProps) => {
             isSurplus={date.active}
             active={isActiveDay}
             date={date.d}
+            inactiveCompletedStyle="dark:text-blue-700 dark:outline-blue-700 outline outline-2 text-blue-300 outline-blue-300"
+            onClick={() => {
+              console.log(date);
+            }}
           />
         );
       })}
