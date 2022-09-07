@@ -122,6 +122,9 @@ const CardMenu = ({
         )}
       </div>
       <Modal isOpen={isModalOpen} close={closeModal}>
+        <div className="text-center font-poppins mb-4 text-xl">
+          LOG PROGRESS
+        </div>
         <ProgressCalendar habit={habit} />
       </Modal>
     </>

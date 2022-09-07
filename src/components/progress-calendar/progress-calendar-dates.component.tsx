@@ -4,6 +4,8 @@ import { Habit } from "../../context/user.context";
 import Day from "../progress-panel/calendar/day.component";
 import { ProgressCalendarContext } from "../../context/progress-calendar.contex";
 import { addCompletedDayToHabit } from "../../utils/stats.utils";
+import { compareAsc } from "date-fns";
+import { getDateAsString } from "../card/progress-menu.component";
 
 type ProgressCalendarDatesProps = {
   habit: Habit;
@@ -21,6 +23,10 @@ const ProgressCalendarDates = ({ habit }: ProgressCalendarDatesProps) => {
     });
   };
 
+  const handleClick = (d: Date) => {
+    addCompletedDayToHabit(habit, d);
+    setReload(!reload);
+  };
   const activeDays = getActiveDays();
   let activeDaysIndex = 0;
 
@@ -49,10 +55,11 @@ const ProgressCalendarDates = ({ habit }: ProgressCalendarDatesProps) => {
             active={isActiveDay}
             date={date.d}
             inactiveCompletedStyle="dark:text-blue-700 dark:outline-blue-700 outline outline-2 text-blue-300 outline-blue-300"
-            onClick={() => {
-              addCompletedDayToHabit(habit, date.d);
-              setReload(!reload);
-            }}
+            onClick={
+              compareAsc(new Date(getDateAsString()), date.d) !== -1
+                ? () => handleClick(date.d)
+                : undefined
+            }
           />
         );
       })}
