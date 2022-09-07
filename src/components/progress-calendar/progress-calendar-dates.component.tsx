@@ -1,24 +1,27 @@
-import { useCallback, useContext } from "react";
+import { useContext, useState } from "react";
 import { getDatesOfMonth } from "../../utils/calendar.utils";
 import { Habit } from "../../context/user.context";
 import Day from "../progress-panel/calendar/day.component";
 import { ProgressCalendarContext } from "../../context/progress-calendar.contex";
+import { addCompletedDayToHabit } from "../../utils/stats.utils";
+
 type ProgressCalendarDatesProps = {
   habit: Habit;
 };
+
 const ProgressCalendarDates = ({ habit }: ProgressCalendarDatesProps) => {
   const { selectedDate } = useContext(ProgressCalendarContext);
+  const [reload, setReload] = useState(false);
   const monthDates = getDatesOfMonth(selectedDate);
 
-  const getActiveDays = useCallback(() => {
+  const getActiveDays = () => {
     return habit?.activeDays.filter((day) => {
       const dayAsDate = new Date(day.date);
       return day.completed && dayAsDate >= monthDates[0].d;
     });
-  }, [habit, monthDates]);
+  };
 
   const activeDays = getActiveDays();
-
   let activeDaysIndex = 0;
 
   return (
@@ -47,7 +50,8 @@ const ProgressCalendarDates = ({ habit }: ProgressCalendarDatesProps) => {
             date={date.d}
             inactiveCompletedStyle="dark:text-blue-700 dark:outline-blue-700 outline outline-2 text-blue-300 outline-blue-300"
             onClick={() => {
-              console.log(date);
+              addCompletedDayToHabit(habit, date.d);
+              setReload(!reload);
             }}
           />
         );

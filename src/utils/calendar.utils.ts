@@ -95,3 +95,13 @@ export const nextMonth = (currentMonth: Date): Date =>
 
 export const prevMonth = (currentMonth: Date): Date =>
   new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 0);
+
+export const checkDatesEqual = (d1: Date, d2: Date) => {
+  if (
+    d1.getFullYear() === d2.getFullYear() &&
+    d1.getMonth() === d2.getMonth() &&
+    d1.getDate() === d2.getDate()
+  )
+    return true;
+  return false;
+};

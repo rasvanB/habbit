@@ -1,5 +1,6 @@
 import { getDateAsString } from "../components/card/progress-menu.component";
 import { Habit } from "../context/user.context";
+import { checkDatesEqual } from "./calendar.utils";
 
 // CHECK IF TWO DAYS ARE CONSECUTIVE
 export const checkConsecutive = (day1: string, day2: string): boolean => {
@@ -154,4 +155,35 @@ export const getProgressOfToday = (habit: Habit) => {
   const today = getDataOfToday(habit);
   if (today) return today.progress;
   return 0;
+};
+
+export const addCompletedDayToHabit = (habit: Habit, d: Date) => {
+  let found = false;
+  for (let i = 0; i < habit.activeDays.length; i++) {
+    const day = habit.activeDays[i];
+    const dayAsDate = new Date(day.date);
+
+    if (checkDatesEqual(d, dayAsDate)) {
+      habit.activeDays.splice(i, 1);
+      return;
+    } else {
+      if (d < dayAsDate) {
+        habit.activeDays.splice(i, 0, {
+          date: d.toLocaleDateString("sv-SE"),
+          completed: true,
+          progress: habit.goal,
+        });
+        found = true;
+        return;
+      }
+    }
+  }
+  if (!found) {
+    habit.activeDays.push({
+      date: d.toLocaleDateString("sv-SE"),
+      completed: true,
+      progress: habit.goal,
+    });
+    return;
+  }
 };

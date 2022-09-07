@@ -3,7 +3,7 @@ import { createContext, ReactNode, useState } from "react";
 export const defaultProfilePicURL =
   "https://i.ibb.co/dBr1HsM/default-profile-300x284.png";
 
-type ActiveDay = {
+export type ActiveDay = {
   date: string;
   progress: number;
   completed: boolean;
