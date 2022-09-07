@@ -1,6 +1,5 @@
 import { Habit } from "../../context/user.context";
-import Calendar from "../progress-panel/calendar/calendar.component";
-
+import CalendarNavigation from "../progress-panel/calendar/calendar-nav.component";
 type ProgressCalendarProps = {
   habit: Habit;
 };
@@ -8,7 +7,7 @@ type ProgressCalendarProps = {
 const ProgressCalendar = ({ habit }: ProgressCalendarProps) => {
   return (
     <div>
-      <Calendar />
+      <CalendarNavigation />
     </div>
   );
 };

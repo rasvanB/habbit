@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Icon } from "@iconify/react";
 import { useContext } from "react";
 import { PanelContext } from "../../../context/progress-panel.context";

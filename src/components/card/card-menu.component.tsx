@@ -9,7 +9,7 @@ import {
 import { showToast } from "../../utils/toast/habit-toasts";
 import Modal from "../other/modal.component";
 import CardMenuItem from "./card-menu-item.component";
-import ProgressCalendar from "./progress-calendar.component";
+import ProgressCalendar from "../progress-calendar/progress-calendar.component";
 import { getDateAsString } from "./progress-menu.component";
 
 type CardMenuProps = {
