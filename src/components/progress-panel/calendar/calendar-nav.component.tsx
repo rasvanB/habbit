@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Icon } from "@iconify/react";
-import { useCallback, useContext } from "react";
+import { useContext } from "react";
 import { PanelContext } from "../../../context/progress-panel.context";
 import {
   getMonthFromNumber,
@@ -11,13 +11,13 @@ import {
 const CalendarNavigation = () => {
   const { selectedDate, setSelectedDate } = useContext(PanelContext);
 
-  const handleNextMonth = useCallback(() => {
+  const handleNextMonth = () => {
     setSelectedDate(nextMonth(selectedDate));
-  }, [selectedDate]);
+  };
 
-  const handlePrevMonth = useCallback(() => {
+  const handlePrevMonth = () => {
     setSelectedDate(prevMonth(selectedDate));
-  }, [selectedDate]);
+  };
 
   return (
     <div className="flex justify-between dark:text-gray-200 text-neutral-600 select-none">

@@ -20,6 +20,7 @@ const HabitCard = ({ habit, completed, ...otherProps }: CardProps) => {
   const { setSelectedHabit, setOpen, setSelectedDate } =
     useContext(PanelContext);
 
+  const cardRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -34,6 +35,19 @@ const HabitCard = ({ habit, completed, ...otherProps }: CardProps) => {
     document.body.addEventListener("click", closeMenus);
     return () => document.body.removeEventListener("click", closeMenus);
   }, []);
+
+  useEffect(() => {
+    const idk = (e: any) => {
+      if (
+        cardRef.current === e.composedPath()[1] ||
+        cardRef.current === e.composedPath()[2]
+      ) {
+        handleClick();
+      }
+    };
+    document.body.addEventListener("click", idk);
+    return () => document.body.removeEventListener("click", idk);
+  });
 
   const closeProgressMenu = () => {
     setProgressOpen(false);
@@ -54,7 +68,7 @@ const HabitCard = ({ habit, completed, ...otherProps }: CardProps) => {
       className={`relative dark:text-gray-200 dark:bg-neutral-800 dark:hover:bg-[rgb(45,45,45)] 
       hover:bg-[rgb(245,245,245)] flex items-center lg:pr-10 pr-8 rounded-sm dark:outline-zinc-700 select-none pl-2 py-1 w-full outline outline-1 outline-gray-200`}
       {...otherProps}
-      onClick={handleClick}
+      ref={cardRef}
     >
       <div
         className="p-2 md:p-3 h-full rounded-md flex items-center justify-center my-2 lg:my-1"
@@ -70,15 +84,15 @@ const HabitCard = ({ habit, completed, ...otherProps }: CardProps) => {
       </div>
 
       <div className="flex flex-col w-full mx-3 lg:mx-4">
-        <div className="font-bold text-sm text-zinc-500 dark:text-gray-200 flex flex-col">
-          <div className="truncate max-w-[150px] mobile:max-w-[250px] sm:max-w-[350px] leading-none">
+        <div className="font-bold text-sm text-zinc-500 dark:text-gray-200 flex flex-col w-fit">
+          <div className="truncate max-w-[150px] mobile:max-w-[250px] sm:max-w-[350px] leading-none w-fit">
             {`${habit.habitName}`.toUpperCase()}
           </div>
-          <div className="truncate leading-tight">
+          <div className="truncate leading-tight w-fit">
             {`${habit.requirement} ${habit.goal} ${habit.unit}`.toUpperCase()}
           </div>
         </div>
-        <div className="text-xs font-semibold dark:text-zinc-400 text-zinc-400 h-fit leading-none">
+        <div className="text-xs font-semibold dark:text-zinc-400 text-zinc-400 h-fit leading-none w-fit">
           current: <span>{`${getProgressOfToday(habit)} / ${habit.goal}`}</span>
         </div>
       </div>
