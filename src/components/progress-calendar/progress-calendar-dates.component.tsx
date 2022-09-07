@@ -1,19 +1,21 @@
 import { useCallback, useContext } from "react";
-import { PanelContext } from "../../../context/progress-panel.context";
-import { getDatesOfMonth } from "../../../utils/calendar.utils";
-import Day from "./day.component";
-
-const DatesContainer = () => {
-  const { selectedDate, selectedHabit } = useContext(PanelContext);
-
+import { getDatesOfMonth } from "../../utils/calendar.utils";
+import { Habit } from "../../context/user.context";
+import Day from "../progress-panel/calendar/day.component";
+import { ProgressCalendarContext } from "../../context/progress-calendar.contex";
+type ProgressCalendarDatesProps = {
+  habit: Habit;
+};
+const ProgressCalendarDates = ({ habit }: ProgressCalendarDatesProps) => {
+  const { selectedDate } = useContext(ProgressCalendarContext);
   const monthDates = getDatesOfMonth(selectedDate);
 
   const getActiveDays = useCallback(() => {
-    return selectedHabit?.activeDays.filter((day) => {
+    return habit?.activeDays.filter((day) => {
       const dayAsDate = new Date(day.date);
       return day.completed && dayAsDate >= monthDates[0].d;
     });
-  }, [selectedHabit, monthDates]);
+  }, [habit, monthDates]);
 
   const activeDays = getActiveDays();
 
@@ -49,4 +51,4 @@ const DatesContainer = () => {
     </div>
   );
 };
-export default DatesContainer;
+export default ProgressCalendarDates;

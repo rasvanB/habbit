@@ -2,9 +2,8 @@ type DateProps = {
   active: boolean;
   isSurplus: boolean;
   date: Date;
-  testMode: boolean;
 };
-const Day = ({ active, isSurplus, date, testMode }: DateProps) => {
+const Day = ({ active, isSurplus, date }: DateProps) => {
   return (
     <div
       className={`${
@@ -16,7 +15,7 @@ const Day = ({ active, isSurplus, date, testMode }: DateProps) => {
           ? "dark:text-blue-900 text-blue-400 outline outline-2 dark:outline-blue-900 outline-blue-400"
           : "dark:text-gray-600 text-neutral-400"
       } text-center rounded-md p-1 px-1.5 font-medium
-      ${testMode ? "hover:dark:bg-[#313134] cursor-pointer" : ""}`}
+      `}
       key={date.getTime()}
     >{`${date.getDate()}`}</div>
   );
