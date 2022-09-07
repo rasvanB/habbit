@@ -31,6 +31,11 @@ const CardMenu = ({
     useContext(ModalContext);
 
   const closeModal = () => {
+    if (currentUser) {
+      addHabitToUser(currentUser.uid, habit);
+    }
+    editHabit(habit);
+    setSelectedHabit(habit);
     setModalOpen(false);
   };
 
