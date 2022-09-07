@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ModalContext } from "../../context/add-modal.context";
 import { PanelContext } from "../../context/progress-panel.context";
 import { Habit, UserContext } from "../../context/user.context";
@@ -7,7 +7,9 @@ import {
   deleteHabitFromUser,
 } from "../../utils/firebase/firebase.utils";
 import { showToast } from "../../utils/toast/habit-toasts";
+import Modal from "../other/modal.component";
 import CardMenuItem from "./card-menu-item.component";
+import ProgressCalendar from "./progress-calendar.component";
 import { getDateAsString } from "./progress-menu.component";
 
 type CardMenuProps = {
@@ -23,9 +25,14 @@ const CardMenu = ({
   ...otherProps
 }: CardMenuProps) => {
   const { currentUser, removeHabit, editHabit } = useContext(UserContext);
+  const [isModalOpen, setModalOpen] = useState(false);
   const { setSelectedHabit } = useContext(PanelContext);
   const { setOpen, setCurrentHabit, setHabitToEdit, setEditMode } =
     useContext(ModalContext);
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   const handleRemoveHabit = (habit: Habit) => {
     if (currentUser) {
@@ -62,49 +69,57 @@ const CardMenu = ({
   };
 
   return (
-    <div
-      {...otherProps}
-      className={`${
-        isOpen ? "top-3 lg:top-0 opacity-100" : "-top-[1000px] opacity-0"
-      } select-none flex flex-col justify-center absolute dark:bg-neutral-800 dark:text-gray-200 font-poppins text-sm right-7 ${
-        completed ? "lg:-right-[157px]" : "lg:-right-[140px]"
-      } rounded-sm transition-opacity py-1 z-10 outline outline-1 dark:outline-zinc-500 outline-zinc-300 bg-white shadow-md dark:shadow-none`}
-    >
-      <CardMenuItem
-        text="delete"
-        iconName="icon-park-outline:delete"
-        onClick={() => {
-          handleRemoveHabit(habit);
-        }}
-        isMobile
-      />
-      <CardMenuItem
-        text="edit"
-        iconName="akar-icons:edit"
-        onClick={handleClick}
-        isMobile
-      />
-      <CardMenuItem
-        text="view progress"
-        iconName="bi:bar-chart-line-fill"
-        isMobile={false}
-      />
-      <CardMenuItem
-        text="log progress"
-        iconName="bx:calendar"
-        isMobile={false}
-      />
-      {completed ? (
+    <>
+      <div
+        {...otherProps}
+        className={`${
+          isOpen ? "top-3 lg:top-0 opacity-100" : "-top-[1000px] opacity-0"
+        } select-none flex flex-col justify-center absolute dark:bg-neutral-800 dark:text-gray-200 font-poppins text-sm right-7 ${
+          completed ? "lg:-right-[157px]" : "lg:-right-[140px]"
+        } rounded-sm transition-opacity py-1 z-10 outline outline-1 dark:outline-zinc-500 outline-zinc-300 bg-white shadow-md dark:shadow-none`}
+      >
         <CardMenuItem
-          text="reset completion"
-          iconName="codicon:debug-restart"
+          text="delete"
+          iconName="icon-park-outline:delete"
+          onClick={() => {
+            handleRemoveHabit(habit);
+          }}
           isMobile
-          onClick={handleReset}
-        ></CardMenuItem>
-      ) : (
-        <></>
-      )}
-    </div>
+        />
+        <CardMenuItem
+          text="edit"
+          iconName="akar-icons:edit"
+          onClick={handleClick}
+          isMobile
+        />
+        <CardMenuItem
+          text="view progress"
+          iconName="bi:bar-chart-line-fill"
+          isMobile={false}
+        />
+        <CardMenuItem
+          text="log progress"
+          iconName="bx:calendar"
+          isMobile
+          onClick={() => {
+            setModalOpen(true);
+          }}
+        />
+        {completed ? (
+          <CardMenuItem
+            text="reset completion"
+            iconName="codicon:debug-restart"
+            isMobile
+            onClick={handleReset}
+          ></CardMenuItem>
+        ) : (
+          <></>
+        )}
+      </div>
+      <Modal isOpen={isModalOpen} close={closeModal}>
+        <ProgressCalendar habit={habit} />
+      </Modal>
+    </>
   );
 };
 

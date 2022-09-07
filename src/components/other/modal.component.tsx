@@ -9,7 +9,7 @@ type ModalProps = {
 const Modal = ({ isOpen, children, close }: ModalProps) => {
   return isOpen ? (
     <div
-      className={`flex fixed top-0 left-0 h-screen w-screen justify-center items-center bg-black bg-opacity-40 backdrop-blur-sm dark:[color-scheme:dark] font-poppins`}
+      className={`flex fixed top-0 left-0 h-screen w-screen justify-center items-center bg-black bg-opacity-40 backdrop-blur-sm dark:[color-scheme:dark] font-poppins z-50`}
     >
       <div className="relative bg-slate-100 dark:bg-zinc-700 flex flex-col px-2 py-5 pt-10 rounded-md w-full mobile:w-auto mobile:px-10 mobile:max-w-[500px]">
         <Icon
