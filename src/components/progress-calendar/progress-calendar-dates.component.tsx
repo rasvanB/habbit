@@ -54,7 +54,7 @@ const ProgressCalendarDates = ({ habit }: ProgressCalendarDatesProps) => {
             isSurplus={date.active}
             active={isActiveDay}
             date={date.d}
-            inactiveCompletedStyle="dark:text-blue-700 dark:outline-blue-700 outline outline-2 text-blue-300 outline-blue-300"
+            inactiveCompletedStyle="dark:text-blue-800 dark:outline-blue-800 outline outline-2 text-blue-300 outline-blue-300"
             onClick={
               compareAsc(new Date(getDateAsString()), date.d) !== -1
                 ? () => handleClick(date.d)

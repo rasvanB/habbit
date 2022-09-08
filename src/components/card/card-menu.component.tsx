@@ -11,6 +11,7 @@ import Modal from "../other/modal.component";
 import CardMenuItem from "./card-menu-item.component";
 import ProgressCalendar from "../progress-calendar/progress-calendar.component";
 import { getDateAsString } from "./progress-menu.component";
+import { ProgressCalendarContext } from "../../context/progress-calendar.contex";
 
 type CardMenuProps = {
   isOpen: boolean;
@@ -27,6 +28,7 @@ const CardMenu = ({
   const { currentUser, removeHabit, editHabit } = useContext(UserContext);
   const [isModalOpen, setModalOpen] = useState(false);
   const { setSelectedHabit } = useContext(PanelContext);
+  const { setSelectedDate } = useContext(ProgressCalendarContext);
   const { setOpen, setCurrentHabit, setHabitToEdit, setEditMode } =
     useContext(ModalContext);
 
@@ -98,16 +100,12 @@ const CardMenu = ({
           isMobile
         />
         <CardMenuItem
-          text="view progress"
-          iconName="bi:bar-chart-line-fill"
-          isMobile={false}
-        />
-        <CardMenuItem
           text="log progress"
           iconName="bx:calendar"
           isMobile
           onClick={() => {
             setModalOpen(true);
+            setSelectedDate(new Date());
           }}
         />
         {completed ? (

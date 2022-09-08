@@ -27,7 +27,6 @@ const CompletionRate = () => {
     if (firstDay) {
       const firstDayAsDate = new Date(firstDay.date).setUTCHours(0, 0, 0);
       const todayDate = new Date().setUTCHours(0, 0, 0);
-
       const result = Math.round(
         (todayDate - firstDayAsDate) / (1000 * 3600 * 24)
       );
@@ -66,7 +65,7 @@ const CompletionRate = () => {
             },
           ]}
           innerRadius={0.5}
-          cornerRadius={3}
+          cornerRadius={2}
           margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
           activeOuterRadiusOffset={5}
           colors={{ datum: "data.color" }}
