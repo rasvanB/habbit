@@ -60,7 +60,8 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
   const [habits, setHabits] = useState<Habit[]>([]);
 
   const addHabit = (habit: Habit) => {
-    habits.push(habit);
+    const newHabits = habits.concat(habit);
+    setHabits(newHabits);
   };
 
   const editHabit = (other: Habit) => {

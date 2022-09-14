@@ -2,3 +2,7 @@ node_modules
 *.todo
 # Local Netlify folder
 .netlify
+.github*
+build
+.firebaserc
+.firebase
