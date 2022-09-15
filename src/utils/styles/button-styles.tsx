@@ -17,7 +17,7 @@ export const buttonClasses = {
   loginButtonStyle:
     "text-blue-400 font-semibold py-2 px-4 rounded hover:text-blue-600 outline outline-2 whitespace-nowrap",
   heroButtonStyle:
-    "bg-blue-500 hover:bg-blue-600 text-white font-normal py-2 px-5 rounded-xl mt-5 whitespace-nowrap",
+    "bg-blue-500 hover:bg-blue-600 text-white font-normal font-poppins text-[18px] py-2 px-5 rounded-md mt-5 whitespace-nowrap",
   submitButton:
     "bg-blue-500 hover:bg-blue-600 w-full text-white font-semibold py-2 px-4 rounded whitespace-nowrap mt-5",
   addHabitButton:
