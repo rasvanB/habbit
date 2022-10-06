@@ -6,6 +6,7 @@ type DateProps = {
   inactiveCompletedStyle?: string;
   onClick?: () => void;
 };
+
 const Day = ({
   active,
   isSurplus,
