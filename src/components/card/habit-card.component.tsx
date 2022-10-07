@@ -37,7 +37,7 @@ const HabitCard = ({ habit, completed, ...otherProps }: CardProps) => {
   }, []);
 
   useEffect(() => {
-    const idk = (e: any) => {
+    const closeCard = (e: any) => {
       if (
         cardRef.current === e.composedPath()[1] ||
         cardRef.current === e.composedPath()[2]
@@ -45,8 +45,8 @@ const HabitCard = ({ habit, completed, ...otherProps }: CardProps) => {
         handleClick();
       }
     };
-    document.body.addEventListener("click", idk);
-    return () => document.body.removeEventListener("click", idk);
+    document.body.addEventListener("click", closeCard);
+    return () => document.body.removeEventListener("click", closeCard);
   });
 
   const closeProgressMenu = () => {
