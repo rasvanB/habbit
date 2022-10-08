@@ -21,8 +21,10 @@ const SettingsMenu = ({ isOpen, signOut, close }: SettingsMenuProps) => {
   };
 
   useEffect(() => {
-    const handleClickOutside = (event: any) => {
+    const handleClickOutside = (event: MouseEvent) => {
       if (
+        event.target &&
+        event.target instanceof Element &&
         isOpen &&
         menuRef.current &&
         !menuRef.current.contains(event.target)
