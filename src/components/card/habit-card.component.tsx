@@ -24,7 +24,7 @@ const HabitCard = ({ habit, completed, ...otherProps }: CardProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const closeMenus = (e: any) => {
+    const closeMenus = (e: MouseEvent) => {
       if (
         menuRef.current !== e.composedPath()[1] &&
         menuRef.current !== e.composedPath()[2]
@@ -37,7 +37,7 @@ const HabitCard = ({ habit, completed, ...otherProps }: CardProps) => {
   }, []);
 
   useEffect(() => {
-    const closeCard = (e: any) => {
+    const closeCard = (e: MouseEvent) => {
       if (
         cardRef.current === e.composedPath()[1] ||
         cardRef.current === e.composedPath()[2]

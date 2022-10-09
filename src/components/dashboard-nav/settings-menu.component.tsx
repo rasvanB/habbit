@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Profile from "../user-profile/profile.component";
 import SettingsMenuItem from "./settings-menu-item.component";
 
@@ -21,8 +21,10 @@ const SettingsMenu = ({ isOpen, signOut, close }: SettingsMenuProps) => {
   };
 
   useEffect(() => {
-    const handleClickOutside = (event: any) => {
+    const handleClickOutside = (event: MouseEvent) => {
       if (
+        event.target &&
+        event.target instanceof Element &&
         isOpen &&
         menuRef.current &&
         !menuRef.current.contains(event.target)
