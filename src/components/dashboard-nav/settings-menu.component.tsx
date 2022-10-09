@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Profile from "../user-profile/profile.component";
 import SettingsMenuItem from "./settings-menu-item.component";
 

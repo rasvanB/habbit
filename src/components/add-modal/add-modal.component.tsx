@@ -61,10 +61,10 @@ const AddModal = () => {
     if (name === "goal" && value) {
       if (parseInt(value) < 0) {
         setCurrentHabit({ ...currentHabit, [name]: 0, timeStamp: Date.now() });
-      } else if (parseInt(value) > 100) {
+      } else if (parseInt(value) > 300) {
         setCurrentHabit({
           ...currentHabit,
-          [name]: 100,
+          [name]: 300,
           timeStamp: Date.now(),
         });
       } else {
@@ -201,7 +201,7 @@ const AddModal = () => {
           placeholder="goal"
           type="number"
           min={1}
-          max={100}
+          max={300}
           value={currentHabit.goal}
           onChange={handleChange}
         />

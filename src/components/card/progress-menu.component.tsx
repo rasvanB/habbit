@@ -34,7 +34,7 @@ const ProgressMenu = ({
     const { value } = e.target;
     if (value) {
       if (habit.requirement.toLowerCase() === "at least") {
-        if (parseInt(value) <= 100) {
+        if (parseInt(value) <= 300) {
           setProgress(parseFloat(value));
         }
       } else {
@@ -50,7 +50,7 @@ const ProgressMenu = ({
   const handleIncrement = (isIncrement: boolean) => {
     if (isIncrement) {
       if (habit.requirement.toLowerCase() === "at least") {
-        if (progress < 100) {
+        if (progress < 300) {
           setProgress(progress + 1);
         }
       } else {
