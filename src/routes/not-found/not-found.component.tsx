@@ -8,6 +8,6 @@ const NotFound = () => {
     navigate("/");
   }, [navigate]);
 
-  return <div className="h-screen dark:bg-zinc-800"></div>;
+  return null;
 };
 export default NotFound;
