@@ -8,6 +8,7 @@ import UserProvider from "./context/user.context";
 import ProgressCalendarProvider from "./context/progress-calendar.contex";
 import App from "./App";
 import "./index.css";
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

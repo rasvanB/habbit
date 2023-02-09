@@ -17,9 +17,7 @@ const AuthPage = () => {
         navigate("/app");
       }
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [auth, loading, currentUser]);
+  }, [auth, loading, currentUser, navigate]);
 
   return (
     <div className="bg-zinc-700">
