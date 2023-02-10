@@ -1,3 +1,5 @@
+import { forwardRef } from "react";
+
 import { inputClasses } from "../../utils/styles/input-styles";
 type InputProps = {
   label?: string;
@@ -5,31 +7,31 @@ type InputProps = {
   isIncrement?: boolean;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
-const InputBox = ({
-  label,
-  isFormInput,
-  isIncrement,
-  ...otherProps
-}: InputProps) => {
-  return (
-    <div className="form-input flex flex-col font-poppins w-full">
-      {label && (
-        <label htmlFor="name" className="text-zinc-700 dark:text-gray-200 pb-1">
-          {`${label}`}
-        </label>
-      )}
-      <div className="relative">
-        <input
-          {...otherProps}
-          className={`${
-            isFormInput
-              ? inputClasses.formInputStyle
-              : inputClasses.modalInputStyle
-          }`}
-        />
+const InputBox = forwardRef<HTMLInputElement, InputProps>(
+  ({ label, isFormInput, isIncrement, ...otherProps }, ref) => {
+    return (
+      <div className="form-input flex flex-col font-poppins w-full">
+        {label && (
+          <label
+            htmlFor="name"
+            className="text-zinc-700 dark:text-gray-200 pb-1"
+          >
+            {`${label}`}
+          </label>
+        )}
+        <div className="relative">
+          <input
+            ref={ref}
+            {...otherProps}
+            className={`${
+              isFormInput
+                ? inputClasses.formInputStyle
+                : inputClasses.modalInputStyle
+            }`}
+          />
+        </div>
       </div>
-    </div>
-  );
-};
-
+    );
+  }
+);
 export default InputBox;
