@@ -215,13 +215,19 @@ export const signInWithProvider = async (provider: authMethods) => {
   }
 };
 
-// TODO: maybe delete users from firestore if they are not verified
 export const createAuthUserWithEmailAndPassword = async (
   email: string,
   password: string,
   additionalInformation: AdditionalUserInfo = {}
-) => {
-  if (!email || !password) return;
+): Promise<{ error: FirebaseError | null }> => {
+  if (!email || !password) {
+    return {
+      error: new FirebaseError(
+        "auth/invalid-credentials",
+        "Invalid credentials"
+      ),
+    };
+  }
   const signInMethods = await fetchSignInMethodsForEmail(auth, email);
   if (!signInMethods.length) {
     try {
@@ -233,14 +239,21 @@ export const createAuthUserWithEmailAndPassword = async (
       await sendEmailVerification(userCredential.user);
       await createUserDocument(userCredential, additionalInformation);
     } catch (error) {
-      return error as FirebaseError;
+      return {
+        error: error as FirebaseError,
+      };
     }
   } else {
-    throw new FirebaseError(
-      "auth/email-already-in-use",
-      "Email already in use"
-    );
+    return {
+      error: new FirebaseError(
+        "auth/email-already-in-use",
+        "Email already in use"
+      ),
+    };
   }
+  return {
+    error: null,
+  };
 };
 
 export const signInUserWithEmailAndPassword = async (
