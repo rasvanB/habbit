@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Divider from "../other/divider.component";
 import InputBox from "../other/input-box.component";
 import Button from "../other/button.component";
@@ -7,67 +7,34 @@ import { signInUserWithEmailAndPassword } from "../../utils/firebase/firebase.ut
 import Message from "../other/message.component";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { validateSignIn } from "../../utils/auth.utils";
-
-const defaultFormState = {
-  email: "",
-  password: "",
-};
+import {
+  getErrorMessages,
+  LoginScheme,
+  LoginType,
+} from "../../utils/auth.utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 const SignInForm = () => {
   const navigate = useNavigate();
-  const [formState, setFormState] = useState(defaultFormState);
-  const { email, password } = formState;
-  const [errorMessage, setErrorMessage] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginType>({
+    resolver: zodResolver(LoginScheme),
+    criteriaMode: "all",
+  });
 
-  const resetFormFields = () => {
-    setFormState(defaultFormState);
-  };
+  const errorMessages = useMemo(() => getErrorMessages(errors), [errors]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setErrorMessage("");
-    const { name, value } = e.target;
-    setFormState({ ...formState, [name]: value });
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    let error: string | undefined = "";
-    error = validateSignIn(email, password);
-    if (error) {
-      setErrorMessage(error);
-      return;
-    }
-    await signInUserWithEmailAndPassword(email, password)
-      .then((err) => {
-        error = err;
-        if (error) {
-          switch (error) {
-            case "auth/user-not-found":
-              error = "User not found";
-              break;
-            case "auth/wrong-password":
-              error = "Wrong password";
-              break;
-            case "auth/invalid-email":
-              error = "Invalid email";
-              break;
-            case "auth/email-not-verified":
-              error = "Email not verified";
-              break;
-            default:
-              error = "Something went wrong";
-              break;
-          }
-        }
-      })
-      .finally(() => {
-        setErrorMessage(error ? error : "");
-        if (!error) {
-          resetFormFields();
-          navigate("/app");
-        }
-      });
+  const onSubmit: SubmitHandler<LoginType> = async (data) => {
+    const result = await signInUserWithEmailAndPassword(
+      data.email,
+      data.password
+    );
+    if (result.error) errorMessages.push(result.error.message);
+    else navigate("/app");
   };
 
   return (
@@ -75,36 +42,28 @@ const SignInForm = () => {
       <h1 className="dark:text-gray-100 text-center font-poppins font-medium text-zinc-800 text-4xl mb-7">
         Sign in
       </h1>
-      {errorMessage && <Message message={errorMessage} isError />}
-      <div className="flex justify-center my-5">
+      {errorMessages[0] ? <Message message={errorMessages[0]} isError /> : null}
+      <div className="flex justify-center gap-5 my-5">
         <LoginButton type="google" />
         <LoginButton type="twitter" />
         <LoginButton type="facebook" />
       </div>
       <Divider text="or Sign In with Email" />
-      <form onSubmit={handleSubmit}>
-        <div className="mt-2">
-          <InputBox
-            isFormInput
-            name="email"
-            label="Email"
-            value={email}
-            type="email"
-            onChange={handleChange}
-            placeholder="mail@website.com"
-          />
-        </div>
-        <div className="mt-2">
-          <InputBox
-            isFormInput
-            name="password"
-            value={password}
-            label="Password"
-            onChange={handleChange}
-            placeholder="password"
-            type="password"
-          />
-        </div>
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
+        <InputBox
+          isFormInput
+          label="Email"
+          placeholder="email"
+          type="email"
+          {...register("email")}
+        />
+        <InputBox
+          isFormInput
+          label="Password"
+          placeholder="password"
+          type="password"
+          {...register("password")}
+        />
         <Button buttonStyle="submit" type="submit">
           Sign In
         </Button>

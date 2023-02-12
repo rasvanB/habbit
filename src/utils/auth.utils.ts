@@ -1,6 +1,5 @@
 import { FieldErrors } from "react-hook-form";
 import { z } from "zod";
-const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
 export const getErrorMessages = (errors: FieldErrors) => {
   const errs: string[] = [];
@@ -9,18 +8,6 @@ export const getErrorMessages = (errors: FieldErrors) => {
       errs.push(error.message);
   });
   return errs;
-};
-
-export const validateSignIn = (email: string, password: string) => {
-  if (!email || !password) {
-    return "Please fill out all fields";
-  }
-  if (email.length < 6 || !regexEmail.test(email)) {
-    return "Invalid email";
-  }
-  if (password.length < 6) {
-    return "Password must be at least 6 characters";
-  }
 };
 
 export const LoginScheme = z

@@ -259,18 +259,24 @@ export const createAuthUserWithEmailAndPassword = async (
 export const signInUserWithEmailAndPassword = async (
   email: string,
   password: string
-): Promise<string | undefined> => {
-  if (!email || !password) return;
-  let error: string = "";
+): Promise<{ error: FirebaseError | null }> => {
+  let error: FirebaseError | null = null;
+  if (!email || !password)
+    error = new FirebaseError(
+      "auth/invalid-credentials",
+      "Invalid credentials"
+    );
   try {
-    await signInWithEmailAndPassword(auth, email, password).then((data) => {
-      if (!data.user.emailVerified) {
-        error = "auth/email-not-verified";
-      }
-    });
+    const data = await signInWithEmailAndPassword(auth, email, password);
+    if (!data.user.emailVerified) {
+      error = new FirebaseError(
+        "auth/email-not-verified",
+        "Email not verified"
+      );
+    }
   } catch (err) {
-    error = (err as FirebaseError).code;
+    error = err as FirebaseError;
   }
   if (error) await signOutUser();
-  return error;
+  return { error };
 };

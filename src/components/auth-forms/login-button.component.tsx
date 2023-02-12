@@ -23,7 +23,7 @@ const LoginButton = ({ type }: LoginButtonProps) => {
   };
   return (
     <div
-      className="select-none transition-shadow cursor-pointer outline outline-1 rounded-md outline-zinc-200 dark:outline-zinc-700 shadow-md dark:shadow-zinc-700 p-2 first:mr-5 last:ml-5 hover:shadow-none"
+      className="select-none transition-shadow cursor-pointer outline outline-1 rounded-md outline-zinc-200 dark:outline-zinc-700 shadow-md dark:shadow-zinc-700 p-2 hover:shadow-none"
       onClick={handleOnClick}
     >
       <ProviderIcon type={type} />
