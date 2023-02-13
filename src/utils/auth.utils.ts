@@ -1,14 +1,12 @@
 import { FieldErrors } from "react-hook-form";
 import { z } from "zod";
 
-export const getErrorMessages = (errors: FieldErrors) => {
-  const errs: string[] = [];
-  Object.values(errors).forEach((error) => {
+export const getErrorMessages = (errors: FieldErrors) =>
+  Object.values(errors).reduce((acc, error) => {
     if (error && error.message && typeof error.message === "string")
-      errs.push(error.message);
-  });
-  return errs;
-};
+      acc.push(error.message);
+    return acc;
+  }, [] as string[]);
 
 export const LoginScheme = z
   .object(
