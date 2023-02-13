@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Divider from "../other/divider.component";
 import InputBox from "../other/input-box.component";
 import Button from "../other/button.component";
@@ -16,6 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 const SignInForm = () => {
+  const [errorMessages, setErrorMessages] = useState<string[]>([]);
   const navigate = useNavigate();
   const {
     register,
@@ -26,14 +27,16 @@ const SignInForm = () => {
     criteriaMode: "all",
   });
 
-  const errorMessages = useMemo(() => getErrorMessages(errors), [errors]);
+  useEffect(() => {
+    setErrorMessages(getErrorMessages(errors));
+  }, [errors]);
 
   const onSubmit: SubmitHandler<LoginType> = async (data) => {
     const result = await signInUserWithEmailAndPassword(
       data.email,
       data.password
     );
-    if (result.error) errorMessages.push(result.error.message);
+    if (result.error) setErrorMessages([result.error, ...errorMessages]);
     else navigate("/app");
   };
 

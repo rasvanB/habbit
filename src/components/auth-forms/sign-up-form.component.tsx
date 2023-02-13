@@ -1,7 +1,7 @@
 import Button from "../other/button.component";
 import { Link } from "react-router-dom";
 import InputBox from "../other/input-box.component";
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Message from "../other/message.component";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -41,6 +41,7 @@ const fields = [
 
 const SignUpForm = () => {
   const [message, setMessage] = useState("");
+  const [errorMessages, setErrorMessages] = useState<string[]>([]);
 
   const {
     register,
@@ -51,7 +52,9 @@ const SignUpForm = () => {
     criteriaMode: "all",
   });
 
-  const errorMessages = useMemo(() => getErrorMessages(errors), [errors]);
+  useEffect(() => {
+    setErrorMessages(getErrorMessages(errors));
+  }, [errors]);
 
   const onSubmit: SubmitHandler<SignUpType> = async (data) => {
     const result = await createAuthUserWithEmailAndPassword(
@@ -61,7 +64,7 @@ const SignUpForm = () => {
         displayName: data.username,
       }
     );
-    if (result.error) errorMessages.push(result.error.message);
+    if (result.error) setErrorMessages([result.error, ...errorMessages]);
     else {
       setMessage("Email verification sent, check your inbox");
       signOutUser();

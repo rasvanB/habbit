@@ -219,13 +219,10 @@ export const createAuthUserWithEmailAndPassword = async (
   email: string,
   password: string,
   additionalInformation: AdditionalUserInfo = {}
-): Promise<{ error: FirebaseError | null }> => {
+): Promise<{ error: string | null }> => {
   if (!email || !password) {
     return {
-      error: new FirebaseError(
-        "auth/invalid-credentials",
-        "Invalid credentials"
-      ),
+      error: "Invalid credentials",
     };
   }
   const signInMethods = await fetchSignInMethodsForEmail(auth, email);
@@ -240,15 +237,12 @@ export const createAuthUserWithEmailAndPassword = async (
       await createUserDocument(userCredential, additionalInformation);
     } catch (error) {
       return {
-        error: error as FirebaseError,
+        error: errorHandling(error as FirebaseError),
       };
     }
   } else {
     return {
-      error: new FirebaseError(
-        "auth/email-already-in-use",
-        "Email already in use"
-      ),
+      error: "Email already in use",
     };
   }
   return {
@@ -259,24 +253,34 @@ export const createAuthUserWithEmailAndPassword = async (
 export const signInUserWithEmailAndPassword = async (
   email: string,
   password: string
-): Promise<{ error: FirebaseError | null }> => {
-  let error: FirebaseError | null = null;
-  if (!email || !password)
-    error = new FirebaseError(
-      "auth/invalid-credentials",
-      "Invalid credentials"
-    );
+): Promise<{ error: string | null }> => {
+  let error: string | null = null;
+  if (!email || !password) error = "Invalid credentials";
   try {
     const data = await signInWithEmailAndPassword(auth, email, password);
     if (!data.user.emailVerified) {
-      error = new FirebaseError(
-        "auth/email-not-verified",
-        "Email not verified"
-      );
+      error = "Email not verified";
     }
   } catch (err) {
-    error = err as FirebaseError;
+    error = errorHandling(err as FirebaseError);
   }
   if (error) await signOutUser();
   return { error };
+};
+
+const errorHandling = (error: FirebaseError): string => {
+  switch (error.code) {
+    case "auth/user-not-found":
+      return "User not found";
+    case "auth/wrong-password":
+      return "Wrong password";
+    case "auth/email-already-in-use":
+      return "Email already in use";
+    case "auth/invalid-credentials":
+      return "Invalid credentials";
+    case "auth/email-not-verified":
+      return "Email not verified";
+    default:
+      return "Something went wrong";
+  }
 };
