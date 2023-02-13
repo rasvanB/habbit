@@ -1,29 +1,27 @@
-export type IconTypes = "facebook" | "google" | "twitter";
+export const typesList = ["facebook", "google", "twitter"] as const;
+export type IconTypes = typeof typesList[number];
 
 type IconProps = {
   type: IconTypes;
 };
 
-const ProviderIcon = ({ type }: IconProps) => {
-  let bgIcon: string = "";
-
+const getIcon = (type: IconTypes) => {
   switch (type) {
     case "facebook":
-      bgIcon = "bg-facebook-icon";
-      break;
+      return "bg-facebook-icon";
     case "google":
-      bgIcon = "bg-google-icon";
-      break;
+      return "bg-google-icon";
     case "twitter":
-      bgIcon = "bg-twitter-icon";
-      break;
-    default:
-      break;
+      return "bg-twitter-icon";
   }
+};
 
+const ProviderIcon = ({ type }: IconProps) => {
   return (
     <div
-      className={`icon h-9 ${bgIcon} bg-cover bg-center bg-no-repeat w-9`}
+      className={`icon h-9 ${getIcon(
+        type
+      )} bg-cover bg-center bg-no-repeat w-9`}
     ></div>
   );
 };

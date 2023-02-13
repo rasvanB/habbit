@@ -14,6 +14,8 @@ import {
 } from "../../utils/auth.utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { typesList } from "../other/provider-icon.component";
+import AuthPrompt from "./auth-prompt.component";
 
 const SignInForm = () => {
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
@@ -47,9 +49,9 @@ const SignInForm = () => {
       </h1>
       {errorMessages[0] ? <Message message={errorMessages[0]} isError /> : null}
       <div className="flex justify-center gap-5 my-5">
-        <LoginButton type="google" />
-        <LoginButton type="twitter" />
-        <LoginButton type="facebook" />
+        {typesList.map((type) => (
+          <LoginButton type={type} key={type} />
+        ))}
       </div>
       <Divider text="or Sign In with Email" />
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
@@ -71,14 +73,11 @@ const SignInForm = () => {
           Sign In
         </Button>
       </form>
-      <div className="font-poppins mt-3 text-zinc-800 dark:text-gray-200 text-sm sm:text-md">
-        Don't have an account?{" "}
-        <Link to="/auth/sign-up">
-          <span className="pl-1 hover:from-indigo-500 hover:to-blue-400 cursor-pointer text-transparent font-extrabold text-md bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">
-            Sign Up
-          </span>
-        </Link>
-      </div>
+      <AuthPrompt
+        text="Don't have an account?"
+        linkText="Sign Up"
+        linkPath="/auth/sign-up"
+      />
     </div>
   );
 };

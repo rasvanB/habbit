@@ -15,6 +15,7 @@ import {
   createAuthUserWithEmailAndPassword,
   signOutUser,
 } from "../../utils/firebase/firebase.utils";
+import AuthPrompt from "./auth-prompt.component";
 
 const fields = [
   {
@@ -100,14 +101,11 @@ const SignUpForm = () => {
           Sign Up
         </Button>
       </form>
-      <div className="font-poppins mt-3 text-zinc-800 dark:text-gray-200 text-sm sm:text-md">
-        Already have an account?
-        <Link to="/auth/sign-in">
-          <span className="pl-1 hover:from-indigo-500 hover:to-blue-400 cursor-pointer text-transparent font-extrabold text-md bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">
-            Sign In
-          </span>
-        </Link>
-      </div>
+      <AuthPrompt
+        text="Already have an account?"
+        linkText="Sign in"
+        linkPath="/auth/sign-in"
+      />
     </div>
   );
 };
