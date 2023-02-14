@@ -8,14 +8,16 @@ import {
   getUserHabits,
   onAuthStateChangeListener,
 } from "./utils/firebase/firebase.utils";
-import { Habit, UserContext } from "./context/user.context";
+import { UserContext } from "./context/user.context";
 import Dashboard from "./routes/dashboard/dashboard.component";
+import { Habit } from "./utils/types.utils";
 
 const App = () => {
   const { setCurrentUser, setLoading, loading, setHabits } =
     useContext(UserContext);
   const getUser = async (uid: string) => {
     const user = await getUserDocData(uid);
+
     if (user) {
       const userHabits = await getUserHabits(user.uid);
       // cast DocumentData arr to Habit
@@ -40,9 +42,8 @@ const App = () => {
         if (
           user.providerData[0].providerId === "password" &&
           !user.emailVerified
-        ) {
+        )
           return;
-        }
         getUser(user.uid);
       } else {
         setCurrentUser(null);

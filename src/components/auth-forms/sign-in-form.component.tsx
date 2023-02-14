@@ -5,7 +5,6 @@ import Button from "../other/button.component";
 import LoginButton from "./login-button.component";
 import { signInUserWithEmailAndPassword } from "../../utils/firebase/firebase.utils";
 import Message from "../other/message.component";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import {
   getErrorMessages,
@@ -54,7 +53,10 @@ const SignInForm = () => {
         ))}
       </div>
       <Divider text="or Sign In with Email" />
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-2 mt-2"
+      >
         <InputBox
           isFormInput
           label="Email"
