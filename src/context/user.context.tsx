@@ -1,32 +1,8 @@
 import { createContext, ReactNode, useState } from "react";
+import { Habit, UserData } from "../utils/types.utils";
 
 export const defaultProfilePicURL =
   "https://i.ibb.co/dBr1HsM/default-profile-300x284.png";
-
-export type ActiveDay = {
-  date: string;
-  progress: number;
-  completed: boolean;
-};
-
-export type Habit = {
-  habitName: string;
-  iconName: string;
-  iconColor: string;
-  requirement: string;
-  description: string;
-  activeDays: ActiveDay[];
-  goal: number;
-  unit: string;
-  timeStamp: number;
-};
-
-export type UserData = {
-  displayName: string;
-  email: string;
-  photoURL: string;
-  uid: string;
-};
 
 export type UserContextType = {
   currentUser: UserData | null;
