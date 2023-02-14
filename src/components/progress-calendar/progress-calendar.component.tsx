@@ -1,4 +1,4 @@
-import { Habit } from "../../context/user.context";
+import { Habit } from "../../utils/types.utils";
 import DayLabels from "../progress-panel/calendar/day-labels.component";
 import ProgressCalendarDates from "./progress-calendar-dates.component";
 import ProgressCalendarNav from "./progress-calendar-nav.component";

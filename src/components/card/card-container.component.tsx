@@ -1,6 +1,7 @@
 import { useContext } from "react";
-import { Habit, UserContext } from "../../context/user.context";
+import { UserContext } from "../../context/user.context";
 import { getDataOfToday } from "../../utils/stats.utils";
+import { Habit } from "../../utils/types.utils";
 import HabitCard from "./habit-card.component";
 
 const CardContainer = () => {

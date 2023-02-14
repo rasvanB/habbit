@@ -1,7 +1,8 @@
 import { useContext, useEffect, useRef } from "react";
 import { PanelContext } from "../../context/progress-panel.context";
-import { Habit, UserContext } from "../../context/user.context";
+import { UserContext } from "../../context/user.context";
 import { addHabitToUser } from "../../utils/firebase/firebase.utils";
+import { Habit } from "../../utils/types.utils";
 import { getDateAsString } from "./progress-menu.component";
 
 type MenuProps = {

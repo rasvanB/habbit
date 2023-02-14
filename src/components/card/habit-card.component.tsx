@@ -1,12 +1,12 @@
 import { Icon } from "@iconify/react";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Habit } from "../../context/user.context";
 import hexToRgba from "hex-to-rgba";
 import CardMenu from "./card-menu.component";
 import ProgressMenu from "./progress-menu.component";
 import CompleteMenu from "./complete-menu.component";
 import { PanelContext } from "../../context/progress-panel.context";
 import { getDataOfToday, getProgressOfToday } from "../../utils/stats.utils";
+import { Habit } from "../../utils/types.utils";
 
 type CardProps = {
   habit: Habit;

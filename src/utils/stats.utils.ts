@@ -1,6 +1,6 @@
 import { getDateAsString } from "../components/card/progress-menu.component";
-import { Habit } from "../context/user.context";
 import { checkDatesEqual } from "./calendar.utils";
+import { Habit } from "./types.utils";
 
 // CHECK IF TWO DAYS ARE CONSECUTIVE
 export const checkConsecutive = (day1: string, day2: string): boolean => {

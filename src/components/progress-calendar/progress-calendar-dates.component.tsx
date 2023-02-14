@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
 import { getDatesOfMonth } from "../../utils/calendar.utils";
-import { Habit } from "../../context/user.context";
 import Day from "../progress-panel/calendar/day.component";
 import { ProgressCalendarContext } from "../../context/progress-calendar.contex";
 import { addCompletedDayToHabit } from "../../utils/stats.utils";
 import { compareAsc } from "date-fns";
 import { getDateAsString } from "../card/progress-menu.component";
+import { Habit } from "../../utils/types.utils";
 
 type ProgressCalendarDatesProps = {
   habit: Habit;

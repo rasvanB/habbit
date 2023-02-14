@@ -1,9 +1,10 @@
 import { Icon } from "@iconify/react";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { PanelContext } from "../../context/progress-panel.context";
-import { Habit, UserContext } from "../../context/user.context";
+import { UserContext } from "../../context/user.context";
 import { addHabitToUser } from "../../utils/firebase/firebase.utils";
 import { getProgressOfToday } from "../../utils/stats.utils";
+import { Habit } from "../../utils/types.utils";
 import Button from "../other/button.component";
 
 type ProgressMenuProps = {

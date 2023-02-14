@@ -1,4 +1,4 @@
-import { Habit } from "../context/user.context";
+import { Habit } from "./types.utils";
 
 export const validateModal = (habit: Habit) => {
   if (!habit.habitName) return "Please enter a name";

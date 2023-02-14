@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useState } from "react";
-import { Habit } from "./user.context";
+import { Habit } from "../utils/types.utils";
 
 export const requirementOptions = [
   {

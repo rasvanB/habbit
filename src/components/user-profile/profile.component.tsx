@@ -1,12 +1,13 @@
 import { Icon } from "@iconify/react";
 import { getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { UserContext, UserData } from "../../context/user.context";
+import { UserContext } from "../../context/user.context";
 import {
   editUser,
   getImagesStorageRef,
 } from "../../utils/firebase/firebase.utils";
 import { showToast } from "../../utils/toast/habit-toasts";
+import { UserData } from "../../utils/types.utils";
 import Button from "../other/button.component";
 import InputBox from "../other/input-box.component";
 import Modal from "../other/modal.component";

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { ModalContext } from "../../context/add-modal.context";
 import { PanelContext } from "../../context/progress-panel.context";
-import { Habit, UserContext } from "../../context/user.context";
+import { UserContext } from "../../context/user.context";
 import {
   addHabitToUser,
   deleteHabitFromUser,
@@ -12,6 +12,7 @@ import CardMenuItem from "./card-menu-item.component";
 import ProgressCalendar from "../progress-calendar/progress-calendar.component";
 import { getDateAsString } from "./progress-menu.component";
 import { ProgressCalendarContext } from "../../context/progress-calendar.contex";
+import { Habit } from "../../utils/types.utils";
 
 type CardMenuProps = {
   isOpen: boolean;

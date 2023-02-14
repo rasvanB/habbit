@@ -37,7 +37,7 @@ const App = () => {
     setLoading(false);
   };
   useEffect(() => {
-    const unsubscribe = onAuthStateChangeListener((user) => {
+    const unsubscribe = onAuthStateChangeListener(async (user) => {
       if (user) {
         if (
           user.providerData[0].providerId === "password" &&

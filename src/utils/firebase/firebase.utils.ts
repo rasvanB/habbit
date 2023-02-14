@@ -27,12 +27,9 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { FirebaseError } from "firebase/app";
-import {
-  Habit,
-  defaultProfilePicURL,
-  UserData,
-} from "../../context/user.context";
+import { defaultProfilePicURL } from "../../context/user.context";
 import { getStorage, ref } from "firebase/storage";
+import { Habit, UserData } from "../types.utils";
 // import { getAnalytics } from "firebase/analytics";
 const firebaseConfig = {
   apiKey: "AIzaSyCU_8Lk_XYfErTC1-mI8htZ-yfp0P-b74A",
