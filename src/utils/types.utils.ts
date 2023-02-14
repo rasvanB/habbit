@@ -1,12 +1,12 @@
 import { z } from "zod";
 
-const DaySchema = z.object({
+export const DaySchema = z.object({
   date: z.string(),
   progress: z.number(),
   completed: z.boolean(),
 });
 
-const HabitSchema = z.object({
+export const HabitSchema = z.object({
   habitName: z.string(),
   iconName: z.string(),
   iconColor: z.string(),
@@ -18,9 +18,9 @@ const HabitSchema = z.object({
   timeStamp: z.number(),
 });
 
-const UserSchema = z.object({
+export const UserSchema = z.object({
   displayName: z.string(),
-  email: z.string(),
+  email: z.string().email(),
   photoURL: z.string(),
   uid: z.string(),
 });

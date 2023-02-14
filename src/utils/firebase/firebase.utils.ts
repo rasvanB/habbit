@@ -29,7 +29,7 @@ import {
 import { FirebaseError } from "firebase/app";
 import { defaultProfilePicURL } from "../../context/user.context";
 import { getStorage, ref } from "firebase/storage";
-import { Habit, UserData } from "../types.utils";
+import { Habit, HabitSchema, UserData, UserSchema } from "../types.utils";
 // import { getAnalytics } from "firebase/analytics";
 const firebaseConfig = {
   apiKey: "AIzaSyCU_8Lk_XYfErTC1-mI8htZ-yfp0P-b74A",
@@ -138,7 +138,10 @@ export const getUserDocData = async (uid: string) => {
   const userDocRef = doc(db, "users", uid);
   const userSnapshot = await getDoc(userDocRef);
   if (userSnapshot.exists()) {
-    return userSnapshot.data();
+    const result = UserSchema.safeParse(userSnapshot.data());
+    if (result.success) {
+      return result.data;
+    }
   }
 };
 
@@ -155,11 +158,23 @@ export const editUser = async (newUser: UserData) => {
 export const getUserHabits = async (uid: string) => {
   const habitsQuery = query(collection(db, `users/${uid}/habits`));
   const habitsDocs = await getDocs(habitsQuery);
-  const habitsArr: DocumentData[] = [];
+  const habitsArr: Habit[] = [];
   habitsDocs.forEach((doc) => {
-    habitsArr.push(doc.data());
+    const result = HabitSchema.safeParse(doc.data());
+    if (result.success) {
+      habitsArr.push(result.data);
+    }
   });
   return habitsArr;
+};
+
+export const getUserData = async (uid: string) => {
+  const user = await getUserDocData(uid);
+  if (user) {
+    const userHabits = await getUserHabits(user.uid);
+    return { user, habits: userHabits };
+  }
+  return null;
 };
 
 export const addHabitToUser = async (uid: string, habit: Habit) => {
