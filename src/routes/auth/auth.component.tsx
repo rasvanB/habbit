@@ -5,19 +5,14 @@ import SignUpForm from "../../components/auth-forms/sign-up-form.component";
 import { UserContext } from "../../context/user.context";
 
 const AuthPage = () => {
-  const { currentUser, loading } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
   const { auth } = useParams();
   const navigate = useNavigate();
   useEffect(() => {
     if (auth !== "signin" && auth !== "sign-up") {
       navigate("/auth/sign-in");
     }
-    if (!loading) {
-      if (currentUser) {
-        navigate("/app");
-      }
-    }
-  }, [auth, loading, currentUser, navigate]);
+  }, [auth]);
 
   return (
     <div className="bg-zinc-700">

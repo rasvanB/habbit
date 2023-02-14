@@ -14,9 +14,8 @@ export const monthNames: { [key: number]: string } = {
 };
 
 const partsOfDay = ["morning", "afternoon", "evening"] as const;
-type partsOfDayType = typeof partsOfDay[number];
 
-export const getPartOfDayFromTimeString = (d: Date): partsOfDayType => {
+export const getPartOfDayFromTimeString = (d: Date) => {
   const [hours, minutes]: number[] = [d.getHours(), d.getMinutes()];
   const hoursPlusMinutes: number = hours * 100 + minutes;
   if (hoursPlusMinutes >= 500 && hoursPlusMinutes <= 1200) {

@@ -4,7 +4,6 @@ import AddModal from "../../components/add-modal/add-modal.component";
 import { useContext, useEffect } from "react";
 import { UserContext, defaultProfilePicURL } from "../../context/user.context";
 import { useNavigate } from "react-router-dom";
-import { getUserHabits } from "../../utils/firebase/firebase.utils";
 import CardContainer from "../../components/card/card-container.component";
 import { Toaster } from "react-hot-toast";
 import { ModalContext } from "../../context/add-modal.context";
@@ -14,9 +13,10 @@ import { Icon } from "@iconify/react";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { currentUser, loading } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
   const { isOpen, setOpen, setEditMode } = useContext(ModalContext);
   const { setDarkMode } = useContext(ThemeContext);
+
   const toggleModal = () => {
     setOpen(!isOpen);
     setEditMode(false);
@@ -35,13 +35,10 @@ const Dashboard = () => {
   }, [setDarkMode]);
 
   useEffect(() => {
-    if (!loading && !currentUser) {
+    if (!currentUser) {
       navigate("/auth/sign-in");
     }
-    if (currentUser) {
-      getUserHabits(currentUser.uid);
-    }
-  }, [currentUser, navigate, loading]);
+  }, [currentUser, navigate]);
 
   return (
     <div className="flex flex-col h-screen dark:bg-zinc-800 bg-white overflow-hidden">

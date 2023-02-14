@@ -6,8 +6,7 @@ export const defaultProfilePicURL =
 
 export type UserContextType = {
   currentUser: UserData | null;
-  loading: boolean;
-  setLoading: (loading: boolean) => void;
+
   setCurrentUser: (currentUser: UserData | null) => void;
   habits: Habit[];
   addHabit: (habit: Habit) => void;
@@ -19,8 +18,6 @@ export type UserContextType = {
 const defaultContext: UserContextType = {
   currentUser: null,
   setCurrentUser: () => {},
-  loading: true,
-  setLoading: () => {},
   habits: [],
   setHabits: () => {},
   editHabit: () => {},
@@ -32,7 +29,6 @@ export const UserContext = createContext<UserContextType>(defaultContext);
 
 const UserProvider = ({ children }: { children: ReactNode }) => {
   const [currentUser, setCurrentUser] = useState<UserData | null>(null);
-  const [loading, setLoading] = useState(true);
   const [habits, setHabits] = useState<Habit[]>([]);
 
   const addHabit = (habit: Habit) => {
@@ -61,8 +57,7 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
         editHabit,
         currentUser,
         setCurrentUser,
-        loading,
-        setLoading,
+
         habits,
         setHabits,
         addHabit,

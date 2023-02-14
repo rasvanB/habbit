@@ -14,15 +14,15 @@ type NavProps = {
 
 const Nav = ({ username, photourl }: NavProps) => {
   const navigate = useNavigate();
-  const { setLoading, setHabits } = useContext(UserContext);
+  const { setHabits, setCurrentUser } = useContext(UserContext);
   const { setSelectedHabit, setOpen } = useContext(PanelContext);
   const [isSettingsOpen, setSettingsOpen] = useState(false);
 
   const handleSignOut = async () => {
     await signOutUser();
-    setLoading(true);
     setHabits([]);
     setSelectedHabit(null);
+    setCurrentUser(null);
     setOpen(false);
     navigate("/auth/sign-in");
   };
@@ -31,8 +31,8 @@ const Nav = ({ username, photourl }: NavProps) => {
     setSettingsOpen(!isSettingsOpen);
   };
 
-  const partOfDay: string = getPartOfDayFromTimeString(new Date());
-  const firstName: string = username.split(" ")[0];
+  const partOfDay = getPartOfDayFromTimeString(new Date());
+  const firstName = username.split(" ")[0];
 
   return (
     <div className="relative flex items-center py-4 px-2 sm:px-4 xl:px-20 bg-slate-100 dark:bg-zinc-900 border-b border-slate-300 dark:border-zinc-600">
