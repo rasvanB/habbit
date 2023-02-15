@@ -24,7 +24,7 @@ export const useUserStore = create<UserStore>((set) => ({
   editHabit: (habit: Habit) =>
     set((state) => ({
       habits: state.habits.map((h) =>
-        h.timeStamp === habit.timeStamp ? h : habit
+        h.timeStamp === habit.timeStamp ? habit : h
       ),
     })),
   removeHabit: (habit: Habit) =>
