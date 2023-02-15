@@ -1,13 +1,8 @@
 import { Icon } from "@iconify/react";
 import { useState } from "react";
 
-type Option = {
-  value: string;
-  label: string;
-};
-
 type DropdownProps = {
-  options: Option[];
+  options: string[];
   setRequirement: (requirement: string) => void;
   requirement: string;
 };
@@ -34,17 +29,17 @@ const Dropdown = ({ options, setRequirement, requirement }: DropdownProps) => {
           isDropdownOpen ? "flex" : "hidden"
         } flex-col absolute w-full top-10 dark:bg-zinc-600 bg-white dark:outline-zinc-500 outline-zinc-200 left-0 outline outline-1 z-10`}
       >
-        {options.map(({ value, label }) => {
+        {options.map((option) => {
           return (
             <div
-              key={value}
+              key={option}
               className="dark:hover:bg-zinc-500 hover:bg-gray-200 px-3 mobile:px-6 py-1"
               onClick={() => {
-                setRequirement(value);
+                setRequirement(option);
                 toggleDropdownOpen();
               }}
             >
-              {label}
+              {option}
             </div>
           );
         })}

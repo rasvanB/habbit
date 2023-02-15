@@ -1,4 +1,3 @@
-// create a zustand store for themes
 import { create } from "zustand";
 
 type ThemeStore = {

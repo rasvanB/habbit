@@ -1,27 +1,14 @@
 import { Habit } from "../types.utils";
 import { create } from "zustand";
 
-export const requirementOptions = [
-  {
-    value: "At least",
-    label: "At least",
-  },
-  {
-    value: "Exactly",
-    label: "Exactly",
-  },
-  {
-    value: "Less than",
-    label: "Less than",
-  },
-];
+export const requirementOptions = ["At least", "Exactly", "Less than"];
 
 export const defaultHabitState: Habit = {
   habitName: "",
   description: "",
   iconName: "",
   iconColor: "#5594f2",
-  requirement: requirementOptions[0].value,
+  requirement: requirementOptions[0],
   unit: "",
   goal: 1,
   timeStamp: 0,
