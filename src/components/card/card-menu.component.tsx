@@ -1,7 +1,4 @@
-import React, { useContext, useState } from "react";
-import { ModalContext } from "../../context/add-modal.context";
-import { PanelContext } from "../../context/progress-panel.context";
-import { UserContext } from "../../context/user.context";
+import React, { useState } from "react";
 import {
   addHabitToUser,
   deleteHabitFromUser,
@@ -13,6 +10,9 @@ import ProgressCalendar from "../progress-calendar/progress-calendar.component";
 import { getDateAsString } from "./progress-menu.component";
 import { Habit } from "../../utils/types.utils";
 import { useCalendarStore } from "../../utils/store/calendar.store";
+import { usePanelStore } from "../../utils/store/panel.store";
+import { useUserStore } from "../../utils/store/user.store";
+import { useModalStore } from "../../utils/store/modal.store";
 
 type CardMenuProps = {
   isOpen: boolean;
@@ -26,12 +26,18 @@ const CardMenu = ({
   completed,
   ...otherProps
 }: CardMenuProps) => {
-  const { currentUser, removeHabit, editHabit } = useContext(UserContext);
   const [isModalOpen, setModalOpen] = useState(false);
-  const { setSelectedHabit } = useContext(PanelContext);
-  const { setOpen, setCurrentHabit, setHabitToEdit, setEditMode } =
-    useContext(ModalContext);
+
+  const setOpen = useModalStore((state) => state.setOpen);
+  const setCurrentHabit = useModalStore((state) => state.setCurrentHabit);
+  const setHabitToEdit = useModalStore((state) => state.setHabitToEdit);
+  const setEditMode = useModalStore((state) => state.setEditMode);
+
+  const setSelectedHabit = usePanelStore((state) => state.setSelectedHabit);
   const setSelectedDate = useCalendarStore((state) => state.setSelectedDate);
+  const currentUser = useUserStore((state) => state.currentUser);
+  const removeHabit = useUserStore((state) => state.removeHabit);
+  const editHabit = useUserStore((state) => state.editHabit);
 
   const closeModal = () => {
     if (currentUser) {

@@ -1,11 +1,11 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import SignInForm from "../../components/auth-forms/sign-in-form.component";
 import SignUpForm from "../../components/auth-forms/sign-up-form.component";
-import { UserContext } from "../../context/user.context";
+import { useUserStore } from "../../utils/store/user.store";
 
 const AuthPage = () => {
-  const { currentUser } = useContext(UserContext);
+  const currentUser = useUserStore((state) => state.currentUser);
   const { auth } = useParams();
   const navigate = useNavigate();
   useEffect(() => {

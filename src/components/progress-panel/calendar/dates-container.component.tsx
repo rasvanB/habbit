@@ -1,10 +1,11 @@
-import { useCallback, useContext } from "react";
-import { PanelContext } from "../../../context/progress-panel.context";
+import { useCallback } from "react";
 import { getDatesOfMonth } from "../../../utils/calendar.utils";
+import { usePanelStore } from "../../../utils/store/panel.store";
 import Day from "./day.component";
 
 const DatesContainer = () => {
-  const { selectedDate, selectedHabit } = useContext(PanelContext);
+  const selectedDate = usePanelStore((state) => state.selectedDate);
+  const selectedHabit = usePanelStore((state) => state.selectedHabit);
 
   const monthDates = getDatesOfMonth(selectedDate);
 

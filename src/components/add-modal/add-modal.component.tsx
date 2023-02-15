@@ -4,35 +4,39 @@ import IconMenu from "../icon-menu/icon-menu.component";
 import Dropdown from "../other/dropdown.component";
 import Message from "../other/message.component";
 import { Icon } from "@iconify/react";
-import { useState, useContext } from "react";
-import { UserContext } from "../../context/user.context";
+import { useState } from "react";
 import { validateModal } from "../../utils/modal.utils";
 import { addHabitToUser } from "../../utils/firebase/firebase.utils";
 import { showToast } from "../../utils/toast/habit-toasts";
-import {
-  ModalContext,
-  requirementOptions,
-  defaultHabitState,
-} from "../../context/add-modal.context";
 import { getDateAsString } from "../card/progress-menu.component";
-import { PanelContext } from "../../context/progress-panel.context";
 import Modal from "../other/modal.component";
+import { usePanelStore } from "../../utils/store/panel.store";
+import { useUserStore } from "../../utils/store/user.store";
+import {
+  defaultHabitState,
+  requirementOptions,
+  useModalStore,
+} from "../../utils/store/modal.store";
 
 const AddModal = () => {
   const [isIconsHidden, setIsIconsHidden] = useState(true);
-  const {
-    isOpen,
-    setOpen,
-    currentHabit,
-    setCurrentHabit,
-    editMode,
-    errorMessage,
-    setErrorMessage,
-    habitToEdit,
-  } = useContext(ModalContext);
 
-  const { addHabit, currentUser, habits, editHabit } = useContext(UserContext);
-  const { selectedHabit, setSelectedHabit } = useContext(PanelContext);
+  const isOpen = useModalStore((state) => state.isOpen);
+  const setOpen = useModalStore((state) => state.setOpen);
+  const currentHabit = useModalStore((state) => state.currentHabit);
+  const setCurrentHabit = useModalStore((state) => state.setCurrentHabit);
+  const editMode = useModalStore((state) => state.editMode);
+  const errorMessage = useModalStore((state) => state.errorMessage);
+  const setErrorMessage = useModalStore((state) => state.setErrorMessage);
+  const habitToEdit = useModalStore((state) => state.habitToEdit);
+
+  const addHabit = useUserStore((state) => state.addHabit);
+  const currentUser = useUserStore((state) => state.currentUser);
+  const habits = useUserStore((state) => state.habits);
+  const editHabit = useUserStore((state) => state.editHabit);
+
+  const selectedHabit = usePanelStore((state) => state.selectedHabit);
+  const setSelectedHabit = usePanelStore((state) => state.setSelectedHabit);
 
   const closeModal = () => {
     setOpen(!isOpen);

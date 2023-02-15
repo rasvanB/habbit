@@ -1,12 +1,11 @@
-import { useContext } from "react";
-import { PanelContext } from "../../context/progress-panel.context";
+import { usePanelStore } from "../../utils/store/panel.store";
 import Calendar from "./calendar/calendar.component";
 import CompletionRate from "./completion-rate.component";
 import Graph from "./graph.component";
 import Stats from "./stats.component";
 
 const ProgressPanel = () => {
-  const { isOpen } = useContext(PanelContext);
+  const isOpen = usePanelStore((state) => state.isOpen);
 
   return (
     <div

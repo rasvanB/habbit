@@ -1,11 +1,9 @@
 import Button from "../other/button.component";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { UserContext } from "../../context/user.context";
+import { useUserStore } from "../../utils/store/user.store";
 
 const Hero = () => {
-  const { currentUser } = useContext(UserContext);
-
+  const currentUser = useUserStore((state) => state.currentUser);
   return (
     <div className="h-screen bg-cover bg-light-bg-mid dark:bg-dark-bg-mid bg-no-repeat bg-center bg-opacity-70 sm:dark:bg-dark-bg-svg sm:bg-light-bg-svg">
       <div className="flex flex-col items-center h-full">

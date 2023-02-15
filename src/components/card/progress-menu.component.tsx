@@ -1,9 +1,9 @@
 import { Icon } from "@iconify/react";
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { PanelContext } from "../../context/progress-panel.context";
-import { UserContext } from "../../context/user.context";
+import React, { useEffect, useRef, useState } from "react";
 import { addHabitToUser } from "../../utils/firebase/firebase.utils";
 import { getProgressOfToday } from "../../utils/stats.utils";
+import { usePanelStore } from "../../utils/store/panel.store";
+import { useUserStore } from "../../utils/store/user.store";
 import { Habit } from "../../utils/types.utils";
 import Button from "../other/button.component";
 
@@ -27,9 +27,11 @@ const ProgressMenu = ({
   ...other
 }: ProgressMenuProps) => {
   const [progress, setProgress] = useState(getProgressOfToday(habit));
-  const { currentUser, editHabit } = useContext(UserContext);
   const menuRef = useRef<HTMLDivElement>(null);
-  const { setSelectedHabit } = useContext(PanelContext);
+
+  const setSelectedHabit = usePanelStore((state) => state.setSelectedHabit);
+  const currentUser = useUserStore((state) => state.currentUser);
+  const editHabit = useUserStore((state) => state.editHabit);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;

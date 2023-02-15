@@ -1,14 +1,13 @@
 import { Icon } from "@iconify/react";
-import { useContext } from "react";
-import { PanelContext } from "../../context/progress-panel.context";
 import {
   calculateCurrentStreak,
   calculateHighestStreak,
   calculateTotalCompletions,
 } from "../../utils/stats.utils";
+import { usePanelStore } from "../../utils/store/panel.store";
 
 const Stats = () => {
-  const { selectedHabit } = useContext(PanelContext);
+  const selectedHabit = usePanelStore((state) => state.selectedHabit);
   let unit = "";
 
   if (selectedHabit) {

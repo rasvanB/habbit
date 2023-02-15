@@ -1,11 +1,11 @@
 import { Icon } from "@iconify/react";
 import { getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { UserContext } from "../../context/user.context";
+import React, { useEffect, useRef, useState } from "react";
 import {
   editUser,
   getImagesStorageRef,
 } from "../../utils/firebase/firebase.utils";
+import { useUserStore } from "../../utils/store/user.store";
 import { showToast } from "../../utils/toast/habit-toasts";
 import { UserData } from "../../utils/types.utils";
 import Button from "../other/button.component";
@@ -20,7 +20,8 @@ type ProfileProps = {
 const MB = 1048576;
 
 const Profile = ({ isOpen, close }: ProfileProps) => {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const currentUser = useUserStore((state) => state.currentUser);
+  const setCurrentUser = useUserStore((state) => state.setCurrentUser);
   const [isLoading, setLoading] = useState(false);
   const [hasChanged, setChanged] = useState(false);
   const [nameInput, setNameInput] = useState(currentUser?.displayName);

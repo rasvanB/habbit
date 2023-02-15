@@ -1,12 +1,12 @@
 import { Icon } from "@iconify/react";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import hexToRgba from "hex-to-rgba";
 import CardMenu from "./card-menu.component";
 import ProgressMenu from "./progress-menu.component";
 import CompleteMenu from "./complete-menu.component";
-import { PanelContext } from "../../context/progress-panel.context";
 import { getDataOfToday, getProgressOfToday } from "../../utils/stats.utils";
 import { Habit } from "../../utils/types.utils";
+import { usePanelStore } from "../../utils/store/panel.store";
 
 type CardProps = {
   habit: Habit;
@@ -17,8 +17,9 @@ const HabitCard = ({ habit, completed, ...otherProps }: CardProps) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isProgressOpen, setProgressOpen] = useState(false);
   const [isCompleteOpen, setCompleteOpen] = useState(false);
-  const { setSelectedHabit, setOpen, setSelectedDate } =
-    useContext(PanelContext);
+  const setSelectedHabit = usePanelStore((state) => state.setSelectedHabit);
+  const setSelectedDate = usePanelStore((state) => state.setSelectedDate);
+  const setOpen = usePanelStore((state) => state.setOpen);
 
   const cardRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);

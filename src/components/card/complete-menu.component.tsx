@@ -1,7 +1,7 @@
-import { useContext, useEffect, useRef } from "react";
-import { PanelContext } from "../../context/progress-panel.context";
-import { UserContext } from "../../context/user.context";
+import { useEffect, useRef } from "react";
 import { addHabitToUser } from "../../utils/firebase/firebase.utils";
+import { usePanelStore } from "../../utils/store/panel.store";
+import { useUserStore } from "../../utils/store/user.store";
 import { Habit } from "../../utils/types.utils";
 import { getDateAsString } from "./progress-menu.component";
 
@@ -12,9 +12,10 @@ type MenuProps = {
 };
 
 const CompleteMenu = ({ isOpen, habit, close }: MenuProps) => {
-  const { currentUser, editHabit } = useContext(UserContext);
+  const currentUser = useUserStore((state) => state.currentUser);
+  const editHabit = useUserStore((state) => state.editHabit);
   const menuRef = useRef<HTMLDivElement>(null);
-  const { setSelectedHabit } = useContext(PanelContext);
+  const setSelectedHabit = usePanelStore((state) => state.setSelectedHabit);
 
   const handleConfirm = () => {
     if (currentUser) {

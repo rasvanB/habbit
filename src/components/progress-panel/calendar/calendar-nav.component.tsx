@@ -1,14 +1,14 @@
 import { Icon } from "@iconify/react";
-import { useContext } from "react";
-import { PanelContext } from "../../../context/progress-panel.context";
 import {
   getMonthFromNumber,
   nextMonth,
   prevMonth,
 } from "../../../utils/calendar.utils";
+import { usePanelStore } from "../../../utils/store/panel.store";
 
 const CalendarNavigation = () => {
-  const { selectedDate, setSelectedDate } = useContext(PanelContext);
+  const selectedDate = usePanelStore((state) => state.selectedDate);
+  const setSelectedDate = usePanelStore((state) => state.setSelectedDate);
 
   const handleNextMonth = () => {
     setSelectedDate(nextMonth(selectedDate));

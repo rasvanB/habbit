@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import Option from "./option.component";
 import Button from "../other/button.component";
-import { useContext } from "react";
-import { UserContext } from "../../context/user.context";
+import { useUserStore } from "../../utils/store/user.store";
 
 const NavLinks = ({ open }: { open: boolean }) => {
-  const { currentUser } = useContext(UserContext);
+  const currentUser = useUserStore((state) => state.currentUser);
   return (
     <div
       className={`

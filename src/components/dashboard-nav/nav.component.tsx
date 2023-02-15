@@ -1,11 +1,11 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
-import { UserContext } from "../../context/user.context";
 import { useNavigate } from "react-router-dom";
 import Avatar from "./avatar.component";
 import SettingsMenu from "./settings-menu.component";
-import { PanelContext } from "../../context/progress-panel.context";
 import { getPartOfDayFromTimeString } from "../../utils/calendar.utils";
+import { usePanelStore } from "../../utils/store/panel.store";
+import { useUserStore } from "../../utils/store/user.store";
 
 type NavProps = {
   username: string;
@@ -14,9 +14,12 @@ type NavProps = {
 
 const Nav = ({ username, photourl }: NavProps) => {
   const navigate = useNavigate();
-  const { setHabits, setCurrentUser } = useContext(UserContext);
-  const { setSelectedHabit, setOpen } = useContext(PanelContext);
   const [isSettingsOpen, setSettingsOpen] = useState(false);
+
+  const setHabits = useUserStore((state) => state.setHabits);
+  const setCurrentUser = useUserStore((state) => state.setCurrentUser);
+  const setSelectedHabit = usePanelStore((state) => state.setSelectedHabit);
+  const setOpen = usePanelStore((state) => state.setOpen);
 
   const handleSignOut = async () => {
     await signOutUser();

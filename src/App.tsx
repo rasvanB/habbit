@@ -1,18 +1,21 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
 import LandingPage from "./routes/landing/landing.component";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import NotFound from "./routes/not-found/not-found.component";
 import AuthPage from "./routes/auth/auth.component";
 import {
   getUserData,
   onAuthStateChangeListener,
 } from "./utils/firebase/firebase.utils";
-import { UserContext } from "./context/user.context";
 import Dashboard from "./routes/dashboard/dashboard.component";
 import { useThemeStore } from "./utils/store/theme.store";
+import { useUserStore } from "./utils/store/user.store";
 
 const App = () => {
-  const { setCurrentUser, setHabits, currentUser } = useContext(UserContext);
+  const setCurrentUser = useUserStore((state) => state.setCurrentUser);
+  const setHabits = useUserStore((state) => state.setHabits);
+  const currentUser = useUserStore((state) => state.currentUser);
+
   const navigate = useNavigate();
   const setDarkMode = useThemeStore((state) => state.setDarkMode);
 

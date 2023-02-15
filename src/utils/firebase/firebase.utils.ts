@@ -27,7 +27,7 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { FirebaseError } from "firebase/app";
-import { defaultProfilePicURL } from "../../context/user.context";
+import { defaultProfilePicURL } from "../store/user.store";
 import { getStorage, ref } from "firebase/storage";
 import { Habit, HabitSchema, UserData, UserSchema } from "../types.utils";
 // import { getAnalytics } from "firebase/analytics";

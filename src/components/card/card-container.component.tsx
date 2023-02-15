@@ -1,11 +1,10 @@
-import { useContext } from "react";
-import { UserContext } from "../../context/user.context";
 import { getDataOfToday } from "../../utils/stats.utils";
+import { useUserStore } from "../../utils/store/user.store";
 import { Habit } from "../../utils/types.utils";
 import HabitCard from "./habit-card.component";
 
 const CardContainer = () => {
-  const { habits } = useContext(UserContext);
+  const habits = useUserStore((state) => state.habits);
   const completedHabits: Habit[] = [];
   const incompleteHabits: Habit[] = [];
 
