@@ -8,31 +8,17 @@ import CardContainer from "../../components/card/card-container.component";
 import { Toaster } from "react-hot-toast";
 import { ModalContext } from "../../context/add-modal.context";
 import ProgressPanel from "../../components/progress-panel/progress-panel.component";
-import { ThemeContext } from "../../context/theme.context";
 import { Icon } from "@iconify/react";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const { currentUser } = useContext(UserContext);
   const { isOpen, setOpen, setEditMode } = useContext(ModalContext);
-  const { setDarkMode } = useContext(ThemeContext);
 
   const toggleModal = () => {
     setOpen(!isOpen);
     setEditMode(false);
   };
-
-  useEffect(() => {
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", (event) => {
-        const colorScheme = event.matches ? true : false;
-        setDarkMode(colorScheme);
-      });
-    setDarkMode(
-      window.matchMedia("(prefers-color-scheme: dark)").matches ? true : false
-    );
-  }, [setDarkMode]);
 
   useEffect(() => {
     if (!currentUser) {

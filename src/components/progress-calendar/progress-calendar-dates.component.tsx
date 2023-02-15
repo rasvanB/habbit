@@ -1,18 +1,18 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { getDatesOfMonth } from "../../utils/calendar.utils";
 import Day from "../progress-panel/calendar/day.component";
-import { ProgressCalendarContext } from "../../context/progress-calendar.contex";
 import { addCompletedDayToHabit } from "../../utils/stats.utils";
 import { compareAsc } from "date-fns";
 import { getDateAsString } from "../card/progress-menu.component";
 import { Habit } from "../../utils/types.utils";
+import { useCalendarStore } from "../../utils/store/calendar.store";
 
 type ProgressCalendarDatesProps = {
   habit: Habit;
 };
 
 const ProgressCalendarDates = ({ habit }: ProgressCalendarDatesProps) => {
-  const { selectedDate } = useContext(ProgressCalendarContext);
+  const selectedDate = useCalendarStore((state) => state.selectedDate);
   const [reload, setReload] = useState(false);
   const monthDates = getDatesOfMonth(selectedDate);
 

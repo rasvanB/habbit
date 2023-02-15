@@ -11,8 +11,8 @@ import Modal from "../other/modal.component";
 import CardMenuItem from "./card-menu-item.component";
 import ProgressCalendar from "../progress-calendar/progress-calendar.component";
 import { getDateAsString } from "./progress-menu.component";
-import { ProgressCalendarContext } from "../../context/progress-calendar.contex";
 import { Habit } from "../../utils/types.utils";
+import { useCalendarStore } from "../../utils/store/calendar.store";
 
 type CardMenuProps = {
   isOpen: boolean;
@@ -29,9 +29,9 @@ const CardMenu = ({
   const { currentUser, removeHabit, editHabit } = useContext(UserContext);
   const [isModalOpen, setModalOpen] = useState(false);
   const { setSelectedHabit } = useContext(PanelContext);
-  const { setSelectedDate } = useContext(ProgressCalendarContext);
   const { setOpen, setCurrentHabit, setHabitToEdit, setEditMode } =
     useContext(ModalContext);
+  const setSelectedDate = useCalendarStore((state) => state.setSelectedDate);
 
   const closeModal = () => {
     if (currentUser) {

@@ -1,15 +1,14 @@
 import { Icon } from "@iconify/react";
-import { useContext } from "react";
-import { ProgressCalendarContext } from "../../context/progress-calendar.contex";
-
 import {
   getMonthFromNumber,
   nextMonth,
   prevMonth,
 } from "../../utils/calendar.utils";
+import { useCalendarStore } from "../../utils/store/calendar.store";
 
 const ProgressCalendarNav = () => {
-  const { selectedDate, setSelectedDate } = useContext(ProgressCalendarContext);
+  const selectedDate = useCalendarStore((state) => state.selectedDate);
+  const setSelectedDate = useCalendarStore((state) => state.setSelectedDate);
 
   const handleNextMonth = () => {
     setSelectedDate(nextMonth(selectedDate));

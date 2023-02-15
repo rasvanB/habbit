@@ -1,11 +1,11 @@
 import { ResponsivePie } from "@nivo/pie";
 import { useCallback, useContext } from "react";
 import { PanelContext } from "../../context/progress-panel.context";
-import { ThemeContext } from "../../context/theme.context";
+import { useThemeStore } from "../../utils/store/theme.store";
 
 const CompletionRate = () => {
   const { selectedHabit } = useContext(PanelContext);
-  const { darkMode } = useContext(ThemeContext);
+  const darkMode = useThemeStore((state) => state.darkMode);
 
   const getNumberOfCompletedDays = useCallback(() => {
     if (selectedHabit) {

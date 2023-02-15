@@ -6,7 +6,6 @@ export const defaultProfilePicURL =
 
 export type UserContextType = {
   currentUser: UserData | null;
-
   setCurrentUser: (currentUser: UserData | null) => void;
   habits: Habit[];
   addHabit: (habit: Habit) => void;

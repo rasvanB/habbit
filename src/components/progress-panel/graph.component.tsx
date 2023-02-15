@@ -1,8 +1,8 @@
 import { ResponsiveBarCanvas } from "@nivo/bar";
 import { useContext, useEffect, useState } from "react";
 import { PanelContext } from "../../context/progress-panel.context";
-import { ThemeContext } from "../../context/theme.context";
 import { getProgressByMonth } from "../../utils/stats.utils";
+import { useThemeStore } from "../../utils/store/theme.store";
 
 const defaultData = [
   {
@@ -14,7 +14,8 @@ const defaultData = [
 const Graph = () => {
   const [reload, setReload] = useState(false);
   const { selectedHabit } = useContext(PanelContext);
-  const { darkMode } = useContext(ThemeContext);
+
+  const darkMode = useThemeStore((state) => state.darkMode);
 
   let data = getProgressByMonth(selectedHabit);
   if (data.length === 0) data = defaultData;

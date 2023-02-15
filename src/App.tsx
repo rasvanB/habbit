@@ -9,10 +9,12 @@ import {
 } from "./utils/firebase/firebase.utils";
 import { UserContext } from "./context/user.context";
 import Dashboard from "./routes/dashboard/dashboard.component";
+import { useThemeStore } from "./utils/store/theme.store";
 
 const App = () => {
   const { setCurrentUser, setHabits, currentUser } = useContext(UserContext);
   const navigate = useNavigate();
+  const setDarkMode = useThemeStore((state) => state.setDarkMode);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChangeListener(async (user) => {
@@ -39,6 +41,18 @@ const App = () => {
       navigate("/app");
     }
   }, [currentUser, navigate]);
+
+  useEffect(() => {
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (event) => {
+        const colorScheme = event.matches ? true : false;
+        setDarkMode(colorScheme);
+      });
+    setDarkMode(
+      window.matchMedia("(prefers-color-scheme: dark)").matches ? true : false
+    );
+  }, [setDarkMode]);
 
   return (
     <>
