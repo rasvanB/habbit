@@ -11,6 +11,14 @@ type ProgressCalendarDatesProps = {
   habit: Habit;
 };
 
+const areDatesEqual = (d1: Date, d2: Date) => {
+  return (
+    d1.getDate() === d2.getDate() &&
+    d1.getMonth() === d2.getMonth() &&
+    d1.getFullYear() === d2.getFullYear()
+  );
+};
+
 const ProgressCalendarDates = ({ habit }: ProgressCalendarDatesProps) => {
   const selectedDate = useCalendarStore((state) => state.selectedDate);
   const [reload, setReload] = useState(false);
@@ -38,11 +46,7 @@ const ProgressCalendarDates = ({ habit }: ProgressCalendarDatesProps) => {
           if (activeDaysIndex < activeDays.length) {
             const activeDayAsDate = new Date(activeDays[activeDaysIndex].date);
             activeDayAsDate.setMonth(activeDayAsDate.getMonth());
-            if (
-              activeDayAsDate.getDate() === date.d.getDate() &&
-              activeDayAsDate.getMonth() === date.d.getMonth() &&
-              activeDayAsDate.getFullYear() === date.d.getFullYear()
-            ) {
+            if (areDatesEqual(activeDayAsDate, date.d)) {
               isActiveDay = true;
               activeDaysIndex++;
             }
