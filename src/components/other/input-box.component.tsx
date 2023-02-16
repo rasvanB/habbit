@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 
-import { inputClasses } from "../../utils/styles/input-styles";
+import { inputStyles } from "../../utils/styles/input-styles";
 type InputProps = {
   label?: string;
   isFormInput?: boolean;
@@ -25,8 +25,8 @@ const InputBox = forwardRef<HTMLInputElement, InputProps>(
             {...otherProps}
             className={`${
               isFormInput
-                ? inputClasses.formInputStyle
-                : inputClasses.modalInputStyle
+                ? inputStyles["form-input"]
+                : inputStyles["modal-input"]
             }`}
           />
         </div>
