@@ -11,8 +11,8 @@ export type ButtonTypes =
   | "increment"
   | "decrement";
 
-export type Styles<T> = {
-  [P in T extends string ? T : never]: string;
+export type Styles<T extends string> = {
+  [P in T]: string;
 };
 
 export const buttonStyles: Styles<ButtonTypes> = {
