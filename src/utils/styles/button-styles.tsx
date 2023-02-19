@@ -11,7 +11,7 @@ export type ButtonTypes =
   | "increment"
   | "decrement";
 
-export type Styles<T extends string> = {
+export type Styles<T extends PropertyKey> = {
   [P in T]: string;
 };
 

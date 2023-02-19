@@ -1,6 +1,7 @@
 import { forwardRef } from "react";
 
 import { inputStyles } from "../../utils/styles/input-styles";
+
 type InputProps = {
   label?: string;
   isFormInput?: boolean;
