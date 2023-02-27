@@ -38,7 +38,7 @@ const Day = ({
       } text-center rounded-md p-1 px-1.5 font-medium select-none
       ${
         onClick
-          ? "dark:hover:bg-neutral-600 hover:bg-gray-100 cursor-pointer"
+          ? "dark:hover:bg-neutral-700 hover:bg-gray-100 cursor-pointer"
           : ""
       }`}
       key={date.getTime()}

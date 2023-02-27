@@ -4,12 +4,9 @@ import {
   deleteHabitFromUser,
 } from "../../utils/firebase/firebase.utils";
 import { showToast } from "../../utils/toast/habit-toasts";
-import Modal from "../other/modal.component";
 import CardMenuItem from "./card-menu-item.component";
-import ProgressCalendar from "../progress-calendar/progress-calendar.component";
 import { getDateAsString } from "./progress-menu.component";
 import { Habit } from "../../utils/types.utils";
-import { useCalendarStore } from "../../utils/store/calendar.store";
 import { usePanelStore } from "../../utils/store/panel.store";
 import { useUserStore } from "../../utils/store/user.store";
 import { useModalStore } from "../../utils/store/modal.store";
@@ -34,7 +31,6 @@ const CardMenu = ({
   const setEditMode = useModalStore((state) => state.setEditMode);
 
   const setSelectedHabit = usePanelStore((state) => state.setSelectedHabit);
-  const setSelectedDate = useCalendarStore((state) => state.setSelectedDate);
   const currentUser = useUserStore((state) => state.currentUser);
   const removeHabit = useUserStore((state) => state.removeHabit);
   const editHabit = useUserStore((state) => state.editHabit);
@@ -106,15 +102,7 @@ const CardMenu = ({
           onClick={handleClick}
           isMobile
         />
-        <CardMenuItem
-          text="log progress"
-          iconName="bx:calendar"
-          isMobile
-          onClick={() => {
-            setModalOpen(true);
-            setSelectedDate(new Date());
-          }}
-        />
+
         {completed ? (
           <CardMenuItem
             text="reset completion"
@@ -126,12 +114,6 @@ const CardMenu = ({
           <></>
         )}
       </div>
-      <Modal isOpen={isModalOpen} close={closeModal}>
-        <div className="text-center font-poppins mb-4 text-xl">
-          LOG PROGRESS
-        </div>
-        <ProgressCalendar habit={habit} />
-      </Modal>
     </>
   );
 };
