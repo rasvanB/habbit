@@ -1,3 +1,5 @@
+import { compareAsc } from "date-fns";
+
 export const monthNames: { [key: number]: string } = {
   0: "January",
   1: "February",
@@ -19,6 +21,11 @@ export const areDatesEqual = (d1: Date, d2: Date) => {
     d1.getMonth() === d2.getMonth() &&
     d1.getFullYear() === d2.getFullYear()
   );
+};
+
+export const isDatePastOrToday = (d: Date) => {
+  const today = new Date();
+  if (compareAsc(d, today) === -1) return true;
 };
 
 const partsOfDay = ["morning", "afternoon", "evening"] as const;
