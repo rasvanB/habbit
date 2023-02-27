@@ -35,6 +35,8 @@ const CardMenu = ({
   const removeHabit = useUserStore((state) => state.removeHabit);
   const editHabit = useUserStore((state) => state.editHabit);
 
+  //TODO: MOVE THIS FUNCTION TO CALENDAR COMPONENT AFTER CLICKED ON DATE TO LOG IT
+  //TODO: USE DEBOUNCE TO AVOID SPAMMING THE DATABASE
   const closeModal = () => {
     if (currentUser) {
       addHabitToUser(currentUser.uid, habit);
