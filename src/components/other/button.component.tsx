@@ -8,7 +8,7 @@ type ButtonProps = {
 const Button = ({ buttonStyle, children, ...otherProps }: ButtonProps) => {
   return (
     <div>
-      <button {...otherProps} className={buttonStyles[buttonStyle]}>
+      <button {...otherProps} className={buttonStyles({ intent: buttonStyle })}>
         {children}
       </button>
     </div>
