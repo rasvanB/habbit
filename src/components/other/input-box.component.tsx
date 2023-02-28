@@ -26,8 +26,8 @@ const InputBox = forwardRef<HTMLInputElement, InputProps>(
             {...otherProps}
             className={`${
               isFormInput
-                ? inputStyles["form-input"]
-                : inputStyles["modal-input"]
+                ? inputStyles({ intent: "form-input" })
+                : inputStyles({ intent: "modal-input" })
             }`}
           />
         </div>
