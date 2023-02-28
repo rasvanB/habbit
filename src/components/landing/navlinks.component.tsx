@@ -14,7 +14,7 @@ const NavLinks = ({ open }: { open: boolean }) => {
             : "-top-52 opacity-0"
         } sm:opacity-100 pr-5 sm:pr-0 sm:border-t-0`}
     >
-      <Option linkTo="/contact" text="Contact" />
+      <Option to="/contact" text="Contact" />
       <Link
         className="sm:mr-6 pt-4 sm:pt-0"
         to={`/${currentUser ? "app" : "auth/sign-in"}`}
