@@ -5,23 +5,16 @@ type IconProps = {
   type: IconTypes;
 };
 
-const getIcon = (type: IconTypes) => {
-  switch (type) {
-    case "facebook":
-      return "bg-facebook-icon";
-    case "google":
-      return "bg-google-icon";
-    case "twitter":
-      return "bg-twitter-icon";
-  }
-};
+const icons: Record<IconTypes, string> = {
+  facebook: "bg-facebook-icon",
+  google: "bg-google-icon",
+  twitter: "bg-twitter-icon",
+} as const;
 
 const ProviderIcon = ({ type }: IconProps) => {
   return (
     <div
-      className={`icon h-9 ${getIcon(
-        type
-      )} bg-cover bg-center bg-no-repeat w-9`}
+      className={`icon h-9 ${icons[type]} bg-cover bg-center bg-no-repeat w-9`}
     ></div>
   );
 };
