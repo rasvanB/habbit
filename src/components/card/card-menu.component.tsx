@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   addHabitToUser,
   deleteHabitFromUser,
@@ -23,8 +22,6 @@ const CardMenu = ({
   completed,
   ...otherProps
 }: CardMenuProps) => {
-  const [isModalOpen, setModalOpen] = useState(false);
-
   const setOpen = useModalStore((state) => state.setOpen);
   const setCurrentHabit = useModalStore((state) => state.setCurrentHabit);
   const setHabitToEdit = useModalStore((state) => state.setHabitToEdit);
@@ -34,17 +31,6 @@ const CardMenu = ({
   const currentUser = useUserStore((state) => state.currentUser);
   const removeHabit = useUserStore((state) => state.removeHabit);
   const editHabit = useUserStore((state) => state.editHabit);
-
-  //TODO: MOVE THIS FUNCTION TO CALENDAR COMPONENT AFTER CLICKED ON DATE TO LOG IT
-  //TODO: USE DEBOUNCE TO AVOID SPAMMING THE DATABASE
-  const closeModal = () => {
-    if (currentUser) {
-      addHabitToUser(currentUser.uid, habit);
-    }
-    editHabit(habit);
-    setSelectedHabit(habit);
-    setModalOpen(false);
-  };
 
   const handleRemoveHabit = (habit: Habit) => {
     if (currentUser) {

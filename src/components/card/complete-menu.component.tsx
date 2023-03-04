@@ -2,13 +2,19 @@ import { useEffect, useRef } from "react";
 import { addHabitToUser } from "../../utils/firebase/firebase.utils";
 import { usePanelStore } from "../../utils/store/panel.store";
 import { useUserStore } from "../../utils/store/user.store";
-import { Habit } from "../../utils/types.utils";
+import { ActiveDay, Habit } from "../../utils/types.utils";
 import { getDateAsString } from "./progress-menu.component";
 
 type MenuProps = {
   isOpen: boolean;
   habit: Habit;
   close: () => void;
+};
+
+const completedDay: ActiveDay = {
+  date: getDateAsString(),
+  progress: 1,
+  completed: true,
 };
 
 const CompleteMenu = ({ isOpen, habit, close }: MenuProps) => {
@@ -20,32 +26,19 @@ const CompleteMenu = ({ isOpen, habit, close }: MenuProps) => {
   const handleConfirm = () => {
     if (currentUser) {
       const newHabit = { ...habit };
-      newHabit.timeStamp = habit.timeStamp;
       if (newHabit.activeDays && newHabit.activeDays.length > 0) {
         if (
           newHabit.activeDays[newHabit.activeDays.length - 1].date !==
           getDateAsString()
         ) {
-          newHabit.activeDays.push({
-            date: getDateAsString(),
-            progress: 1,
-            completed: true,
-          });
+          newHabit.activeDays.push(completedDay);
         } else {
           newHabit.activeDays.pop();
-          newHabit.activeDays.push({
-            date: getDateAsString(),
-            progress: 1,
-            completed: true,
-          });
+          newHabit.activeDays.push(completedDay);
         }
       } else {
         newHabit.activeDays = [];
-        newHabit.activeDays.push({
-          date: getDateAsString(),
-          progress: 1,
-          completed: true,
-        });
+        newHabit.activeDays.push(completedDay);
       }
 
       editHabit(newHabit);
