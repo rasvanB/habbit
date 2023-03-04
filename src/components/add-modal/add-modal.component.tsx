@@ -117,26 +117,23 @@ const AddModal = () => {
     if (error) setErrorMessage(error);
     else {
       if (currentUser) {
-        const oldTimestamp = habitToEdit.timeStamp;
-        const newHabit = { ...currentHabit };
-        newHabit.timeStamp = oldTimestamp;
+        const newHabit = { ...currentHabit, timeStamp: habitToEdit.timeStamp };
+        if (
+          newHabit.goal !== habitToEdit.goal &&
+          newHabit.activeDays &&
+          newHabit.activeDays.length > 0 &&
+          newHabit.activeDays[newHabit.activeDays.length - 1].date ===
+            getDateAsString()
+        ) {
+          const progress =
+            newHabit.activeDays[newHabit.activeDays.length - 1].progress;
 
-        if (newHabit.goal !== habitToEdit.goal) {
-          if (newHabit.activeDays && newHabit.activeDays.length > 0) {
-            if (
-              newHabit.activeDays[newHabit.activeDays.length - 1].date ===
-              getDateAsString()
-            ) {
-              const progress =
-                newHabit.activeDays[newHabit.activeDays.length - 1].progress;
-              newHabit.activeDays.pop();
-              newHabit.activeDays.push({
-                completed: progress >= newHabit.goal,
-                date: getDateAsString(),
-                progress: progress,
-              });
-            }
-          }
+          newHabit.activeDays[newHabit.activeDays.length - 1].progress;
+          newHabit.activeDays[newHabit.activeDays.length - 1] = {
+            completed: progress >= newHabit.goal,
+            date: getDateAsString(),
+            progress: progress,
+          };
         }
         editHabit(newHabit);
         addHabitToUser(currentUser.uid, newHabit);
