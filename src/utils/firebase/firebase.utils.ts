@@ -19,7 +19,6 @@ import {
   collection,
   deleteDoc,
   doc,
-  DocumentData,
   getDoc,
   getDocs,
   getFirestore,
@@ -30,7 +29,7 @@ import { FirebaseError } from "firebase/app";
 import { defaultProfilePicURL } from "../store/user.store";
 import { getStorage, ref } from "firebase/storage";
 import { Habit, HabitSchema, UserData, UserSchema } from "../types.utils";
-// import { getAnalytics } from "firebase/analytics";
+
 const firebaseConfig = {
   apiKey: "AIzaSyCU_8Lk_XYfErTC1-mI8htZ-yfp0P-b74A",
   authDomain: "habbit-db.firebaseapp.com",
@@ -41,10 +40,8 @@ const firebaseConfig = {
   measurementId: "G-1ML4JWKDF3",
 };
 
-// Initialize Firebase
 initializeApp(firebaseConfig);
 const auth = getAuth();
-// const analytics = getAnalytics(app);
 const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
 const twitterProvider = new TwitterAuthProvider();
