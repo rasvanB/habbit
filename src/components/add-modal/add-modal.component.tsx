@@ -17,26 +17,40 @@ import {
   requirementOptions,
   useModalStore,
 } from "../../utils/store/modal.store";
+import { Habit } from "../../utils/types.utils";
+
+const updateCurrentHabit = (
+  currentHabit: Habit,
+  name: string,
+  value: string
+): Habit => {
+  if (name === "goal" && typeof value === "number") {
+    const newValue = Math.min(Math.max(value, 0), 300);
+    return { ...currentHabit, [name]: newValue, timeStamp: Date.now() };
+  } else {
+    return { ...currentHabit, [name]: value, timeStamp: Date.now() };
+  }
+};
 
 const AddModal = () => {
   const [isIconsHidden, setIsIconsHidden] = useState(true);
 
-  const isOpen = useModalStore((state) => state.isOpen);
-  const setOpen = useModalStore((state) => state.setOpen);
-  const currentHabit = useModalStore((state) => state.currentHabit);
-  const setCurrentHabit = useModalStore((state) => state.setCurrentHabit);
-  const editMode = useModalStore((state) => state.editMode);
-  const errorMessage = useModalStore((state) => state.errorMessage);
-  const setErrorMessage = useModalStore((state) => state.setErrorMessage);
-  const habitToEdit = useModalStore((state) => state.habitToEdit);
+  const {
+    isOpen,
+    setOpen,
+    currentHabit,
+    setCurrentHabit,
+    editMode,
+    errorMessage,
+    setErrorMessage,
+    habitToEdit,
+  } = useModalStore((state) => state);
 
-  const addHabit = useUserStore((state) => state.addHabit);
-  const currentUser = useUserStore((state) => state.currentUser);
-  const habits = useUserStore((state) => state.habits);
-  const editHabit = useUserStore((state) => state.editHabit);
+  const { addHabit, currentUser, habits, editHabit } = useUserStore(
+    (state) => state
+  );
 
-  const selectedHabit = usePanelStore((state) => state.selectedHabit);
-  const setSelectedHabit = usePanelStore((state) => state.setSelectedHabit);
+  const { selectedHabit, setSelectedHabit } = usePanelStore((state) => state);
 
   const closeModal = () => {
     setOpen(!isOpen);
@@ -61,30 +75,9 @@ const AddModal = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setErrorMessage("");
-    const { name, value } = e.target;
-    if (name === "goal" && value) {
-      if (parseInt(value) < 0) {
-        setCurrentHabit({ ...currentHabit, [name]: 0, timeStamp: Date.now() });
-      } else if (parseInt(value) > 300) {
-        setCurrentHabit({
-          ...currentHabit,
-          [name]: 300,
-          timeStamp: Date.now(),
-        });
-      } else {
-        setCurrentHabit({
-          ...currentHabit,
-          [name]: parseInt(value),
-          timeStamp: Date.now(),
-        });
-      }
-    } else {
-      setCurrentHabit({
-        ...currentHabit,
-        [name]: value,
-        timeStamp: Date.now(),
-      });
-    }
+    setCurrentHabit(
+      updateCurrentHabit(currentHabit, e.target.name, e.target.value)
+    );
   };
 
   const changeColor = (color: string) => {
