@@ -177,9 +177,13 @@ const AddModal = () => {
           </Button>
           <IconMenu
             isIconsHidden={isIconsHidden}
-            selectIcon={selectIcon}
+            onIconChange={(icon) => {
+              selectIcon(icon);
+            }}
+            onColorChange={(color) => {
+              changeColor(color);
+            }}
             iconColor={currentHabit.iconColor}
-            changeColor={changeColor}
           />
         </div>
       </div>

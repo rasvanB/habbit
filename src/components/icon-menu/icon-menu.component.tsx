@@ -7,15 +7,15 @@ import ColorsMenu from "../colors-menu/colors-menu.component";
 type IconMenuProps = {
   isIconsHidden: boolean;
   iconColor: string;
-  selectIcon(iconName: string): void;
-  changeColor(color: string): void;
+  onIconChange(iconName: string): void;
+  onColorChange(color: string): void;
 };
 
 const IconMenu = ({
   isIconsHidden,
-  selectIcon,
   iconColor,
-  changeColor,
+  onIconChange,
+  onColorChange,
 }: IconMenuProps) => {
   const [isColorMenuOpen, setIsColorMenuOpen] = useState(false);
   const handleColorMenuToggle = () => {
@@ -39,7 +39,7 @@ const IconMenu = ({
       <ColorsMenu
         closeColorMenu={handleColorMenuToggle}
         isColorsMenuOpen={isColorMenuOpen}
-        changeColor={changeColor}
+        changeColor={onColorChange}
       ></ColorsMenu>
       <div className="gap-2 flex flex-row flex-wrap min-w-[240px] max-h-[215px] overflow-y-scroll p-1">
         {iconNames.map((iconName) => (
@@ -50,7 +50,7 @@ const IconMenu = ({
             style={{
               color: iconColor,
             }}
-            onClick={() => selectIcon(iconName)}
+            onClick={() => onIconChange(iconName)}
           />
         ))}
       </div>
