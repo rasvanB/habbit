@@ -1,5 +1,5 @@
 export const typesList = ["facebook", "google", "twitter"] as const;
-export type IconTypes = typeof typesList[number];
+export type IconTypes = (typeof typesList)[number];
 
 type IconProps = {
   type: IconTypes;

@@ -59,6 +59,7 @@ const Profile = ({ isOpen, close }: ProfileProps) => {
             },
             (error) => {
               console.error(error);
+              setLoading(false);
             },
             () => {
               getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl) => {
